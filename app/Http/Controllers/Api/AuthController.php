@@ -11,7 +11,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'mobile' => 'required',
-            'firebase_uid' => 'required',
+            // 'firebase_uid' => 'required',
         ]);
         $mobile = $request->mobile;
         if(substr($mobile, 0, 2) == '03'){
