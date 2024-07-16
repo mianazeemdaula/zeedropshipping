@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('mobile',16)->unique();
-            $table->string('fcm_token',200);
-            $table->string('ref_code',20)->unique();
+            $table->string('fcm_token',250)->nullable();
+            $table->string('ref_code',20)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
