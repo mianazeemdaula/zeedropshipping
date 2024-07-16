@@ -40,7 +40,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'fcm_token' => 'required',
+            // 'fcm_token' => 'required',
         ]);
         $mobile = $request->mobile;
         if(substr($mobile, 0, 2) == '03'){
