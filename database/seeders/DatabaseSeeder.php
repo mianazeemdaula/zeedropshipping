@@ -12,7 +12,7 @@ use Spatie\Permission\Models\Permission;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
-
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -55,5 +55,26 @@ class DatabaseSeeder extends Seeder
         City::create(['state_id' => 1, 'name' => 'Multan']);
         City::create(['state_id' => 1, 'name' => 'Rawalpindi']);
         City::create(['state_id' => 1, 'name' => 'Gujranwala']);
+
+        // Categories 
+
+        $categories = [
+            'Electronics',
+            'Fashion',
+            'Home & Living',
+            'Health & Beauty',
+            'Sports & Travel',
+            'Automotive',
+            'Books & Stationery',
+            'Groceries',
+            'Kids & Babies',
+            'Pets',
+            'Services',
+            'Others',
+        ];
+        Category::insert(array_map(fn($category) => ['name' => $category], $categories));
+
+        // Products
+        \App\Models\Product::factory(100)->create();
     }
 }
