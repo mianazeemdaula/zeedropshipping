@@ -9,6 +9,7 @@ Route::get('/user', function (Request $request) {
 
 
 Route::post('/login', 'App\Http\Controllers\Api\AuthController@login');
+Route::post('/auth/is-mobile-register', 'App\Http\Controllers\Api\AuthController@isMobileRegister');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/categories', 'App\Http\Controllers\Api\CategoryController@index');

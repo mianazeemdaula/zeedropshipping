@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -30,7 +31,24 @@ class AuthController extends Controller
         $token = $user->createToken('login')->plainTextToken;
         $data['token'] = $token;
         $data['user'] = $user;
-        $data['addresses'] = $user->addresses;
         return response()->json($data, 200);
+    }
+
+    public function isMobileRegister(Request $request)
+    {
+        $request->validate([
+            'mobile' => 'required',
+        ]);
+        $mobile = $request->mobile;
+        if(substr($mobile, 0, 2) == '03'){
+            $mobile = substr($mobile, 1);
+            $mobile = '92'.$mobile;
+        }
+        $mobile = str_replace('+', '', $mobile);
+        $user = User::where('mobile', $mobile)->first();
+        if (! $user) {
+            return response()->json(['message' => 'User not found'], 204); 
+        }
+        return response()->json(['message' => 'User found'], 200);
     }
 }
