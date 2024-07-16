@@ -34,6 +34,31 @@ class AuthController extends Controller
         return response()->json($data, 200);
     }
 
+    public function signupUsingMobile(Request $request){
+        $request->validate([
+            'mobile' => 'required|unique:users',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $mobile = $request->mobile;
+        if(substr($mobile, 0, 2) == '03'){
+            $mobile = substr($mobile, 1);
+            $mobile = '92'.$mobile;
+        }
+        $mobile = str_replace('+', '', $mobile);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mobile = $mobile;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $token = $user->createToken('login')->plainTextToken;
+        $data['token'] = $token;
+        $data['user'] = $user;
+        return response()->json($data, 200);
+    }
+
     public function isMobileRegister(Request $request)
     {
         $request->validate([
