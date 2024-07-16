@@ -40,6 +40,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
+            'fcm_token' => 'required',
         ]);
         $mobile = $request->mobile;
         if(substr($mobile, 0, 2) == '03'){
@@ -52,6 +53,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->mobile = $mobile;
         $user->password = bcrypt($request->password);
+        $user->fcm_token = $request->fcm_token;
         $user->save();
         $token = $user->createToken('login')->plainTextToken;
         $data['token'] = $token;
