@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('payment_status')->default('pending');
             $table->string('shipping_address')->nullable();
             $table->string('billing_address')->nullable();
-            $table->string('shipping_method')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
