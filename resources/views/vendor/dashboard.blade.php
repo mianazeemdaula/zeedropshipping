@@ -8,5 +8,10 @@
 </head>
 <body>
     {{ auth()->user()->name }}
+
+    <form action="{{ url('logout') }}" method="POST">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>
