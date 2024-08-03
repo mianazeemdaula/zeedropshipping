@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'support']);
         Role::create(['name' => 'user']);
+        Role::create(['name' => 'vendor']);
+        Role::create(['name' => 'shipper']);
 
         User::factory()->create([
             'name' => 'Test User',
@@ -50,11 +52,11 @@ class DatabaseSeeder extends Seeder
 
         // Add Some Cities
 
-        City::create(['state_id' => 1, 'name' => 'Lahore']);
-        City::create(['state_id' => 1, 'name' => 'Faisalabad']);
-        City::create(['state_id' => 1, 'name' => 'Multan']);
-        City::create(['state_id' => 1, 'name' => 'Rawalpindi']);
-        City::create(['state_id' => 1, 'name' => 'Gujranwala']);
+        City::create(['state_id' => 1, 'name' => 'Lahore', 'delivery_fee' => 100]);
+        City::create(['state_id' => 1, 'name' => 'Faisalabad', 'delivery_fee' => 150]);
+        City::create(['state_id' => 1, 'name' => 'Multan', 'delivery_fee' => 200]);
+        City::create(['state_id' => 1, 'name' => 'Rawalpindi', 'delivery_fee' => 250]);
+        City::create(['state_id' => 1, 'name' => 'Gujranwala', 'delivery_fee' => 300]);
 
         // Categories 
 
@@ -73,6 +75,11 @@ class DatabaseSeeder extends Seeder
             'Others',
         ];
         Category::insert(array_map(fn($category) => ['name' => $category], $categories));
+
+        // Paymnet Methods 
+        foreach (['Cash on Delivery', 'Credit Card', 'Bank Transfer'] as $method) {
+            \App\Models\PaymentMethod::create(['name' => $method,'slug' => \Illuminate\Support\Str::slug($method)]);
+        }
 
         // Products
         \App\Models\Product::factory(100)->create();

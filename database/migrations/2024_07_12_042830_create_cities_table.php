@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->unsignedBigInteger('state_id');
+            $table->unsignedInteger('delivery_fee')->default(0);
             $table->timestamps();
             $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
         });

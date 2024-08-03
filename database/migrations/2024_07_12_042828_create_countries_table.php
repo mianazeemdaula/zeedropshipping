@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('phone_code');
             $table->string('currency',10);
             $table->string('currency_symbol',3);
+            $table->string('flag', 100)->nullable();
+            $table->string('lang', 3)->default('en');
             $table->timestamps();
         });
     }
