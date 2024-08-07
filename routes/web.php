@@ -9,7 +9,7 @@ Route::get('/', function () {
 // auth routes
 Route::get('/signup', 'App\Http\Controllers\AuthController@signup');
 Route::post('/signup', 'App\Http\Controllers\AuthController@postSignup');
-Route::get('/login', 'App\Http\Controllers\AuthController@login');
+Route::get('/login', 'App\Http\Controllers\AuthController@login')->name('login');
 Route::post('/login', 'App\Http\Controllers\AuthController@postLogin');
 
 
@@ -19,8 +19,11 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
     // logout route
     Route::post('/logout', 'App\Http\Controllers\AuthController@logout');
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function () {
-        
+    Route::namespace('App\Http\Controllers\Admin')->group(function () {
+        Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
+            Route::resource('categories', 'CategoryController');
+            Route::resource('products', 'ProductController');
+        });
     });
 
     Route::namespace('App\Http\Controllers\Vendor')->group(function() {

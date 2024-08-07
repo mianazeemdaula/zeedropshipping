@@ -46,6 +46,12 @@ class User extends Authenticatable
         ];
     }
 
+    // userable
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
     // orders
 
     public function orders()
@@ -62,6 +68,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(ReferrProduct::class);
     }
-    
-
 }

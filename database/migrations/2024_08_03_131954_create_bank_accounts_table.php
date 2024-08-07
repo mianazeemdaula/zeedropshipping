@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100)->unique();
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->string('image', 255)->nullable();
+            $table->foreignId('bank_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('account_name', 100);
+            $table->string('iban', 100);
+            $table->boolean('is_default')->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('bank_accounts');
     }
 };

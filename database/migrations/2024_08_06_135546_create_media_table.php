@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100)->unique();
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->string('image', 255)->nullable();
+            $table->string('file_path', 255);
+            $table->string('file_ext', 5);
+            $table->string('file_thumbnail', 255)->nullable();
+            $table->morphs('mediable');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('media');
     }
 };

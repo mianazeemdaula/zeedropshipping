@@ -31,7 +31,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard');
         }
-        return redirect('login')->with('email', 'Oppes! You have entered invalid credentials');
+        return redirect()->back()->withErrors(['password' => 'Invalid Credentials']);
     }
 
     public function postSignup(Request $request)

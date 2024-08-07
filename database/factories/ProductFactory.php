@@ -17,15 +17,23 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
+            'category_id' => $this->faker->numberBetween(1, 12),
+            'user_id' => 1,
             'name' => $this->faker->word,
-            'price' => $this->faker->randomFloat(2, 1, 100),
+            'sku' => rand(100000, 999999),
+            'purchase_price' => $this->faker->randomFloat(2, 1, 1000),
+            'sale_price' => $this->faker->randomFloat(2, 1, 1000),
+            'discount_price' => $this->faker->randomFloat(2, 1, 1000),
             'description' => $this->faker->text,
-            'featured' => $this->faker->randomElement([true, false]),
-            'category_id' => $this->faker->numberBetween(1, 10),
-            'discount' => $this->faker->randomFloat(2, 1, 100),
             'vat' => $this->faker->randomFloat(2, 1, 10),
             'stock' => $this->faker->numberBetween(1, 100),
+            'low_stock_report' => $this->faker->numberBetween(5, 10),
+            'min_order_qty' => $this->faker->numberBetween(1, 5),
+            'max_order_qty' => $this->faker->numberBetween(5, 20),
             'weight' => $this->faker->numberBetween(1, 100),
+            'image' => $this->faker->imageUrl(),
+            'other_details' => $this->faker->text,
+            'status' => 1,
         ];
     }
 }

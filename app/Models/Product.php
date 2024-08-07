@@ -38,4 +38,9 @@ class Product extends Model
     {
         return $this->hasMany(ReferrProduct::class);
     }
+
+    public function media()
+    {
+        return $this->morphMany(Media::class, 'mediable');
+    }
 }
