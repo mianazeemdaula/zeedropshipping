@@ -92,6 +92,7 @@ class OrderController extends Controller
                 $orderNumers[] = $order['Name'];
                 if(!isset($orderNumers[$order['Name']]  )){
                     $orderModel =  Order::create([
+                        'user_id' => auth()->id(),
                         'order_number' => $order['Name'],
                         'customer_name' => $order['Billing Name'],
                         'customer_email' => $order['Email'],
