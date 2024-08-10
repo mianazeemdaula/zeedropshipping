@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_number',20)->unique();
+            $table->string('order_number',20);
             $table->unsignedBigInteger('payment_method_id');
             $table->char('status', 20)->default('open');
             $table->string('customer_name', 100);
@@ -25,6 +25,12 @@ return new class extends Migration
             $table->string('payment_status')->default('pending');
             $table->string('shipping_address')->nullable();
             $table->string('billing_address')->nullable();
+            $table->decimal('total', 10, 2)->default(0);
+            $table->decimal('shipping_cost',10,2)->default(0);
+            $table->decimal('discount',10,2)->default(0);
+            $table->decimal('tax',10,2)->default(0);
+            $table->integer('zip')->nullable();
+            $table->string('city',50)->nullable();
             $table->timestamps();
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
         });

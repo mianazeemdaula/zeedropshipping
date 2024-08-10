@@ -38,7 +38,13 @@
                 </a>
               </div>
               <div class="mt-2">
-                <x-input name="password" type="password" placeholder="Password" />
+                <div class="relative" x-data="{showPassword=false}">
+                  <x-input name="password" type="password" placeholder="Password" />
+                  <!-- Eye Icon -->
+                  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-eye"></i>
+                  </div>
+                </div>
               </div>
             </div>
             <div>

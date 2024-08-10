@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Imports\OrdersImport;
+use App\Models\Order;
+use App\Helper\CSVHelper;
 class OrderController extends Controller
 {
     /**
@@ -12,7 +14,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::latest()->paginate();
+        return view('vendor.orders.index', compact('orders'));
     }
 
     /**
@@ -72,15 +75,45 @@ class OrderController extends Controller
     public function importStore(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:xlsx,xls,csv',
+            'file' => 'required',
+            'provider' =>  'required'
         ]);
 
         // upload file
         $file = $request->file('file');
         $file->storeAs('orders', 'orders.xlsx');
 
-        (new OrdersImport())->import('orders/orders.xlsx');
+        if($request->provider === 'shopify'){
+            $rows =  CSVHelper::readCSV('orders/orders.xlsx');
+            $orders =  CSVHelper::namedKeys($rows, 0);
+            // return $orders;
+            $orderNumers = [];
+            foreach($orders as $key => $order){
+                $orderNumers[] = $order['Name'];
+                if(!isset($orderNumers[$order['Name']]  )){
+                    $orderModel =  Order::create([
+                        'order_number' => $order['Name'],
+                        'customer_name' => $order['Billing Name'],
+                        'customer_email' => $order['Email'],
+                        'customer_phone' => $order['Shipping Phone'],
+                        'total' => $order['Total'],
+                        'order_date' => now()->toDateString(),
+                        'status' => 'open',
+                        'extra_note' => $order['Notes'],
+                        'shipping_address' => $order['Billing Street'],
+                        'billing_address' => $order['Billing Address1'],
+                        'zip' => intval(substr($order['Shipping Zip'], 1)),
+                        'city' => $order['Shipping City'],
+                        'payment_method_id' => 1,
+                        'shipping_cost' => $order['Shipping'],
+                        'tax' => $order['Taxes'],
+                    ]);
+                    
+                }
+            }
+        }
+        // (new OrdersImport())->import('orders/orders.xlsx');
 
-        return redirect()->back()->with('success', 'Orders imported successfully');
+        return redirect()->route('vendor.orders.index')->with('success', 'Orders imported successfully');
     }
 }

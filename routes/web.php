@@ -29,8 +29,8 @@ Route::middleware(['auth'])->group(function () {
     Route::namespace('App\Http\Controllers\Vendor')->group(function() {
         Route::group(['prefix' => 'vendor','as' => 'vendor.'], function() {
             Route::resource('orders', 'OrderController');        
-            Route::get('/orders/import', 'App\Http\Controllers\Vendor\OrderController@import');
-            Route::post('/orders/import', 'App\Http\Controllers\Vendor\OrderController@importStore');
+            Route::get('/orders-import', 'App\Http\Controllers\Vendor\OrderController@import');
+            Route::post('/orders-import', 'App\Http\Controllers\Vendor\OrderController@importStore');
         });
     });
 });

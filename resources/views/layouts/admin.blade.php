@@ -29,14 +29,15 @@
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.products.*')) bg-primary @endif">
           <a href="{{ route('admin.products.index') }}" class="block"><i class="fa-solid fa-tag mr-2"></i> Products</a>
         </li>
+        
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
+          <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Orders</a>
+        </li>
         {{-- <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
           <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-users mr-2"></i> Users</a>
         </li>
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
           <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Levels</a>
-        </li>
-        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
-          <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Orders</a>
         </li>
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
           <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> News</a>
@@ -72,6 +73,12 @@
       </header>
 
       <main class="flex-1 p-6 bg-gray-100 ">
+        @if(session('success'))
+          <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Success!</strong>
+            <span class="block sm:inline">{{ session('success') }}</span>
+          </div>
+        @endif
         @yield('content')
       </main>
     </div>
