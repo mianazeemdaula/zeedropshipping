@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::latest()->paginate();
+        $orders = Order::where('use_id', auth()->id())->latest()->paginate();
         return view('vendor.orders.index', compact('orders'));
     }
 
