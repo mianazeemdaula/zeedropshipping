@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('phone', 20);
             $table->string('email', 100);
+            $table->string('icon',200)->nullable();
             $table->boolean('active')->default(true);
+            $table->text('config')->nullable();
             $table->timestamps();
         });
     }

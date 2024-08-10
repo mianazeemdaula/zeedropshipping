@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name', 100);
             $table->string('address', 150);
+            $table->string('city',50);
             $table->string('phone', 20);
             $table->string('email', 100);
             $table->boolean('status')->default(1);
