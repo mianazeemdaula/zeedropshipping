@@ -14,15 +14,15 @@ Route::post('/login', 'App\Http\Controllers\AuthController@postLogin');
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('vendor.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard','App\Http\Controllers\AuthController@dashboard' )->name('dashboard');
     // logout route
     Route::post('/logout', 'App\Http\Controllers\AuthController@logout');
     Route::namespace('App\Http\Controllers\Admin')->group(function () {
         Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
             Route::resource('categories', 'CategoryController');
             Route::resource('products', 'ProductController');
+            Route::resource('users', 'UserController');
+            Route::resource('shippers', 'ShipperController');
         });
     });
 

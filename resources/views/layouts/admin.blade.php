@@ -29,6 +29,10 @@
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.products.*')) bg-primary @endif">
           <a href="{{ route('admin.products.index') }}" class="block"><i class="fa-solid fa-tag mr-2"></i> Products</a>
         </li>
+
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.shippers.*')) bg-primary @endif">
+          <a href="{{ route('admin.shippers.index') }}" class="block"><i class="fa-solid fa-truck mr-2"></i> Shippers</a>
+        </li>
         
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
           <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Orders</a>

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('icon',200)->nullable();
             $table->boolean('active')->default(true);
             $table->text('config')->nullable();
+            $table->string('slug',100)->unique();
+            $table->string('tracking_url',200)->nullable();
             $table->timestamps();
         });
     }

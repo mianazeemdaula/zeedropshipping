@@ -13,6 +13,7 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Category;
+use App\Models\Shipper;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,15 +28,33 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'support']);
         Role::create(['name' => 'user']);
         Role::create(['name' => 'vendor']);
+        Role::create(['name' => 'dispatcher']);
         Role::create(['name' => 'shipper']);
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
         ]);
 
         $user = User::find(1);
         $user->assignRole('admin');
+
+        User::factory()->create([
+            'name' => 'Vendor',
+            'email' => 'vendor@gmail.com',
+        ]);
+
+        $user = User::find(2);
+        $user->assignRole('vendor');
+
+
+        User::factory()->create([
+            'name' => 'Dispatcher',
+            'email' => 'dispatcher@gmail.com',
+        ]);
+
+        $user = User::find(3);
+        $user->assignRole('dispatcher');
 
 
         // add countries and states
@@ -83,5 +102,20 @@ class DatabaseSeeder extends Seeder
 
         // Products
         // \App\Models\Product::factory(200)->create();
+
+        Shipper::create([
+            'name' => 'Digi Dokan',
+            'phone' => '123456789',
+            'email' => 'digidokan@gmail.com',
+            'slug' => 'digidokan',
+            'tracking_url' => 'https://tcs.com/track',
+            'icon' => 'https://web.digidokaan.pk/images/dokaan_logo.png',
+            'active' => true,
+            'config' => json_encode([
+                'username' => 'tcs',
+                'password' => 'tcs',
+                'token' => '',
+            ]),
+        ]);
     }
 }
