@@ -33,7 +33,13 @@
                     <x-label>Phone</x-label>
                     <x-input name="phone" value="{{ $shipper->phone }}" type="text" />
                 </div>
-                @foreach ($shipper->config ?? [] as $key => $value)
+                @php 
+                    if(is_array($shipper->config))
+                        $config = $shipper->config;
+                    else
+                        $config = json_decode($shipper->config, true);
+                @endphp
+                @foreach ($config as $key => $value)
                 <div class="flex flex-col gap-2">
                     <x-label>{{ ucFirst($key) }}</x-label>
                     <x-input name="config[{{$key}}]" value="{{ $value }}"  />
