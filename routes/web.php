@@ -34,3 +34,10 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
+
+
+Route::get('/test-api', function(){
+    $digi = new App\Services\DigiDokan();
+    $response = $digi->login('923048144425','2185');
+    dd($response);
+});

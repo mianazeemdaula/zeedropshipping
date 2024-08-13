@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Imports\OrdersImport;
 use App\Models\Order;
+use App\Models\Product;
 use App\Helper\CSVHelper;
+use App\Models\PaymentMethod;
+use App\Models\Shipper;
+
 class OrderController extends Controller
 {
     /**
@@ -39,7 +43,8 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::where('user_id', auth()->id())->findOrFail($id);
+        return view('vendor.orders.show', compact('order'));
     }
 
     /**
@@ -47,7 +52,10 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $order = Order::where('user_id', auth()->id())->findOrFail($id);
+        $paymentMethods = PaymentMethod::all();
+        $shippers = Shipper::all();
+        return view('vendor.orders.edit', compact('order', 'paymentMethods','shippers'));
     }
 
     /**
@@ -55,7 +63,20 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'status' => 'required',
+            // 'payment_method_id' => 'required',
+        ]);
+
+        $order = Order::where('user_id', auth()->id())->findOrFail($id);
+        if($request->status === 'shipped'){
+            $order->shipper_id = 1;
+            $order->tracking_number = '123456';
+            $order->shipped_date = now()->toDateString();
+        }
+        $order->save();
+        $order->update($request->all());
+        return redirect()->route('vendor.orders.index')->with('success', 'Order updated successfully');
     }
 
     /**
@@ -90,7 +111,14 @@ class OrderController extends Controller
             $orderNumers = [];
             foreach($orders as $key => $order){
                 $orderNumers[] = $order['Name'];
-                if(!isset($orderNumers[$order['Name']]  )){
+                $orderModel = null;
+                
+                // add order details to the order
+                $product = Product::where('sku', $order['Lineitem sku'])->first();
+                if(!$product){
+                    continue;
+                }
+                if(!isset($orderNumers[$order['Name']])){
                     $orderModel =  Order::create([
                         'user_id' => auth()->id(),
                         'order_number' => $order['Name'],
@@ -109,12 +137,18 @@ class OrderController extends Controller
                         'shipping_cost' => $order['Shipping'],
                         'tax' => $order['Taxes'],
                     ]);
-                    
+                }
+                if($product && $orderModel){
+                    $orderModel->details()->create([
+                        'product_id' => $product->id,
+                        'qty' => $order['Lineitem quantity'],
+                        'price' => $order['Lineitem price'],
+                    ]);
                 }
             }
         }
         // (new OrdersImport())->import('orders/orders.xlsx');
 
-        return redirect()->route('vendor.orders.index')->with('success', 'Orders imported successfully');
+        return redirect()->route('vendor.orders.index')->with('success', "Orders ".count($orderNumers)." imported successfully");
     }
 }

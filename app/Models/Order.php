@@ -29,6 +29,8 @@ class Order extends Model
         'shipping_cost',
         'discount',
         'tax',
+        'shipper_id',
+        'shipped_date',
     ];
 
     public function user()
@@ -39,5 +41,15 @@ class Order extends Model
     public function details()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function shipper()
+    {
+        return $this->belongsTo(Shipper::class);
     }
 }

@@ -22,6 +22,7 @@ class Product extends Model
         'extra_info',
         'referr_discount',
         'referal_discount',
+        'user_id',
     ];
 
     public function category()
@@ -43,4 +44,27 @@ class Product extends Model
     {
         return $this->morphMany(Media::class, 'mediable');
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_details');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // count products sales in order details
+
+    public function getActiveSalesAttribute()
+    {
+        return $this->orders()->whereNotIn('status',['canceled','returned'])->sum('qty');
+    }
+
+    public function getReturnSalesAttribute()
+    {
+        return $this->orders()->where('status','returned')->sum('qty');
+    }
+    
 }
