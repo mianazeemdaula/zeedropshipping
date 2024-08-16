@@ -69,14 +69,50 @@ class OrderController extends Controller
         ]);
 
         $order = Order::where('user_id', auth()->id())->findOrFail($id);
-        if($request->status === 'shipped'){
-            $order->shipper_id = 1;
-            $order->tracking_number = '123456';
-            $order->shipped_date = now()->toDateString();
-        }
-        $order->save();
-        $order->update($request->all());
-        return redirect()->route('vendor.orders.index')->with('success', 'Order updated successfully');
+        // if($request->status === 'shipped'){
+            // Send order to digiDokan
+            $digi = new \App\Services\DigiDokan();
+            $response = $digi->getCities([
+                'shipment_type' => 1,
+                'gateway_id' => 3,
+                'courier_bulk' => 1
+            ]);
+            $cities = collect($response->Overnight);
+            // find city
+            
+            $city_id = 405;
+
+            $res =  $digi->bookShipment([
+               'seller_number' => "+".env('DIGIDOKAAN_PHONE'),
+               'buyer_number' => $order->customer_phone,
+               'buyer_name' => $order->customer_name,
+               'buyer_address' => $order->shipping_address,
+               'buyer_city' => $city_id,
+               'piece' => 1,
+               'amount' => intval($order->total),
+               'special_instruction' => $order->extra_note,
+               'product_name' => $order->details()->first()->name,
+               'store_url' => url('/'),
+               'business_name' => $order->user->name,
+               'origin' => 'Lahore',
+               'gateway_id' => 3,
+               'shipper_address' => $order->user->name,
+               'shipper_name' => $order->user->name,
+               'shipper_phone' => $order->user->mobile,
+               'shipment_type' => 1,
+               'external_reference_no' => $order->order_number,
+               'weight' => 1,
+               'other_product' => $order->details()->count() > 1,
+               'pickup_id' => 5264
+            ]);
+            dd($res);
+        //     $order->shipper_id = 1;
+        //     $order->tracking_number = '123456';
+        //     $order->shipped_date = now()->toDateString();
+        // }
+        // $order->save();
+        // $order->update($request->all());
+        // return redirect()->route('vendor.orders.index')->with('success', 'Order updated successfully');
     }
 
     /**

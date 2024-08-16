@@ -38,6 +38,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/test-api', function(){
     $digi = new App\Services\DigiDokan();
-    $response = $digi->login('923048144425','2185');
+    $response = $digi->getCities([
+        'shipment_type' => 2,
+        'gateway_id' => 5,
+        'courier_bulk' => 1
+    ]);
     dd($response);
 });

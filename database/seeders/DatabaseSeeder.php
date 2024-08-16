@@ -101,8 +101,26 @@ class DatabaseSeeder extends Seeder
         }
 
         // Products
-        // \App\Models\Product::factory(200)->create();
-
+        // \App\Models\Product::factory(5)->create();
+        \App\Models\Product::create([
+            'category_id' => 1,
+            'user_id' => 2,
+            'name' => 'iPhone 12',
+            'sku' => 'SKU-240811-01',
+            'purchase_price' => 1000,
+            'sale_price' => 1200,
+            'discount_price' => 1100,
+            'description' => 'This is a test product',
+            'vat' => 10,
+            'stock' => 100,
+            'low_stock_report' => 10,
+            'min_order_qty' => 1,
+            'max_order_qty' => 5,
+            'weight' => 1,
+            'image' => 'https://via.placeholder.com/150',
+            'other_details' => 'This is a test product',
+            'status' => 1,
+        ]);
         Shipper::create([
             'name' => 'Digi Dokan',
             'phone' => '123456789',
@@ -112,8 +130,8 @@ class DatabaseSeeder extends Seeder
             'icon' => 'https://web.digidokaan.pk/images/dokaan_logo.png',
             'active' => true,
             'config' => json_encode([
-                'username' => 'tcs',
-                'password' => 'tcs',
+                'phone' => '923123456789',
+                'password' => '12345678',
                 'token' => '',
             ]),
         ]);

@@ -1,6 +1,6 @@
 <?php
 namespace App\Services;
-
+use App\Models\Shipper;
 class DigiDokan {
     private $http;
 
@@ -27,12 +27,40 @@ class DigiDokan {
 
     // Login to DigiDokan
 
-    public function login($phone, $password)
+    public function login()
     {
+        $shipper = Shipper::find(1);
+        if($shipper){
+            $config = json_decode($shipper->config);
+            if($config->token) {
+                return $config->token;
+            }
+        }
         $response = $this->http->post('auth/login', [
             'form_params' => [
-                'phone' => env('DIGIDOKAAN_PHONE'),
-                'password' => env('DIGIDOKAAN_PASSWORD')
+                'phone' => env('DIGIDOKAAN_PHONE', $config->phone),
+                'password' => env('DIGIDOKAAN_PASSWORD',$config->password)
+            ]
+        ]);
+        if($response->getStatusCode() == 200) {
+            $res =  json_decode($response->getBody()->getContents());
+            if($res->code == 200) {
+                if($shipper){
+                    $config = json_decode($shipper->config);
+                    $config->token = $res->token;
+                    $shipper->config = json_encode($config);
+                    $shipper->save();
+                }
+                return $res->token;
+            }
+            throw new \Exception($res->error);
+        }
+    }
+
+    public function refreshToken(){
+        $response = $this->http->post('auth/refresh_token', [
+            'headers' => [
+                'Authorization' => 'Bearer '. $token
             ]
         ]);
         if($response->getStatusCode() == 200) {
@@ -47,11 +75,30 @@ class DigiDokan {
     // get all cities 
     public function getCities($params)
     {
+        $token = $this->login();
         $response = $this->http->post('cities', [
             'headers' => [
                 'Authorization' => 'Bearer '.$token
             ],
             'form_params' => $params
+        ]);
+        if($response->getStatusCode() == 200) {
+            $res =  json_decode($response->getBody()->getContents());
+            if($res->code == 200) {
+                return $res->data;
+            }
+            throw new \Exception($res->error);
+        }
+    }
+
+    // book a shipment
+    public function bookShipment($params){
+        $token = $this->login();
+        $response = $this->http->post('order-book', [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token
+            ],
+            'form_params' => $params,
         ]);
         if($response->getStatusCode() == 200) {
             $res =  json_decode($response->getBody()->getContents());
