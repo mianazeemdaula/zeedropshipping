@@ -2,12 +2,11 @@
 namespace App\Services;
 use App\Models\Shipper;
 class DigiDokan {
-    private $http;
-
-    public $logistics = [
+    private \GuzzleHttp\Client $http;
+    public static $logistics = [
         3 => 'Leopards',
         9 => 'Swift',
-        5 => 'trax',
+        5 => 'Trax',
         15 => 'M&P',
         13 => 'BlueEx',
     ];
@@ -58,18 +57,16 @@ class DigiDokan {
     }
 
     public function refreshToken(){
-        $response = $this->http->post('auth/refresh_token', [
-            'headers' => [
-                'Authorization' => 'Bearer '. $token
-            ]
-        ]);
-        if($response->getStatusCode() == 200) {
-            $res =  json_decode($response->getBody()->getContents());
-            if($res->code == 200) {
-                return $res->token;
-            }
-            throw new \Exception($res->error);
+        $shipper = Shipper::find(1);
+        if($shipper){
+            $config = json_decode($shipper->config);
+            // remove token
+            $config->token = null;
+            $shipper->config = json_encode($config);
+            $shipper->save();
         }
+        $token = $this->login();
+        return $token;
     }
 
     // get all cities 
@@ -86,8 +83,11 @@ class DigiDokan {
             $res =  json_decode($response->getBody()->getContents());
             if($res->code == 200) {
                 return $res->data;
+            }else if($res->code == 401) {
+                $token = $this->refreshToken();
+                return $this->getCities($params);
             }
-            throw new \Exception($res->error);
+            throw new \Exception($res);
         }
     }
 
@@ -104,6 +104,31 @@ class DigiDokan {
             $res =  json_decode($response->getBody()->getContents());
             if($res->code == 200) {
                 return $res->data;
+            }else if($res->code == 401) {
+                $token = $this->refreshToken();
+                return $this->bookShipment($params);
+            }
+            throw new \Exception($res->error);
+        }
+    }
+
+    // get shipment tracking
+
+    public function getShipmentTracking($params){
+        $token = $this->login();
+        $response = $this->http->post('get-order-tracking', [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token,
+            ],
+            'form_params' => $params,
+        ]);
+        if($response->getStatusCode() == 200) {
+            $res =  json_decode($response->getBody()->getContents());
+            if($res->code == 200) {
+                return $res->data;
+            }else if($res->code == 401) {
+                $token = $this->refreshToken();
+                return $this->getShipmentTracking($params);
             }
             throw new \Exception($res->error);
         }

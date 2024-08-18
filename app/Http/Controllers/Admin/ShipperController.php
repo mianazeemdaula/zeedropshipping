@@ -78,7 +78,7 @@ class ShipperController extends Controller
         foreach ($request->config as $key => $value) {
             $config[$key] = $value;
         }
-        $shipper->config = $config;
+        $shipper->config = json_encode($config);
         $shipper->save();
         return redirect()->route('admin.shippers.index');
     }

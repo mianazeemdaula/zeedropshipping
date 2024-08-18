@@ -33,6 +33,12 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/orders-import', 'App\Http\Controllers\Vendor\OrderController@importStore');
         });
     });
+
+    Route::namespace('App\Http\Controllers\Dispatcher')->group(function() {
+        Route::group(['prefix' => 'dispatcher','as' => 'dispatcher.'], function() {
+            Route::resource('orders', 'OrderController');
+        });
+    });
 });
 
 
@@ -43,5 +49,5 @@ Route::get('/test-api', function(){
         'gateway_id' => 5,
         'courier_bulk' => 1
     ]);
-    dd($response);
+    return ($response);
 });

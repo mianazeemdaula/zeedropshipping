@@ -33,9 +33,11 @@ return new class extends Migration
             $table->integer('zip')->nullable();
             $table->string('city',50)->nullable();
             $table->unsignedBigInteger('shipper_id')->nullable();
+            $table->dateTime('packed_date')->nullable();
             $table->dateTime('shipped_date')->nullable();
             $table->string('tracking_number',100)->nullable();
             $table->string('provider',50)->nullable();
+            $table->unsignedInteger('profit')->default(0);
             $table->timestamps();
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

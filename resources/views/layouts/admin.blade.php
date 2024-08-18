@@ -25,6 +25,7 @@
         <button class="p-4 lg:hidden" id="close-sidebar">✕</button>
       </div>
       <ul class="space-y-2">
+        @role('admin')
         <li class="p-2 hover:bg-primary-700  hover:animate-pulse">
           <a href="{{ route('dashboard') }}" class="block" ><i class="fa-solid fa-home mr-2"></i> Dashboard</a>
         </li>
@@ -38,10 +39,18 @@
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.shippers.*')) bg-primary @endif">
           <a href="{{ route('admin.shippers.index') }}" class="block"><i class="fa-solid fa-truck mr-2"></i> Shippers</a>
         </li>
-        
+        @endrole
+        @role('vendor')
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
           <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Orders</a>
         </li>
+        @endrole
+
+        @role('dispatcher')
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('dispatcher.orders.*')) bg-primary @endif">
+          <a href="{{ route('dispatcher.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Orders</a>
+        </li>
+        @endrole
         {{-- <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
           <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-users mr-2"></i> Users</a>
         </li>

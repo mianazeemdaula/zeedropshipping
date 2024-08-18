@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('city_id');
-            $table->boolean('active')->default(true);
+            $table->string('business_name', 100);
+            $table->string('store_url', 250)->nullable();
+            $table->string('store_logo', 250)->nullable();
             $table->string('address', 255);
+            $table->string('phone', 20);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('city_id')->references('id')->on('cities')->cascadeOnDelete();

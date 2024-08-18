@@ -74,16 +74,15 @@ class OrderController extends Controller
             $digi = new \App\Services\DigiDokan();
             $response = $digi->getCities([
                 'shipment_type' => 1,
-                'gateway_id' => 3,
+                'gateway_id' => 5,
                 'courier_bulk' => 1
             ]);
             $cities = collect($response->Overnight);
             // find city
-            
-            $city_id = 405;
-
+            $city = $cities->where('city_name', $order->city)->first();
+            $city_id = $city->city_id ?? 1;
             $res =  $digi->bookShipment([
-               'seller_number' => "+".env('DIGIDOKAAN_PHONE'),
+               'seller_number' => env('DIGIDOKAAN_PHONE'),
                'buyer_number' => $order->customer_phone,
                'buyer_name' => $order->customer_name,
                'buyer_address' => $order->shipping_address,
@@ -91,14 +90,14 @@ class OrderController extends Controller
                'piece' => 1,
                'amount' => intval($order->total),
                'special_instruction' => $order->extra_note,
-               'product_name' => $order->details()->first()->name,
-               'store_url' => url('/'),
-               'business_name' => $order->user->name,
+               'product_name' => $order->details()->first()->product->name,
+               'store_url' => $order->user->vendor->store_url,
+               'business_name' => $order->user->vendor->business_name,
                'origin' => 'Lahore',
-               'gateway_id' => 3,
-               'shipper_address' => $order->user->name,
-               'shipper_name' => $order->user->name,
-               'shipper_phone' => $order->user->mobile,
+               'gateway_id' => 5,
+               'shipper_address' => $order->user->vendor->address,
+               'shipper_name' => $order->user->vendor->business_name,
+               'shipper_phone' => $order->user->vendor->phone,
                'shipment_type' => 1,
                'external_reference_no' => $order->order_number,
                'weight' => 1,

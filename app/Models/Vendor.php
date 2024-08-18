@@ -10,16 +10,21 @@ class Vendor extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
         'phone',
         'address',
-        'status',
+        'city_id',
+        'business_name',
+        'store_url',
+        'store_logo',
     ];
 
-    // user 
     public function user()
     {
-        return $this->morphOne(User::class, 'userable');
+        return $this->belongsTo(User::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }

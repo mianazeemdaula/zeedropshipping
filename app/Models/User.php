@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile',
+        'avatar',
+        'status',
+        'country_id',
     ];
 
     /**
@@ -46,13 +50,12 @@ class User extends Authenticatable
         ];
     }
 
-    // userable
-    public function userable()
+    // attributes
+    public function getAvatarAttribute($value)
     {
-        return $this->morphTo();
+        return $value ? asset('users/' . $value) : asset('users/default.png');
     }
 
-    // orders
 
     public function orders()
     {
@@ -68,4 +71,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(ReferrProduct::class);
     }
+
+    public function vendor()
+    {
+        return $this->hasOne(Vendor::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
 }

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('mobile',20)->nullable();
             $table->string('avatar',150)->nullable();
             $table->string('status',10)->default('active');
-            // $table->morphs('userable')->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
             $table->rememberToken();
             $table->timestamps();

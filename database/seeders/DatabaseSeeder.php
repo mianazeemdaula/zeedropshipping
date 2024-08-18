@@ -31,32 +31,7 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'dispatcher']);
         Role::create(['name' => 'shipper']);
 
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-        ]);
-
-        $user = User::find(1);
-        $user->assignRole('admin');
-
-        User::factory()->create([
-            'name' => 'Vendor',
-            'email' => 'vendor@gmail.com',
-        ]);
-
-        $user = User::find(2);
-        $user->assignRole('vendor');
-
-
-        User::factory()->create([
-            'name' => 'Dispatcher',
-            'email' => 'dispatcher@gmail.com',
-        ]);
-
-        $user = User::find(3);
-        $user->assignRole('dispatcher');
-
-
+        
         // add countries and states
         Country::create(['name' => 'Pakistan', 'iso2' => 'PK', 'iso3' => 'PAK', 'phone_code' => '+92', 'currency' => 'PKR', 'currency_symbol' => 'Rs']);
         Country::create(['name' => 'United States', 'iso2' => 'US', 'iso3' => 'USA', 'phone_code' => '+1', 'currency' => 'USD', 'currency_symbol' => '$']);
@@ -76,6 +51,39 @@ class DatabaseSeeder extends Seeder
         City::create(['state_id' => 1, 'name' => 'Multan', 'delivery_fee' => 200]);
         City::create(['state_id' => 1, 'name' => 'Rawalpindi', 'delivery_fee' => 250]);
         City::create(['state_id' => 1, 'name' => 'Gujranwala', 'delivery_fee' => 300]);
+
+        User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+        ]);
+
+        $user = User::find(1);
+        $user->assignRole('admin');
+
+        User::factory()->create([
+            'name' => 'Vendor',
+            'email' => 'vendor@gmail.com',
+        ]);
+
+        $user = User::find(2);
+        $user->vendor()->create([
+            'business_name' => 'Tor Link',
+            'store_url' => 'https://torlink.com',
+            'phone' => '923004156789',
+            'address' => 'Lahore, Pakistan',
+            'store_logo' => 'https://via.placeholder.com/150',
+            'city_id' => 1,
+        ]);
+        $user->assignRole('vendor');
+
+
+        User::factory()->create([
+            'name' => 'Dispatcher',
+            'email' => 'dispatcher@gmail.com',
+        ]);
+
+        $user = User::find(3);
+        $user->assignRole('dispatcher');
 
         // Categories 
 
