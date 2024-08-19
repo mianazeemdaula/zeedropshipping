@@ -8,10 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
-class User extends Authenticatable
+use Osiset\ShopifyApp\Contracts\ShopModel as IShopModel;
+use Osiset\ShopifyApp\Traits\ShopModel;
+
+
+class User extends Authenticatable implements IShopModel
 {
     use HasFactory, Notifiable;
-    use HasRoles, HasApiTokens;
+    use HasRoles, HasApiTokens, ShopModel;
     /**
      * The attributes that are mass assignable.
      *
@@ -46,7 +50,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            // 'password' => 'hashed',
         ];
     }
 

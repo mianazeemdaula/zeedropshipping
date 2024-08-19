@@ -71,6 +71,7 @@ class OrderController extends Controller
         $order = Order::where('user_id', auth()->id())->findOrFail($id);
         if($request->status === 'shipped'){
             // Send order to digiDokan
+            $shipper = Shipper::find($request->shipper_id);
             $digi = new \App\Services\DigiDokan();
             $response = $digi->getCities([
                 'shipment_type' => 1,
@@ -104,8 +105,8 @@ class OrderController extends Controller
                'other_product' => $order->details()->count() > 1,
                'pickup_id' => 5264
             ]);
-            $order->shipper_id = 1;
-            $order->tracking_number = '123456';
+            $order->shipper_id = $shipper->id;
+            $order->tracking_number = $res->tracking_no;
             $order->shipped_date = now()->toDateString();
         }
         $order->save();
