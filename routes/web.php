@@ -8,7 +8,7 @@ Route::get('/', function () {
 
 Route::get('/shopify', function () {
     return view('auth.shopify_auth');
-})->name('home');
+})->middleware(['verify.shopify'])->name('home');
 
 // auth routes
 Route::get('/signup', 'App\Http\Controllers\AuthController@signup');
