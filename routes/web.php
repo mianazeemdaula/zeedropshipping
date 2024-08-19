@@ -6,6 +6,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/shopify', function () {
+    return view('auth.shopify_auth');
+})->name('home');
+
 // auth routes
 Route::get('/signup', 'App\Http\Controllers\AuthController@signup');
 Route::post('/signup', 'App\Http\Controllers\AuthController@postSignup');
