@@ -6,10 +6,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/shopify', function () {
-    return view('auth.shopify_auth');
-})->middleware(['verify.shopify'])->name('home');
-
 // auth routes
 Route::get('/signup', 'App\Http\Controllers\AuthController@signup');
 Route::post('/signup', 'App\Http\Controllers\AuthController@postSignup');
@@ -25,7 +21,7 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
             Route::resource('categories', 'CategoryController');
             Route::resource('products', 'ProductController');
-            Route::resource('users', 'UserController');
+            // Route::resource('users', 'UserController');
             Route::resource('shippers', 'ShipperController');
         });
     });
