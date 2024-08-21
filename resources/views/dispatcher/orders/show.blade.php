@@ -115,10 +115,10 @@
                 </tbody>
             </table>
             <div class="mt-4 flex justify-end space-x-2">
-                <a href="{{ route('vendor.orders.index') }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">
+                <a href="{{ route('dispatcher.orders.index') }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">
                     <i class="fa-solid fa-print mr-2"></i>Print
                 </a>
-                <form action="{{ route('vendor.orders.update',$order->id) }}" method="post">
+                <form action="{{ route('dispatcher.orders.update',$order->id) }}" method="post">
                     @csrf
                     @method('PUT')
                     @php

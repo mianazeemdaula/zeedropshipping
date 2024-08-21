@@ -17,12 +17,14 @@ class Product extends Model
         'discount',
         'vat',
         'stock',
+        'sku',
         'featured',
         'description',
         'extra_info',
         'referr_discount',
         'referal_discount',
         'user_id',
+        'status',
     ];
 
     public function category()

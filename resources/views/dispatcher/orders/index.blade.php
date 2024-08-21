@@ -6,27 +6,6 @@
         <div>
             <h2 class="text-lg font-semibold">Orders</h2>
         </div>
-        <div class="flex space-x-2">
-            <x-modal title="Import Orders from Shopify" 
-            subTitle="Its help you to import direct orders from shopify" >
-            <form class="mt-5" enctype="multipart/form-data" method="POST" action="{{ url('vendor/orders-import') }}">
-                @csrf
-                    <div>
-                        <label for="user name" class="block text-sm text-gray-700 capitalize dark:text-gray-200">Orders CSV</label>
-                        <input type="hidden" name="provider" value="shopify">
-                        <input placeholder="Shopify CSV" name="file" type="file" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
-                    </div>
-
-                    <div class="flex justify-end mt-6">
-                        <button type="submit" class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                            Import Orders
-                        </button>
-                    </div>
-                </form>
-            </x-modal>
-            {{-- <a href="{{ route('vendor.orders.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Create Order</a> --}}
-            <a href="{{ url('vendor/orders-import') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Import Shopify</a>
-        </div>
     </div>
     <div class="mt-6 flex flex-col">
         <!-- Table Layout for Larger Screens -->
@@ -70,17 +49,16 @@
                                     <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">{{ $item->total }}</td>
                                     <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">{{ $item->extra_note }}</td>
                                     <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 flex items-center space-x-2">
-                                        <a href="{{ route('vendor.orders.show', $item->id) }}" class="text-gray-700 hover:text-blue-500" aria-label="View details for Order {{ $item->id }}">
+                                        <a href="{{ route('dispatcher.orders.show', $item->id) }}" class="text-gray-700 hover:text-blue-500" aria-label="View details for Order {{ $item->id }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm7.5 0c-.914 3.407-4.104 6-7.5 6s-6.586-2.593-7.5-6c.914-3.407 4.104-6 7.5-6s6.586 2.593 7.5 6z"/>
                                             </svg>
                                         </a>
-                                        <a href="{{ route('vendor.orders.edit', $item->id) }}" aria-label="Edit Order {{ $item->id }}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1" class="w-5 h-5">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M11 19h-2a1 1 0 01-1-1v-2a1 1 0 01.293-.707l8.59-8.59a1.5 1.5 0 012.12 0l2.12 2.12a1.5 1.5 0 010 2.12l-8.59 8.59A1 1 0 0111 19z" />
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M13 17l-3-3m0 0l1-1m-1 1l-1-1m1 1h1.5m3-5.5L14 9m-1 1L11.5 7.5" />
-                                            </svg>
+                                        @if($item->status !== 'open' && $item->status !== 'packed')
+                                        <a href="{{ $item->tracking_invoice_url }}" target="__blank" aria-label="Edit Order {{ $item->id }}">
+                                            <i class="fa-solid fa-file-pdf"></i>
                                         </a>
+                                        @endif
                                         <a href="#" aria-label="Delete Order {{ $item->id }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1" class="w-5 h-5">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('packed_user_id')->nullable();
+            $table->unsignedBigInteger('shipped_user_id')->nullable();
             $table->string('order_number',30);
             $table->unsignedBigInteger('payment_method_id');
             $table->char('status', 20)->default('open');
@@ -30,7 +32,7 @@ return new class extends Migration
             $table->decimal('shipping_cost',10,2)->default(0);
             $table->decimal('discount',10,2)->default(0);
             $table->decimal('tax',10,2)->default(0);
-            $table->integer('zip')->nullable();
+            $table->string('zip',15)->nullable();
             $table->string('city',50)->nullable();
             $table->unsignedBigInteger('shipper_id')->nullable();
             $table->dateTime('packed_date')->nullable();
@@ -38,6 +40,7 @@ return new class extends Migration
             $table->string('tracking_number',100)->nullable();
             $table->string('provider',50)->nullable();
             $table->unsignedInteger('profit')->default(0);
+            $table->string('tracking_invoice_url')->nullable();
             $table->timestamps();
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

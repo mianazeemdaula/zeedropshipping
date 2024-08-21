@@ -31,6 +31,7 @@ class Order extends Model
         'tax',
         'shipper_id',
         'shipped_date',
+        'tracking_invoice_url',
     ];
 
     public function user()

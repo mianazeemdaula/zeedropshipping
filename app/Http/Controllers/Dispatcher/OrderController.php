@@ -10,7 +10,7 @@ use App\Models\Product;
 use App\Helper\CSVHelper;
 use App\Models\PaymentMethod;
 use App\Models\Shipper;
-
+use App\Helper\Helper;
 class OrderController extends Controller
 {
     /**
@@ -18,7 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::whereIn('status',['packed'])->paginate();
+        $orders = Order::whereIn('status',['packed','open','shipped'])->orderBy('id','desc')->paginate();
         return view('dispatcher.orders.index', compact('orders'));
     }
 
@@ -33,7 +33,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) 
     {
         //
     }
@@ -43,7 +43,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::where('user_id', auth()->id())->findOrFail($id);
+        $order = Order::findOrFail($id);
         return view('dispatcher.orders.show', compact('order'));
     }
 
@@ -52,7 +52,7 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        $order = Order::where('user_id', auth()->id())->findOrFail($id);
+        $order = Order::findOrFail($id);
         $paymentMethods = PaymentMethod::all();
         $shippers = Shipper::all();
         return view('dispatcher.orders.edit', compact('order', 'paymentMethods','shippers'));
@@ -68,14 +68,18 @@ class OrderController extends Controller
             // 'payment_method_id' => 'required',
         ]);
 
-        $order = Order::where('user_id', auth()->id())->findOrFail($id);
-        if($request->status === 'shipped'){
+        $order = Order::findOrFail($id);
+        if($request->status === 'packed'){
+            $order->status = 'packed';
+            $order->packed_date = now();
+            $order->packed_user_id = auth()->user()->id;
+        }else if($request->status === 'shipped'){
             // Send order to digiDokan
-            $shipper = Shipper::find($request->shipper_id);
+            $shipper = Shipper::find(1);
             $digi = new \App\Services\DigiDokan();
             $response = $digi->getCities([
                 'shipment_type' => 1,
-                'gateway_id' => 5,
+                'gateway_id' => 3,
                 'courier_bulk' => 1
             ]);
             $cities = collect($response->Overnight);
@@ -83,34 +87,37 @@ class OrderController extends Controller
             $city = $cities->where('city_name', $order->city)->first();
             $city_id = $city->city_id ?? 1;
             $res =  $digi->bookShipment([
-               'seller_number' => env('DIGIDOKAAN_PHONE'),
-               'buyer_number' => $order->customer_phone,
+               'seller_number' => Helper::parseDigiPhone(env('DIGIDOKAAN_PHONE')),
+               'buyer_number' => Helper::parseDigiPhone($order->customer_phone),
                'buyer_name' => $order->customer_name,
-               'buyer_address' => $order->shipping_address,
+               'buyer_address' => empty($order->shipping_address) ? 'Lahore' : $order->billing_address,
                'buyer_city' => $city_id,
-               'piece' => 1,
+               'piece' => $order->details()->count(),
                'amount' => intval($order->total),
                'special_instruction' => $order->extra_note,
                'product_name' => $order->details()->first()->product->name,
                'store_url' => $order->user->vendor->store_url,
                'business_name' => $order->user->vendor->business_name,
                'origin' => 'Lahore',
-               'gateway_id' => 5,
+               'gateway_id' => 3,
                'shipper_address' => $order->user->vendor->address,
                'shipper_name' => $order->user->vendor->business_name,
-               'shipper_phone' => $order->user->vendor->phone,
+               'shipper_phone' => Helper::parseDigiPhone($order->user->vendor->phone),
                'shipment_type' => 1,
                'external_reference_no' => $order->order_number,
                'weight' => 1,
                'other_product' => $order->details()->count() > 1,
-               'pickup_id' => 5264
+               'pickup_id' => 5195
             ]);
             $order->shipper_id = $shipper->id;
             $order->tracking_number = $res->tracking_no;
+            $order->tracking_invoice_url = $res->slip_link;
             $order->shipped_date = now()->toDateString();
+            $order->shipping_cost = $res->delivery_charges;
+            $order->shipped_user_id = auth()->user()->id;
+            $order->status = 'shipped';
         }
         $order->save();
-        $order->update($request->all());
         return redirect()->route('dispatcher.orders.index')->with('success', 'Order updated successfully');
     }
 

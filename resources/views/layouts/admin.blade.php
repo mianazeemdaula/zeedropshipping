@@ -81,12 +81,12 @@
         <button id="menu-button" class="text-xl font-bold lg:hidden">☰</button>
         <h1 class="text-xl font-bold mb-2 sm:mb-0 hidden lg:block">Dashboard</h1>
         <div class="flex flex-wrap sm:flex-nowrap space-x-2 sm:space-x-4">
-          <button class="py-1 px-3 bg-blue-600 text-white rounded-md">
-            Login
-          </button>
-          <button class="py-1 px-3 bg-red-600 text-white rounded-md">
-            Logout
-          </button>
+          <div class="text-xs">
+            {{ auth()->user()->name }}
+          </div>
+          <div class="text-xs">
+            {{ auth()->user()->email }}
+          </div>
         </div>
       </header>
 

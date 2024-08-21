@@ -93,6 +93,7 @@ class DigiDokan {
 
     // book a shipment
     public function bookShipment($params){
+        // dd( $params);
         $token = $this->login();
         $response = $this->http->post('order-book', [
             'headers' => [

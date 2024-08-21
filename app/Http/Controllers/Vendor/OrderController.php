@@ -11,6 +11,8 @@ use App\Helper\CSVHelper;
 use App\Models\PaymentMethod;
 use App\Models\Shipper;
 
+use App\Helper\Helper;
+
 class OrderController extends Controller
 {
     /**
@@ -74,7 +76,7 @@ class OrderController extends Controller
             $digi = new \App\Services\DigiDokan();
             $response = $digi->getCities([
                 'shipment_type' => 1,
-                'gateway_id' => 5,
+                'gateway_id' => 3,
                 'courier_bulk' => 1
             ]);
             $cities = collect($response->Overnight);
@@ -82,10 +84,10 @@ class OrderController extends Controller
             $city = $cities->where('city_name', $order->city)->first();
             $city_id = $city->city_id ?? 1;
             $res =  $digi->bookShipment([
-               'seller_number' => env('DIGIDOKAAN_PHONE'),
-               'buyer_number' => $order->customer_phone,
+               'seller_number' => Helper::parseDigiPhone(env('DIGIDOKAAN_PHONE')),
+               'buyer_number' => Helper::parseDigiPhone($order->customer_phone),
                'buyer_name' => $order->customer_name,
-               'buyer_address' => $order->shipping_address,
+               'buyer_address' => $order->shipping_address ?? 'Lahore',
                'buyer_city' => $city_id,
                'piece' => 1,
                'amount' => intval($order->total),
@@ -94,15 +96,15 @@ class OrderController extends Controller
                'store_url' => $order->user->vendor->store_url,
                'business_name' => $order->user->vendor->business_name,
                'origin' => 'Lahore',
-               'gateway_id' => 5,
+               'gateway_id' => 3,
                'shipper_address' => $order->user->vendor->address,
                'shipper_name' => $order->user->vendor->business_name,
-               'shipper_phone' => $order->user->vendor->phone,
+               'shipper_phone' => Helper::parseDigiPhone($order->user->vendor->phone),
                'shipment_type' => 1,
                'external_reference_no' => $order->order_number,
                'weight' => 1,
                'other_product' => $order->details()->count() > 1,
-               'pickup_id' => 5264
+               'pickup_id' => 5195
             ]);
             dd($res);
         //     $order->shipper_id = 1;
@@ -140,20 +142,19 @@ class OrderController extends Controller
         $file->storeAs('orders', 'orders.xlsx');
 
         if($request->provider === 'shopify'){
-            $rows =  CSVHelper::readCSV('orders/orders.xlsx');
-            $orders =  CSVHelper::namedKeys($rows, 0);
-            // return $orders;
+            $rows =  CSVHelper::readCSV('orders/orders.xlsx');;
+            $orders =  CSVHelper::namedKeys($rows);
             $orderNumers = [];
+            
+            $orderModel = null;
             foreach($orders as $key => $order){
                 $orderNumers[] = $order['Name'];
-                $orderModel = null;
-                
                 // add order details to the order
                 $product = Product::where('sku', $order['Lineitem sku'])->first();
                 if(!$product){
                     continue;
                 }
-                if(!isset($orderNumers[$order['Name']])){
+                if(isset($order['Financial Status']) && strlen($order['Financial Status']) > 0){
                     $orderModel =  Order::create([
                         'user_id' => auth()->id(),
                         'order_number' => $order['Name'],
@@ -173,7 +174,7 @@ class OrderController extends Controller
                         'tax' => $order['Taxes'],
                     ]);
                 }
-                if($product && $orderModel){
+                if($product){
                     $orderModel->details()->create([
                         'product_id' => $product->id,
                         'qty' => $order['Lineitem quantity'],
