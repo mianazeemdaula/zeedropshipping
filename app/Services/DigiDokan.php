@@ -126,7 +126,7 @@ class DigiDokan {
         if($response->getStatusCode() == 200) {
             $res =  json_decode($response->getBody()->getContents());
             if($res->code == 200) {
-                return $res->data;
+                return $res->status;
             }else if($res->code == 401) {
                 $token = $this->refreshToken();
                 return $this->getShipmentTracking($params);

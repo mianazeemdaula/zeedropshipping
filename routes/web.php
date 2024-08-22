@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest.index');
 });
 
 // auth routes
@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => 'vendor','as' => 'vendor.'], function() {
             Route::resource('orders', 'OrderController');        
             Route::get('/orders-import', 'App\Http\Controllers\Vendor\OrderController@import');
+            Route::get('/orders-status/{status}', 'App\Http\Controllers\Vendor\OrderController@showStatusOrder');
             Route::post('/orders-import', 'App\Http\Controllers\Vendor\OrderController@importStore');
         });
     });

@@ -28,6 +28,13 @@
             <a href="{{ url('vendor/orders-import') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Import Shopify</a>
         </div>
     </div>
+    <div class="flex">
+        <a class="p-2 @if($status === 'open') bg-primary-700 @else bg-primary-500 @endif text-white rounded-l-lg hover:bg-primary-700" href="{{ url('vendor/orders-status/open') }}">Pending</a>
+        <a class="p-2 @if($status === 'packed') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700 " href="{{ url('vendor/orders-status/packed') }}">Packed</a>
+        <a class="p-2 @if($status === 'dispatched') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700  " href="{{ url('vendor/orders-status/dispatched') }}">Dispatched</a>
+        <a class="p-2 @if($status === 'intransit') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700 " href="{{ url('vendor/orders-status/intransit') }}">Intransit</a>
+        <a class="p-2 @if($status === 'canceled') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700 rounded-r-lg" href="{{ url('vendor/orders-status/canceled') }}">Canceled</a>
+    </div>
     <div class="mt-6 flex flex-col">
         <!-- Table Layout for Larger Screens -->
         <div class="">

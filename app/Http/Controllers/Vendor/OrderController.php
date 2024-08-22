@@ -20,8 +20,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('user_id', auth()->id())->latest()->paginate();
-        return view('vendor.orders.index', compact('orders'));
+        $status = 'open';
+        $orders = Order::where('user_id', auth()->id())->whereStatus($status)->latest()->paginate();
+        return view('vendor.orders.index', compact('orders', 'status'));
     }
 
     /**
@@ -71,7 +72,7 @@ class OrderController extends Controller
         ]);
 
         $order = Order::where('user_id', auth()->id())->findOrFail($id);
-        // if($request->status === 'shipped'){
+        if($request->status === 'shipped'){
             // Send order to digiDokan
             $digi = new \App\Services\DigiDokan();
             $response = $digi->getCities([
@@ -106,14 +107,10 @@ class OrderController extends Controller
                'other_product' => $order->details()->count() > 1,
                'pickup_id' => 5195
             ]);
-            dd($res);
-        //     $order->shipper_id = 1;
-        //     $order->tracking_number = '123456';
-        //     $order->shipped_date = now()->toDateString();
-        // }
+        }
         // $order->save();
         // $order->update($request->all());
-        // return redirect()->route('vendor.orders.index')->with('success', 'Order updated successfully');
+        return redirect()->route('vendor.orders.index')->with('success', 'Order updated successfully');
     }
 
     /**
@@ -122,6 +119,13 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    
+
+    public function showStatusOrder(string $status)
+    {
+        $orders = Order::where('user_id', auth()->id())->where('status', $status)->latest()->paginate();
+        return view('vendor.orders.index', compact('orders', 'status'));
     }
 
 

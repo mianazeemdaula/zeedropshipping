@@ -67,11 +67,26 @@ class AuthController extends Controller
         if($user->hasRole('admin')){
             $stats = [
                 'total_users' => User::count(),
+                'total_team' => User::role('dispatcher')->count(),
                 'total_vendors' => User::role('vendor')->count(),
                 'total_orders' => Order::count(),
                 'total_products' => Product::count(),
+                'open_orders' => Order::where('status', 'open')->count(),
+                'intransit_orders' => Order::whereNotIn('status', ['open','canceled'])->count(),
+                'canceled_orders' => Order::where('status', 'canceled')->count(),
+                'dispatched_orders' => Order::where('status', 'dispatched')->count(),
             ];
             return view('admin.dashboard', compact('stats'));
+        }else if($user->hasRole('vendor')){
+            $stats = [
+                'open_orders' => Order::where('status', 'open')->count(),
+                'intransit_orders' => Order::whereNotIn('status', ['open','canceled'])->count(),
+                'canceled_orders' => Order::where('status', 'canceled')->count(),
+                'dispatched_orders' => Order::where('status', 'dispatched')->count(),
+                'total_orders' => Order::where('user_id', auth()->id())->count(),
+                'total_sales' => Order::where('user_id', auth()->id())->sum('total'),
+            ];
+            return view('vendor.dashboard', compact('stats'));
         }
         return view('vendor.dashboard');
     }
