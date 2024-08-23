@@ -55,7 +55,7 @@ class User extends Authenticatable
     // attributes
     public function getAvatarAttribute($value)
     {
-        return $value ? asset('users/' . $value) : asset('users/default.png');
+        return $value ? asset($value) : asset('users/default.png');
     }
 
 
@@ -82,6 +82,11 @@ class User extends Authenticatable
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function bankAccounts()
+    {
+        return $this->hasMany(BankAccount::class);
     }
 
 }

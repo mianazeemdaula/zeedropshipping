@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('store_logo', 250)->nullable();
             $table->string('address', 255);
             $table->string('phone', 20);
+            $table->string('checkout_frequency', 15)->define('weekly');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('city_id')->references('id')->on('cities')->cascadeOnDelete();

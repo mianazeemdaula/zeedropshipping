@@ -14,6 +14,7 @@ use App\Models\State;
 use App\Models\City;
 use App\Models\Category;
 use App\Models\Shipper;
+use App\Models\Bank;
 
 class DatabaseSeeder extends Seeder
 {
@@ -55,6 +56,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
+            'country_id' => 1,
         ]);
 
         $user = User::find(1);
@@ -63,6 +65,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Vendor',
             'email' => 'vendor@gmail.com',
+            'country_id' => 1,
         ]);
 
         $user = User::find(2);
@@ -80,6 +83,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Dispatcher',
             'email' => 'dispatcher@gmail.com',
+            'country_id' => 1,
         ]);
 
         $user = User::find(3);
@@ -181,5 +185,12 @@ class DatabaseSeeder extends Seeder
                 'token' => '',
             ]),
         ]);
+
+        Bank::create(['name' => 'Habib Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Allied Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Bank Alflah','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Bank of Punjab','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Muslim Commerical Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Meezan Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
     }
 }

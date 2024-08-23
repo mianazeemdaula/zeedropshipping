@@ -6,7 +6,7 @@
     id="{{ $name }}"
     name="{{ $name }}"
     value="{{ $value ?? '' }}"
-    required="{{ $required ?? false }}"
+    {{-- required="{{ $required ?? false }}" --}}
     />
     @error($name)
         <p class="text-red-500 text-xs mt-1">{{ $message }}</p> 

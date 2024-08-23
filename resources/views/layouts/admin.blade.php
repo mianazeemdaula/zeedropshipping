@@ -19,7 +19,7 @@
 <body>
   <div class="flex bg-gray-100 ">
     <!-- Sidebar -->
-    <div id="sidebar" class="lg:flex flex-col lg:relative fixed  top-0 left-0 h-screen bg-gray-800 text-white w-64 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <div id="sidebar" class="lg:flex flex-col lg:relative fixed  top-0 left-0  bg-gray-800 text-white w-64 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
       <div class="flex justify-between">
         <div class="p-4 font-bold text-lg">Admin Panel</div>
         <button class="p-4 lg:hidden" id="close-sidebar">✕</button>
@@ -43,6 +43,15 @@
         @role('vendor')
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
           <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Orders</a>
+        </li>
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.bank-account.*')) bg-primary @endif">
+          <a href="{{ route('vendor.bank-account.index') }}" class="block"><i class="fa-solid fa-bank mr-2"></i> Bank Account</a>
+        </li>
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.bank-transactions.*')) bg-primary @endif">
+          <a href="{{ route('vendor.bank-transactions.index') }}" class="block"><i class="fa-solid fa-dollar mr-2"></i> Revenue</a>
+        </li>
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.profile.*')) bg-primary @endif">
+          <a href="{{ route('vendor.profile.index') }}" class="block"><i class="fa-solid fa-user mr-2"></i> Profile</a>
         </li>
         @endrole
 

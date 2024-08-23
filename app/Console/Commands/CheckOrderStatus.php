@@ -35,6 +35,7 @@ class CheckOrderStatus extends Command
             // $order->status = $status;
             // $order->save();
         });
+        $this->info('Order status checked');
     }
 
     public $digidokan;
