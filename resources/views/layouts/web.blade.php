@@ -31,7 +31,7 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
     <header class="bg-white relative " x-data="{ isSidebarOpen: false }">
         <div class="flex justify-between items-center px-7 py-3">
             <a href="{{ url('/') }}">
-            <img src={{ asset('assets/images/logo.png') }} alt="Logo" class="w-32 h-auto" />
+            <img src={{ asset('assets/images/Logo.png') }} alt="Logo" class="w-32 h-auto" />
             </a>
             <button class="lg:hidden text-2xl" @click="isSidebarOpen =!isSidebarOpen;">
             {{-- <button class="lg:hidden text-2xl" @click="alert('ASDSDS');"> --}}
