@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.web')
 @section('content')
       <div class="py-20">
         <div class="flex flex-col justify-center items-center gap-2">

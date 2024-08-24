@@ -3,15 +3,18 @@
 <div class="">
 
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-        <x-icon-state-card title="Total User" icon="fa-solid fa-users" value="{{ $stats['total_users'] }}" />
-        <x-icon-state-card title="Total Vendors" icon="fa-solid fa-handshake" value="{{ $stats['total_vendors'] }}" />
-        <x-icon-state-card title="Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['total_orders'] }}" />
-        <x-icon-state-card title="Total Products" icon="fa-solid fa-tags" value="{{ $stats['total_products'] }}" />
+        <x-icon-state-card title="Open Orders" icon="fa-solid fa-users" value="{{ $stats['open_orders'] }}" />
+        <x-icon-state-card title="Intransit Orders" icon="fa-solid fa-handshake" value="{{ $stats['intransit_orders'] }}" />
+        <x-icon-state-card title="Canceled Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['canceled_orders'] }}" />
+        <x-icon-state-card title="Dispatched Orders" icon="fa-solid fa-tags" value="{{ $stats['dispatched_orders'] }}" />
+        <x-icon-state-card title="Total Orders" icon="fa-solid fa-tags" value="{{ $stats['total_orders'] }}" />
     </div>
 
-    <div class="w-40 mt-4 bg-white p-2 rounded-xl items-center flex flex-col">
-        <canvas id="chart-1" class=""></canvas>
-        <div class="text-base">Distribution Chart</div>
+    <div class="w-60 h-30 mt-4">
+        <div class="bg-white p-4 rounded-xl flex flex-col items-start shadow-sm">
+            <h1 class="text-base font-bold">Orders Distribution</h1>
+            <canvas id="chart-1" class=""></canvas>
+        </div>
     </div>
 </div>
 @endsection
@@ -22,10 +25,10 @@
     new Chart(ctx, {
         type: 'pie',
         data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: @json(array_keys(collect($stats)->except('total_orders')->toArray())),
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'count ',
+                data: @json(array_values(collect($stats)->except('total_orders')->toArray())),
                 borderWidth: 1
             }]
         },

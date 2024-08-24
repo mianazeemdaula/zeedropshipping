@@ -53,4 +53,9 @@ class Order extends Model
     {
         return $this->belongsTo(Shipper::class);
     }
+
+    public function revenues()
+    {
+        return $this->hasMany(Revenue::class);
+    }
 }

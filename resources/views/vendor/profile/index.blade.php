@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<section class="mx-auto w-full h-screen max-w-7xl px-4 py-4">
+<section class="mx-auto w-full max-w-7xl px-4 py-4">
     <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
         <div class="flex items-center justify-between min-w-full">
             <h2 class="text-lg font-semibold">Profile</h2>
@@ -10,8 +10,8 @@
     </div>
     <div class="mt-6 flex flex-col space-y-4 bg-white p-6 rounded-lg">
         <div class="p-4 border rounded-lg flex items-center space-x-2">
-            <div class="w-20">
-                <img src="{{ $user->avatar }}" alt="" class="w-full">
+            <div class="w-20 h-20">
+                <img src="{{ $user->avatar }}" alt="" class="w-20 h-20 object-contain">
             </div>
             <div class="space-y-1">
                 <h3 class="text-sm font-semibold">{{ $user->name }}</h3>

@@ -1,21 +1,21 @@
 @extends('layouts.admin')
 
 @section('content')
-<section class="mx-auto w-full h-screen max-w-7xl px-4 py-4">
+<section class="mx-auto w-full max-w-7xl px-4 py-4">
     <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
         <div class="flex items-center justify-between min-w-full">
             <div>
-                <h2 class="text-lg font-semibold">Revenue</h2>
+                <h2 class="text-lg font-semibold">Payments</h2>
             </div>
             
             <div>
-                <span class="font-thin">Balance:</span>
+                <span class="font-normal">Total Payout:</span>
                 <span class="bg-primary-500 px-2 rounded-full text-white"> RS. 45000</span>
             </div>
             {{-- <a href="{{ route('vendor.bank-account.create') }}" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800" >Create</a> --}}
         </div>
     </div>
-    <div class="mt-6 flex flex-col space-y-4">
+    <div class="mt-6 flex flex-col space-y-4 min-h-screen">
         <!-- Table Layout for Larger Screens -->
         <div class="">
             <div class="overflow-x-auto">
@@ -34,7 +34,7 @@
                             <tbody class="divide-y divide-gray-200 bg-white">
                                 @if($transactions->isEmpty())
                                     <tr>
-                                        <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4" colspan="9">No Bank Accounts Added</td>
+                                        <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4" colspan="9">No Bank Transactions</td>
                                     </tr>
                                 @endif
                                 @foreach($transactions as $item)

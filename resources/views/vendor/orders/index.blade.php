@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<section class="mx-auto w-full px-4 py-4">
+<section class="mx-auto w-full px-4 py-4 ">
     <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
         <div>
             <h2 class="text-lg font-semibold">Orders</h2>
@@ -25,7 +25,7 @@
                 </form>
             </x-modal>
             {{-- <a href="{{ route('vendor.orders.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Create Order</a> --}}
-            <a href="{{ url('vendor/orders-import') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Import Shopify</a>
+            {{-- <a href="{{ url('vendor/orders-import') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Import Shopify</a> --}}
         </div>
     </div>
     <div class="flex">

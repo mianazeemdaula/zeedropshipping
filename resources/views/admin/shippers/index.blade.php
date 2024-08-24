@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<section class="mx-auto w-full h-screen max-w-7xl px-4 py-4">
+<section class="mx-auto w-full max-w-7xl px-4 py-4">
     <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
         <div class="flex items-center justify-between min-w-full">
             <h2 class="text-lg font-semibold">Shippers</h2>

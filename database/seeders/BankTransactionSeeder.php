@@ -35,21 +35,21 @@ class BankTransactionSeeder extends Seeder
                 'description' => 'Deposit'
             ],
             [
-                'bank_account_id' => 2,
+                'bank_account_id' => 1,
                 'type' => 'credit',
                 'reference' => 'TRX-004',
                 'amount' => 5000,
                 'description' => 'Deposit'
             ],
             [
-                'bank_account_id' => 2,
+                'bank_account_id' => 1,
                 'type' => 'debit',
                 'reference' => 'TRX-005',
                 'amount' => 2000,
                 'description' => 'Withdrawal'
             ],
             [
-                'bank_account_id' => 2,
+                'bank_account_id' => 1,
                 'type' => 'credit',
                 'reference' => 'TRX-006',
                 'amount' => 10000,

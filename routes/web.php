@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\EnsureVendorProfileExist;
 Route::get('/', function () {
     return view('guest.index');
 });
@@ -30,8 +30,9 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => 'vendor','as' => 'vendor.'], function() {
             Route::resource('orders', 'OrderController');        
             Route::resource('bank-account', 'BankAccountController');
-            Route::resource('bank-transactions', 'BankTransactionController');        
-            Route::resource('profile', 'ُProfileController');        
+            Route::resource('bank-transactions', 'BankTransactionController');  
+            Route::resource('revenue', 'RevenueController');  
+            Route::resource('profile', 'ProfileController')->withoutMiddleware(EnsureVendorProfileExist::class);        
             Route::get('/orders-import', 'App\Http\Controllers\Vendor\OrderController@import');
             Route::get('/orders-status/{status}', 'App\Http\Controllers\Vendor\OrderController@showStatusOrder');
             Route::post('/orders-import', 'App\Http\Controllers\Vendor\OrderController@importStore');

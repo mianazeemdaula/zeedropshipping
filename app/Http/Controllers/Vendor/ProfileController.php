@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
 use Illuminate\Support\Facades\File;
-class ُProfileController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class ُProfileController extends Controller
         $user = auth()->user();
         $vendor = $user->vendor;
         if($vendor == null) {
-            return redirect()->route('vendor.profile.create');
+            return redirect()->route('vendor.profile.create',compact('user'));
         }
         return view('vendor.profile.index', compact('vendor', 'user'));
     }
@@ -31,7 +31,8 @@ class ُProfileController extends Controller
         if($vendor) {
             return redirect()->route('vendor.profile.index');
         }
-        return view('vendor.profile.create', compact('user'));
+        $cities = City::all();
+        return view('vendor.profile.create', compact('user', 'cities'));
     }
 
     /**
@@ -39,7 +40,40 @@ class ُProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'city_id' => 'required|exists:cities,id',
+            'phone' => 'required|string|max:255',
+            'city_id' => 'required|exists:cities,id',
+            'business_name' => 'required|string|max:255',
+            'store_url' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'store_logo' => 'required|image',
+            'avatar' => 'required|image',
+        ]);
+
+        $user = auth()->user();
+        $user->name = $request->name;
+        $user->save();
+        if($request->hasFile('avatar')) {
+            $avatarName = time() . '_'.$user->id .".". $request->file('avatar')->getClientOriginalExtension();
+            $user->avatar = $request->file('avatar')->storeAs('users', $avatarName);
+            $user->save();
+        }
+        $vendor = $user->vendor()->create([
+            'phone' => $request->phone,
+            'city_id' => $request->city_id,
+            'business_name' => $request->business_name,
+            'store_url' => $request->store_url,
+            'address' => $request->address,
+            'city_id' => $request->city_id,
+        ]);
+        if($request->hasFile('store_logo')) {
+            $logoName = time() . '_'.$vendor->id .".". $request->file('store_logo')->getClientOriginalExtension();
+            $vendor->store_logo = $request->file('store_logo')->storeAs('vendors', $logoName);
+            $vendor->save();
+        }
+        return redirect()->route('vendor.profile.index');
     }
 
     /**

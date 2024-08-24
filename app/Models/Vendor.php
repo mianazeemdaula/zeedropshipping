@@ -18,6 +18,12 @@ class Vendor extends Model
         'store_logo',
     ];
 
+    // get store logo
+    public function getStoreLogoAttribute($value)
+    {
+        return $value ? asset($value) : asset('images/default-store-logo.jpg');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

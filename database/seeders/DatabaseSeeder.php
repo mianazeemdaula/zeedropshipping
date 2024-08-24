@@ -15,6 +15,7 @@ use App\Models\City;
 use App\Models\Category;
 use App\Models\Shipper;
 use App\Models\Bank;
+use App\Models\BankAccount;
 
 class DatabaseSeeder extends Seeder
 {
@@ -192,5 +193,17 @@ class DatabaseSeeder extends Seeder
         Bank::create(['name' => 'Bank of Punjab','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
         Bank::create(['name' => 'Muslim Commerical Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
         Bank::create(['name' => 'Meezan Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+
+        BankAccount::create([
+            'user_id' => 2,
+            'bank_id' => 1,
+            'account_name' => 'Tor Link',
+            'iban' => 'PK123456789',
+        ]);
+
+        $this->call([
+            BankTransactionSeeder::class,
+            // RevenueSeeder::class,
+        ]);
     }
 }

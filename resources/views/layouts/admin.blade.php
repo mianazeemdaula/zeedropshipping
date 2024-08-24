@@ -16,12 +16,14 @@
       }
     </style>
 </head>
-<body>
-  <div class="flex bg-gray-100 ">
+<body class="">
+  <div class="flex bg-gray-100 min-h-screen">
     <!-- Sidebar -->
     <div id="sidebar" class="lg:flex flex-col lg:relative fixed  top-0 left-0  bg-gray-800 text-white w-64 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
       <div class="flex justify-between">
+        <a href="{{ route('dashboard') }}">
         <div class="p-4 font-bold text-lg">Admin Panel</div>
+      </a>
         <button class="p-4 lg:hidden" id="close-sidebar">✕</button>
       </div>
       <ul class="space-y-2">
@@ -48,7 +50,11 @@
           <a href="{{ route('vendor.bank-account.index') }}" class="block"><i class="fa-solid fa-bank mr-2"></i> Bank Account</a>
         </li>
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.bank-transactions.*')) bg-primary @endif">
-          <a href="{{ route('vendor.bank-transactions.index') }}" class="block"><i class="fa-solid fa-dollar mr-2"></i> Revenue</a>
+          <a href="{{ route('vendor.bank-transactions.index') }}" class="block"><i class="fa-solid fa-money-bill mr-2"></i>Payments</a>
+        </li>
+        
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.revenue.*')) bg-primary @endif">
+          <a href="{{ route('vendor.revenue.index') }}" class="block"><i class="fa-solid fa-dollar mr-2"></i> Revenue</a>
         </li>
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.profile.*')) bg-primary @endif">
           <a href="{{ route('vendor.profile.index') }}" class="block"><i class="fa-solid fa-user mr-2"></i> Profile</a>
@@ -89,12 +95,12 @@
       <header class="bg-white shadow-md p-4 flex flex-row items-center justify-between">
         <button id="menu-button" class="text-xl font-bold lg:hidden">☰</button>
         <h1 class="text-xl font-bold mb-2 sm:mb-0 hidden lg:block">Dashboard</h1>
-        <div class="flex flex-wrap sm:flex-nowrap space-x-2 sm:space-x-4">
+        <div class="flex flex-wrap sm:flex-nowrap space-x-2 sm:space-x-4 items-center" >
           <div class="text-xs">
             {{ auth()->user()->name }}
           </div>
-          <div class="text-xs">
-            {{ auth()->user()->email }}
+          <div class="">
+            <img src="{{ auth()->user()->avatar }}" alt="" class="w-8 h-8 rounded-full">
           </div>
         </div>
       </header>
