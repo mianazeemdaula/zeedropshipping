@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureVendorProfileExist
+class EnsureProfileActive
 {
     /**
      * Handle an incoming request.
@@ -17,6 +17,10 @@ class EnsureVendorProfileExist
     {
         if($request->user() && $request->user()->hasRole('vendor') &&  $request->user()->vendor == null) {
             return redirect()->route('vendor.profile.create');
+        }
+        if($request->user() && $request->user()->status !== 'active') {
+            auth()->logout();
+            abort(403, 'Your account is not active');
         }
         return $next($request);
     }

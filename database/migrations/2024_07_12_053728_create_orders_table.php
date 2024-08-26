@@ -37,10 +37,14 @@ return new class extends Migration
             $table->unsignedBigInteger('shipper_id')->nullable();
             $table->dateTime('packed_date')->nullable();
             $table->dateTime('shipped_date')->nullable();
-            $table->string('tracking_number',100)->nullable();
+            $table->dateTime('delivered_date')->nullable();
+            $table->dateTime('canceled_date')->nullable();
+            $table->string('cancel_reason',150)->nullable();
+            $table->string('cancel_by',15)->nullable();
             $table->string('provider',50)->nullable();
             $table->unsignedInteger('profit')->default(0);
-            $table->string('tracking_invoice_url')->nullable();
+            $table->unsignedInteger('weight')->default(0);
+            $table->json('track_data')->nullable(); 
             $table->timestamps();
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -26,6 +26,10 @@
                         <td class="py-1">Shipper:</td>
                         <td class="text-right">{{ $order->shipper->name ?? 'N/A' }}</td>
                     </tr>
+                    <tr>
+                        <td class="py-1">Track ID:</td>
+                        <td class="text-right">{{ $order->track_data['tracking_no'] ?? 'N/A' }}</td>
+                    </tr>
                 </table>
             </div>
 
@@ -52,15 +56,15 @@
                 <table class="text-sm w-full ">
                     <tr>
                         <td class="py-1">Name:</td>
-                        <td class="text-right">{{ $order->user->name }}</td>
+                        <td class="text-right">{{ $order->user->vendor->business_name }}</td>
                     </tr>
                     <tr>
-                        <td class="py-1">Mobile:</td>
-                        <td class="text-right">{{ $order->user->mobile }}</td>
+                        <td class="py-1">Phone:</td>
+                        <td class="text-right">{{ $order->user->vendor->phone }}</td>
                     </tr>
                     <tr>
-                        <td class="py-1">Email:</td>
-                        <td class="text-right">{{ $order->user->email }}</td>
+                        <td class="py-1">City:</td>
+                        <td class="text-right">{{ $order->user->vendor->city->name }}</td>
                     </tr>
                 </table>
             </div>

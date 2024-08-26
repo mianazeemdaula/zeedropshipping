@@ -17,6 +17,8 @@ use App\Models\Shipper;
 use App\Models\Bank;
 use App\Models\BankAccount;
 
+use App\Models\KycDoc;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -204,6 +206,18 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BankTransactionSeeder::class,
             // RevenueSeeder::class,
+        ]);
+
+        KycDoc::create([
+            'name' => 'CNIC Front',
+            'required' => true,
+            'type' => 'vendor',
+        ]);
+
+        KycDoc::create([
+            'name' => 'CNIC Back',
+            'required' => true,
+            'type' => 'vendor',
         ]);
     }
 }

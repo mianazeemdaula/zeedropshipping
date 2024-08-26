@@ -29,12 +29,44 @@
         </div>
     </div>
     <div class="flex">
-        <a class="p-2 @if($status === 'open') bg-primary-700 @else bg-primary-500 @endif text-white rounded-l-lg hover:bg-primary-700" href="{{ url('vendor/orders-status/open') }}">Pending</a>
+        {{-- <a class="p-2 @if($status === 'open') bg-primary-700 @else bg-primary-500 @endif text-white rounded-l-lg hover:bg-primary-700" href="{{ url('vendor/orders-status/open') }}">Pending</a>
         <a class="p-2 @if($status === 'packed') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700 " href="{{ url('vendor/orders-status/packed') }}">Packed</a>
-        <a class="p-2 @if($status === 'dispatched') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700  " href="{{ url('vendor/orders-status/dispatched') }}">Dispatched</a>
+        <a class="p-2 @if($status === 'shipped') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700  " href="{{ url('vendor/orders-status/shipped') }}">Shipped</a>
         <a class="p-2 @if($status === 'intransit') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700 " href="{{ url('vendor/orders-status/intransit') }}">Intransit</a>
-        <a class="p-2 @if($status === 'canceled') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700 rounded-r-lg" href="{{ url('vendor/orders-status/canceled') }}">Canceled</a>
+        <a class="p-2 @if($status === 'canceled') bg-primary-700 @else bg-primary-500 @endif text-white hover:bg-primary-700 rounded-r-lg" href="{{ url('vendor/orders-status/canceled') }}">Canceled</a> --}}
     </div>
+
+    
+    <form action="{{ route('vendor.orders.store') }}" method="post" class="mt-4">
+        @csrf
+        <div class="flex items-center justify-between">
+            <div class="flex space-x-2">
+                <div class="flex flex-col">
+                    <x-label >Date</x-label>
+                    <input type="date" name="start_date" id="" class="p-1 rounded-md" value="{{ $start_date ?? date('Y-m-d') }}">
+                </div>
+                <div class="flex flex-col">
+                    <x-label >Date</x-label>
+                    <input type="date" name="end_date" id="" class="p-1 rounded-md" value="{{ $end_date ?? date('Y-m-d') }}">
+                </div>
+                <div class="flex flex-col">
+                    @php $status = $status ?? 'all'; @endphp
+                    <x-label >Order Status {{ $status }}</x-label>
+                    <select name="status" id="" class="p-1 rounded-md">
+                        <option value="all" @if($status == 'all') selected @endif >All</option>
+                        <option value="open" @if($status == 'open') selected @endif>Open</option>
+                        <option value="packed" @if($status == 'packed') selected @endif>Packed</option>
+                        <option value="shipped" @if($status == 'shipped') selected @endif>Shipped</option>
+                        <option value="intransit" @if($status == 'intransit') selected @endif>Intransit</option>
+                        <option value="canceled" @if($status == 'canceled') selected @endif>Canceled</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button class="bg-blue-500 text-white px-4 py-1 rounded-md">Filter</button>
+            </div>
+        </div>
+    </form>
     <div class="mt-6 flex flex-col">
         <!-- Table Layout for Larger Screens -->
         <div class="">
@@ -51,10 +83,16 @@
                                     <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">Shipping Cost</th>
                                     <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">Total</th>
                                     <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">Extra Note</th>
+                                    <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">Track ID</th>
                                     <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
+                                @if($orders->count() == 0)
+                                    <tr>
+                                        <td colspan="9" class="text-center py-4">No Orders Found</td>
+                                    </tr>
+                                @endif
                                 @foreach($orders as $item)
                                 <tr>
                                     <td class="whitespace-nowrap px-4 py-4">
@@ -76,6 +114,7 @@
                                     <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">{{ $item->shipping_cost }}</td>
                                     <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">{{ $item->total }}</td>
                                     <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">{{ $item->extra_note }}</td>
+                                    <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">{{ $item->track_data['tracking_no'] ?? '' }}</td>
                                     <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 flex items-center space-x-2">
                                         <a href="{{ route('vendor.orders.show', $item->id) }}" class="text-gray-700 hover:text-blue-500" aria-label="View details for Order {{ $item->id }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

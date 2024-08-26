@@ -10,7 +10,7 @@ use App\Models\Product;
 use App\Helper\CSVHelper;
 use App\Models\PaymentMethod;
 use App\Models\Shipper;
-
+use Carbon\Carbon;
 use App\Helper\Helper;
 
 class OrderController extends Controller
@@ -38,7 +38,24 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+;        $request->validate([
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'status' => 'required',
+        ]);
+
+        $startDate = Carbon::parse($request->start_date)->format('Y-m-d').' 00:00:00';
+        $endDate = Carbon::parse($request->end_date)->format('Y-m-d').' 23:59:59';
+        $status = $request->status;
+        $orders = Order::where('user_id', auth()->id())
+            ->whereBetween('created_at', [$startDate, $endDate]);
+        if($status !== 'all'){
+            $orders = $orders->where('status', $status);
+        }
+        $orders = $orders->latest()->paginate();
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        return view('vendor.orders.index', compact('orders', 'status', 'start_date', 'end_date'));
     }
 
     /**
@@ -149,8 +166,21 @@ class OrderController extends Controller
             $rows =  CSVHelper::readCSV('orders/orders.xlsx');;
             $orders =  CSVHelper::namedKeys($rows);
             $orderNumers = [];
-            
+            $orderIds = [];
             $orderModel = null;
+            // check the order numbers if it already exists
+            $orderNumbers = array_map(function($order){
+                return $order['Name'];
+            }, $orders);
+            $existingOrders = Order::whereIn('order_number', $orderNumbers)->where('user_id', auth()->user()->id)->get();
+            $existingOrderNumbers = $existingOrders->map(function($order){
+                return $order->order_number;
+            });
+            
+            $orders = array_filter($orders, function($order) use ($existingOrderNumbers){
+                return !in_array($order['Name'], $existingOrderNumbers->toArray());
+            });
+
             foreach($orders as $key => $order){
                 $orderNumers[] = $order['Name'];
                 // add order details to the order
@@ -177,18 +207,29 @@ class OrderController extends Controller
                         'shipping_cost' => $order['Shipping'],
                         'tax' => $order['Taxes'],
                     ]);
+                    $orderIds[] = $orderModel->id;
                 }
                 if($product){
                     $orderModel->details()->create([
                         'product_id' => $product->id,
                         'qty' => $order['Lineitem quantity'],
                         'price' => $order['Lineitem price'],
+                        'ds_price' => $product->sale_price
                     ]);
                 }
             }
-        }
-        // (new OrdersImport())->import('orders/orders.xlsx');
 
+            // calculate total weight
+            $totalWeight = 0;
+            foreach($orderIds as $orderId){
+                $order = Order::find($orderId);
+                foreach($order->details as $detail){
+                    $totalWeight += $detail->product->weight * $detail->qty;
+                }
+                $order->weight = $totalWeight;
+                $order->save();
+            }
+        }
         return redirect()->route('vendor.orders.index')->with('success', "Orders ".count($orderNumers)." imported successfully");
     }
 }

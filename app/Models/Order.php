@@ -31,8 +31,21 @@ class Order extends Model
         'tax',
         'shipper_id',
         'shipped_date',
-        'tracking_invoice_url',
+        'packed_date',
+        'provider',
+        'profit',
+        'track_data',
     ];
+
+    protected $casts = [
+        'order_date' => 'datetime',
+        'payment_date' => 'datetime',
+        'shipped_date' => 'datetime',
+        'packed_date' => 'datetime',
+        'delivered_date' => 'datetime',
+        'track_data' => 'array',
+    ];
+    
 
     public function user()
     {

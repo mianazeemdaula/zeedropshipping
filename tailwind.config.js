@@ -32,6 +32,10 @@ export default {
           900: '#181a3d',
         },
       },
+      screens: {
+        print: { raw: 'print' },
+        screen: { raw: 'screen' },
+      },
     },
   },
   plugins: [],

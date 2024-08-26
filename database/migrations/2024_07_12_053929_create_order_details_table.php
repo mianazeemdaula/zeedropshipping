@@ -17,7 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedInteger('qty')->default(1);
             $table->double('price')->default(0.0);
+            $table->double('ds_price')->default(0.0);
             $table->timestamps();
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

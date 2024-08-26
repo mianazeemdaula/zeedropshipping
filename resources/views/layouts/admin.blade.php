@@ -8,13 +8,13 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   @yield('head')
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<style>
-      body {
-        font-family: 'Poppins', serif;
-      }
-    </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+        body {
+          font-family: 'Poppins', serif;
+        }
+  </style>
 </head>
 <body class="">
   <div class="flex bg-gray-100 min-h-screen">
@@ -37,7 +37,9 @@
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.products.*')) bg-primary @endif">
           <a href="{{ route('admin.products.index') }}" class="block"><i class="fa-solid fa-tag mr-2"></i> Products</a>
         </li>
-
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.users.*')) bg-primary @endif">
+          <a href="{{ route('admin.users.index') }}" class="block"><i class="fa-solid fa-users mr-2"></i> Users</a>
+        </li>
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.shippers.*')) bg-primary @endif">
           <a href="{{ route('admin.shippers.index') }}" class="block"><i class="fa-solid fa-truck mr-2"></i> Shippers</a>
         </li>
@@ -110,6 +112,12 @@
           <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
             <strong class="font-bold">Success!</strong>
             <span class="block sm:inline">{{ session('success') }}</span>
+          </div>
+        @endif
+        @if(session('error'))
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-2" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">{{ session('error') }}</span>
           </div>
         @endif
         @yield('content')

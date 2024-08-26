@@ -8,9 +8,13 @@
                 <h2 class="text-lg font-semibold">Payments</h2>
             </div>
             
-            <div>
+            <div class="flex flex-col">
                 <span class="font-normal">Total Payout:</span>
-                <span class="bg-primary-500 px-2 rounded-full text-white"> RS. 45000</span>
+                <span class="bg-primary-500 text-lg px-2 rounded-full text-white"> RS. 45000</span>
+            </div>
+
+            <div>
+                .
             </div>
             {{-- <a href="{{ route('vendor.bank-account.create') }}" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800" >Create</a> --}}
         </div>
@@ -28,6 +32,7 @@
                                     <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Description</th>
                                     <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Reference</th>
                                     <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Amount</th>
+                                    <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Date</th>
                                     {{-- <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Action</th> --}}
                                 </tr>
                             </thead>
@@ -55,6 +60,10 @@
                                     </td>
                                     <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
                                         {{ $item->amount }}
+                                    </td>
+
+                                    <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                        {{ $item->created_at }}
                                     </td>
                                     
                                     {{-- <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-right sm:px-4 sm:py-4 flex">

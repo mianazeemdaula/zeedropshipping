@@ -5,7 +5,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
         <x-icon-state-card title="Total User" icon="fa-solid fa-users" value="{{ $stats['total_users'] }}" color="green" />
         <x-icon-state-card title="Team Members" icon="fa-solid fa-users" value="{{ $stats['total_team'] }}" color="green" />
-        <x-icon-state-card title="Total Vendors" icon="fa-solid fa-handshake" value="{{ $stats['total_vendors'] }}" color="blue" />
+        <x-icon-state-card title="Dropshippers" icon="fa-solid fa-handshake" value="{{ $stats['total_vendors'] }}" color="blue" />
         <x-icon-state-card title="Open Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['open_orders'] }}" color="red" />
         <x-icon-state-card title="Dispatched Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['dispatched_orders'] }}" color="red" />
         <x-icon-state-card title="Canceled Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['canceled_orders'] }}" color="red" />

@@ -13,8 +13,9 @@ class RevenueController extends Controller
      */
     public function index()
     {
-        $revenues = VendorRevenue::with('order')->latest()->paginate();
-        return view('vendor.revenues.index', compact('revenues'));
+        $revenues = VendorRevenue::where('user_id', auth()->id())->latest()->paginate();
+        $total = VendorRevenue::where('user_id', auth()->id())->sum('amount');
+        return view('vendor.revenues.index', compact('revenues','total'));
     }
 
     /**

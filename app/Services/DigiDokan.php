@@ -1,6 +1,8 @@
 <?php
 namespace App\Services;
 use App\Models\Shipper;
+use Illuminate\Support\Facades\Cache;
+
 class DigiDokan {
     private \GuzzleHttp\Client $http;
     public static $logistics = [
@@ -73,6 +75,12 @@ class DigiDokan {
     public function getCities($params)
     {
         $token = $this->login();
+        // check in cache
+        $key = 'digi_cities_'.$params['shipment_type']."_".$params['gateway_id'];
+        $cities = Cache::get($key);
+        if($cities) {
+            return $cities;
+        }
         $response = $this->http->post('cities', [
             'headers' => [
                 'Authorization' => 'Bearer '.$token
@@ -82,6 +90,7 @@ class DigiDokan {
         if($response->getStatusCode() == 200) {
             $res =  json_decode($response->getBody()->getContents());
             if($res->code == 200) {
+                Cache::put($key, $res->data, now()->addHours(24));
                 return $res->data;
             }else if($res->code == 401) {
                 $token = $this->refreshToken();
@@ -130,6 +139,26 @@ class DigiDokan {
             }else if($res->code == 401) {
                 $token = $this->refreshToken();
                 return $this->getShipmentTracking($params);
+            }
+            throw new \Exception($res->error);
+        }
+    }
+
+    public function downloadLoadSheet($params){
+        $token = $this->login();
+        $response = $this->http->post('download-load-sheet', [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token,
+            ],
+            'form_params' => $params,
+        ]);
+        if($response->getStatusCode() == 200) {
+            $res =  json_decode($response->getBody()->getContents());
+            if($res->code == 200) {
+                return $res->data;
+            }else if($res->code == 401) {
+                $token = $this->refreshToken();
+                return $this->downloadLoadSheet($params);
             }
             throw new \Exception($res->error);
         }
