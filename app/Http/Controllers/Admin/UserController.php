@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -67,7 +68,13 @@ class UserController extends Controller
             'role' => 'required|string|exists:roles,name'
         ]);
 
+        
         $user = User::find($id);
+        
+        if($request->status != $user->status){
+            Mail::to($user->email)->send(new \App\Mail\AccountStatus($user));
+        }
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->mobile = $request->mobile;

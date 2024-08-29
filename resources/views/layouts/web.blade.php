@@ -72,13 +72,13 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
           id='sidebar'
           x-show='sidebar'
           class='fixed inset-0 bg-gray-800 z-50 transform translate-x-full transition-transform duration-300 lg:hidden'
-          :class="sidebar ? 'translate-x-full' : 'translate-x-0'"
+          x-bind:class="sidebar ? 'translate-x-full' : 'translate-x-0'"
         >
           <div class='relative w-64 h-full bg-gray-900 text-white'>
             <button class='absolute top-4 right-4 text-2xl text-white' x-on:click="sidebar = !sidebar">
               <i class="fa-solid fa-home"></i>
             </button>
-            <nav class='mt-12'>
+            <nav class='mt-8'>
               <ul>
                 <li>
                   <a href="https://youtu.be/Xgi5ljHgSmo?si=A0CpUqhwddbj1eFE" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Home</a>
@@ -132,15 +132,22 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
         <nav class="hidden md:block w-full my-8 p-4">
           <ul class="hidden lg:flex flex-wrap lg:flex-nowrap gap-4 lg:gap-4">
             <li class="flex-grow">
-              <a href="#"
-                class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"
-              >Home</a>
+              <a href="#"class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"
+                >
+                <i class="fa-solid fa-home"></i>
+                <div>
+                  Home
+                </div>
+              </a>
             </li>
 
             <li class="relative group flex-grow">
                   <a href="#"
-                    class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
-                  >About</a>
+                    class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+                  ><i class="fa-solid fa-home"></i>
+                <div>
+                  Home
+                </div></a>
                 <div class="group-hover:block hidden absolute left-0 mt-1 w-full z-40 bg-primary-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <ul>
                     <li>
@@ -189,22 +196,33 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
 
             <li class="flex-grow">
               <a href="{{ url('products') }}"
-                class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">Products</a>
-            </li>
-            <li class="flex-grow">
-              <a
-                href="#"
-                class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
-              >
-                Portfolio
+                class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
+              <i class="fa-solid fa-home"></i>
+                <div>
+                  Products
+                </div>
               </a>
             </li>
             <li class="flex-grow">
               <a
                 href="#"
-                class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+                class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
               >
-                Contact
+                <i class="fa-solid fa-home"></i>
+                <div>
+                  Home
+                </div>
+              </a>
+            </li>
+            <li class="flex-grow">
+              <a
+                href="#"
+                class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+              >
+                <i class="fa-solid fa-home"></i>
+                <div>
+                  Home
+                </div>
               </a>
             </li>
           </ul>

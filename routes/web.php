@@ -67,18 +67,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('/test-api', function(){
-    $order =  \App\Models\Order::find(1);
-    
-    return \App\Models\Shipper::find(1)->config;
-    $digi = new App\Services\DigiDokan();
-    $ordersdata = \App\Models\Order::get()->pluck('track_data')->toArray();
-    $trackings = collect($ordersdata)->pluck('tracking_no')->toArray();
-    $orders = collect($ordersdata)->pluck('order_no')->toArray();
-    $response = $digi->downloadLoadSheet([
-        'orders' => $orders,
-        'tracking_numbers' => $trackings,
-        'phone' => App\Helper\Helper::parseDigiPhone(env('DIGIDOKAAN_PHONE')),
-        'gateway_id' => 3
-    ]);
-    return redirect()->to($response->pdf_link);
+    $user = \App\Models\User::find(1);
+    $status = Mail::to('mazeemrehan@gmail.com')->send(new \App\Mail\AccountStatus($user));
+    return 'email sent';
 });
