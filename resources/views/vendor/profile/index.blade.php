@@ -22,14 +22,30 @@
 
         <div class="p-4 border rounded-lg">
             <h1 class="text-base font-bold mb-4">Shop Information</h1>
-            <div class="w-20 mb-4">
-                <img src="{{ $user->vendor->store_logo }}" alt="" class="w-full">
-            </div>
             <table class="w-full">
                 <tr class="">
-                    <td class="text-sm ">Name</td>
-                    <td class="text-sm">Email</td>
+                    <td class="text-sm ">Store Logo</td>
+                    <td class="text-sm">CNIC</td>
                 </tr>
+                
+                <tr>
+                    <td class="text-sm font-semibold">
+                        <img src="{{ $user->vendor->store_logo }}" alt="" class="w-20">
+                    </td>
+                    <td class="text-sm font-semibold">
+                        @if($user->dropShipperNicKyc)
+                            <img src="{{ asset($user->dropShipperNicKyc->file) }}" alt="" class="w-20">
+                        @else
+                            N/A
+                        @endif
+                    </td>
+                </tr>
+                
+                <tr class="">
+                    <td class="text-sm pt-2">Name</td>
+                    <td class="text-sm pt-2">Email</td>
+                </tr>
+                
                 <tr>
                     <td class="text-sm font-semibold">{{ $user->vendor->business_name }}</td>
                     <td class="text-sm font-semibold">{{ $user->vendor->store_url }}</td>
@@ -42,7 +58,7 @@
                     <td class="text-sm font-semibold">{{ $user->vendor->phone }}</td>
                     <td class="text-sm ">
                         <div>
-                            <span class="bg-green-500 text-white px-4 py-1 rounded-full">Active</span>
+                            <x-status-chip status="{{$user->status}}" />
                         </div>
                     </td>
                 </tr>
@@ -67,6 +83,28 @@
                 <tr>
                     <td class="text-sm font-semibold">{{ $user->vendor->phone }}</td>
                     <td class="text-sm font-semibold">{{ $user->vendor->address }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="p-4 border rounded-lg">
+            <h1 class="text-base font-bold mb-4">Bank Information</h1>
+            <table class="w-full">
+                <tr class="">
+                    <td class="text-sm ">Bank</td>
+                    <td class="text-sm">IBAN</td>
+                </tr>
+                <tr>
+                    <td class="text-sm font-semibold">{{ $user->activeBankAccount->bank->name ?? 'N/A' }}</td>
+                    <td class="text-sm font-semibold">{{ $user->activeBankAccount->iban }}</td>
+                </tr>
+                <tr>
+                    <td class="text-sm pt-2">Title</td>
+                    <td class="text-sm pt-2">Status</td>
+                </tr>
+                <tr>
+                    <td class="text-sm font-semibold">{{ $user->activeBankAccount->account_name }}</td>
+                    <td class="text-sm font-semibold">{{ $user->activeBankAccount->status }}</td>
                 </tr>
             </table>
         </div>

@@ -26,190 +26,267 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
 /></noscript>
-</head> 
-<body>
-    <header class="bg-white relative " x-data="{ isSidebarOpen: false }">
-        <div class="flex justify-between items-center px-7 py-3">
-            <a href="{{ url('/') }}">
-            <img src={{ asset('assets/images/Logo.png') }} alt="Logo" class="w-32 h-auto" />
-            </a>
-            <button class="lg:hidden text-2xl" @click="isSidebarOpen =!isSidebarOpen;">
-            {{-- <button class="lg:hidden text-2xl" @click="alert('ASDSDS');"> --}}
-            ☰
-            </button>
-            <div class="hidden lg:flex items-center justify-between gap-7">
-            <nav>
-                <ul class="flex items-center gap-10 text-[18px]">
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                </ul>
-            </nav>
-            <div class="flex gap-3.5">
-            @auth
-                <a href="{{ url('/dashboard') }}" class="border border-gray-400 px-8 py-3 rounded-lg font-medium text-base hover:bg-primary-500 hover:text-white">Dashbaord</a>
-            @else
-                <a href="{{ url('/login') }}" class="border border-gray-400 px-8 py-3 rounded-lg font-medium text-base hover:bg-primary-500 hover:text-white">
-                Login
-                </a>
-                <a href="{{ url('/signup') }}" class="border border-gray-400 px-8 py-3 rounded-lg font-medium text-base hover:bg-primary-500 hover:text-white">
-                Sign Up
-                </a>
-            @endauth
+</head>
+<body class="font-zeefont">
+
+  <header class='my-8 px-4' x-data="{sidebar:false}">
+        <div class='flex justify-between items-center'>
+          <div class="flex-1">
+            <div class="size-8 lg:hidden cursor-pointer" x-on:click="sidebar = !sidebar">
+              <i class="fa-solid fa-bars"></i>
             </div>
+          </div>
+          <div class="flex-1 flex items-center justify-center">
+            <img
+              src="https://img.freepik.com/free-psd/engraved-black-logo-mockup_125540-223.jpg"
+              alt="Logo"
+              class='size-28'
+            />
+          </div>
+
+          <div class='hidden lg:flex items-center gap-4 flex-1 justify-end'>
+            <div class='flex items-center p-3 rounded-lg border justify-center'>
+              <i class='fa-solid fa-search text-blue-950' > </i>
+              <input
+                type="text"
+                id='search'
+                name='search'
+                placeholder='Search'
+                class='outline-none border-none text-black ml-2'/>
             </div>
+           <a href="{{ url('/login') }}"> <i class="fa-solid fa-user"></i></a>
+          </div>
         </div>
 
+        <div class='mx-4 my-24 flex items-center p-3 rounded-lg border lg:hidden'>
+          <i class='fa-solid fa-search'> </i>
+          <input
+            type="text"
+            id='search'
+            name='search'
+            placeholder='Search'
+            class='outline-none  text-black ml-2 transition'
+          />
+        </div>
         <div
-            class="fixed top-0 right-0 h-full bg-white shadow-lg transition-transform lg:hidden"
-            :class="isSidebarOpen ? 'translate-x-0' : 'translate-x-full'"
+          id='sidebar'
+          x-show='sidebar'
+          class='fixed inset-0 bg-gray-800 z-50 transform translate-x-full transition-transform duration-300 lg:hidden'
+          :class="sidebar ? 'translate-x-full' : 'translate-x-0'"
         >
-            <button
-            class="absolute top-4 left-4 text-2xl font-bold"
-            onClick={toggleSidebar}
-            >
-            &times;
+          <div class='relative w-64 h-full bg-gray-900 text-white'>
+            <button class='absolute top-4 right-4 text-2xl text-white' x-on:click="sidebar = !sidebar">
+              <i class="fa-solid fa-home"></i>
             </button>
-            <nav class="mt-12">
-            <ul class="space-y-6 px-4">
+            <nav class='mt-12'>
+              <ul>
                 <li>
-                <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                    Home
-                </a>
+                  <a href="https://youtu.be/Xgi5ljHgSmo?si=A0CpUqhwddbj1eFE" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Home</a>
                 </li>
-                <li>
-                <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                    Home
-                </a>
-                </li>
-                <li>
-                <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
+                <li class='relative group'>
+                  <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">
                     About
-                </a>
-                </li>
-                <li>
-                <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                    Contact
-                </a>
-                </li>
-                <li>
-                <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                    Login
-                </a>
-                </li>
-                <li>
-                <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                    Signup
-                </a>
-                </li>
-            </ul>
-            </nav>
-        </div>
-    </header>
-    @yield('content')
-    <footer class="bg-secondary-900 px-6 py-10">
-        <div class="flex flex-wrap ">
-          <div class="flex flex-col gap-8 w-full md:w-1/2 lg:w-1/3">
-            <img src={{ asset('assets/images/Logo.png') }} alt="" class="w-full max-w-[300px]" />
-            <p class="text-[16px] text-[#FFFFFF]">
-              You've reached the end of Collab P, but the journey is just
-              beginning. Let us be a part of your team and help you develop the
-              right solution.
-            </p>
-            <div class="flex gap-3 flex-col sm:flex-row">
-              <button class="px-7 py-3 bg-[#09BAB1] text-white hover:cursor-pointer rounded-lg">
-                As a Client
-              </button>
-              <button class="px-7 py-3 bg-[#09BAB1] text-white hover:cursor-pointer rounded-lg">
-                As A Service Provider
-              </button>
-            </div>
-          </div>
-          <div class="flex gap-8 w-full md:w-1/2 lg:w-2/3 justify-evenly sm: pt-2">            
-            <div class="flex flex-col text-white gap-4">
-              <h4 class="font-medium text-[20px]">Company</h4>
-              <ul class="flex flex-col text-[16px] gap-2">
-                <li>
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#">About Us</a>
-                </li>
-                <li>
-                  <a href="#">Projects</a>
-                </li>
-                <li>
-                  <a href="#">Industry</a>
-                </li>
-                <li>
-                  <a href="#">Contact Us</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="flex flex-col text-white gap-4">
-              <h4 class="font-medium text-[20px]">Community</h4>
-              <ul class="flex flex-col text-[16px] gap-2">
-                <li>
-                  <a href="#">Docs</a>
-                </li>
-                <li>
-                  <a href="#">Open source</a>
-                </li>
-                <li>
-                  <a href="#">Feature</a>
-                </li>
-                <li>
-                  <a href="#">Requests</a>
-                </li>
-                <li>
-                  <a href="#">Online events</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="flex flex-col text-white gap-4">
-              <h4 class="font-medium text-[20px]">Featured Skills</h4>
-              <ul class="flex flex-col text-[16px] gap-2">
-                <li>
-                  <a href="#">Software Developers</a>
-                </li>
-                <li>
-                  <a href="#">Web Developers</a>
-                </li>
-                <li>
-                  <a href="#">Mobile App Developers</a>
-                </li>
-                <li>
-                  <a href="#">iOS Developers</a>
-                </li>
-                <li>
-                  <a href="#">Node.js Developers</a>
-                </li>
-                <li>
-                  <a href="#">PHP Developers</a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="text-[#2BFFF4] border-b border-[#2BFFF4]"
-                  >
-                    View All
                   </a>
+                  <div class="absolute left-full top-0 mt-2 w-48 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ul>
+                      <li>
+                        <a
+                          href="#"
+                          class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
+                        >
+                          Team
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
+                        >
+                          History
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
+                        >
+                          Values
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <a href="{{ url('products') }}" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Products</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Portfolio</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Contact</a>
                 </li>
               </ul>
-            </div>
+            </nav>
           </div>
         </div>
+        <nav class="hidden md:block w-full my-8 p-4">
+          <ul class="hidden lg:flex flex-wrap lg:flex-nowrap gap-4 lg:gap-4">
+            <li class="flex-grow">
+              <a href="#"
+                class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"
+              >Home</a>
+            </li>
+
+            <li class="relative group flex-grow">
+                  <a href="#"
+                    class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+                  >About</a>
+                <div class="group-hover:block hidden absolute left-0 mt-1 w-full z-40 bg-primary-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ul>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                      >
+                        Team
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                      >
+                        History
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                      >
+                        Values
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                      >
+                        Values
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                      >
+                        Values
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </li>
+
+            <li class="flex-grow">
+              <a href="{{ url('products') }}"
+                class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">Products</a>
+            </li>
+            <li class="flex-grow">
+              <a
+                href="#"
+                class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+              >
+                Portfolio
+              </a>
+            </li>
+            <li class="flex-grow">
+              <a
+                href="#"
+                class="block px-8 py-10 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  <div class='main md:px-14'>
+    @yield('content')
+  </div>
+     
+  <footer class="bg-blue-900 text-white py-6  md:pt-16 px-12">
+      <div class="container mx-auto px-4 flex flex-col md:flex-row justify-around gap-10 items-start ">
+        <div class="mb-6 md:mb-0">
+          <h3 class="text-secondary-400 font-medium mb-2 text-xl whitespace-nowrap">FOLLOW US:</h3>
+          <div class="flex space-x-4">
+            <a href="#" class="text-white hover:text-secondary-400">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="#" class="text-white hover:text-secondary-400">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="#" class="text-white hover:text-secondary-400">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="mb-6 md:mb-0">
+          <h3 class="text-secondary-400 font-medium mb-2 text-xl text-start">Support</h3>
+          <ul class="space-y-1 text-sm text-start">
+            <li><a href="#" class="hover:text-secondary-400">Refund & Replacement Policy (For Resellers)</a></li>
+            <li><a href="#" class="hover:text-secondary-400">Refund and Replacement Policy (primaryers)</a></li>
+            <li><a href="#" class="hover:text-secondary-400">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-secondary-400">Terms of Service</a></li>
+          </ul>
+        </div>
+
+        <div class="mb-6 md:mb-0">
+          <h3 class="text-secondary-400 font-medium mb-2 text-xl text-start">Powered by</h3>
+          <p class="text-sm text-start">
+            myzambeeL is powered and owned by Tazah Global L.L.C-FZ
+            <br />
+            Warehouse # 13, Plot # 4488, PO Box 5841, Al Sajaa Industrial, Sharjah
+          </p>
+        </div>
+      </div>
+
+      <div class="border-t border-blue-800 mt-6 pt-4">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+          <p class="text-xs text-gray-400">&copy; 2024, Zambeel Powered by 
+            <a href="https://txdevs.com" class="text-white hover:text-secondary-400">TXDevs</a>
+          </p>
+          <button class="bg-green-500 text-black text-sm font-bold py-2 px-4 rounded hover:bg-green-600 mt-4 md:mt-0">
+            Book a Call
+          </button>
+        </div>
+      </div>
     </footer>
+
+  <script type="module">
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('translate-x-full');
+      sidebar.classList.toggle('translate-x-0');
+    };
+
+    // Function to hide the sidebar
+    function hideSidebar  ()  {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.add('translate-x-full');
+      sidebar.classList.remove('translate-x-0');
+    };
+
+    // Attach the hideSidebar function to all sidebar links
+    function addLinkClickListeners  () {
+      const links = document.querySelectorAll('#sidebar a');
+      links.forEach(link => {
+        link.addEventListener('click', hideSidebar);
+      });
+    };
+    addLinkClickListeners();
+
+  </script>
+  @yield('scripts')
 </body>
 </html>

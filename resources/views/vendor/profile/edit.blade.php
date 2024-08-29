@@ -60,21 +60,53 @@
 
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 mt-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
                 <div class="flex flex-col gap-2">
-                    <div class="w-20">
-                        <img src="{{ $user->avatar }}" alt="" srcset="">
+                    <div class="w-20 h-20">
+                        <img src="{{ $user->avatar }}" alt="" srcset="" class="h-20">
                     </div>
                     <x-label>Avatar</x-label>
                     <x-input type="file" name="avatar" />
                 </div>
 
                 <div class="flex flex-col gap-2">
-                     <div class="w-20">
-                        <img src="{{ $user->vendor->store_logo }}" alt="" srcset="">
+                     <div class="w-20 h-20">
+                        <img src="{{ $user->vendor->store_logo }}" alt="" srcset="" class="h-20">
                     </div>
                     <x-label>Store Logo</x-label>
                     <x-input type="file" name="store_logo" required="false"/>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                     <div class="w-20 h-20">
+                        @if($user->dropShipperNicKyc)
+                            <img src="{{ asset($user->dropShipperNicKyc->file) }}" alt="" srcset="" class="h-20">
+                        @else
+                            <img src="{{ asset('users/default.png') }}" alt="" srcset="">
+                        @endif
+                    </div>
+                    <x-label>CNIC</x-label>
+                    <x-input type="file" name="cnic" required="false"/>
+                </div>
+            </div>
+
+            <div class="font-semibold mt-6 mb-2">Bank Information</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="flex flex-col gap-2">
+                    <x-label>Bank Name</x-label>
+                    <x-select name="bank_id">
+                        @foreach($banks as $bank)
+                            <option value="{{ $bank->id }}" @if($user->activeBankAccount->bank_id == $bank->id) selected @endif >{{ $bank->name }}</option>
+                        @endforeach
+                    </x-select>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <x-label>Account Name</x-label>
+                    <x-input name="account_name" value="{{ $user->activeBankAccount->account_name }}" />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <x-label>Account Number (IBAN)</x-label>
+                    <x-input name="iban" value="{{ $user->activeBankAccount->iban }}" />
                 </div>
             </div>
             

@@ -4,8 +4,8 @@
 <div class="mx-auto">
     <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
         <div class="min-w-full">
-            <h2 class="text-lg font-semibold">Update Profile</h2>
-            <p class="text-sm font-light text-gray-400">Update your profile and Business Informatoin</p>
+            <h2 class="text-lg font-semibold">Create Profile</h2>
+            <p class="text-sm font-light text-gray-400">Create your profile and Business Informatoin</p>
         </div>
     </div>
     <div class="px-4 sm:px-8 md:px-12 bg-white rounded-lg mt-7 pt-4">
@@ -22,6 +22,7 @@
         @endif
         <form action="{{ route('vendor.profile.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <div class="font-semibold my-2">Profile Information</div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 <div class="flex flex-col gap-2">
                     <x-label>User Name</x-label>
@@ -59,21 +60,40 @@
 
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 mt-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
                 <div class="flex flex-col gap-2">
-                    {{-- <div class="w-20">
-                        <img src="{{ $user->avatar }}" alt="" srcset="">
-                    </div> --}}
                     <x-label>Avatar</x-label>
                     <x-input type="file" name="avatar" required="true"  />
                 </div>
 
                 <div class="flex flex-col gap-2">
-                     {{-- <div class="w-20">
-                        <img src="{{ $user->vendor->store_logo }}" alt="" srcset="">
-                    </div> --}}
                     <x-label>Store Logo</x-label>
                     <x-input type="file" name="store_logo"  required="true" />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <x-label>CNIC</x-label>
+                    <x-input type="file" name="cnic"  required="true" />
+                </div>
+            </div>
+
+            <div class="font-semibold mt-6 mb-2">Bank Information</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="flex flex-col gap-2">
+                    <x-label>Bank Name</x-label>
+                    <x-select name="bank_id">
+                        @foreach($banks as $bank)
+                            <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+                        @endforeach
+                    </x-select>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <x-label>Account Name</x-label>
+                    <x-input name="account_name" value="{{ old('account_name') }}" />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <x-label>Account Number (IBAN)</x-label>
+                    <x-input name="iban" value="{{ old('iban') }}" />
                 </div>
             </div>
             

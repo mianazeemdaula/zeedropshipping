@@ -3,6 +3,9 @@
 /public/hot
 /public/media
 /public/storage
+/public/users
+/public/vendors
+/public/orders
 /storage/*.key
 /vendor
 .env

@@ -23,13 +23,14 @@
                                     <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Email</th>
                                     <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Mobile</th>
                                     <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Role</th>
+                                    <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Note</th>
                                     <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
                                 @if($users->isEmpty())
                                     <tr>
-                                        <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4" colspan="9">No Earnings Yet</td>
+                                        <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4" colspan="9">0 Records</td>
                                     </tr>
                                 @endif
                                 @foreach($users as $item)
@@ -44,7 +45,11 @@
                                         {{ $item->mobile }}
                                     </td>
                                     <td class="whitespace nowrap px-2 py-2 text-sm sm:px-2 sm:py-2">
-                                        {{ $item->roles->pluck('name') }}
+                                        {{ implode(",",$item->roles->pluck('name')->toArray()) }}
+                                    </td>
+
+                                    <td class="whitespace nowrap px-2 py-2 text-sm sm:px-2 sm:py-2">
+                                        {{ $item->comment }}
                                     </td>
                                     
                                     <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-right sm:px-2 sm:py-2 flex">

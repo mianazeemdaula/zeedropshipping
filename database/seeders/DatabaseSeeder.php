@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'support']);
         Role::create(['name' => 'user']);
-        Role::create(['name' => 'vendor']);
+        Role::create(['name' => 'dropshipper']);
         Role::create(['name' => 'dispatcher']);
         Role::create(['name' => 'shipper']);
 
@@ -66,8 +66,8 @@ class DatabaseSeeder extends Seeder
         $user->assignRole('admin');
 
         User::factory()->create([
-            'name' => 'Vendor',
-            'email' => 'vendor@gmail.com',
+            'name' => 'Drop Shipper',
+            'email' => 'dropshipper@gmail.com',
             'country_id' => 1,
         ]);
 
@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
             'store_logo' => 'https://via.placeholder.com/150',
             'city_id' => 1,
         ]);
-        $user->assignRole('vendor');
+        $user->assignRole('dropshipper');
 
 
         User::factory()->create([
@@ -211,13 +211,13 @@ class DatabaseSeeder extends Seeder
         KycDoc::create([
             'name' => 'CNIC Front',
             'required' => true,
-            'type' => 'vendor',
+            'type' => 'dropshipper',
         ]);
 
         KycDoc::create([
             'name' => 'CNIC Back',
             'required' => true,
-            'type' => 'vendor',
+            'type' => 'dropshipper',
         ]);
     }
 }

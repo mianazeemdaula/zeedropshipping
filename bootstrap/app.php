@@ -12,8 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->web( append : [
-            \App\Http\Middleware\EnsureProfileActive::class,
+        // $middleware->web( append : [
+        //     \App\Http\Middleware\EnsureProfileActive::class,
+        // ]);
+        $middleware->alias([
+            'validprofile' => \App\Http\Middleware\EnsureProfileActive::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

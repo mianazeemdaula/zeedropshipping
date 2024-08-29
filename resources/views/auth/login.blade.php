@@ -14,7 +14,7 @@
             title=""
             class="font-medium text-black transition-all duration-200 hover:underline"
           >
-            Sign Up
+            Register Now
           </a>
         </p>
         <form action="{{ url('login') }}" method="POST" class="mt-8">
@@ -37,14 +37,18 @@
                   Forgot Password?
                 </a>
               </div>
-              <div class="mt-2">
-                <div class="relative" x-data="{showPassword=false}">
-                  <x-input name="password" type="password" placeholder="Password" />
+              <div class="mt-2" x-data="{ showpassword: false }">
+                <div class="relative" >
+                  <input :type="showpassword ? 'text' : 'password'" name="password" placeholder="Password" class="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50">
                   <!-- Eye Icon -->
-                  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <i class="fa-solid fa-eye"></i>
+                  <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <i x-show="showpassword" class="fa-solid fa-eye" x-on:click="showpassword = ! showpassword"></i>
+                    <i x-show="!showpassword" class="fa-solid fa-eye-slash" x-on:click="showpassword = ! showpassword"></i>
                   </div>
                 </div>
+                @error('password')
+                  <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
+                @enderror
               </div>
             </div>
             <div>

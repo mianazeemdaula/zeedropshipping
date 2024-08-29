@@ -63,7 +63,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'mobile' => 'nullable|string|max:20',
-            'status' => 'required|string|in:active,inactive',
+            'status' => 'required|string|in:active,inactive,under-review',
             'role' => 'required|string|exists:roles,name'
         ]);
 
@@ -72,6 +72,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->mobile = $request->mobile;
         $user->status = $request->status;
+        $user->comment = $request->comment;
         $user->syncRoles([$request->role]);
         $user->save();
         if($request->has('password')){
@@ -95,5 +96,21 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showStatusUser(string $status)
+    {
+        if($status == 'all'){
+            $users = User::where('id', '!=', auth()->id())->paginate();
+        }else if($status == 'dispatcher' || $status == 'dropshipper'){
+            $users = User::role($status)->paginate();
+        }else if($status == 'inreview'){
+            $users = User::role('dropshipper')->where('status', 'under-review')->paginate();
+        }else if($status == 'inactive'){
+            $users = User::role('dropshipper')->where('status', 'inactive')->paginate();
+        }else{
+            $users = User::where('id', '!=', auth()->id())->paginate();
+        }
+        return view('admin.users.index', compact('users'));
     }
 }

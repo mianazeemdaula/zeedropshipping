@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
+use App\Models\Bank;
+use App\Models\BankAccount;
+use App\Models\UserKycDoc;
 use Illuminate\Support\Facades\File;
 class ProfileController extends Controller
 {
@@ -32,7 +35,8 @@ class ProfileController extends Controller
             return redirect()->route('vendor.profile.index');
         }
         $cities = City::all();
-        return view('vendor.profile.create', compact('user', 'cities'));
+        $banks = Bank::all();
+        return view('vendor.profile.create', compact('user', 'cities', 'banks'));
     }
 
     /**
@@ -73,6 +77,30 @@ class ProfileController extends Controller
             $vendor->store_logo = $request->file('store_logo')->storeAs('vendors', $logoName);
             $vendor->save();
         }
+        if($request->hasFile('cnic')) {
+            $logoName = time() . '_'.$vendor->id .".". $request->file('cnic')->getClientOriginalExtension();
+            $fileName = $request->file('cnic')->storeAs('vendors', $logoName);
+            $kyc = UserKycDoc::where('user_id', $user->id)->where('kyc_doc_id',1)->first();
+            if(!$kyc){
+                $kyc = new UserKycDoc;
+                $kyc->user_id = $user->id;
+                $kyc->kyc_doc_id = 1;
+                $kyc->file = $fileName;
+                $kyc->save();
+            }else{
+                $kyc->file = $fileName;
+                $kyc->status = 'pending';
+                $kyc->save();
+            }
+        }
+        $account = new BankAccount();
+        $account->bank_id = $request->bank_id;
+        $account->user_id = $user->id;
+        $account->account_name = $request->account_name;
+        $account->iban = $request->iban;
+        $account->save();
+        $user->status = 'under-review';
+        $user->save();
         return redirect()->route('vendor.profile.index');
     }
 
@@ -92,7 +120,8 @@ class ProfileController extends Controller
         if(auth()->user()->id == $id) {
             $user = auth()->user();
             $cities = City::all();
-            return view('vendor.profile.edit', compact('user', 'cities'));
+            $banks = Bank::all();
+            return view('vendor.profile.edit', compact('user', 'cities','banks'));
         }
         abort(403);
     }
@@ -138,6 +167,30 @@ class ProfileController extends Controller
             $user->avatar = $request->file('avatar')->storeAs('users', $avatarName);
             $user->save();
         }
+        if($request->hasFile('cnic')) {
+            $logoName = time() . '_'.$vendor->id .".". $request->file('cnic')->getClientOriginalExtension();
+            $fileName = $request->file('cnic')->storeAs('vendors', $logoName);
+            $kyc = UserKycDoc::where('user_id', $user->id)->where('kyc_doc_id',1)->first();
+            if(!$kyc){
+                $kyc = new UserKycDoc;
+                $kyc->user_id = $user->id;
+                $kyc->kyc_doc_id = 1;
+                $kyc->file = $fileName;
+                $kyc->save();
+            }else{
+                $kyc->file = $fileName;
+                $kyc->status = 'pending';
+                $kyc->save();
+            }
+        }
+        $bankAccount = $user->activeBankAccount;
+        $bankAccount->account_name = $request->account_name;
+        $bankAccount->bank_id = $request->bank_id;
+        $bankAccount->iban = $request->iban;
+        if($bankAccount->iban !== $request->iban || $bankAccount->account_name !== $request->account_name){
+            $bankAccount->status = 'under-review';
+        }
+        $bankAccount->save();
         return redirect()->route('vendor.profile.index');
     }
 

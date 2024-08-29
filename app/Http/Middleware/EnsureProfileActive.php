@@ -15,12 +15,17 @@ class EnsureProfileActive
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user() && $request->user()->hasRole('vendor') &&  $request->user()->vendor == null) {
-            return redirect()->route('vendor.profile.create');
-        }
-        if($request->user() && $request->user()->status !== 'active') {
-            auth()->logout();
-            abort(403, 'Your account is not active');
+        if($request->user()){
+            $user = $request->user();
+            if($user->status !== 'active') {
+                if($user->status === 'under-review') {
+                    auth()->logout();
+                    return abort(403,"You account is under verification pelase wait or check your email for status");
+                }
+                return abort(403, 'Your account is not active');
+            }else if($user->hasRole('dropshipper') &&  $user->vendor == null) {
+                return redirect()->route('vendor.profile.create');
+            }
         }
         return $next($request);
     }

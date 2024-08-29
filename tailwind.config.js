@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'zeefont': ['zeefont', 'sans-serif'],
+      },
       colors: {
         'primary': {
           100: '#fde2e3',

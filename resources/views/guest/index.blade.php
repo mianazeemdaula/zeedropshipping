@@ -1,363 +1,274 @@
 @extends('layouts.web')
 @section('content')
-      <div class="py-20">
-        <div class="flex flex-col justify-center items-center gap-2">
-          <h2 class="font-medium text-[45px]">Our Clients</h2>
-          <p class="text-center text-[16px] text-[#555555] ">
-            Every project we deliver showcases the hard work and dedication of
-            our collaborative partners.
-            <br /> This demonstrates our collective strength, as Collab P is all
-            about collaboration.
-          </p>
-        </div>
-
-        <div class="max-w-[1300px] mx-auto max-[1024]: px-10 max-lg:px-7 pt-8">
-          <img src={{ asset('assets/images/project.png') }} alt="" class="w-full" />
+<!-- header Section -->
+    <div class='px-14 md:px-0'>
+      <div class="relative flex flex-col items-center text-center">
+        <img src="https://png.pngtree.com/thumb_back/fh260/back_pic/00/02/44/5056179b42b174f.jpg" alt="Background Image" class="w-full  object-cover rounded-lg shadow-lg" />
+        <div class="absolute top-1/2 transform -translate-y-1/2 px-4 py-6  text-white rounded-lg max-w-md w-full">
+          <p class="text-3xl font-bold text-yellow-400 mb-4">Zambeel is now active in KSA</p>
+          <p class="text-lg mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam, eos.</p>
+          <button class=" w-full px-8 py-4 bg-primary-200 text-gray-800 rounded-lg md:self-center hover:bg-primary-600 transition-colors">Signup</button>
         </div>
       </div>
+    </div>
+    {{-- begin slider --}}
 
-      <div class="pt-20">
-        <div class="flex justify-center items-center">
-          <div class="flex flex-col gap-2">
-            <h2 class="font-medium text-[45px] text-[#555555] text-center max-sm:text-[20px]">
-              How Collab P makes Clients' lives easy
-            </h2>
-            <p class="text-center text-[16px] max-sm:text-[12px]">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
-              <br />
-              Lorem Ipsum has been the industry's standard dummy.
+    {{-- <swiper-container>
+      <swiper-slide>Slide 1</swiper-slide>
+      <swiper-slide>Slide 2</swiper-slide>
+      <swiper-slide>Slide 3</swiper-slide>
+      <swiper-slide>Slide ...</swiper-slide>
+    </swiper-container> --}}
+    {{-- end slider --}}
+    <div class=" p-8 mt-32 ">
+      <div class="flex flex-col md:flex-row justify-evenly gap-8">
+        <div class="">
+          <img src="https://plus.unsplash.com/premium_photo-1661284828052-ea25d6ea94cd?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d29ya3xlbnwwfHwwfHx8MA%3D%3D"
+            alt="Work Image"
+            class="w-full md:w-[460px]   rounded-lg shadow-lg" />
+        </div>
+        <div class="">
+          <h1 class="text-2xl font-bold mb-4">What Do We Do?</h1>
+          <div class='flex flex-col gap-6'>
+
+
+            <p class="text-gray-700 ">
+              At Zambeel, our goal is to equip individuals and brands with the tools they <br /> need to flourish in the thriving markets of the UAE and KSA.
             </p>
-            <div class="flex justify-center pt-6 gap-4">
-              <button class="px-6 py-3 rounded-lg font-medium text-[18px] bg-[#09BAB1] text-white hover:bg-[#008E89] sm:px-4 sm:py-2 sm:text-[14px]">
-                For Clients
-              </button>
-              <button class="px-6 py-3 rounded-lg font-medium text-[18px] bg-[#09BAB1] text-white hover:bg-[#008E89] sm:px-4 sm:py-2 sm:text-[14px]">
-                For Service Providers
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-y-4 justify-evenly my-10 py-10 bg-[#FAFAFA]">
-          <div class="w-full lg:w-1/6 md:w-1/4 sm:w-1/2 p-2 flex flex-col items-center">
-            <div class="flex flex-col items-center gap-1 text-center">
-              <p class="font-bold text-[24px] md:text-[28px] text-[#B6B6B6]">
-                10+
-              </p>
-              <h4 class="font-medium text-[14px] md:text-[16px]">
-                Global Warehouses
-              </h4>
-            </div>
-          </div>
-          <div class="w-full lg:w-1/6 md:w-1/4 sm:w-1/2 p-2 flex flex-col items-center">
-            <div class="flex flex-col items-center gap-1 text-center">
-              <p class="font-bold text-[24px] md:text-[28px] text-[#B6B6B6]">
-                1,300+
-              </p>
-              <h4 class="font-medium text-[14px] md:text-[16px]">
-                Cooperated Factories
-              </h4>
-            </div>
-          </div>
-          <div class="w-full lg:w-1/6 md:w-1/4 sm:w-1/2 p-2 flex flex-col items-center">
-            <div class="flex flex-col items-center gap-1 text-center">
-              <p class="font-bold text-[24px] md:text-[28px] text-[#B6B6B6]">
-                1,500K+
-              </p>
-              <h4 class="font-medium text-[14px] md:text-[16px]">
-                Trusted Ecommerce Stores
-              </h4>
-            </div>
-          </div>
-          <div class="w-full lg:w-1/6 md:w-1/4 sm:w-1/2 p-2 flex flex-col items-center">
-            <div class="flex flex-col items-center gap-1 text-center">
-              <p class="font-bold text-[24px] md:text-[28px] text-[#B6B6B6]">
-                120+
-              </p>
-              <h4 class="font-medium text-[14px] md:text-[16px]">
-                Partner Couriers Worldwide
-              </h4>
-            </div>
+            <p>With strategically positioned warehouses in Sharjah, Jeddah, and Riyadh,<br /> we guarantee efficient and prompt delivery operations.</p>
+            <p>With the widest range of drop-shipping options available, we provide <br /> resellers with an unparalleled array of products. Our comprehensive suite <br /> of services covers everything from sourcing goods from local markets in <br /> the UAE and KSA, as well as China, to warehousing, fulfillment, last-mile <br /> delivery, and Cash on Delivery facilities.</p>
+            <p>Our extensive network comprises resellers from Pakistan, India, <br />Bangladesh, UAE, KSA, Brazil, and Egypt, all united in their success with <br /> Zambeel.</p>
+            <button class='bg-primary-700 hover:bg-primary-600 p-4 text-white rounded-lg self-start'>See Our Video</button>
           </div>
         </div>
       </div>
+    </div>
 
-     <div class="bg-custom-red-extra-light pb-4">
-        <h2 class="font-medium text-[45px] text-center py-10">
-          How to Start Dropshipping with CJ?
-        </h2>
-
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 px-8 py-10 ">
-          <div class="card relative bg-white shadow-lg p-6 rounded-lg max-w-[100%] sm:max-w-[407px] mx-auto">
-            <div class="absolute top-0 left-0 size-14 rounded bg-green-300 flex justify-center items-center">
-              <h1 class="text-xl font-bold">1</h1>
-            </div>
-            <div class="flex flex-col items-center gap-4 mt-12">
-              <div class="pt-4">
-                <img
-                  src="https://tse4.mm.bing.net/th?id=OIP.QpFulb0h03TyeQznvwk_IgHaF7&pid=Api&P=0&h=220"
-                  alt="Product Image"
-                  class="w-full max-w-[150px] h-auto object-cover"
-                />
-              </div>
-              <h3 class="text-[18px] font-medium tracking-tighter text-center">
-                Source and Sell Winning Products
-              </h3>
-            </div>
-          </div>
-          <div class="card relative bg-white shadow-lg p-6 rounded-lg max-w-[100%] sm:max-w-[407px] mx-auto">
-            <div class="absolute top-0 left-0 size-14 rounded bg-green-300 flex justify-center items-center">
-              <h1 class="text-xl font-bold">2</h1>
-            </div>
-            <div class="flex flex-col items-center gap-4 mt-12">
-              <div class="pt-4">
-                <img
-                  src="https://tse4.mm.bing.net/th?id=OIP.QpFulb0h03TyeQznvwk_IgHaF7&pid=Api&P=0&h=220"
-                  alt="Product Image"
-                  class="w-full max-w-[150px] h-auto object-cover"
-                />
-              </div>
-              <h3 class="text-[18px] font-medium tracking-tighter text-center">
-                Source and Sell Winning Products
-              </h3>
-            </div>
-          </div>
-          <div class="card relative bg-white shadow-lg p-6 rounded-lg max-w-[100%] sm:max-w-[407px] mx-auto">
-            <div class="absolute top-0 left-0 size-14 rounded bg-green-300 flex justify-center items-center">
-              <h1 class="text-xl font-bold">3</h1>
-            </div>
-            <div class="flex flex-col items-center gap-4 mt-12">
-              <div class="pt-4">
-                <img
-                  src="https://tse4.mm.bing.net/th?id=OIP.QpFulb0h03TyeQznvwk_IgHaF7&pid=Api&P=0&h=220"
-                  alt="Product Image"
-                  class="w-full max-w-[150px] h-auto object-cover"
-                />
-              </div>
-              <h3 class="text-[18px] font-medium tracking-tighter text-center">
-                Source and Sell Winning Products
-              </h3>
-            </div>
-          </div>
-          <div class="card relative bg-white shadow-lg p-6 rounded-lg max-w-[100%] sm:max-w-[407px] mx-auto">
-            <div class="absolute top-0 left-0 size-14 rounded bg-green-300 flex justify-center items-center">
-              <h1 class="text-xl font-bold">4</h1>
-            </div>
-            <div class="flex flex-col items-center gap-4 mt-12">
-              <div class="pt-4">
-                <img
-                  src="https://tse4.mm.bing.net/th?id=OIP.QpFulb0h03TyeQznvwk_IgHaF7&pid=Api&P=0&h=220"
-                  alt="Product Image"
-                  class="w-full max-w-[150px] h-auto object-cover"
-                />
-              </div>
-              <h3 class="text-[18px] font-medium tracking-tighter text-center">
-                Source and Sell Winning Products
-              </h3>
-            </div>
-          </div>
-        </div>
-        <div class="px-5">
-          <div class="bg-white rounded-md p-4 max-w-[800px] mx-auto px-5  ">
-            <p>
-              You may also place wholesale orders to have them stocked in CJ
-              warehouses, without a store.
+    <div class=" p-8 mt-32 ">
+      <div class="flex flex-col md:flex-row justify-evenly gap-8">
+        <div class="">
+          <h1 class="text-2xl font-bold mb-4">What Do We Do?</h1>
+          <div class='flex flex-col gap-6'>
+            <p class="text-gray-700 ">
+              At Zambeel, our goal is to equip individuals and brands with the tools they <br /> need to flourish in the thriving markets of the UAE and KSA.
             </p>
+            <p>With strategically positioned warehouses in Sharjah, Jeddah, and Riyadh,<br /> we guarantee efficient and prompt delivery operations.</p>
+            <p>With the widest range of drop-shipping options available, we provide <br /> resellers with an unparalleled array of products. Our comprehensive suite <br /> of services covers everything from sourcing goods from local markets in <br /> the UAE and KSA, as well as China, to warehousing, fulfillment, last-mile <br /> delivery, and Cash on Delivery facilities.</p>
+            <p>Our extensive network comprises resellers from Pakistan, India, <br />Bangladesh, UAE, KSA, Brazil, and Egypt, all united in their success with <br /> Zambeel.</p>
+            <button class='bg-primary-700 hover:bg-primary-600 text-white p-4 rounded-lg self-start'>Read the artical</button>
           </div>
+        </div>
+        <div class="">
+          <img src="https://plus.unsplash.com/premium_photo-1661284828052-ea25d6ea94cd?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d29ya3xlbnwwfHwwfHx8MA%3D%3D"
+            alt="Work Image"
+            class="w-full md:w-[460px]   rounded-lg shadow-lg" />
+        </div>
+      </div>
+    </div>
+
+    <div class='bg-gray-100 py-11'>
+
+      <p class='text-center font-bold text-2xl text-blue-950 py-10'>What Makes Zambeel Unique?</p>
+      <div class='grid grid-cols-1 md:grid-cols-3 gap-10 max-w-[1000px] mx-auto  '>
+
+
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'>  <i class='fa-solid fa-dollar text-4xl text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-base'>no need to get business <br />Registration or buy inventroy</p>
+
+        </div>
+
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'><i class='fa-solid fa-dollar text-4xl text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-base'>no need to get business <br />Registration or buy inventroy</p>
+
+        </div>
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'>  <i class='fa-solid fa-dollar text-4xl text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-base'>no need to get business <br />Registration or buy inventroy</p>
+
+        </div>
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'> <i class='fa-solid fa-dollar text-4xl text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-base'>no need to get business <br />Registration or buy inventroy</p>
+
+        </div>
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'><i class='fa-solid fa-dollar text-4xl text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-base'>no need to get business <br />Registration or buy inventroy</p>
+
+        </div>
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'>  <i class='fa-solid fa-dollar text-4xl text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-base'>no need to get business <br />Registration or buy inventroy</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class='max-w-[800px] mx-auto my-12'>
+      <h2 class='text-center text-2xl font-bold text-blue-800'>Who Are You?</h2>
+
+      <div class='flex flex-col md:flex-row gap-6 my-7'>
+        <div class="relative  w-[420px] md:w-[800px] rounded-lg">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmj6irVXYigBNppDIPGtB73hrvHHWD1scCjQ&s" alt="Your Image" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-xl p-4">
+            <div class='flex flex-col gap-5'>
+              <p class='text-center font-bold text-2xl'>Drop shipping seller</p>
+              <div class='flex gap-3 '>
+                <button class='py-2 px-3 bg-yellow-400 rounded-lg text-base'>Sign UP FOR UAE</button>
+                <button class='py-2 px-3 bg-primary-600 rounded-lg text-base'>Sign UP FOR UAE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="relative w-[420px] md:w-[800px] rounded-lg">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmj6irVXYigBNppDIPGtB73hrvHHWD1scCjQ&s" alt="Your Image" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-xl p-4">
+            <div class='flex flex-col gap-5'>
+
+
+              <p class='text-center font-bold text-2xl'>Drop shipping seller</p>
+              <div class='flex gap-3 '>
+
+                <button class='py-2 px-3 bg-yellow-400 rounded-lg text-base'>Sign UP FOR UAE</button>
+                <button class='py-2 px-3 bg-primary-600 rounded-lg text-base'>Sign UP FOR UAE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class=' py-11'>
+
+      <p class='text-center font-bold text-2xl text-blue-950 py-10'>Our Mile stones</p>
+      <div class='grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[1000px] mx-auto  '>
+
+
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'>  <i class='fa-solid fa-dollar text-4xl  text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-2xl'>75%+ Delivery Ratio</p>
+          <p class='text-center'>80% of our resellers get more than 75% delivery ratio in GCC markets</p>
+
+        </div>
+
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'>  <i class='fa-solid fa-dollar text-4xl  text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-2xl'>75%+ Delivery Ratio</p>
+          <p class='text-center'>80% of our resellers get more than 75% delivery ratio in GCC markets</p>
+
+        </div>
+
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'>  <i class='fa-solid fa-dollar text-4xl  text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-2xl'>75%+ Delivery Ratio</p>
+          <p class='text-center'>80% of our resellers get more than 75% delivery ratio in GCC markets</p>
+
+        </div>
+        <div class='flex flex-col gap-4'>
+
+          <div class='flex justify-center items-center'>  <i class='fa-solid fa-dollar text-4xl  text-green-400' ></i></div>
+
+          <p class='text-center font-bold text-2xl'>75%+ Delivery Ratio</p>
+          <p class='text-center'>80% of our resellers get more than 75% delivery ratio in GCC markets</p>
+
         </div>
       </div>
 
-      <section class="bg-gray-200 p-12 my-10">
-        <div class="container mx-auto text-center">
-          <h2 class="text-3xl font-bold mb-8">Our Services</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 duration-1000">
-              <img
-                src="https://tse1.mm.bing.net/th?id=OIP.gh6OclTu9xcdYMV4AKoMkAHaE8&pid=Api"
-                alt="Service One"
-                class="w-32 h-32 rounded-full object-cover mb-4"
-              />
-              <h3 class="text-xl font-semibold mb-4">Quick Sourcing</h3>
-              <p class="text-gray-700 text-center">
-                When you cannot find your ideal product, we can help you find
-                and send it to your agent.
-              </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 duration-1000">
-              <img
-                src="https://wallpaperaccess.com/full/4546786.jpg"
-                alt="Service Two"
-                class="w-32 h-32 rounded-full object-cover mb-4"
-              />
-              <h3 class="text-xl font-semibold mb-4">Service Two</h3>
-              <p class="text-gray-700 text-center">
-                Our team specializes in delivering high-quality results for this
-                service.
-              </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 duration-1000">
-              <img
-                src="https://www.providesupport.com/blog/wp-content/uploads/2017/04/Keeping-customers-happy.jpg"
-                alt="Service Three"
-                class="w-32 h-32 rounded-full object-cover mb-4"
-              />
-              <h3 class="text-xl font-semibold mb-4">Service Three</h3>
-              <p class="text-gray-700 text-center">
-                We focus on providing innovative solutions for our clients in
-                this area.
-              </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 duration-1000">
-              <img
-                src="https://www.providesupport.com/blog/wp-content/uploads/2017/04/Keeping-customers-happy.jpg"
-                alt="Service Three"
-                class="w-32 h-32 rounded-full object-cover mb-4"
-              />
-              <h3 class="text-xl font-semibold mb-4">Service Three</h3>
-              <p class="text-gray-700 text-center">
-                We focus on providing innovative solutions for our clients in
-                this area.
-              </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 duration-1000">
-              <img
-                src="https://www.providesupport.com/blog/wp-content/uploads/2017/04/Keeping-customers-happy.jpg"
-                alt="Service Three"
-                class="w-32 h-32 rounded-full object-cover mb-4"
-              />
-              <h3 class="text-xl font-semibold mb-4">Service Three</h3>
-              <p class="text-gray-700 text-center">
-                We focus on providing innovative solutions for our clients in
-                this area.
-              </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 duration-1000">
-              <img
-                src="https://www.providesupport.com/blog/wp-content/uploads/2017/04/Keeping-customers-happy.jpg"
-                alt="Service Three"
-                class="w-32 h-32 rounded-full object-cover mb-4"
-              />
-              <h3 class="text-xl font-semibold mb-4">Service Three</h3>
-              <p class="text-gray-700 text-center">
-                We focus on providing innovative solutions for our clients in
-                this area.
-              </p>
-            </div>
+    </div>
+
+    <div class='max-w-[800px] mx-auto my-12'>
+
+      <p class='text-center font-bold text-2xl text-primary-600'>Happy Resellers of Zambeel</p>
+
+      <div class='grid grid-cols-2 px-2 md:grid-cols-3 lg:grid-cols-5 gap-5 my-8'>
+
+        <div class=''>
+          <div class='border-4 border-yellow-400 '>
+            <img src='https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=' alt="" class='w-full' />
           </div>
+
+
+          <p class=' my-2 font-bold tracking-tighter'>High Delivery Success</p>
+
+          <p class=' my-2'>Zambeel's reliable shipping has helped me achieve a high delivery ratio Impressed with their operations.</p>
         </div>
-      </section>
 
-      <div class="background-color mt-10">
-        <h2 class="font-medium text-[45px] text-center py-12">
-          Our Advantages
-        </h2>
-
-        <div class=" flex-flex-col gap-10 px-10 py-10 md:flex  ">
-
-          <div class=" mb-5 md:w-[100%] px-6 py-8 rounded-xl bg-white ">
-        
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
-              <p class="hover:text-red-400 cursor-pointer">
-                Product Listing Service for Multiple Platforms
-              </p>
-            </div>
-            <hr class="my-4" />
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
-              <p class="hover:text-red-400 cursor-pointer">
-                Product Listing Service for Multiple Platforms
-              </p>
-            </div>
-            <hr class="my-4" />
-
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
-              <p class="hover:text-red-400 cursor-pointer">
-                Product Listing Service for Multiple Platforms
-              </p>
-            </div>
-            <hr class="my-4" />
-
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
-              <p class="hover:text-red-400 cursor-pointer">
-                Product Listing Service for Multiple Platforms
-              </p>
-            </div>
-            <hr class="my-4" />
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
-              <p class="hover:text-red-400 cursor-pointer">
-                Product Listing Service for Multiple Platforms
-              </p>
-            </div>
-            <hr class="my-4" />
+        <div class=''>
+          <div class='border-4 border-yellow-400 '>
+            <img src='https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=' alt="" class='w-full' />
           </div>
 
-          <div class=" mb-5 md:w-[100%] px-6 py-8 rounded-xl bg-white ">
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
 
-              <a
-                href="https://www.youtube.com/watch?v=dRr_eF3YifA&list=RDMMwsOeCANTVPo&index=27"
-                class="hover:text-red-400 cursor-pointer"
-              >
-                Product Listing Service for Multiple Platforms
-              </a>
-            </div>
-            <hr class="my-4" />
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
-              <p class="hover:text-red-400 cursor-pointer">
-                Product Listing Service for Multiple Platforms
-              </p>
-            </div>
-            <hr class="my-4" />
+          <p class=' my-2 font-bold tracking-tighter'>High Delivery Success</p>
 
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
-              <p class="hover:text-red-400 cursor-pointer">
-                Product Listing Service for Multiple Platforms
-              </p>
-            </div>
-            <hr class="my-4" />
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
-              <p class="hover:text-red-400 cursor-pointer">
-                Product Listing Service for Multiple Platforms
-              </p>
-            </div>
-            <hr class="my-4" />
-            <div class="flex gap-5 items-center">
-              <div class="size-8 rounded-full bg-green-600 flex justify-center items-center">
-                <i class="fa-solid fa-coffee text-white"></i>
-              </div>
-              <p class="hover:text-red-400 cursor-pointer">
-                Product Listing Service for Multiple Platforms
-              </p>
-            </div>
-            <hr class="my-4" />
+          <p class=' my-2'>Zambeel's reliable shipping has helped me achieve a high delivery ratio Impressed with their operations.</p>
+        </div>
+        <div class=''>
+          <div class='border-4 border-yellow-400 '>
+            <img src='https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=' alt="" class='w-full' />
           </div>
+
+
+          <p class=' my-2 font-bold tracking-tighter'>High Delivery Success</p>
+
+          <p class=' my-2'>Zambeel's reliable shipping has helped me achieve a high delivery ratio Impressed with their operations.</p>
+        </div>
+        <div class=''>
+          <div class='border-4 border-yellow-400 '>
+            <img src='https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=' alt="" class='w-full' />
+          </div>
+
+
+          <p class=' my-2 font-bold tracking-tighter'>High Delivery Success</p>
+
+          <p class=' my-2'>Zambeel's reliable shipping has helped me achieve a high delivery ratio Impressed with their operations.</p>
+        </div>
+        <div class=''>
+          <div class='border-4 border-yellow-400 '>
+            <img src='https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=' alt="" class='w-full' />
+          </div>
+
+          <p class=' my-2 font-bold tracking-tighter'>High Delivery Success</p>
+
+          <p class=' my-2'>Zambeel's reliable shipping has helped me achieve a high delivery ratio Impressed with their operations.</p>
         </div>
       </div>
 
+    </div>
+  </div>
+
+@endsection
+
+@section('scripts')
+<script type="module">
+  const swiper = new Swiper('.swiper', {
+    speed: 400,
+    spaceBetween: 100,
+  });
+</script>
 @endsection

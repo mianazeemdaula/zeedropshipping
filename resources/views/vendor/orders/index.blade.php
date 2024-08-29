@@ -37,21 +37,21 @@
     </div>
 
     
-    <form action="{{ route('vendor.orders.store') }}" method="post" class="mt-4">
+    <form action="{{ route('vendor.orders.store') }}" method="post" class="mt-4 bg-primary-200 rounded-lg p-4">
         @csrf
         <div class="flex items-center justify-between">
             <div class="flex space-x-2">
                 <div class="flex flex-col">
-                    <x-label >Date</x-label>
+                    <x-label >Start Date</x-label>
                     <input type="date" name="start_date" id="" class="p-1 rounded-md" value="{{ $start_date ?? date('Y-m-d') }}">
                 </div>
                 <div class="flex flex-col">
-                    <x-label >Date</x-label>
+                    <x-label >End Date</x-label>
                     <input type="date" name="end_date" id="" class="p-1 rounded-md" value="{{ $end_date ?? date('Y-m-d') }}">
                 </div>
                 <div class="flex flex-col">
                     @php $status = $status ?? 'all'; @endphp
-                    <x-label >Order Status {{ $status }}</x-label>
+                    <x-label >Order Status</x-label>
                     <select name="status" id="" class="p-1 rounded-md">
                         <option value="all" @if($status == 'all') selected @endif >All</option>
                         <option value="open" @if($status == 'open') selected @endif>Open</option>

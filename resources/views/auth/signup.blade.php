@@ -4,8 +4,8 @@
   <div class="grid grid-cols-1 lg:grid-cols-2">
     <div class="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
       <div class="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-        <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl">
-          Sign up
+        <h2 class="text-3xl font-bold leading-tight text-primary-500 sm:text-4xl">
+          Register Now
         </h2>
         <p class="mt-2 text-base text-gray-600">
           Already have an account?
@@ -23,13 +23,13 @@
             <div>
               <x-label>Full Name</x-label>
               <div class="mt-2">
-                <x-input name="name" placeholder="Full Name" />
+                <x-input name="name" placeholder="Full Name" value="{{ old('name')}}" />
               </div>
             </div>
             <div>
               <x-label>Email</x-label>
               <div class="mt-2">
-                <x-input name="email" type="email" placeholder="Email" />
+                <x-input name="email" type="email" placeholder="Email" value="{{ old('email')}}" />
               </div>
             </div>
             <div>

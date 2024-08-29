@@ -3,14 +3,16 @@
 <div class="">
 
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-        <x-icon-state-card title="Total User" icon="fa-solid fa-users" value="{{ $stats['total_users'] }}" color="green" />
-        <x-icon-state-card title="Team Members" icon="fa-solid fa-users" value="{{ $stats['total_team'] }}" color="green" />
-        <x-icon-state-card title="Dropshippers" icon="fa-solid fa-handshake" value="{{ $stats['total_vendors'] }}" color="blue" />
-        <x-icon-state-card title="Open Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['open_orders'] }}" color="red" />
-        <x-icon-state-card title="Dispatched Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['dispatched_orders'] }}" color="red" />
-        <x-icon-state-card title="Canceled Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['canceled_orders'] }}" color="red" />
-        <x-icon-state-card title="Intransit Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['intransit_orders'] }}" color="red" />
-        <x-icon-state-card title="Total Products" icon="fa-solid fa-tags" value="{{ $stats['total_products'] }}" color="primary" />
+        <x-icon-state-card title="Total User" icon="fa-solid fa-users" value="{{ $stats['total_users'] }}" color="green" url="{{ route('admin.user.status','all') }}" />
+        <x-icon-state-card title="Team Members" icon="fa-solid fa-users" value="{{ $stats['total_team'] }}" color="green" url="{{ route('admin.user.status','dispatcher') }}" />
+        <x-icon-state-card title="Dropshippers" icon="fa-solid fa-handshake" value="{{ $stats['total_vendors'] }}" color="blue" url="{{ route('admin.user.status','dropshipper') }}"/>
+        <x-icon-state-card title="Inreview Dropshippers" icon="fa-solid fa-handshake" value="{{ $stats['inreview_dropshippers'] }}" color="blue" url="{{ route('admin.user.status','inreview') }}"/>
+        <x-icon-state-card title="Inactive Dropshippers" icon="fa-solid fa-handshake" value="{{ $stats['total_vendors'] }}" color="blue" url="{{ route('admin.user.status','inactive') }}"/>
+        <x-icon-state-card title="Open Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['open_orders'] }}" color="red" url="{{ route('admin.orders.status','open') }}" />
+        <x-icon-state-card title="Dispatched Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['dispatched_orders'] }}" color="red" url="{{ route('admin.orders.status','shipped') }}" />
+        <x-icon-state-card title="Canceled Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['canceled_orders'] }}" color="red" url="{{ route('admin.orders.status','canceled') }}" />
+        <x-icon-state-card title="Intransit Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['intransit_orders'] }}" color="red" url="{{ route('admin.orders.status','intransit') }}" />
+        <x-icon-state-card title="Total Products" icon="fa-solid fa-tags" value="{{ $stats['total_products'] }}" color="primary" url="{{ route('admin.products.index') }}" />
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4 shadow-sm">

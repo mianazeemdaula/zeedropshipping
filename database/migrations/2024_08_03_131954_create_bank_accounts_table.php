@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('account_name', 100);
             $table->string('iban', 100);
             $table->boolean('is_default')->default(0);
+            $table->string('status', 20)->default('approved');
+            $table->string('cancel_reason',150)->nullable();
             $table->timestamps();
         });
     }

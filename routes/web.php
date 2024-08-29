@@ -6,6 +6,15 @@ Route::get('/', function () {
     return view('guest.index');
 });
 
+Route::get('/about', function () {
+    return view('guest.index');
+});
+
+Route::get('/products', function () {
+    $categoreis = \App\Models\Category::all();
+    return view('guest.products', compact('categoreis'));
+});
+
 // auth routes
 Route::get('/signup', 'App\Http\Controllers\AuthController@signup');
 Route::post('/signup', 'App\Http\Controllers\AuthController@postSignup');
@@ -14,28 +23,36 @@ Route::post('/login', 'App\Http\Controllers\AuthController@postLogin');
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard','App\Http\Controllers\AuthController@dashboard' )->name('dashboard');
+    Route::get('/dashboard','App\Http\Controllers\AuthController@dashboard' )->name('dashboard')
+    ->middleware('validprofile');
     // logout route
-    Route::post('/logout', 'App\Http\Controllers\AuthController@logout')->withoutMiddleware(EnsureProfileActive::class);
+    Route::post('/logout', 'App\Http\Controllers\AuthController@logout');
+    // change password route
+    Route::get('change-password', 'App\Http\Controllers\AuthController@changePassword');
+    Route::post('change-password', 'App\Http\Controllers\AuthController@postChangePassword')->name('change.password');
     Route::namespace('App\Http\Controllers\Admin')->group(function () {
         Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
             Route::resource('categories', 'CategoryController');
             Route::resource('products', 'ProductController');
+            Route::resource('orders', 'OrderController');
+            Route::get('/orders-status/{status}', 'OrderController@showStatusOrders')->name('orders.status');
             Route::resource('users', 'UserController');
+            Route::get('/users-status/{status}', 'UserController@showStatusUser')->name('user.status');
             Route::resource('shippers', 'ShipperController');
+            Route::resource('payments', 'PaymentController');
         });
     });
 
-    Route::namespace('App\Http\Controllers\Vendor')->group(function() {
+    Route::namespace('App\Http\Controllers\Vendor')->middleware(['validprofile'])->group(function() {
         Route::group(['prefix' => 'vendor','as' => 'vendor.'], function() {
             Route::resource('orders', 'OrderController');        
             Route::resource('bank-account', 'BankAccountController');
             Route::resource('bank-transactions', 'BankTransactionController');  
-            Route::resource('revenue', 'RevenueController');  
-            Route::resource('profile', 'ProfileController')->withoutMiddleware(EnsureProfileActive::class);        
+            Route::resource('revenue', 'RevenueContwroller');  
             Route::get('/orders-import', 'App\Http\Controllers\Vendor\OrderController@import');
             Route::get('/orders-status/{status}', 'App\Http\Controllers\Vendor\OrderController@showStatusOrder');
             Route::post('/orders-import', 'App\Http\Controllers\Vendor\OrderController@importStore');
+            Route::resource('profile', 'ProfileController')->withoutMiddleware('validprofile');
         });
     });
 

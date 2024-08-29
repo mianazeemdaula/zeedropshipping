@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('mobile',20)->nullable();
             $table->string('avatar',150)->nullable();
-            $table->string('status',10)->default('active');
+            $table->string('status',15)->default('active');
+            $table->string('comment',150)->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
             $table->rememberToken();
             $table->timestamps();

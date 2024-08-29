@@ -40,11 +40,16 @@
                     </x-select>
                 </div>
                 <div class="flex flex-col gap-2">
+                    <x-label>Comment</x-label>
+                    <x-input name="comment" value="{{ $user->comment }}" />
+                </div>
+                <div class="flex flex-col gap-2">
                     <x-label>Status</x-label>
                     <x-select name="status">
                         <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Active</option>
                         <option value="blocked" {{ $user->status == 'blocked' ? 'selected' : '' }}>Blocked</option>
                         <option value="unverified" {{ $user->status == 'unverified' ? 'selected' : '' }}>Unverified</option>
+                        <option value="under-review" {{ $user->status == 'under-review' ? 'selected' : '' }}>Under Review</option>
                     </x-select>
                 </div>
                 

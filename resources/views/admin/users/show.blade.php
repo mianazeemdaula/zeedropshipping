@@ -10,17 +10,18 @@
     </div>
     <div class="mt-6 flex flex-col space-y-4 bg-white p-6 rounded-lg">
         <div class="p-4 border rounded-lg flex items-center space-x-2">
-            <div class="w-20 h-20">
-                <img src="{{ $user->avatar }}" alt="" class="w-20 h-20 object-contain">
+            <div class="size-40">
+                <img src="{{ $user->avatar }}" alt="" class="size-40 object-contain">
             </div>
-            <div class="space-y-1">
+            <div class="space-y-0">
                 <h3 class="text-sm font-semibold">{{ $user->name }}</h3>
                 <p class="text-sm">{{ $user->email }}</p>
-                <p class="text-sm">{{ $user->mobile }}</p>
+                <p class="text-sm">{{ $user->mobile ?? 'Mobile N/A' }}</p>
+                <p class="text-sm">Last Update: {{ $user->updated_at }}</p>
             </div>
         </div>
 
-        @if($user->hasRole('vendor'))
+        @if($user->hasRole('dropshipper'))
 
         <div class="p-4 border rounded-lg">
             <h1 class="text-base font-bold mb-4">Shop Information</h1>
@@ -69,6 +70,27 @@
                 <tr>
                     <td class="text-sm font-semibold">{{ $user->vendor->phone }}</td>
                     <td class="text-sm font-semibold">{{ $user->vendor->address }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="p-4 border rounded-lg">
+            <h1 class="text-base font-bold mb-4">Bank Information</h1>
+            <table class="w-full">
+                <tr class="">
+                    <td class="text-sm ">Bank</td>
+                    <td class="text-sm">IBAN</td>
+                </tr>
+                <tr>
+                    <td class="text-sm font-semibold">{{ $user->activeBankAccount->bank->name ?? 'N/A' }}</td>
+                    <td class="text-sm font-semibold">{{ $user->activeBankAccount->iban }}</td>
+                </tr>
+                <tr>
+                    <td class="text-sm pt-2">Title</td>
+                    <td class="text-sm pt-2">Status</td>
+                </tr>
+                <tr>
+                    <td class="text-sm font-semibold">{{ $user->activeBankAccount->account_name }}</td>
+                    <td class="text-sm font-semibold">{{ $user->activeBankAccount->status }}</td>
                 </tr>
             </table>
         </div>

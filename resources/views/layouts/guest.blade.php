@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ZeeDropShipping</title>
+    <title>@yield('title','ZeeDropShipping')</title>
      <meta name="description" content="">
      <meta property="og:title" content="Zeed Dropshipping" />
      <meta property="og:url" content="{{ Request::url() }}"/>
@@ -27,7 +27,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
 /></noscript>
 </head> 
-<body>
+<body class="font-zeefont">
     @yield('content')
 </body>
 </html>

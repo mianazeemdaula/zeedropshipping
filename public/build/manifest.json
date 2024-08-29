@@ -32,12 +32,28 @@
     "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CmzQ6-4V.css",
+    "file": "assets/app-BbE4N5Cf.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/fonts/AvenirNextCyr-Bold.woff2": {
+    "file": "assets/AvenirNextCyr-Bold-BN3WPJNn.woff2",
+    "src": "resources/css/fonts/AvenirNextCyr-Bold.woff2"
+  },
+  "resources/css/fonts/AvenirNextCyr-Light.woff2": {
+    "file": "assets/AvenirNextCyr-Light-nKHxlDzT.woff2",
+    "src": "resources/css/fonts/AvenirNextCyr-Light.woff2"
+  },
+  "resources/css/fonts/AvenirNextCyr-Medium.woff2": {
+    "file": "assets/AvenirNextCyr-Medium-CBQpy7Y1.woff2",
+    "src": "resources/css/fonts/AvenirNextCyr-Medium.woff2"
+  },
+  "resources/css/fonts/AvenirNextCyr-Regular.woff2": {
+    "file": "assets/AvenirNextCyr-Regular-DVUnrmNb.woff2",
+    "src": "resources/css/fonts/AvenirNextCyr-Regular.woff2"
+  },
   "resources/js/app.js": {
-    "file": "assets/app-Chocp_Cx.js",
+    "file": "assets/app-CNwxDhhh.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true

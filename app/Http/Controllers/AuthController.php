@@ -52,7 +52,7 @@ class AuthController extends Controller
         $user->save();
         // logint to the system after signup
         Auth::login($user);
-        $user->assignRole('vendor');
+        $user->assignRole('dropshipper');
         return redirect()->route('dashboard');
     }
 
@@ -68,7 +68,9 @@ class AuthController extends Controller
             $stats = [
                 'total_users' => User::count(),
                 'total_team' => User::role('dispatcher')->count(),
-                'total_vendors' => User::role('vendor')->count(),
+                'total_vendors' => User::role('dropshipper')->count(),
+                'inreview_dropshippers' => User::role('dropshipper')->whereStatus('under-review')->count(),
+                'total_active_dropshippers' => User::role('dropshipper')->where('status', 'active')->count(),
                 'total_orders' => Order::count(),
                 'total_products' => Product::count(),
                 'open_orders' => Order::where('status', 'open')->count(),
@@ -77,7 +79,7 @@ class AuthController extends Controller
                 'dispatched_orders' => Order::where('status', 'dispatched')->count(),
             ];
             return view('admin.dashboard', compact('stats'));
-        }else if($user->hasRole('vendor')){
+        }else if($user->hasRole('dropshipper')){
             $stats = [
                 'open_orders' => Order::where('status', 'open')->count(),
                 'intransit_orders' => Order::whereNotIn('status', ['open','canceled'])->count(),
@@ -98,5 +100,25 @@ class AuthController extends Controller
             return view('dispatcher.dashboard', compact('stats'));
         }
         return view('vendor.dashboard');
+    }
+
+    public function changePassword()
+    {
+        return view('auth.change-password');
+    }
+
+    public function postChangePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+        $user = Auth::user();
+        if(Hash::check($request->old_password, $user->password)){
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return redirect()->route('dashboard')->with('success', 'Password changed successfully');
+        }
+        return redirect()->back()->withErrors(['old_password' => 'Old password is incorrect']);
     }
 }

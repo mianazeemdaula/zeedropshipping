@@ -7,16 +7,8 @@
   <title>ZeeDropShipping</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   @yield('head')
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <style>
-        body {
-          font-family: 'Poppins', serif;
-        }
-  </style>
 </head>
-<body class="">
+<body class="font-zeefont">
   <div class="flex bg-gray-100 min-h-screen">
     <!-- Sidebar -->
     <div id="sidebar" class="lg:flex flex-col lg:relative fixed  top-0 left-0  bg-gray-800 text-white w-64 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
@@ -28,7 +20,7 @@
       </div>
       <ul class="space-y-2">
         @role('admin')
-        <li class="p-2 hover:bg-primary-700  hover:animate-pulse">
+        <li class="p-2 hover:bg-primary-700  hover:animate-pulse text-sm">
           <a href="{{ route('dashboard') }}" class="block" ><i class="fa-solid fa-home mr-2"></i> Dashboard</a>
         </li>
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.categories.*')) bg-primary @endif">
@@ -37,20 +29,26 @@
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.products.*')) bg-primary @endif">
           <a href="{{ route('admin.products.index') }}" class="block"><i class="fa-solid fa-tag mr-2"></i> Products</a>
         </li>
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.orders.*')) bg-primary @endif">
+          <a href="{{ route('admin.orders.index') }}" class="block"><i class="fa-solid fa-cart-shopping mr-2"></i> Orders</a>
+        </li>
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.users.*')) bg-primary @endif">
           <a href="{{ route('admin.users.index') }}" class="block"><i class="fa-solid fa-users mr-2"></i> Users</a>
+        </li>
+         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.payments.*')) bg-primary @endif">
+          <a href="{{ route('admin.payments.index') }}" class="block"><i class="fa-solid fa-bank mr-2"></i> Payments</a>
         </li>
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('admin.shippers.*')) bg-primary @endif">
           <a href="{{ route('admin.shippers.index') }}" class="block"><i class="fa-solid fa-truck mr-2"></i> Shippers</a>
         </li>
         @endrole
-        @role('vendor')
+        @role('dropshipper')
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
           <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Orders</a>
         </li>
-        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.bank-account.*')) bg-primary @endif">
+        {{-- <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.bank-account.*')) bg-primary @endif">
           <a href="{{ route('vendor.bank-account.index') }}" class="block"><i class="fa-solid fa-bank mr-2"></i> Bank Account</a>
-        </li>
+        </li> --}}
         <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('vendor.bank-transactions.*')) bg-primary @endif">
           <a href="{{ route('vendor.bank-transactions.index') }}" class="block"><i class="fa-solid fa-money-bill mr-2"></i>Payments</a>
         </li>
@@ -83,6 +81,9 @@
         <li class="p-2 hover:bg-primary-700  hover:animate-pulse @if(request()->routeIs('vendor.orders.*')) bg-primary @endif">
           <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Posts</a>
         </li> --}}
+        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if(request()->routeIs('change.password')) bg-primary @endif">
+          <a href="{{ route('change.password') }}" class="block"><i class="fa-solid fa-lock mr-2"></i> Change Password</a>
+        </li>
         <li class="p-2 hover:bg-primary-700  hover:animate-pulse">
           <form action="{{ url('logout') }}" method="post">
             @csrf
@@ -109,7 +110,7 @@
 
       <main class="flex-1 p-6 bg-gray-100 ">
         @if(session('success'))
-          <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+          <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-2" role="alert">
             <strong class="font-bold">Success!</strong>
             <span class="block sm:inline">{{ session('success') }}</span>
           </div>

@@ -89,9 +89,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(BankAccount::class);
     }
 
+    public function activeBankAccount(){
+        return $this->hasOne(BankAccount::class)->where('status','approved');
+    }
+
     public function vendorRevenue()
     {
         return $this->hasMany(VendorRevenue::class);
     }
 
+    public function kycDocs(){
+        return $this->hasMany(UserKycDoc::class);
+    }
+
+    public function dropShipperNicKyc(){
+        return $this->hasOne(UserKycDoc::class)->where('kyc_doc_id',1);
+    }
+    
 }
