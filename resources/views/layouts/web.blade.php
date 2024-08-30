@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ZeeDropShipping</title>
+    <title>@yield('title', "ZeeDropShipping")</title>
      <meta name="description" content="">
-     <meta property="og:title" content="Zeed Dropshipping" />
+     <meta property="og:title" content="@yield('title', "Zee DropShipping")" />
      <meta property="og:url" content="{{ Request::url() }}"/>
      <meta property="og:description" content="Best-in-industry guides and information while cultivating a positive community."/>
      <meta property="og:image" content="https://www.example.com/sample.jpg"/>
@@ -27,112 +27,118 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
 /></noscript>
 </head>
-<body class="font-zeefont">
-
+<body class="font-calibrifont">
+  <div class="">
+    <div class="bg-secondary-500 text-white text-center py-2">
+      <div class="text-sm">Please ensure that every product you list includes its Product SKU. Accurate SKUs are essential for effective inventory management and seamless order processing. Without a SKU, we cannot guarantee proper tracking and fulfillment of your products.</div>
+    </div>
+  </div>
   <header class='my-8 px-4' x-data="{sidebar:false}">
-        <div class='flex justify-between items-center'>
-          <div class="flex-1">
-            <div class="size-8 lg:hidden cursor-pointer" x-on:click="sidebar = !sidebar">
-              <i class="fa-solid fa-bars"></i>
-            </div>
-          </div>
-          <div class="flex-1 flex items-center justify-center">
-            <img
-              src="https://img.freepik.com/free-psd/engraved-black-logo-mockup_125540-223.jpg"
-              alt="Logo"
-              class='size-28'
-            />
-          </div>
-
-          <div class='hidden lg:flex items-center gap-4 flex-1 justify-end'>
-            <div class='flex items-center p-3 rounded-lg border justify-center'>
-              <i class='fa-solid fa-search text-blue-950' > </i>
-              <input
-                type="text"
-                id='search'
-                name='search'
-                placeholder='Search'
-                class='outline-none border-none text-black ml-2'/>
-            </div>
-           <a href="{{ url('/login') }}"> <i class="fa-solid fa-user"></i></a>
-          </div>
+    <div class='flex justify-between items-center'>
+      <div class="flex-1">
+        <div class="size-8 lg:hidden cursor-pointer" x-on:click="sidebar = !sidebar">
+          <i class="fa-solid fa-bars"></i>
         </div>
+      </div>
+      <div class="flex-1 flex items-center justify-center">
+        <img
+          src="{{ asset('assets/images/Logo2.png') }}"
+          alt="Logo"
+          class='w-20 h-12 object-fill'
+        />
+      </div>
 
-        <div class='mx-4 my-24 flex items-center p-3 rounded-lg border lg:hidden'>
-          <i class='fa-solid fa-search'> </i>
+      <div class='hidden lg:flex items-center gap-4 flex-1 justify-end'>
+        {{-- <div class='flex items-center p-3 rounded-lg border justify-center'>
+          <i class='fa-solid fa-search text-blue-950' > </i>
           <input
             type="text"
             id='search'
             name='search'
             placeholder='Search'
-            class='outline-none  text-black ml-2 transition'
-          />
-        </div>
-        <div
-          id='sidebar'
-          x-show='sidebar'
-          class='fixed inset-0 bg-gray-800 z-50 transform translate-x-full transition-transform duration-300 lg:hidden'
-          x-bind:class="sidebar ? 'translate-x-full' : 'translate-x-0'"
-        >
-          <div class='relative w-64 h-full bg-gray-900 text-white'>
-            <button class='absolute top-4 right-4 text-2xl text-white' x-on:click="sidebar = !sidebar">
-              <i class="fa-solid fa-home"></i>
-            </button>
-            <nav class='mt-8'>
-              <ul>
-                <li>
-                  <a href="https://youtu.be/Xgi5ljHgSmo?si=A0CpUqhwddbj1eFE" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Home</a>
-                </li>
-                <li class='relative group'>
-                  <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">
-                    About
-                  </a>
-                  <div class="absolute left-full top-0 mt-2 w-48 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ul>
-                      <li>
-                        <a
-                          href="#"
-                          class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
-                        >
-                          Team
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
-                        >
-                          History
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
-                        >
-                          Values
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li>
-                  <a href="{{ url('products') }}" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Products</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Portfolio</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Contact</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
+            class='outline-none border-none text-black ml-2'/>
+        </div> --}}
+        <a href="{{ url('/login') }}"> <i class="fa-solid fa-user"></i></a>
+        {{-- Register now button --}}
+        <a href="{{ url('/signup') }}" class="bg-secondary-600 text-white px-4 py-2 rounded-lg">Register Now</a>
+      </div>
+    </div>
+
+    <div class='mx-4 my-24 flex items-center p-3 rounded-lg border lg:hidden'>
+      <i class='fa-solid fa-search'> </i>
+      <input
+        type="text"
+        id='search'
+        name='search'
+        placeholder='Search'
+        class='outline-none  text-black ml-2 transition'
+      />
+    </div>
+    <div
+      id='sidebar'
+      x-show='sidebar'
+      class='fixed inset-0 bg-gray-800 z-50 transform translate-x-full transition-transform duration-300 lg:hidden'
+      x-bind:class="sidebar ? 'translate-x-full' : 'translate-x-0'"
+    >
+      <div class='relative w-64 h-full bg-gray-900 text-white'>
+        <button class='absolute top-4 right-4 text-2xl text-white' x-on:click="sidebar = !sidebar">
+          <i class="fa-solid fa-home"></i>
+        </button>
+        <nav class='mt-8'>
+          <ul>
+            <li>
+              <a href="https://youtu.be/Xgi5ljHgSmo?si=A0CpUqhwddbj1eFE" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Home</a>
+            </li>
+            <li class='relative group'>
+              <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">
+                About
+              </a>
+              <div class="absolute left-full top-0 mt-2 w-48 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <ul>
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
+                    >
+                      Team
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
+                    >
+                      History
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
+                    >
+                      Values
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="{{ url('products') }}" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Products</a>
+            </li>
+            <li>
+              <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Portfolio</a>
+            </li>
+            <li>
+              <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
         <nav class="hidden md:block w-full my-8 p-4">
           <ul class="hidden lg:flex flex-wrap lg:flex-nowrap gap-4 lg:gap-4">
-            <li class="flex-grow">
-              <a href="#"class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"
+            <li class="flex-1">
+              <a href="{{ url('/') }}"class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"
                 >
                 <i class="fa-solid fa-home"></i>
                 <div>
@@ -141,14 +147,14 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
               </a>
             </li>
 
-            <li class="relative group flex-grow">
-                  <a href="#"
-                    class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
-                  ><i class="fa-solid fa-home"></i>
+            <li class="relative group flex-1">
+                  <a href="{{ url('/policies') }}"
+                    class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+                  ><i class="fa-solid fa-globe"></i>
                 <div>
-                  Home
+                  Polices
                 </div></a>
-                <div class="group-hover:block hidden absolute left-0 mt-1 w-full z-40 bg-primary-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {{-- <div class="group-hover:block hidden absolute left-0 mt-1 w-full z-40 bg-primary-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <ul>
                     <li>
                       <a
@@ -191,37 +197,34 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> --}}
             </li>
 
-            <li class="flex-grow">
+            <li class="flex-1">
               <a href="{{ url('products') }}"
-                class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
-              <i class="fa-solid fa-home"></i>
+                class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
+              <i class="fa-solid fa-tags"></i>
                 <div>
                   Products
                 </div>
               </a>
             </li>
-            <li class="flex-grow">
+            <li class="flex-1">
               <a
-                href="#"
-                class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+                href="{{ url('/terms-and-conditions') }}"
+                class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
               >
-                <i class="fa-solid fa-home"></i>
+                <i class="fa-solid fa-file-contract"></i>
                 <div>
-                  Home
+                  Terms & Conditions
                 </div>
               </a>
             </li>
-            <li class="flex-grow">
-              <a
-                href="#"
-                class="block px-8 py-8 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
-              >
-                <i class="fa-solid fa-home"></i>
+            <li class="flex-1">
+              <a href="{{ url('/contact') }}" class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
+                <i class="fa-solid fa-address-book "></i>
                 <div>
-                  Home
+                  Contact Us
                 </div>
               </a>
             </li>
@@ -264,14 +267,14 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
           <p class="text-sm text-start">
             myzambeeL is powered and owned by Tazah Global L.L.C-FZ
             <br />
-            Warehouse # 13, Plot # 4488, PO Box 5841, Al Sajaa Industrial, Sharjah
+            2nd Floor Fazal Trade Center 114-E Gulberg-III
           </p>
         </div>
       </div>
 
       <div class="border-t border-blue-800 mt-6 pt-4">
         <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-          <p class="text-xs text-gray-400">&copy; 2024, Zambeel Powered by 
+          <p class="text-xs text-gray-400">&copy; 2024, Zee Dropshipping Powered by 
             <a href="https://txdevs.com" class="text-white hover:text-secondary-400">TXDevs</a>
           </p>
           <button class="bg-green-500 text-black text-sm font-bold py-2 px-4 rounded hover:bg-green-600 mt-4 md:mt-0">

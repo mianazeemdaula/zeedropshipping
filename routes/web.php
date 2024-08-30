@@ -2,14 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureVendorProfileExist;
-Route::get('/', function () {
-    return view('guest.index');
-});
-
-Route::get('/about', function () {
-    return view('guest.index');
-});
-
+Route::get('/', 'App\Http\Controllers\GuestController@index');
+Route::get('/terms-and-conditions', 'App\Http\Controllers\GuestController@termsAndConditions');
+Route::get('/policies', 'App\Http\Controllers\GuestController@policies');
+Route::get('/contact', 'App\Http\Controllers\GuestController@contact');
 Route::get('/products', function () {
     $categoreis = \App\Models\Category::all();
     return view('guest.products', compact('categoreis'));

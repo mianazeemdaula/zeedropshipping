@@ -1,33 +1,11 @@
 @extends('layouts.web')
 @section('content')
     <div class="max-w-6xl mx-auto px-4 py-8">
-        <div class="container mx-auto flex gap-8 items-center">
+        <div class="container mx-auto flex gap-8 items-center justify-between">
           <h1 class="text-xl font-bold">Product Listing</h1>
-          <div class="flex items-center">
-            <button class="text-custom-gray rounded-lg border font-bold p-4 transform transition-transform duration-300 ease-in-out hover:scale-90">
-              UAE & KSA Both
-              <svg
-                class="w-4 h-4 inline-block ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
-            </button>
-            <button class="text-gray-700 py-2 px-4 rounded ml-2">
-              CLEAR ALL
-            </button>
-          </div>
           <div class="w-1/2">
             <div class="flex items-center justify-end">
-              <select class="border text-gray-700 font-bold p-4 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
+              <select class="border text-gray-700 font-bold p-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                 <option value="price_low_to_high">Price, low to high</option>
                 <option value="price_high_to_low">Price, high to low</option>
                 <option value="newest">Newest</option>
@@ -56,23 +34,19 @@
             <h2 class="text-lg font-bold mt-6 mb-2">Price</h2>
             <div class="mb-2 flex ">
               <span class="text-gray-500">
-                The highest price is 349.00 AED
+                The highest price is {{ 500 }} PKR
               </span>
               <button class="text-sm underline ml-4 hover:no-underline">
                 RESET
               </button>
             </div>
             <div class="flex gap-2">
-              <input
-                type="number"
+              <input type="number"
                 class="p-2 w-32 outline-none hover:border hover:bg-white rounded-lg bg-custom-gray"
-                placeholder="From"
-              />
-              <input
-                type="number"
+                placeholder="From" />
+              <input type="number"
                 class="p-2 w-32 outline-none hover:border hover:bg-white  rounded-lg bg-custom-gray"
-                placeholder="To"
-              />
+                placeholder="To" />
             </div>
           </aside>
           <div class="lg:w-3/4 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">

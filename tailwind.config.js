@@ -9,6 +9,7 @@ export default {
     extend: {
       fontFamily: {
         'zeefont': ['zeefont', 'sans-serif'],
+        'calibrifont': ['calibrifont', 'sans-serif'],
       },
       colors: {
         'primary': {
