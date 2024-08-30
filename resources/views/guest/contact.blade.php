@@ -2,7 +2,7 @@
 @section('title', 'Contact Us | Zeedropshipping')
 @section('content')
 <div class="p-4">
-    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
         <div class="space-y-4">
             <div class="text-primary-300 uppercase text-lg">Contact Us</div>
             <div class="font-bold uppercase text-2xl">How Can I help you?</div>
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class=" bg-gray-100 p-4 rounded-sm">
+        <div class=" bg-gray-100 p-4 rounded-lg">
             <form action="" method="post">
                 <div class="space-y-2">
                     <div class="font-bold uppercase text-2xl">Send Us a Message</div>

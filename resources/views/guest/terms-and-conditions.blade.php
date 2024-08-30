@@ -1,6 +1,6 @@
 @extends('layouts.web')
 @section('content')
-<div class="p-4 my-4 ">
+<div class="p-8 my-8 md:p-4 md:my-4 lg:p-4 lg:my-4 ">
     <p>Welcome to Zee Dropshipping! We're excited to connect you with a wide range of products and suppliers. By using our platform, you agree to these terms and conditions. Please read them carefully, as they will guide your experience with Zee Dropshipping.</p>
     <h3 class="text-xl font-bold my-4">Terms and Conditions:</h3>
     <ul class="list-disc">

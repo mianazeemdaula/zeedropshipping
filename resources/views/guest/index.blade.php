@@ -4,7 +4,7 @@
     
     {{-- begin slider --}}
 
-   <div class="swiper h-96">
+   <div class="swiper h-36 md:h-60 lg:h-96">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
           <!-- Slides -->
@@ -13,7 +13,7 @@
             <div class="swiper-slide">
               <img src="{{ asset("assets/banners/0$item.png") }}"
                 alt="Work Image"
-                class="w-full h-full" />
+                class="w-full h-full " />
             </div>
           @endforeach
         </div>
@@ -166,7 +166,7 @@
 
     </div>
 
-    <div class='max-w-[800px] mx-auto my-12'>
+    <div class='max-w-[800px] mx-auto my-12 p-2 lg:p-0 md:p-0'>
 
       <p class='text-center font-bold text-2xl text-primary-600'>What Our Top Dropshippers Say</p>
       <div class='grid grid-cols-2 px-2 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8'>

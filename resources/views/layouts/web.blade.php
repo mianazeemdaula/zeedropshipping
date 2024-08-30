@@ -64,7 +64,7 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
       </div>
     </div>
 
-    <div class='mx-4 my-24 flex items-center p-3 rounded-lg border lg:hidden'>
+    {{-- <div class='mx-4 my-24 flex items-center p-3 rounded-lg border lg:hidden'>
       <i class='fa-solid fa-search'> </i>
       <input
         type="text"
@@ -73,163 +73,133 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
         placeholder='Search'
         class='outline-none  text-black ml-2 transition'
       />
-    </div>
-    <div
-      id='sidebar'
-      x-show='sidebar'
-      class='fixed inset-0 bg-gray-800 z-50 transform translate-x-full transition-transform duration-300 lg:hidden'
-      x-bind:class="sidebar ? 'translate-x-full' : 'translate-x-0'"
-    >
-      <div class='relative w-64 h-full bg-gray-900 text-white'>
-        <button class='absolute top-4 right-4 text-2xl text-white' x-on:click="sidebar = !sidebar">
-          <i class="fa-solid fa-home"></i>
-        </button>
-        <nav class='mt-8'>
-          <ul>
-            <li>
-              <a href="https://youtu.be/Xgi5ljHgSmo?si=A0CpUqhwddbj1eFE" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Home</a>
-            </li>
-            <li class='relative group'>
-              <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">
-                About
-              </a>
-              <div class="absolute left-full top-0 mt-2 w-48 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <ul>
-                  <li>
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
-                    >
-                      Team
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
-                    >
-                      History
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-white hover:bg-blue-600 transition-colors"
-                    >
-                      Values
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a href="{{ url('products') }}" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Products</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Portfolio</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-blue-600 transition-colors">Contact</a>
-            </li>
-          </ul>
-        </nav>
+    </div> --}}
+    <aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 bg-white" x-show="sidebar">
+      <div class="flex justify-between items-center p-4">
+        <img
+          src="{{ asset('assets/images/Logo2.png') }}"
+          alt="Logo"
+          class='w-20 h-12 object-fill'
+        />
+        <div class="size-8 cursor-pointer" x-on:click="sidebar = !sidebar">
+          <i class="fa-solid fa-times"></i>
+        </div>
       </div>
-    </div>
-        <nav class="hidden md:block w-full my-8 p-4">
-          <ul class="hidden lg:flex flex-wrap lg:flex-nowrap gap-4 lg:gap-4">
-            <li class="flex-1">
-              <a href="{{ url('/') }}"class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"
-                >
-                <i class="fa-solid fa-home"></i>
-                <div>
-                  Home
-                </div>
-              </a>
-            </li>
+      <nav class="p-4">
+        <ul>
+          <li>
+            <a href="{{ url('/') }}" class="block py-2">Home</a>
+          </li>
+          <li>
+            <a href="{{ url('/policies') }}" class="block py-2">Policies</a>
+          </li>
+          <li>
+            <a href="{{ url('/products') }}" class="block py-2">Products</a>
+          </li>
+          <li>
+            <a href="{{ url('/terms-and-conditions') }}" class="block py-2">Terms & Conditions</a>
+          </li>
+          <li>
+            <a href="{{ url('/contact') }}" class="block py-2">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <nav class="hidden md:block w-full my-8 p-4">
+      <ul class="hidden lg:flex flex-wrap lg:flex-nowrap gap-4 lg:gap-4">
+        <li class="flex-1">
+          <a href="{{ url('/') }}"class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"
+            >
+            <i class="fa-solid fa-home"></i>
+            <div>
+              Home
+            </div>
+          </a>
+        </li>
 
-            <li class="relative group flex-1">
-                  <a href="{{ url('/policies') }}"
-                    class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
-                  ><i class="fa-solid fa-globe"></i>
-                <div>
-                  Polices
-                </div></a>
-                {{-- <div class="group-hover:block hidden absolute left-0 mt-1 w-full z-40 bg-primary-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ul>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                      >
-                        Team
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                      >
-                        History
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                      >
-                        Values
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                      >
-                        Values
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                      >
-                        Values
-                      </a>
-                    </li>
-                  </ul>
-                </div> --}}
-            </li>
-
-            <li class="flex-1">
-              <a href="{{ url('products') }}"
-                class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
-              <i class="fa-solid fa-tags"></i>
-                <div>
-                  Products
-                </div>
-              </a>
-            </li>
-            <li class="flex-1">
-              <a
-                href="{{ url('/terms-and-conditions') }}"
+        <li class="relative group flex-1">
+              <a href="{{ url('/policies') }}"
                 class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
-              >
-                <i class="fa-solid fa-file-contract"></i>
-                <div>
-                  Terms & Conditions
-                </div>
-              </a>
-            </li>
-            <li class="flex-1">
-              <a href="{{ url('/contact') }}" class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
-                <i class="fa-solid fa-address-book "></i>
-                <div>
-                  Contact Us
-                </div>
-              </a>
-            </li>
-          </ul>
-        </nav>
+              ><i class="fa-solid fa-globe"></i>
+            <div>
+              Polices
+            </div></a>
+            {{-- <div class="group-hover:block hidden absolute left-0 mt-1 w-full z-40 bg-primary-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <ul>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                  >
+                    Team
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                  >
+                    History
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                  >
+                    Values
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                  >
+                    Values
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
+                  >
+                    Values
+                  </a>
+                </li>
+              </ul>
+            </div> --}}
+        </li>
+
+        <li class="flex-1">
+          <a href="{{ url('products') }}"
+            class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
+          <i class="fa-solid fa-tags"></i>
+            <div>
+              Products
+            </div>
+          </a>
+        </li>
+        <li class="flex-1">
+          <a
+            href="{{ url('/terms-and-conditions') }}"
+            class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+          >
+            <i class="fa-solid fa-file-contract"></i>
+            <div>
+              Terms & Conditions
+            </div>
+          </a>
+        </li>
+        <li class="flex-1">
+          <a href="{{ url('/contact') }}" class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
+            <i class="fa-solid fa-address-book "></i>
+            <div>
+              Contact Us
+            </div>
+          </a>
+        </li>
+      </ul>
+    </nav>
     </header>
   <div class='main md:px-14'>
     @yield('content')
@@ -285,11 +255,11 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
     </footer>
 
   <script type="module">
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('translate-x-full');
-      sidebar.classList.toggle('translate-x-0');
-    };
+    // function toggleSidebar() {
+    //   const sidebar = document.getElementById('sidebar');
+    //   sidebar.classList.toggle('translate-x-full');
+    //   sidebar.classList.toggle('translate-x-0');
+    // };
 
     // Function to hide the sidebar
     function hideSidebar  ()  {

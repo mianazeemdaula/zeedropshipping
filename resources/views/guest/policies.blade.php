@@ -1,6 +1,6 @@
 @extends('layouts.web')
 @section('content')
-<div class="p-4 my-4 ">
+<div class="p-8 my-4 md:p-4 lg:p-4">
     <p class="text-2xl"><strong>Courier Charges Policy</strong></p>
   <p><strong>Delivery charges</strong> are calculated based on the wholesale price of the order and packing costs. Below is the breakdown of how charges are determined:</p>
   <ol  class="list-decimal">
