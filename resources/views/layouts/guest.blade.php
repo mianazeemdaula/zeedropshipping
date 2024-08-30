@@ -10,6 +10,8 @@
      <meta property="og:url" content="{{ Request::url() }}"/>
      <meta property="og:description" content="Best-in-industry guides and information while cultivating a positive community."/>
      <meta property="og:image" content="https://www.example.com/sample.jpg"/>
+     
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
 !function(f,b,e,v,n,t,s)

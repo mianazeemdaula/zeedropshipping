@@ -51,3 +51,18 @@
 .submenu {
     @apply hidden;
 }
+
+.zeemarquee {
+    animation: marquee 15s linear infinite;
+    width: calc(100% * 2);
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}

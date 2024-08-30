@@ -1,7 +1,7 @@
 @extends('layouts.web')
 @section('content')
 <!-- header Section -->
-    
+  
     {{-- begin slider --}}
 
    <div class="swiper h-36 md:h-60 lg:h-96">
@@ -40,18 +40,18 @@
 <br/></br>At Zee Dropshipping, we are more than just a service—we are your partner in success. Join us today and take your business to new heights!
 
             </p>
-            <button class='bg-primary-700 hover:bg-primary-600 p-4 text-white rounded-lg self-start'>See Our Video</button>
+            <a href="{{ url('/signup') }}" class='bg-primary-700 hover:bg-primary-600 p-4 text-white rounded-lg self-start'>Register Now</a>
           </div>
         </div>
       </div>
     </div>
     <div class=" p-8 mt-4 ">
-      <div class="flex flex-col md:flex-row justify-evenly gap-8">
+      <div class="flex flex-col md:flex-row justify-evenly gap-6">
         <div class="">
           <h1 class="text-2xl font-bold mb-4">Our Journey of Success</h1>
           <div class='flex flex-col gap-6'>
               <ul class="list-decimal">
-                <li>Zee Dropshipping was launched in year 2024, quickly becoming a trusted name in Pakistan's e-commerce landscape.</li>
+                <li><span class="font-bold">Zee Dropshipping</span> was launched in year 2024, quickly becoming a trusted name in Pakistan's e-commerce landscape.</li>
                 <li><span class="font-bold">1000+ Active Dropshippers:</span> Within the first few weeks, we onboarded over 1000+ active dropshippers.</li>
                 <li><span class="font-bold">Nationwide Coverage:</span> Established partnerships with multiple logistic companies, ensuring seamless nationwide delivery.</li>
                 <li><span class="font-bold">Thousands of Orders Fulfilled:</span> Successfully fulfilled thousands of orders with same-day dispatch and top-notch quality assurance.</li>
@@ -77,7 +77,8 @@
           @foreach ($whyChoozeZee as $item)
           <div class='flex flex-col justify-center items-center'>
             <div class='flex items-center justify-center bg-primary-400 text-white p-2 rounded-full size-10'> 
-              {{ $loop->iteration }}
+              {{-- {{ $loop->iteration }} --}}
+              <i class="{{ $item['icon'] }}"></i>
             </div>
             <p class='text-center font-semibold text-base mt-2'>{{ $item['text'] }}</p>
           </div>
@@ -122,7 +123,7 @@
       </div>
 
     </div> --}}
-    <div class=' py-11'>
+    {{-- <div class=' py-11'>
 
       <p class='text-center font-bold text-2xl text-blue-950 py-10'>Our Mile stones</p>
       <div class='grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[1000px] mx-auto  '>
@@ -164,20 +165,20 @@
         </div>
       </div>
 
-    </div>
+    </div> --}}
 
     <div class='max-w-[800px] mx-auto my-12 p-2 lg:p-0 md:p-0'>
 
-      <p class='text-center font-bold text-2xl text-primary-600'>What Our Top Dropshippers Say</p>
+      <p class='text-center font-bold text-2xl '>What Our Top Dropshippers Say</p>
       <div class='grid grid-cols-2 px-2 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8'>
 
         @foreach ($dropshippersSays as $item)
         <div class='flex flex-col items-center'>
           <div class='border-2 border-secondary-400 rounded-full size-24'>
-            <img src='https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=' alt="" class='w-full aspect-square object-cover rounded-full' />
+            <img src='{{ asset($item['image']) }}' alt="" class='w-full aspect-square object-cover rounded-full' />
           </div>
           <p class=' mt-1 font-bold tracking-tighter'>{{ $item['name'] }}</p>
-          <p class=' my-1 text-justify text-gray-500'>{{ $item['comment'] }}</p>
+          <p class=' my-1 text-justify text-gray-500 leading-tight'>{{ $item['comment'] }}</p>
         </div>
         @endforeach
       </div>

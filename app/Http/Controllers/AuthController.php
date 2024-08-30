@@ -43,6 +43,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
+            'accept_terms' => 'required|in:on'
         ]);
         $user = new User();
         $user->name = $request->name;

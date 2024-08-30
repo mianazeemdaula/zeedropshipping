@@ -10,6 +10,7 @@
      <meta property="og:url" content="{{ Request::url() }}"/>
      <meta property="og:description" content="Best-in-industry guides and information while cultivating a positive community."/>
      <meta property="og:image" content="https://www.example.com/sample.jpg"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
 !function(f,b,e,v,n,t,s)
@@ -29,8 +30,12 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
 </head>
 <body class="font-calibrifont">
   <div class="">
-    <div class="bg-secondary-500 text-white text-center py-2">
-      <div class="text-sm">Please ensure that every product you list includes its Product SKU. Accurate SKUs are essential for effective inventory management and seamless order processing. Without a SKU, we cannot guarantee proper tracking and fulfillment of your products.</div>
+    <div class="bg-secondary-500 text-white text-center py-2 flex-wrap">
+      <div class="text-sm whitespace-nowrap relative overflow-hidden">
+        <div class="inline-block whitespace-nowrap zeemarquee ">
+          Attention: Please ensure that every product you list includes its Product SKU. Accurate SKUs are essential for effective inventory management and seamless order processing. Without a SKU, we cannot guarantee proper tracking and fulfillment of your products.
+        </div>
+      </div>
     </div>
   </div>
   <header class='my-8 px-4' x-data="{sidebar:false}">
@@ -44,11 +49,11 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
         <img
           src="{{ asset('assets/images/Logo2.png') }}"
           alt="Logo"
-          class='w-20 h-12 object-fill'
+          class='w-28 h-16 object-fill'
         />
       </div>
 
-      <div class='hidden lg:flex items-center gap-4 flex-1 justify-end'>
+      <div class='hidden lg:flex items-center gap-1 flex-1 justify-end'>
         {{-- <div class='flex items-center p-3 rounded-lg border justify-center'>
           <i class='fa-solid fa-search text-blue-950' > </i>
           <input
@@ -58,9 +63,14 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
             placeholder='Search'
             class='outline-none border-none text-black ml-2'/>
         </div> --}}
-        <a href="{{ url('/login') }}"> <i class="fa-solid fa-user"></i></a>
+        {{-- <a href="{{ url('/login') }}"> <i class="fa-solid fa-user"></i></a> --}}
+        @if(Auth::check())
+        <a href="{{ url('/dashboard') }}" class="bg-secondary-600 text-white px-4 py-2 rounded-lg">{{ auth()->user()->name }}</a>
+        @else
+        <a href="{{ url('/login') }}" class="bg-secondary-600 text-white px-4 py-2 rounded-lg">Login</a>
         {{-- Register now button --}}
         <a href="{{ url('/signup') }}" class="bg-secondary-600 text-white px-4 py-2 rounded-lg">Register Now</a>
+        @endif
       </div>
     </div>
 
@@ -91,10 +101,10 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
             <a href="{{ url('/') }}" class="block py-2">Home</a>
           </li>
           <li>
-            <a href="{{ url('/policies') }}" class="block py-2">Policies</a>
+            <a href="{{ url('/products') }}" class="block py-2">Products</a>
           </li>
           <li>
-            <a href="{{ url('/products') }}" class="block py-2">Products</a>
+            <a href="{{ url('/policies') }}" class="block py-2">Policies</a>
           </li>
           <li>
             <a href="{{ url('/terms-and-conditions') }}" class="block py-2">Terms & Conditions</a>
@@ -108,92 +118,46 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
     <nav class="hidden md:block w-full my-8 p-4">
       <ul class="hidden lg:flex flex-wrap lg:flex-nowrap gap-4 lg:gap-4">
         <li class="flex-1">
-          <a href="{{ url('/') }}"class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"
+          <a href="{{ url('/') }}"class="block px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"
             >
             <i class="fa-solid fa-home"></i>
-            <div>
+            <div class="font-bold">
               Home
             </div>
           </a>
         </li>
-
-        <li class="relative group flex-1">
-              <a href="{{ url('/policies') }}"
-                class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
-              ><i class="fa-solid fa-globe"></i>
-            <div>
-              Polices
-            </div></a>
-            {{-- <div class="group-hover:block hidden absolute left-0 mt-1 w-full z-40 bg-primary-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <ul>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                  >
-                    Team
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                  >
-                    History
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                  >
-                    Values
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                  >
-                    Values
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-white hover:bg-primary-400 transition-colors rounded-lg"
-                  >
-                    Values
-                  </a>
-                </li>
-              </ul>
-            </div> --}}
-        </li>
-
         <li class="flex-1">
           <a href="{{ url('products') }}"
-            class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
+            class="block px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
           <i class="fa-solid fa-tags"></i>
-            <div>
+            <div class="font-bold">
               Products
             </div>
           </a>
         </li>
+        <li class="relative group flex-1">
+              <a href="{{ url('/policies') }}"
+                class="block px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+              ><i class="fa-solid fa-scale-balanced"></i>
+            <div class="font-bold">
+              Policies
+            </div></a>
+        </li>
         <li class="flex-1">
           <a
             href="{{ url('/terms-and-conditions') }}"
-            class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
+            class="block px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors"
           >
             <i class="fa-solid fa-file-contract"></i>
-            <div>
+            <div class="font-bold">
               Terms & Conditions
             </div>
           </a>
         </li>
         <li class="flex-1">
-          <a href="{{ url('/contact') }}" class="block px-8 py-6 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
+          <a href="{{ url('/contact') }}" class="block px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transition-colors">
             <i class="fa-solid fa-address-book "></i>
-            <div>
+            <div class="font-bold">
               Contact Us
             </div>
           </a>
@@ -205,39 +169,40 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
     @yield('content')
   </div>
      
-  <footer class="bg-blue-900 text-white py-6  md:pt-16 px-12">
+  <footer class="bg-secondary-500 text-white py-6  md:pt-16 px-12">
       <div class="container mx-auto px-4 flex flex-col md:flex-row justify-around gap-10 items-start ">
         <div class="mb-6 md:mb-0">
-          <h3 class="text-secondary-400 font-medium mb-2 text-xl whitespace-nowrap">FOLLOW US:</h3>
+          <h3 class="text-primary-600 font-medium mb-2 text-xl whitespace-nowrap">FOLLOW US:</h3>
           <div class="flex space-x-4">
             <a href="#" class="text-white hover:text-secondary-400">
-              <i class="fa-brands fa-facebook"></i>
+              <i class="fa-brands fa-facebook text-2xl"></i>
             </a>
             <a href="#" class="text-white hover:text-secondary-400">
-              <i class="fa-brands fa-whatsapp"></i>
+              <i class="fa-brands fa-whatsapp text-2xl"></i>
             </a>
             <a href="#" class="text-white hover:text-secondary-400">
-              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-instagram text-2xl"></i>
             </a>
           </div>
         </div>
 
         <div class="mb-6 md:mb-0">
-          <h3 class="text-secondary-400 font-medium mb-2 text-xl text-start">Support</h3>
+          <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Support</h3>
           <ul class="space-y-1 text-sm text-start">
-            <li><a href="#" class="hover:text-secondary-400">Refund & Replacement Policy (For Resellers)</a></li>
-            <li><a href="#" class="hover:text-secondary-400">Refund and Replacement Policy (primaryers)</a></li>
-            <li><a href="#" class="hover:text-secondary-400">Privacy Policy</a></li>
-            <li><a href="#" class="hover:text-secondary-400">Terms of Service</a></li>
+            <li><a href="{{ url('/policies') }}" class="hover:text-secondary-400">Policies</a></li>
+            <li><a href="{{ url('/terms-and-conditions') }}" class="hover:text-secondary-400">Terms of Conditions</a></li>
+            <li><a href="{{ url('/contact') }}" class="hover:text-secondary-400">Contact Us</a></li>
           </ul>
         </div>
 
         <div class="mb-6 md:mb-0">
-          <h3 class="text-secondary-400 font-medium mb-2 text-xl text-start">Powered by</h3>
+          <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Powered by</h3>
           <p class="text-sm text-start">
-            myzambeeL is powered and owned by Tazah Global L.L.C-FZ
+            ZeeDropShipping
             <br />
             2nd Floor Fazal Trade Center 114-E Gulberg-III
+            <br />
+            +92 315-9999547
           </p>
         </div>
       </div>
@@ -247,9 +212,10 @@ src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1"
           <p class="text-xs text-gray-400">&copy; 2024, Zee Dropshipping Powered by 
             <a href="https://txdevs.com" class="text-white hover:text-secondary-400">TXDevs</a>
           </p>
-          <button class="bg-green-500 text-black text-sm font-bold py-2 px-4 rounded hover:bg-green-600 mt-4 md:mt-0">
-            Book a Call
-          </button>
+          <a href="+923159999547
+" class="bg-green-500 text-black text-sm font-bold py-2 px-4 rounded hover:bg-green-600 mt-4 md:mt-0">
+            Call Us
+          </a>
         </div>
       </div>
     </footer>

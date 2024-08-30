@@ -25,27 +25,27 @@
             <div class="font-semibold my-2">Profile Information</div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 <div class="flex flex-col gap-2">
-                    <x-label>User Name</x-label>
+                    <x-label>User Name*</x-label>
                     <x-input name="name" value="{{ $user->name }}" />
                 </div>
                 <div class="flex flex-col gap-2">
-                    <x-label>Business Name</x-label>
+                    <x-label>Business Name*</x-label>
                     <x-input name="business_name" value="{{ old('business_name') }}" />
                 </div>
                 
                 <div class="flex flex-col gap-2">
-                    <x-label>Store Url</x-label>
+                    <x-label>Store Url*</x-label>
                     <x-input type="url" name="store_url" value="{{ old('store_url') }}" />
                 </div>
 
                  <div class="flex flex-col gap-2">
-                    <x-label>Store Phone</x-label>
+                    <x-label>Store Phone*</x-label>
                     <x-input type="tel" name="phone" value="{{ old('phone') }}" />
                 </div>
 
                 
                 <div class="flex flex-col gap-2">
-                    <x-label>Store City</x-label>
+                    <x-label>Store City*</x-label>
                     <x-select name="city_id">
                         @foreach($cities as $city)
                             <option value="{{ $city->id }}">{{ $city->name }}</option>
@@ -54,7 +54,7 @@
                 </div>
 
                  <div class="flex flex-col gap-2">
-                    <x-label>Store Address</x-label>
+                    <x-label>Store Address*</x-label>
                     <x-input name="address" value="{{ old('address') }}" />
                 </div>
 
@@ -63,21 +63,21 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
                 <div class="flex flex-col gap-2">
                     <x-label>Avatar</x-label>
-                    <x-input type="file" name="avatar" required="true"  />
+                    <x-input type="file" name="avatar" />
                 </div>
 
                 <div class="flex flex-col gap-2">
                     <x-label>Store Logo</x-label>
-                    <x-input type="file" name="store_logo"  required="true" />
+                    <x-input type="file" name="store_logo"  />
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <x-label>CNIC</x-label>
+                    <x-label>CNIC*</x-label>
                     <x-input type="file" name="cnic"  required="true" />
                 </div>
             </div>
 
-            <div class="font-semibold mt-6 mb-2">Bank Information</div>
+            <div class="font-semibold mt-6 mb-2">Bank Details for payments</div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 <div class="flex flex-col gap-2">
                     <x-label>Bank Name</x-label>
@@ -88,11 +88,11 @@
                     </x-select>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <x-label>Account Name</x-label>
+                    <x-label>Account Name*</x-label>
                     <x-input name="account_name" value="{{ old('account_name') }}" />
                 </div>
                 <div class="flex flex-col gap-2">
-                    <x-label>Account Number (IBAN)</x-label>
+                    <x-label>Account Number (IBAN)*</x-label>
                     <x-input name="iban" value="{{ old('iban') }}" />
                 </div>
             </div>
