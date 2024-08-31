@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'support']);
-        Role::create(['name' => 'user']);
         Role::create(['name' => 'dropshipper']);
         Role::create(['name' => 'dispatcher']);
         Role::create(['name' => 'shipper']);
@@ -58,39 +57,39 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'saqibirfaq@gmail.com',
             'country_id' => 1,
         ]);
 
         $user = User::find(1);
         $user->assignRole('admin');
 
-        User::factory()->create([
-            'name' => 'Drop Shipper',
-            'email' => 'dropshipper@gmail.com',
-            'country_id' => 1,
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Drop Shipper',
+        //     'email' => 'dropshipper@gmail.com',
+        //     'country_id' => 1,
+        // ]);
 
-        $user = User::find(2);
-        $user->vendor()->create([
-            'business_name' => 'Tor Link',
-            'store_url' => 'https://torlink.com',
-            'phone' => '923004156789',
-            'address' => 'Lahore, Pakistan',
-            'store_logo' => 'https://via.placeholder.com/150',
-            'city_id' => 1,
-        ]);
-        $user->assignRole('dropshipper');
+        // $user = User::find(2);
+        // $user->vendor()->create([
+        //     'business_name' => 'Tor Link',
+        //     'store_url' => 'https://torlink.com',
+        //     'phone' => '923004156789',
+        //     'address' => 'Lahore, Pakistan',
+        //     'store_logo' => 'https://via.placeholder.com/150',
+        //     'city_id' => 1,
+        // ]);
+        // $user->assignRole('dropshipper');
 
 
-        User::factory()->create([
-            'name' => 'Dispatcher',
-            'email' => 'dispatcher@gmail.com',
-            'country_id' => 1,
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Dispatcher',
+        //     'email' => 'dispatcher@gmail.com',
+        //     'country_id' => 1,
+        // ]);
 
-        $user = User::find(3);
-        $user->assignRole('dispatcher');
+        // $user = User::find(3);
+        // $user->assignRole('dispatcher');
 
         // Categories 
 
@@ -117,63 +116,63 @@ class DatabaseSeeder extends Seeder
 
         // Products
         // \App\Models\Product::factory(5)->create();
-        \App\Models\Product::create([
-            'category_id' => 1,
-            'user_id' => 2,
-            'name' => 'iPhone 12',
-            'sku' => 'SKU-240811-01',
-            'purchase_price' => 1000,
-            'sale_price' => 1200,
-            'discount_price' => 1100,
-            'description' => 'This is a test product',
-            'vat' => 10,
-            'stock' => 100,
-            'low_stock_report' => 10,
-            'min_order_qty' => 1,
-            'max_order_qty' => 5,
-            'weight' => 1,
-            'image' => 'https://via.placeholder.com/150',
-            'other_details' => 'This is a test product',
-            'status' => 1,
-        ]);
-        \App\Models\Product::create([
-            'category_id' => 1,
-            'user_id' => 2,
-            'name' => 'iPhone 09',
-            'sku' => 'SKU-240811-02',
-            'purchase_price' => 1000,
-            'sale_price' => 1200,
-            'discount_price' => 1100,
-            'description' => 'This is a test product',
-            'vat' => 10,
-            'stock' => 100,
-            'low_stock_report' => 10,
-            'min_order_qty' => 1,
-            'max_order_qty' => 5,
-            'weight' => 1,
-            'image' => 'https://via.placeholder.com/150',
-            'other_details' => 'This is a test product',
-            'status' => 1,
-        ]);
-        \App\Models\Product::create([
-            'category_id' => 1,
-            'user_id' => 2,
-            'name' => 'iPhone 15',
-            'sku' => 'SKU-240811-03',
-            'purchase_price' => 1000,
-            'sale_price' => 1200,
-            'discount_price' => 1100,
-            'description' => 'This is a test product',
-            'vat' => 10,
-            'stock' => 100,
-            'low_stock_report' => 10,
-            'min_order_qty' => 1,
-            'max_order_qty' => 5,
-            'weight' => 1,
-            'image' => 'https://via.placeholder.com/150',
-            'other_details' => 'This is a test product',
-            'status' => 1,
-        ]);
+        // \App\Models\Product::create([
+        //     'category_id' => 1,
+        //     'user_id' => 2,
+        //     'name' => 'iPhone 12',
+        //     'sku' => 'SKU-240811-01',
+        //     'purchase_price' => 1000,
+        //     'sale_price' => 1200,
+        //     'discount_price' => 1100,
+        //     'description' => 'This is a test product',
+        //     'vat' => 10,
+        //     'stock' => 100,
+        //     'low_stock_report' => 10,
+        //     'min_order_qty' => 1,
+        //     'max_order_qty' => 5,
+        //     'weight' => 1,
+        //     'image' => 'https://via.placeholder.com/150',
+        //     'other_details' => 'This is a test product',
+        //     'status' => 1,
+        // ]);
+        // \App\Models\Product::create([
+        //     'category_id' => 1,
+        //     'user_id' => 2,
+        //     'name' => 'iPhone 09',
+        //     'sku' => 'SKU-240811-02',
+        //     'purchase_price' => 1000,
+        //     'sale_price' => 1200,
+        //     'discount_price' => 1100,
+        //     'description' => 'This is a test product',
+        //     'vat' => 10,
+        //     'stock' => 100,
+        //     'low_stock_report' => 10,
+        //     'min_order_qty' => 1,
+        //     'max_order_qty' => 5,
+        //     'weight' => 1,
+        //     'image' => 'https://via.placeholder.com/150',
+        //     'other_details' => 'This is a test product',
+        //     'status' => 1,
+        // ]);
+        // \App\Models\Product::create([
+        //     'category_id' => 1,
+        //     'user_id' => 2,
+        //     'name' => 'iPhone 15',
+        //     'sku' => 'SKU-240811-03',
+        //     'purchase_price' => 1000,
+        //     'sale_price' => 1200,
+        //     'discount_price' => 1100,
+        //     'description' => 'This is a test product',
+        //     'vat' => 10,
+        //     'stock' => 100,
+        //     'low_stock_report' => 10,
+        //     'min_order_qty' => 1,
+        //     'max_order_qty' => 5,
+        //     'weight' => 1,
+        //     'image' => 'https://via.placeholder.com/150',
+        //     'other_details' => 'This is a test product',
+        //     'status' => 1,
+        // ]);
         Shipper::create([
             'name' => 'Digi Dokan',
             'phone' => '123456789',
@@ -195,18 +194,37 @@ class DatabaseSeeder extends Seeder
         Bank::create(['name' => 'Bank of Punjab','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
         Bank::create(['name' => 'Muslim Commerical Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
         Bank::create(['name' => 'Meezan Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Apna Microfinance','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Al Barka Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Askari Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Bank Alhabib','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Bank Makramah Limited','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Bank of Khyber','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Bank Islami','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'City Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Dubai Islamic','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Faysal Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'First Women Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'HBL Konnect','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Habib Metro','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'JS Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'NSB','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Silk Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Standard Chartered','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'UBL','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
+        Bank::create(['name' => 'Zarai Tariaqiati Bank','icon' => 'https://via.placeholder.com/150', 'format' => 'IBAN']);
 
-        BankAccount::create([
-            'user_id' => 2,
-            'bank_id' => 1,
-            'account_name' => 'Tor Link',
-            'iban' => 'PK123456789',
-        ]);
+        // BankAccount::create([
+        //     'user_id' => 2,
+        //     'bank_id' => 1,
+        //     'account_name' => 'Tor Link',
+        //     'iban' => 'PK123456789',
+        // ]);
 
-        $this->call([
-            BankTransactionSeeder::class,
-            // RevenueSeeder::class,
-        ]);
+        // $this->call([
+        //     BankTransactionSeeder::class,
+        //     // RevenueSeeder::class,
+        // ]);
 
         KycDoc::create([
             'name' => 'CNIC Front',

@@ -9,6 +9,8 @@ use App\Models\Bank;
 use App\Models\BankAccount;
 use App\Models\UserKycDoc;
 use Illuminate\Support\Facades\File;
+use App\Models\Vendor;
+
 class ProfileController extends Controller
 {
     /**
@@ -34,8 +36,8 @@ class ProfileController extends Controller
         if($vendor) {
             return redirect()->route('vendor.profile.index');
         }
-        $cities = City::all();
-        $banks = Bank::all();
+        $cities = City::orderBy('name','asc')->get();
+        $banks = Bank::orderBy('name','asc')->get();
         return view('vendor.profile.create', compact('user', 'cities', 'banks'));
     }
 
@@ -52,8 +54,8 @@ class ProfileController extends Controller
             'business_name' => 'required|string|max:255',
             'store_url' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'store_logo' => 'required|image',
-            'avatar' => 'required|image',
+            'store_logo' => 'nullable|image',
+            'avatar' => 'nullable|image',
         ]);
 
         $user = auth()->user();
@@ -64,6 +66,8 @@ class ProfileController extends Controller
             $user->avatar = $request->file('avatar')->storeAs('users', $avatarName);
             $user->save();
         }
+        $vendorCount = Vendor::count() + 1;
+        $dsNumber = $vendorCount > 1000 ? $vendorCount : str_pad($vendorCount, 4, '0', STR_PAD_LEFT);
         $vendor = $user->vendor()->create([
             'phone' => $request->phone,
             'city_id' => $request->city_id,
@@ -71,6 +75,7 @@ class ProfileController extends Controller
             'store_url' => $request->store_url,
             'address' => $request->address,
             'city_id' => $request->city_id,
+            'ds_number' => 'DS-'.$dsNumber,
         ]);
         if($request->hasFile('store_logo')) {
             $logoName = time() . '_'.$vendor->id .".". $request->file('store_logo')->getClientOriginalExtension();

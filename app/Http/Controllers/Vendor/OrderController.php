@@ -89,6 +89,14 @@ class OrderController extends Controller
         ]);
 
         $order = Order::where('user_id', auth()->id())->findOrFail($id);
+        if($request->status === 'cancelled'){
+            $order->status = 'cancelled';
+            $order->canceled_date = now();
+            $order->cancel_reason = $request->reason;
+            $order->cancel_by = auth()->user()->id;
+            $order->save();
+            return redirect()->route('vendor.orders.index')->with('error', 'Order cancelled successfully');
+        }
         if($request->status === 'shipped'){
             // Send order to digiDokan
             $digi = new \App\Services\DigiDokan();

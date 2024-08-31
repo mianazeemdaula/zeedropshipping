@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="flex-1 flex items-center justify-center">
-                <img src="{{ asset('assets/images/Logo2.png') }}" alt="Logo" class='w-32 h-[18rm] object-fill' />
+                <img src="{{ asset('assets/images/Logo.png') }}" alt="Logo" class='h-20' />
             </div>
 
             <div class='hidden lg:flex items-center gap-1 flex-1 justify-end'>

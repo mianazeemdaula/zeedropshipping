@@ -55,7 +55,10 @@ class OrderController extends Controller
 ;            $query = $query->whereBetween('created_at', [$startDate, $endDate]);
         }
         $orders = $query->whereIn('status',['packed','open','shipped'])->get();
-        return view('dispatcher.orders.index', compact('orders'));
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $sku = $request->sku;
+        return view('dispatcher.orders.index', compact('orders', 'start_date', 'end_date','sku'));
 
     }
 
@@ -84,71 +87,80 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'status' => 'required',
-            // 'payment_method_id' => 'required',
-        ]);
-
-        $order = Order::findOrFail($id);
-        if($request->status === 'packed'){
-            $order->status = 'packed';
-            $order->packed_date = now();
-            $order->packed_user_id = auth()->user()->id;
-        }else if($request->status === 'shipped'){
-            // Send order to digiDokan
-            $shipper = Shipper::find(1);
-            $digi = new \App\Services\DigiDokan();
-            $digiGatewayId = 3;
-            $response = $digi->getCities([
-                'shipment_type' => 1,
-                'gateway_id' => $digiGatewayId,
-                'courier_bulk' => 1
+        try {
+            $request->validate([
+                'status' => 'required',
+                'reason' => 'sometimes|max:150|string|min:5',
+                // 'payment_method_id' => 'required',
             ]);
-            $cities = collect($response->Overnight);
-            // find city
-            $city = $cities->where('city_name', $order->city)->first();
-            if(!$city){
-                return redirect()->back()->with('error', 'Order city not found');
+            $order = Order::findOrFail($id);
+            if($request->status === 'cancelled'){
+                $order->status = 'cancelled';
+                $order->canceled_date = now();
+                $order->cancel_reason = $request->reason;
+                $order->cancel_by = auth()->user()->id;
+            }else if($request->status === 'packed'){
+                $order->status = 'packed';
+                $order->packed_date = now();
+                $order->packed_user_id = auth()->user()->id;
+            }else if($request->status === 'shipped'){
+                // Send order to digiDokan
+                $shipper = Shipper::find(1);
+                $digi = new \App\Services\DigiDokan();
+                $digiGatewayId = $request->digi_gateway_id;
+                $response = $digi->getCities([
+                    'shipment_type' => $request->shipment_type,
+                    'gateway_id' => $digiGatewayId,
+                    'courier_bulk' => 1
+                ]);
+                $cities = collect($response->Overnight);
+                // find city
+                $city = $cities->where('city_name', $order->city)->first();
+                if(!$city){
+                    return redirect()->back()->with('error', 'Order city not found');
+                }
+                $city_id = $city->city_id ?? 1;
+                
+                $res =  $digi->bookShipment([
+                    'seller_number' => Helper::parseDigiPhone(json_decode($shipper->config)->phone),
+                    'buyer_number' => Helper::parseDigiPhone($order->customer_phone),
+                    'buyer_name' => $order->customer_name,
+                    'buyer_address' => empty($order->shipping_address) ? 'Lahore' : $order->billing_address,
+                    'buyer_city' => $city_id,
+                    'piece' => $order->details()->count(),
+                    'amount' => intval($order->total),
+                    'special_instruction' => $order->extra_note,
+                    'product_name' => $order->details()->first()->product->name,
+                    'store_url' => $order->user->vendor->store_url,
+                    'business_name' => $order->user->vendor->business_name,
+                    'origin' => 'Lahore',
+                    'gateway_id' => $digiGatewayId,
+                    'shipper_address' => $order->user->vendor->address,
+                    'shipper_name' => $order->user->vendor->business_name,
+                    'shipper_phone' => Helper::parseDigiPhone($order->user->vendor->phone),
+                    'shipment_type' => 1,
+                    'external_reference_no' => $order->order_number,
+                    'weight' => $order->weight ?? 1,
+                    'other_product' => $order->details()->count() > 1,
+                    'pickup_id' => intval($request->pickup_addresses),
+                ]);
+                $order->shipper_id = $shipper->id;
+                $trackData = [];
+                $trackData['tracking_no'] = $res->tracking_no;
+                $trackData['invoice_url'] = $res->slip_link;
+                $trackData['order_no'] = $res->order_no;
+                $trackData['gateway_id'] = $digiGatewayId;
+                $order->track_data = $trackData;
+                $order->shipped_date = now()->toDateString();
+                $order->shipping_cost = $res->delivery_charges;
+                $order->shipped_user_id = auth()->user()->id;
+                $order->status = 'shipped';
             }
-            $city_id = $city->city_id ?? 1;
-            
-            $res =  $digi->bookShipment([
-               'seller_number' => Helper::parseDigiPhone(json_decode($shipper->config)->phone),
-               'buyer_number' => Helper::parseDigiPhone($order->customer_phone),
-               'buyer_name' => $order->customer_name,
-               'buyer_address' => empty($order->shipping_address) ? 'Lahore' : $order->billing_address,
-               'buyer_city' => $city_id,
-               'piece' => $order->details()->count(),
-               'amount' => intval($order->total),
-               'special_instruction' => $order->extra_note,
-               'product_name' => $order->details()->first()->product->name,
-               'store_url' => $order->user->vendor->store_url,
-               'business_name' => $order->user->vendor->business_name,
-               'origin' => 'Lahore',
-               'gateway_id' => $digiGatewayId,
-               'shipper_address' => $order->user->vendor->address,
-               'shipper_name' => $order->user->vendor->business_name,
-               'shipper_phone' => Helper::parseDigiPhone($order->user->vendor->phone),
-               'shipment_type' => 1,
-               'external_reference_no' => $order->order_number,
-               'weight' => $order->weight ?? 1,
-               'other_product' => $order->details()->count() > 1,
-               'pickup_id' => 5195
-            ]);
-            $order->shipper_id = $shipper->id;
-            $trackData = [];
-            $trackData['tracking_no'] = $res->tracking_no;
-            $trackData['invoice_url'] = $res->slip_link;
-            $trackData['order_no'] = $res->order_no;
-            $trackData['gateway_id'] = $digiGatewayId;
-            $order->track_data = $trackData;
-            $order->shipped_date = now()->toDateString();
-            $order->shipping_cost = $res->delivery_charges;
-            $order->shipped_user_id = auth()->user()->id;
-            $order->status = 'shipped';
+            $order->save();
+            return redirect()->route('dispatcher.orders.index')->with('success', 'Order updated successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
         }
-        $order->save();
-        return redirect()->route('dispatcher.orders.index')->with('success', 'Order updated successfully');
     }
 
     /**

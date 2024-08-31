@@ -20,6 +20,11 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
+    public function getImageAttribute($value)
+    {
+        return $value ? asset($value) : 'https://via.placeholder.com/150';
+    }
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');

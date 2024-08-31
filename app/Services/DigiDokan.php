@@ -163,4 +163,35 @@ class DigiDokan {
             throw new \Exception($res->error);
         }
     }
+
+    public function getPickupAddress($gatewayId){
+        $token = $this->login();
+        // check in cache
+        $key = 'digi_pickup_address_'.$gatewayId;
+        $addresses = Cache::get($key);
+        if($addresses) {
+            return $addresses;
+        }
+        $response = $this->http->post('get-pickUp-address', [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token,
+            ],
+            'form_params' => [
+                'gateway_id' => $gatewayId,
+                'source' => 'core_api'
+            ],
+        ]);
+        
+        if($response->getStatusCode() == 200) {
+            $res =  json_decode($response->getBody()->getContents());
+            if($res->code == 200) {
+                Cache::put($key, $res->data, now()->addHours(24));
+                return $res->data;
+            }else if($res->code == 401) {
+                $token = $this->refreshToken();
+                return $this->getPickupAddress($gatewayId);
+            }
+            throw new \Exception($res->error);
+        }
+    }
 }

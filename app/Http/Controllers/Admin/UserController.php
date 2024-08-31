@@ -64,15 +64,15 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'mobile' => 'nullable|string|max:20',
-            'status' => 'required|string|in:active,inactive,under-review',
+            'status' => 'required|string|in:active,inactive,under-review,blocked,unverified',
             'role' => 'required|string|exists:roles,name'
         ]);
 
         
         $user = User::find($id);
-        
+        $sendEmail = false;
         if($request->status != $user->status){
-            Mail::to($user->email)->send(new \App\Mail\AccountStatus($user));
+            $sendEmail = true;
         }
 
         $user->name = $request->name;
@@ -82,6 +82,9 @@ class UserController extends Controller
         $user->comment = $request->comment;
         $user->syncRoles([$request->role]);
         $user->save();
+        if($sendEmail){
+            Mail::to($user->email)->send(new \App\Mail\AccountStatus($user));
+        }
         if($request->has('password')){
             $user->password = bcrypt($request->password);
             $user->save();
@@ -115,6 +118,10 @@ class UserController extends Controller
             $users = User::role('dropshipper')->where('status', 'under-review')->paginate();
         }else if($status == 'inactive'){
             $users = User::role('dropshipper')->where('status', 'inactive')->paginate();
+        }else if($status == 'no-orders-inactive'){
+            $users = User::role('dropshipper')->whereHas('orders', function($q){
+                $q->where('created_at', '>=', now()->subDays(15));
+            })->paginate();
         }else{
             $users = User::where('id', '!=', auth()->id())->paginate();
         }

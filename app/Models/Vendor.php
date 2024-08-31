@@ -16,6 +16,7 @@ class Vendor extends Model
         'business_name',
         'store_url',
         'store_logo',
+        'ds_number',
     ];
 
     // get store logo

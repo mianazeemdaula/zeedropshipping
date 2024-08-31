@@ -6,16 +6,18 @@
                 $color = 'green';
                 break;
             case 'inactive':
+            case 'cancelled':
                 $color = 'red';
                 break;
             case 'pending':
                 $color = 'yellow';
                 break;
+
             default:
                 break;
         }
     @endphp
-    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $color }}-100 text-{{ $color }}-800">
+    <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-{{ $color }}-500 text-white">
         {{ ucFirst($status) }}
     </span>
 </div>

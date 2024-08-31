@@ -40,7 +40,7 @@ return new class extends Migration
             $table->dateTime('delivered_date')->nullable();
             $table->dateTime('canceled_date')->nullable();
             $table->string('cancel_reason',150)->nullable();
-            $table->string('cancel_by',15)->nullable();
+            $table->unsignedBigInteger('cancel_by')->nullable();
             $table->string('provider',50)->nullable();
             $table->unsignedInteger('profit')->default(0);
             $table->unsignedInteger('weight')->default(0);

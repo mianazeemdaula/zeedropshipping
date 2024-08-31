@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Order;
 use App\Models\Product;
-
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -54,6 +54,7 @@ class AuthController extends Controller
         // logint to the system after signup
         Auth::login($user);
         $user->assignRole('dropshipper');
+        event(new Registered($user));
         return redirect()->route('dashboard');
     }
 
@@ -72,19 +73,23 @@ class AuthController extends Controller
                 'total_vendors' => User::role('dropshipper')->count(),
                 'inreview_dropshippers' => User::role('dropshipper')->whereStatus('under-review')->count(),
                 'total_active_dropshippers' => User::role('dropshipper')->where('status', 'active')->count(),
+                'inactive_dropshippers' => User::role('dropshipper')->whereHas('orders',function($q){
+                    // less then 15 days old
+                    $q->where('created_at', '>=', now()->subDays(15));
+                })->count(),
                 'total_orders' => Order::count(),
                 'total_products' => Product::count(),
                 'open_orders' => Order::where('status', 'open')->count(),
-                'intransit_orders' => Order::whereNotIn('status', ['open','canceled'])->count(),
-                'canceled_orders' => Order::where('status', 'canceled')->count(),
+                'intransit_orders' => Order::whereNotIn('status', ['open','cancelled'])->count(),
+                'canceled_orders' => Order::where('status', 'cancelled')->count(),
                 'dispatched_orders' => Order::where('status', 'dispatched')->count(),
             ];
             return view('admin.dashboard', compact('stats'));
         }else if($user->hasRole('dropshipper')){
             $stats = [
                 'open_orders' => Order::where('status', 'open')->count(),
-                'intransit_orders' => Order::whereNotIn('status', ['open','canceled'])->count(),
-                'canceled_orders' => Order::where('status', 'canceled')->count(),
+                'intransit_orders' => Order::whereNotIn('status', ['open','cancelled'])->count(),
+                'canceled_orders' => Order::where('status', 'cancelled')->count(),
                 'dispatched_orders' => Order::where('status', 'dispatched')->count(),
                 'total_orders' => Order::where('user_id', auth()->id())->count(),
                 'total_sales' => Order::where('user_id', auth()->id())->sum('total'),
@@ -93,8 +98,8 @@ class AuthController extends Controller
         }else if($user->hasRole('dispatcher') || $user->hasRole('shipper')){
             $stats = [
                 'open_orders' => Order::where('status', 'open')->count(),
-                'intransit_orders' => Order::whereNotIn('status', ['open','canceled'])->count(),
-                'canceled_orders' => Order::where('status', 'canceled')->count(),
+                'intransit_orders' => Order::whereNotIn('status', ['open','cancelled'])->count(),
+                'canceled_orders' => Order::where('status', 'cancelled')->count(),
                 'dispatched_orders' => Order::where('status', 'dispatched')->count(),
                 'total_orders' => Order::count(),
             ];
