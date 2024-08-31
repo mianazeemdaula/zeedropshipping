@@ -222,11 +222,12 @@
                 <p class="text-xs text-gray-400">&copy; 2024, Zee Dropshipping Powered by
                     <a href="https://txdevs.com" class="text-white hover:text-secondary-400">TXDevs</a>
                 </p>
-                <a href="+923159999547
-"
-                    class="bg-green-500 text-black text-sm font-bold py-2 px-4 rounded hover:bg-green-600 mt-4 md:mt-0">
-                    Call Us
+
+                <a href="https://wa.me/923159999547" target="_blank"
+                    class="bg-green-500 flex justify-center fixed bottom-10 right-5 items-center size-12 rounded-full text-white text-sm font-bold py-2 px-4  hover:bg-green-600 mt-4 md:mt-0 z-50 hover:scale-105 hover:animate-pulse">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
                 </a>
+
             </div>
         </div>
     </footer>
