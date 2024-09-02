@@ -1,39 +1,38 @@
 @extends('layouts.guest')
+@section('title', 'Reset Password')
 @section('content')
     <section class="">
         <div class="grid grid-cols-1 lg:grid-cols-2">
             <div class="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
                 <div class="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
                     <h2 class="text-3xl font-bold leading-tight text-primary-500 sm:text-4xl">
-                        Sign in
+                        Reset Password
                     </h2>
-                    <p class="mt-2 text-base text-gray-600">
-                        Don't have an account?
-                        <a href="{{ url('signup') }}" title=""
-                            class="font-medium text-black transition-all duration-200 hover:underline">
-                            Register Now
-                        </a>
-                    </p>
-                    <form action="{{ url('login') }}" method="POST" class="mt-8">
+                    <p class="">Set your password for account</p>
+                    <form action="{{ route('password.update') }}" method="POST" class="mt-8">
                         @csrf
+                        <input type="hidden" name="token" value="{{ $token }}">
                         <div class="space-y-5">
                             <div>
                                 <x-label>Email</x-label>
                                 <div class="mt-2">
-                                    <x-input name="email" type="email" placeholder="Email" />
+                                    <x-input name="email" type="email" placeholder="Email"
+                                        value="{{ request()->email }}" readonly />
+                                </div>
+                            </div>
+                            <div>
+                                <x-label>New Password</x-label>
+                                <div class="mt-2">
+                                    <x-input name="password" type="password" placeholder="Enter password" />
                                 </div>
                             </div>
                             <div>
                                 <div class="flex items-center justify-between">
-                                    <x-label>Password</x-label>
-                                    <a href="{{ route('password.request') }}" title=""
-                                        class="text-sm font-medium text-black transition-all duration-200 hover:underline">
-                                        Forgot Password?
-                                    </a>
+                                    <x-label>Retype Password</x-label>
                                 </div>
                                 <div class="mt-2" x-data="{ showpassword: false }">
                                     <div class="relative">
-                                        <input :type="showpassword ? 'text' : 'password'" name="password"
+                                        <input :type="showpassword ? 'text' : 'password'" name="password_confirmation"
                                             placeholder="Password"
                                             class="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50">
                                         <!-- Eye Icon -->
@@ -44,7 +43,7 @@
                                                 x-on:click="showpassword = ! showpassword"></i>
                                         </div>
                                     </div>
-                                    @error('password')
+                                    @error('password_confirmation')
                                         <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
                                     @enderror
                                 </div>

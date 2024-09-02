@@ -79,6 +79,15 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
+Route::post('/forgot-password', 'App\Http\Controllers\AuthController@forgotPassword')->middleware('guest')->name('password.email');
+Route::get('/reset-password/{token}','App\Http\Controllers\AuthController@resetPassword')->middleware('guest')->name('password.reset');
+Route::post('/reset-password','App\Http\Controllers\AuthController@postResetPassword')->middleware('guest')->name('password.update');
+
+
+
 Route::get('/test-api', function(){
     $user = \App\Models\User::find(1);
     $status = Mail::to('mazeemrehan@gmail.com')->send(new \App\Mail\AccountStatus($user));
