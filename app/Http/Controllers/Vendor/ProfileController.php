@@ -48,9 +48,9 @@ class ProfileController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'city_id' => 'required|exists:cities,id',
+            // 'city_id' => 'required|exists:cities,id',
+            'city_name' => 'required',
             'phone' => 'required|string|max:255',
-            'city_id' => 'required|exists:cities,id',
             'business_name' => 'required|string|max:255',
             'store_url' => 'required|string|max:255',
             'address' => 'required|string|max:255',
@@ -67,15 +67,15 @@ class ProfileController extends Controller
             $user->save();
         }
         $vendorCount = Vendor::count() + 1;
-        $dsNumber = $vendorCount > 1000 ? $vendorCount : str_pad($vendorCount, 4, '0', STR_PAD_LEFT);
+        $dsNumber = $vendorCount > 1000 ? $vendorCount : 1000 + $vendorCount;
         $vendor = $user->vendor()->create([
             'phone' => $request->phone,
-            'city_id' => $request->city_id,
+            'city_id' => 1,
             'business_name' => $request->business_name,
             'store_url' => $request->store_url,
             'address' => $request->address,
-            'city_id' => $request->city_id,
             'ds_number' => 'DS-'.$dsNumber,
+            'city_name' => $request->city_name,
         ]);
         if($request->hasFile('store_logo')) {
             $logoName = time() . '_'.$vendor->id .".". $request->file('store_logo')->getClientOriginalExtension();
@@ -138,10 +138,10 @@ class ProfileController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'city_name' => 'required',
             // 'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-            'city_id' => 'required|exists:cities,id',
+            // 'city_id' => 'required|exists:cities,id',
             'phone' => 'required|string|max:255',
-            'city_id' => 'required|exists:cities,id',
             'business_name' => 'required|string|max:255',
             'store_url' => 'required|string|max:255',
             'address' => 'required|string|max:255',
@@ -154,15 +154,14 @@ class ProfileController extends Controller
         $user->save();
         $vendor = $user->vendor;
         $vendor->phone = $request->phone;
-        $vendor->city_id = $request->city_id;
+        $vendor->city_name = $request->city_name;
         $vendor->business_name = $request->business_name;
         $vendor->store_url = $request->store_url;
         $vendor->address = $request->address;
-        $vendor->city_id = $request->city_id;
         $vendor->save();
         if($request->hasFile('store_logo')) {
             File::delete($vendor->store_logo);
-            $logoName = time() . '_'.$vendor->id .".". $request->file('store_logo')->getClientOriginalExtension();
+            $logoName = time() . '_'.$user->id .".". $request->file('store_logo')->getClientOriginalExtension();
             $vendor->store_logo = $request->file('store_logo')->storeAs('vendors', $logoName);
             $vendor->save();
         }
@@ -173,7 +172,7 @@ class ProfileController extends Controller
             $user->save();
         }
         if($request->hasFile('cnic')) {
-            $logoName = time() . '_'.$vendor->id .".". $request->file('cnic')->getClientOriginalExtension();
+            $logoName = time() . '_'.$user->id .".". $request->file('cnic')->getClientOriginalExtension();
             $fileName = $request->file('cnic')->storeAs('vendors', $logoName);
             $kyc = UserKycDoc::where('user_id', $user->id)->where('kyc_doc_id',1)->first();
             if(!$kyc){

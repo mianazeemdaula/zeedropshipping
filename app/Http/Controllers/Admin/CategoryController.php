@@ -98,4 +98,11 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $categories = Category::where('name', 'like', '%'.$search.'%')->paginate(10);
+        return view('admin.categories.index', compact('categories','search'));
+    }
 }

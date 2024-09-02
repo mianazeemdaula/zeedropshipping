@@ -76,7 +76,7 @@
                     </tr>
                     <tr>
                         <td class="text-sm font-semibold">{{ $user->country->name }}</td>
-                        <td class="text-sm font-semibold">{{ $user->vendor->city->name }}</td>
+                        <td class="text-sm font-semibold">{{ $user->vendor->city_name }}</td>
                     </tr>
                     <tr>
                         <td class="text-sm pt-2">Phone</td>

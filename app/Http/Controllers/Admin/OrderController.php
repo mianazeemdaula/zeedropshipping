@@ -96,4 +96,18 @@ class OrderController extends Controller
         $orders = $orders->orderBy('id','desc')->paginate();
         return view('admin.orders.index', compact('orders'));
     }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'required'
+        ]);
+        $search = $request->search;
+        $orders = Order::where('id', $request->search)
+        ->orWhere('order_number', 'like', '%'.$search.'%')
+        ->orWhere('customer_name', 'like', '%'.$search.'%')
+        ->orWhere('customer_email', 'like', '%'.$search.'%')
+        ->orWhere('customer_phone', 'like', '%'.$search.'%')->get();
+        return view('admin.orders.index', compact('orders'));
+    }
 }

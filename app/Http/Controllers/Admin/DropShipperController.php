@@ -9,15 +9,15 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
-class UserController extends Controller
+class DropShipperController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::where('id', '!=', auth()->id())->paginate();
-        return view('admin.users.index', compact('users'));
+        $users = User::role('dropshipper')->paginate();
+        return view('admin.dropshippers.index', compact('users'));
     }
 
     /**
@@ -42,7 +42,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::find($id);
-        return view('admin.users.show', compact('user'));
+        return view('admin.dropshippers.show', compact('user'));
     }
 
     /**
@@ -52,7 +52,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::all();
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.dropshippers.edit', compact('user', 'roles'));
     }
 
     /**
@@ -93,11 +93,11 @@ class UserController extends Controller
             if(File::exists($user->avatar)){
                 File::delete($user->avatar);
             }
-            $logoName = time() . '_'.$user->id .".". $request->file('avatar')->getClientOriginalExtension();
+            $logoName = time() . '_'.$vendor->id .".". $request->file('avatar')->getClientOriginalExtension();
             $user->avatar = $request->file('avatar')->storeAs('users', $logoName);
             $user->save();
         }
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
+        return redirect()->route('admin.dropshippers.index')->with('success', 'Dropshipper updated successfully');
     }
 
     /**
@@ -125,18 +125,6 @@ class UserController extends Controller
         }else{
             $users = User::where('id', '!=', auth()->id())->paginate();
         }
-        return view('admin.users.index', compact('users'));
-    }
-
-    public function search(Request $request)
-    {
-        $request->validate([
-            'search' => 'required'
-        ]);
-        $users = User::where('name', 'like', '%'.$request->search.'%')
-            ->orWhere('email', 'like', '%'.$request->search.'%')
-            ->orWhere('mobile', 'like', '%'.$request->search.'%')
-            ->paginate();
         return view('admin.users.index', compact('users'));
     }
 }

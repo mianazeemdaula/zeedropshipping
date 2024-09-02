@@ -33,10 +33,14 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::namespace('App\Http\Controllers\Admin')->group(function () {
         Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
             Route::resource('categories', 'CategoryController');
+            Route::post('categories/search', 'CategoryController@search')->name('categories.search');
             Route::resource('products', 'ProductController');
+            Route::post('products/search', 'ProductController@search')->name('products.search');
             Route::resource('orders', 'OrderController');
+            Route::post('orders/search', 'OrderController@search')->name('orders.search');
             Route::get('/orders-status/{status}', 'OrderController@showStatusOrders')->name('orders.status');
             Route::resource('users', 'UserController');
+            Route::post('users/search', 'UserController@search')->name('users.search');
             Route::get('/users-status/{status}', 'UserController@showStatusUser')->name('user.status');
             Route::resource('shippers', 'ShipperController');
             Route::resource('payments', 'PaymentController');

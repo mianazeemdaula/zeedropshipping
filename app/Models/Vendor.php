@@ -17,6 +17,7 @@ class Vendor extends Model
         'store_url',
         'store_logo',
         'ds_number',
+        'city_name',
     ];
 
     // get store logo
@@ -30,8 +31,8 @@ class Vendor extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function city()
-    {
-        return $this->belongsTo(City::class);
-    }
+    // public function city()
+    // {
+    //     return $this->belongsTo(City::class);
+    // }
 }
