@@ -66,7 +66,7 @@ class ShipperController extends Controller
             'phone' => 'required',
             'email' => 'required',
             'tracking_url' => 'required',
-            'config.*' => 'required|string',
+            // 'config.*' => 'required|string',
         ]);
         $shipper = Shipper::find($id);
         $shipper->name = $request->name;
