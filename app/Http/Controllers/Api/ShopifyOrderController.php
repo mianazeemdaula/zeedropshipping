@@ -55,7 +55,7 @@ class ShopifyOrderController extends Controller
                 $orderModel->save();
                 $totalWeight = 0;
                 foreach ($order['details'] as $detail) {
-                    $product =  Product::where('sku','SKU-240811-02')->first();
+                    $product =  Product::where('sku', $detail['sku'])->first();
                     $orderDetail = new OrderDetail();
                     $orderDetail->order_id = $orderModel->id;
                     $orderDetail->product_id = $product->id;
