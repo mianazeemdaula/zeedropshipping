@@ -25,7 +25,7 @@
                 <div class="overflow-x-auto">
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden border border-gray-200 md:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200">
+                            <table class="min-w-full divide-y divide-gray-200 example">
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th scope="col"

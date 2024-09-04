@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->foreignId('user_id');
-            $table->string('name', 100);
-            $table->string('sku', 16)->unique();
+            $table->string('name', 250);
+            $table->string('sku', 20)->unique();
             $table->integer('weight')->default(0);
             $table->float('purchase_price')->default(0.0);
             $table->float('sale_price')->default(0.0);
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('max_order_qty')->default(10);
             $table->text('description')->nullable();
             $table->text('other_details')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image',500)->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

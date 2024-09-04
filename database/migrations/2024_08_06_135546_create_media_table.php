@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->string('file_path', 255);
+            $table->string('file_path', 500);
             $table->string('file_ext', 5);
             $table->string('file_thumbnail', 255)->nullable();
             $table->morphs('mediable');

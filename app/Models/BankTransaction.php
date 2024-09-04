@@ -11,10 +11,22 @@ class BankTransaction extends Model
 
     protected $fillable = [
         'bank_account_id',
+        'enter_by',
+        'payment_date',
         'type',
         'reference',
         'amount',
-        'description'
+        'deduction',
+        'description',
+        'order_ids',
+        'invoice',
+        'note',
+        'status',
+    ];
+
+    // cast attributes
+    protected $casts = [
+        'order_ids' => 'array',
     ];
 
     public function bankAccount()

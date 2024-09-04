@@ -3,6 +3,7 @@
         $color = 'gray';
         switch ($status) {
             case 'active':
+            case 'completed':
                 $color = 'green';
                 break;
             case 'inactive':

@@ -24,17 +24,17 @@
 
             <div class="p-4 border rounded-lg">
                 <h1 class="text-base font-bold mb-4">Shop Information</h1>
-                <table class="w-full">
+                <table class="w-full table-fixed">
                     <tr class="">
-                        <td class="text-sm ">Store Logo</td>
-                        <td class="text-sm">CNIC</td>
+                        <td class="text-sm w-1/2">Store Logo</td>
+                        <td class="text-sm w-1/2">CNIC</td>
                     </tr>
 
                     <tr>
-                        <td class="text-sm font-semibold">
+                        <td class="text-sm font-semibold w-1/2">
                             <img src="{{ $user->vendor->store_logo }}" alt="" class="w-20">
                         </td>
-                        <td class="text-sm font-semibold">
+                        <td class="text-sm font-semibold w-1/2">
                             @if ($user->dropShipperNicKyc)
                                 <img src="{{ asset($user->dropShipperNicKyc->file) }}" alt="" class="w-20">
                             @else
@@ -44,21 +44,21 @@
                     </tr>
 
                     <tr class="">
-                        <td class="text-sm pt-2">Name</td>
-                        <td class="text-sm pt-2">Email</td>
+                        <td class="text-sm pt-2 w-1/2">Name</td>
+                        <td class="text-sm pt-2 w-1/2">Email</td>
                     </tr>
 
                     <tr>
-                        <td class="text-sm font-semibold">{{ $user->vendor->business_name }}</td>
-                        <td class="text-sm font-semibold">{{ $user->vendor->store_url }}</td>
+                        <td class="text-sm font-semibold w-1/2">{{ $user->vendor->business_name }}</td>
+                        <td class="text-sm font-semibold w-1/2">{{ $user->vendor->store_url }}</td>
                     </tr>
                     <tr>
-                        <td class="text-sm pt-2">Phone</td>
-                        <td class="text-sm pt-2">Status</td>
+                        <td class="text-sm pt-2 w-1/2">Phone</td>
+                        <td class="text-sm pt-2 w-1/2">Status</td>
                     </tr>
                     <tr>
-                        <td class="text-sm font-semibold">{{ $user->vendor->phone }}</td>
-                        <td class="text-sm ">
+                        <td class="text-sm font-semibold w-1/2">{{ $user->vendor->phone }}</td>
+                        <td class="text-sm w-1/2">
                             <div>
                                 <x-status-chip status="{{ $user->status }}" />
                             </div>
@@ -69,44 +69,44 @@
 
             <div class="p-4 border rounded-lg">
                 <h1 class="text-base font-bold mb-4">Address Information</h1>
-                <table class="w-full">
+                <table class="w-full table-fixed">
                     <tr class="">
-                        <td class="text-sm ">Country</td>
-                        <td class="text-sm">City</td>
+                        <td class="text-sm w-1/2">Country</td>
+                        <td class="text-sm w-1/2">City</td>
                     </tr>
                     <tr>
-                        <td class="text-sm font-semibold">{{ $user->country->name }}</td>
-                        <td class="text-sm font-semibold">{{ $user->vendor->city_name }}</td>
+                        <td class="text-sm font-semibold w-1/2">{{ $user->country->name }}</td>
+                        <td class="text-sm font-semibold w-1/2">{{ $user->vendor->city_name }}</td>
                     </tr>
                     <tr>
-                        <td class="text-sm pt-2">Phone</td>
-                        <td class="text-sm pt-2">Address</td>
+                        <td class="text-sm pt-2 w-1/2">Phone</td>
+                        <td class="text-sm pt-2 w-1/2">Address</td>
                     </tr>
                     <tr>
-                        <td class="text-sm font-semibold">{{ $user->vendor->phone }}</td>
-                        <td class="text-sm font-semibold">{{ $user->vendor->address }}</td>
+                        <td class="text-sm font-semibold w-1/2">{{ $user->vendor->phone }}</td>
+                        <td class="text-sm font-semibold w-1/2">{{ $user->vendor->address }}</td>
                     </tr>
                 </table>
             </div>
 
             <div class="p-4 border rounded-lg">
                 <h1 class="text-base font-bold mb-4">Bank Information</h1>
-                <table class="w-full">
+                <table class="w-full table-fixed">
                     <tr class="">
-                        <td class="text-sm ">Bank</td>
-                        <td class="text-sm">IBAN</td>
+                        <td class="text-sm w-1/2">Bank</td>
+                        <td class="text-sm w-1/2">IBAN</td>
                     </tr>
                     <tr>
-                        <td class="text-sm font-semibold">{{ $user->activeBankAccount->bank->name ?? 'N/A' }}</td>
-                        <td class="text-sm font-semibold">{{ $user->activeBankAccount->iban }}</td>
+                        <td class="text-sm font-semibold w-1/2">{{ $user->activeBankAccount->bank->name ?? 'N/A' }}</td>
+                        <td class="text-sm font-semibold w-1/2">{{ $user->activeBankAccount->iban }}</td>
                     </tr>
                     <tr>
-                        <td class="text-sm pt-2">Title</td>
-                        <td class="text-sm pt-2">Status</td>
+                        <td class="text-sm pt-2 w-1/2">Title</td>
+                        <td class="text-sm pt-2 w-1/2"></td>
                     </tr>
                     <tr>
-                        <td class="text-sm font-semibold">{{ $user->activeBankAccount->account_name }}</td>
-                        <td class="text-sm font-semibold">{{ $user->activeBankAccount->status }}</td>
+                        <td class="text-sm font-semibold w-1/2">{{ $user->activeBankAccount->account_name }}</td>
+                        <td class="text-sm font-semibold w-1/2"></td>
                     </tr>
                 </table>
             </div>

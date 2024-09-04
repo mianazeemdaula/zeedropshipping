@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Helper\MediaHelper;
+use App\Helper\CSVHelper;
 class ProductController extends Controller
 {
     /**
@@ -43,6 +44,7 @@ class ProductController extends Controller
             'low_stock_report' => 'required',
             'min_order_qty' => 'required',
             'max_order_qty' => 'required',
+            'weight' => 'required',
             'description' => 'required',
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -54,6 +56,7 @@ class ProductController extends Controller
         $product->sku = $request->sku;
         $product->purchase_price = $request->purchase_price;
         $product->sale_price = $request->sale_price;
+        $product->weight = $request->weight;
         $product->discount_price = $request->discount_price;
         $product->vat = $request->vat;
         $product->stock = $request->stock;
@@ -111,6 +114,7 @@ class ProductController extends Controller
             'discount_price' => 'required',
             'vat' => 'required',
             'stock' => 'required',
+            'weight' => 'required',
             'low_stock_report' => 'required',
             'min_order_qty' => 'required',
             'max_order_qty' => 'required',
@@ -127,6 +131,7 @@ class ProductController extends Controller
         $product->discount_price = $request->discount_price;
         $product->vat = $request->vat;
         $product->stock = $request->stock;
+        $product->weight = $request->weight;
         $product->low_stock_report = $request->low_stock_report;
         $product->min_order_qty = $request->min_order_qty;
         $product->max_order_qty = $request->max_order_qty;
@@ -162,5 +167,52 @@ class ProductController extends Controller
         ->orWhere('sku', 'like', '%'.$request->search.'%')
         ->orWhere('description', 'like', '%'.$request->search.'%')->paginate(10);
         return view('admin.products.index', compact('products'));
+    }
+
+    public function importProducts(Request $request){
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv',
+        ]);
+        $file = $request->file('file');
+
+        $rows = CSVHelper::readCSV($file);
+        $products =  CSVHelper::namedKeys($rows);
+        foreach($products as $product){
+            $p = Product::where('sku', $product['sku'])->first();
+            if(!$p){
+                $cat = Category::where('name', $product['category'])->first();
+                $p = new Product();
+                $p->category_id = $cat->id;
+                $p->user_id = auth()->id();
+                $p->name = $product['name'];
+                $p->sku = $product['sku'];
+                $p->purchase_price = $product['purchase_price'];
+                $p->sale_price = $product['sale_price'];
+                $p->discount_price = $product['discount_price'];
+                $p->vat = $product['vat'];
+                $p->stock = $product['stock'];
+                $p->weight = $product['weight'];
+                $p->low_stock_report = $product['low_qty_stock'];
+                $p->min_order_qty = $product['min_order_qty'];
+                $p->max_order_qty = $product['max_order_qty'];
+                $p->description = $product['description'];
+                $p->status = in_array(strtolower($product['active']), ['active', 'yes', 'on','1']);
+                $p->image = $product['image_1'];
+                $p->save();
+                if($product['image_2'] && $product['image_2'] != ''){
+                    $media = MediaHelper::url($product['image_2'], $p->id, Product::class);
+                }
+                if($product['image_3'] && $product['image_3'] != ''){
+                    $media = MediaHelper::url($product['image_3'], $p->id, Product::class);
+                }
+                if($product['image_4'] && $product['image_4'] != ''){
+                    $media = MediaHelper::url($product['image_4'], $p->id, Product::class);
+                }
+                if($product['image_5'] && $product['image_5'] != ''){
+                    $media = MediaHelper::url($product['image_5'], $p->id, Product::class);
+                }
+            }
+        }
+        return redirect()->route('admin.products.index')->with('success', 'Products imported successfully');
     }
 }

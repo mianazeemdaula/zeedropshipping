@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('id', '!=', auth()->id())->paginate();
+        $users = User::withoutRole('admin')->withoutRole('dropshipper')->paginate();
         return view('admin.users.index', compact('users'));
     }
 
@@ -25,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -33,7 +34,32 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'mobile' => 'nullable|string|max:20',
+            'status' => 'required|string|in:active,inactive,under-review,blocked,unverified',
+            'role' => 'required|string|exists:roles,name',
+            'password' => 'required|string|min:6',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mobile = $request->mobile;
+        $user->status = $request->status;
+        $user->comment = $request->comment;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $user->assignRole($request->role);
+        if($request->hasFile('avatar')){
+            $logoName = time() . '_'.$user->id .".". $request->file('avatar')->getClientOriginalExtension();
+            $user->avatar = $request->file('avatar')->storeAs('users', $logoName);
+            $user->save();
+        }
+
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -133,7 +159,7 @@ class UserController extends Controller
         $request->validate([
             'search' => 'required'
         ]);
-        $users = User::where('name', 'like', '%'.$request->search.'%')
+        $users = User::withoutRole('admin')->withoutRole('dropshipper')->where('name', 'like', '%'.$request->search.'%')
             ->orWhere('email', 'like', '%'.$request->search.'%')
             ->orWhere('mobile', 'like', '%'.$request->search.'%')
             ->paginate();

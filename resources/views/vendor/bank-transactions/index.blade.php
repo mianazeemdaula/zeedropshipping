@@ -1,72 +1,102 @@
 @extends('layouts.admin')
 
 @section('content')
-<section class="mx-auto w-full max-w-7xl px-4 py-4">
-    <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
-        <div class="flex items-center justify-between min-w-full">
-            <div>
-                <h2 class="text-lg font-semibold">Payments</h2>
-            </div>
-            
-            <div class="flex flex-col">
-                <span class="font-normal">Total Payout:</span>
-                <span class="bg-primary-500 text-lg px-2 rounded-full text-white"> RS. 45000</span>
-            </div>
+    <section class="mx-auto w-full max-w-7xl px-4 py-4">
+        <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
+            <div class="flex items-center justify-between min-w-full">
+                <div>
+                    <h2 class="text-lg font-semibold">Payments</h2>
+                </div>
 
-            <div>
-                .
+                <div class="flex flex-col">
+                    <span class="font-normal">Total Payout:</span>
+                    <span class="bg-primary-500 text-lg px-2 rounded-full text-white"> RS. {{ $totalPayments }}</span>
+                </div>
+
+                <div>
+                    .
+                </div>
+                {{-- <a href="{{ route('vendor.bank-account.create') }}" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800" >Create</a> --}}
             </div>
-            {{-- <a href="{{ route('vendor.bank-account.create') }}" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800" >Create</a> --}}
         </div>
-    </div>
-    <div class="mt-6 flex flex-col space-y-4 min-h-screen">
-        <!-- Table Layout for Larger Screens -->
-        <div class="">
-            <div class="overflow-x-auto">
-                <div class="inline-block min-w-full align-middle">
-                    <div class="overflow-hidden border border-gray-200 md:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Bank Account</th>
-                                    <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Description</th>
-                                    <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Reference</th>
-                                    <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Amount</th>
-                                    <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Date</th>
-                                    {{-- <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Action</th> --}}
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200 bg-white">
-                                @if($transactions->isEmpty())
+        <div class="mt-6 flex flex-col space-y-4 min-h-screen">
+            <!-- Table Layout for Larger Screens -->
+            <div class="">
+                <div class="overflow-x-auto">
+                    <div class="inline-block min-w-full align-middle">
+                        <div class="overflow-hidden border border-gray-200 md:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
                                     <tr>
-                                        <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4" colspan="9">No Bank Transactions</td>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Bank Account</th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Note</th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Reference</th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Deductions</th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Amount</th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Payment Date</th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Status</th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Date</th>
+                                        {{-- <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Action</th> --}}
                                     </tr>
-                                @endif
-                                @foreach($transactions as $item)
-                                <tr>
-                                    <td class="whitespace-nowrap px-2 py-2 text-sm sm:px-4 sm:py-2">
-                                        <div class="font-medium">
-                                            {{ $item->bankAccount->bank->name }}
-                                        </div>
-                                        <div>
-                                            {{ $item->bankAccount->iban }}
-                                        </div>
-                                    </td>
-                                    <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
-                                        {{ $item->description }}
-                                    </td>
-                                    <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
-                                        {{ $item->reference }}
-                                    </td>
-                                    <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
-                                        {{ $item->amount }}
-                                    </td>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    @if ($transactions->isEmpty())
+                                        <tr>
+                                            <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4" colspan="9">
+                                                No Bank Transactions</td>
+                                        </tr>
+                                    @endif
+                                    @foreach ($transactions as $item)
+                                        <tr>
+                                            <td class="whitespace-nowrap px-2 py-2 text-sm sm:px-4 sm:py-2">
+                                                <div class="font-medium">
+                                                    {{ $item->bankAccount->bank->name }}
+                                                </div>
+                                                <div>
+                                                    {{ $item->bankAccount->iban }}
+                                                </div>
+                                            </td>
+                                            <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                                {{ $item->note }}
+                                            </td>
+                                            <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                                {{ $item->reference }}
+                                            </td>
+                                            <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                                {{ $item->deduction }}
+                                            </td>
+                                            <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                                {{ $item->amount }}
+                                            </td>
+                                            <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                                {{ $item->payment_date }}
+                                            </td>
 
-                                    <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
-                                        {{ $item->created_at }}
-                                    </td>
-                                    
-                                    {{-- <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-right sm:px-4 sm:py-4 flex">
+                                            <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                                <x-status-chip :status="$item->status" />
+                                            </td>
+
+                                            <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                                {{ $item->created_at }}
+                                            </td>
+
+                                            {{-- <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-right sm:px-4 sm:py-4 flex">
                                          <a href="#" class="text-gray-700 hover:text-blue-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm7.5 0c-.914 3.407-4.104 6-7.5 6s-6.586-2.593-7.5-6c.914-3.407 4.104-6 7.5-6s6.586 2.593 7.5 6z"/>
@@ -79,18 +109,18 @@
                                         </svg>
                                     </a>
                                     </td> --}}
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    {{-- <x-pagging :paginator=$products /> --}}
-    <div class="py-4">
-        {{ $transactions->links() }}
-    </div>
-</section>
+        {{-- <x-pagging :paginator=$products /> --}}
+        <div class="py-4">
+            {{ $transactions->links() }}
+        </div>
+    </section>
 @endsection

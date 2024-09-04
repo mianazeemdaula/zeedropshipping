@@ -15,7 +15,8 @@
                         </div>
                     </form>
                 </div>
-                {{-- <a href="{{ route('vendor.bank-account.create') }}" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800" >Create</a> --}}
+                <a href="{{ route('admin.users.create') }}"
+                    class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">Create</a>
             </div>
         </div>
         <div class="mt-6 flex flex-col space-y-4">

@@ -8,13 +8,13 @@
             <x-icon-state-card title="Team Members" icon="fa-solid fa-users" value="{{ $stats['total_team'] }}" color="green"
                 url="{{ route('admin.user.status', 'dispatcher') }}" />
             <x-icon-state-card title="Dropshippers" icon="fa-solid fa-handshake" value="{{ $stats['total_vendors'] }}"
-                color="blue" url="{{ route('admin.user.status', 'dropshipper') }}" />
+                color="blue" url="{{ route('admin.dropshippers.status', 'dropshipper') }}" />
             <x-icon-state-card title="Inreview Dropshippers" icon="fa-solid fa-handshake"
                 value="{{ $stats['inreview_dropshippers'] }}" color="blue"
-                url="{{ route('admin.user.status', 'inreview') }}" />
+                url="{{ route('admin.dropshippers.status', 'inreview') }}" />
             <x-icon-state-card title="Inactive Dropshippers" icon="fa-solid fa-handshake"
                 value="{{ $stats['inactive_dropshippers'] }}" color="blue"
-                url="{{ route('admin.user.status', 'no-orders-inactive') }}" />
+                url="{{ route('admin.dropshippers.status', 'no-orders-inactive') }}" />
             <x-icon-state-card title="Open Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['open_orders'] }}"
                 color="red" url="{{ route('admin.orders.status', 'open') }}" />
             <x-icon-state-card title="Dispatched Orders" icon="fa-solid fa-cart-shopping"

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address', 255);
             $table->string('phone', 20);
             $table->string('nic',20)->nullable();
+            $table->string('city_name',30)->nullable();
             $table->string('checkout_frequency', 15)->default('weekly');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();

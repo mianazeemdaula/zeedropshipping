@@ -50,6 +50,12 @@
                             Users</a>
                     </li>
                     <li
+                        class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('admin.dropshippers.*')) bg-primary @endif">
+                        <a href="{{ route('admin.dropshippers.index') }}" class="block"><i
+                                class="fa-solid fa-truck mr-2"></i>
+                            Dropshippers</a>
+                    </li>
+                    <li
                         class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('admin.payments.*')) bg-primary @endif">
                         <a href="{{ route('admin.payments.index') }}" class="block"><i class="fa-solid fa-bank mr-2"></i>
                             Payments</a>

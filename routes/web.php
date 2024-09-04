@@ -36,12 +36,16 @@ Route::middleware(['auth','verified'])->group(function () {
             Route::post('categories/search', 'CategoryController@search')->name('categories.search');
             Route::resource('products', 'ProductController');
             Route::post('products/search', 'ProductController@search')->name('products.search');
+            Route::post('products/import', 'ProductController@importProducts')->name('products.import');
             Route::resource('orders', 'OrderController');
             Route::post('orders/search', 'OrderController@search')->name('orders.search');
             Route::get('/orders-status/{status}', 'OrderController@showStatusOrders')->name('orders.status');
             Route::resource('users', 'UserController');
             Route::post('users/search', 'UserController@search')->name('users.search');
+            Route::resource('dropshippers', 'DropShipperController');
+            Route::post('dropshippers/search', 'DropShipperController@search')->name('dropshippers.search');
             Route::get('/users-status/{status}', 'UserController@showStatusUser')->name('user.status');
+            Route::get('/dropshipper-status/{status}', 'DropShipperController@showStatusUser')->name('dropshippers.status');
             Route::resource('shippers', 'ShipperController');
             Route::resource('payments', 'PaymentController');
         });
@@ -93,7 +97,5 @@ Route::post('/reset-password','App\Http\Controllers\AuthController@postResetPass
 
 
 Route::get('/test-api', function(){
-    $user = \App\Models\User::find(1);
-    $status = Mail::to('mazeemrehan@gmail.com')->send(new \App\Mail\AccountStatus($user));
-    return 'email sent';
+    $image = \App\Helper\MediaHelper::url('https://ae-pic-a1.aliexpress-media.com/kf/Sfb172da41f334e608e5260f23fb7dcecN/Bluetooth-5-3-Earphones-True-Wireless-Headphones-with-Mic-Button-Control-Noise-Reduction-Earhooks-Waterproof-Headset.jpg_.webp', 1, 'App\Models\User');
 });

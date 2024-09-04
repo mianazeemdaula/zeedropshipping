@@ -63,11 +63,12 @@ class DropShipperController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'mobile' => 'nullable|string|max:20',
+            'phone' => 'required|string|max:20',
             'status' => 'required|string|in:active,inactive,under-review,blocked,unverified',
-            'role' => 'required|string|exists:roles,name'
+            'role' => 'required|string|exists:roles,name',
+            'city_name' => 'required|string|max:255',
+            'store_url' => 'nullable|string|max:255',
         ]);
-
         
         $user = User::find($id);
         $sendEmail = false;
@@ -77,11 +78,17 @@ class DropShipperController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->mobile = $request->mobile;
         $user->status = $request->status;
         $user->comment = $request->comment;
         $user->syncRoles([$request->role]);
         $user->save();
+        if($user->vendor){
+            $user->vendor->phone = $request->phone;
+            $user->vendor->business_name = $request->business_name;
+            $user->vendor->store_url = $request->store_url;
+            $user->vendor->city_name = $request->city_name;
+            $user->vendor->save();
+        }
         if($sendEmail){
             Mail::to($user->email)->send(new \App\Mail\AccountStatus($user));
         }
@@ -93,7 +100,7 @@ class DropShipperController extends Controller
             if(File::exists($user->avatar)){
                 File::delete($user->avatar);
             }
-            $logoName = time() . '_'.$vendor->id .".". $request->file('avatar')->getClientOriginalExtension();
+            $logoName = time() . '_'.$user->id .".". $request->file('avatar')->getClientOriginalExtension();
             $user->avatar = $request->file('avatar')->storeAs('users', $logoName);
             $user->save();
         }
@@ -112,8 +119,6 @@ class DropShipperController extends Controller
     {
         if($status == 'all'){
             $users = User::where('id', '!=', auth()->id())->paginate();
-        }else if($status == 'dispatcher' || $status == 'dropshipper'){
-            $users = User::role($status)->paginate();
         }else if($status == 'inreview'){
             $users = User::role('dropshipper')->where('status', 'under-review')->paginate();
         }else if($status == 'inactive'){
@@ -125,6 +130,23 @@ class DropShipperController extends Controller
         }else{
             $users = User::where('id', '!=', auth()->id())->paginate();
         }
-        return view('admin.users.index', compact('users'));
+        return view('admin.dropshippers.index', compact('users'));
     }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'required|string|max:255'
+        ]);
+        $users = User::role('dropshipper')->where('name', 'like', '%'.$request->search.'%')
+            ->orWhere('email', 'like', '%'.$request->search.'%')
+            ->orWhere('mobile', 'like', '%'.$request->search.'%')
+            ->orWhereHas('vendor', function($q) use($request){
+                $q->where('business_name', 'like', '%'.$request->search.'%');
+                $q->orWhere('address', 'like', '%'.$request->search.'%');
+                $q->orWhere('ds_number', 'like', '%'.$request->search.'%');
+                $q->orWhere('phone', 'like', '%'.$request->search.'%');
+            })->paginate();
+        return view('admin.dropshippers.index', compact('users'));
+    } 
 }

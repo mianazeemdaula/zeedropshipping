@@ -6,6 +6,7 @@
 /public/users
 /public/vendors
 /public/orders
+/public/payments
 /storage/*.key
 /vendor
 .env

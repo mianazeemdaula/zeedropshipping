@@ -106,5 +106,15 @@ class User extends Authenticatable implements MustVerifyEmail , CanResetPassword
     public function dropShipperNicKyc(){
         return $this->hasOne(UserKycDoc::class)->where('kyc_doc_id',1);
     }
+
+    public function getOrderRatioAttribute()
+    {
+        $totalOrders = $this->orders()->count();
+        $totalCancelled = $this->orders()->where('status','cancelled')->count();
+        if($totalOrders == 0){
+            return 0;
+        }
+        return ($totalCancelled / $totalOrders) * 100;
+    }
     
 }

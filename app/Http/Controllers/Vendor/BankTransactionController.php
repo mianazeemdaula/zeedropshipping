@@ -15,7 +15,8 @@ class BankTransactionController extends Controller
     {
         $accountIds = auth()->user()->bankAccounts->pluck('id');
         $transactions = BankTransaction::whereIn('bank_account_id', $accountIds)->latest()->paginate();
-        return view('vendor.bank-transactions.index', compact('transactions'));
+        $totalPayments = BankTransaction::whereIn('bank_account_id', $accountIds)->where('status', 'completed')->sum('amount');
+        return view('vendor.bank-transactions.index', compact('transactions','totalPayments'));
     }
 
     /**
