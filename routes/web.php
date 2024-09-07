@@ -53,10 +53,13 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::namespace('App\Http\Controllers\Vendor')->middleware(['validprofile'])->group(function() {
         Route::group(['prefix' => 'vendor','as' => 'vendor.'], function() {
-            Route::resource('orders', 'OrderController');        
+            Route::resource('orders', 'OrderController');
+            Route::post('/orders-status/{status}', 'OrderController@showStatusOrder')->name('orders.status');   
             Route::resource('bank-account', 'BankAccountController');
             Route::resource('bank-transactions', 'BankTransactionController');  
+            Route::post('bank-transactions-serach', 'BankTransactionController@search')->name('bank-transactions.search');  
             Route::resource('revenue', 'RevenueController');  
+            Route::post('revenue-search', 'RevenueController@search')->name('revenue.search');
             Route::get('/orders-import', 'App\Http\Controllers\Vendor\OrderController@import');
             Route::get('/orders-status/{status}', 'App\Http\Controllers\Vendor\OrderController@showStatusOrder');
             Route::post('/orders-import', 'App\Http\Controllers\Vendor\OrderController@importStore');
@@ -67,6 +70,8 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::namespace('App\Http\Controllers\Dispatcher')->group(function() {
         Route::group(['prefix' => 'dispatcher','as' => 'dispatcher.'], function() {
             Route::resource('orders', 'OrderController');
+            Route::post('/orders-status/{status}', 'OrderController@showStatusOrder')->name('orders.status');
+            Route::post('/orders-search', 'OrderController@search')->name('orders.search');
             Route::post('/print-orders-label', 'OrderController@printLabel')->name('print.order.label');
             Route::post('/print-orders-stock', 'OrderController@printStcok')->name('print.order.stock');
         });

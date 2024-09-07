@@ -104,7 +104,10 @@
                                                 <x-status-chip :status="$item->status == 1 ? 'active' : 'inactive'" />
                                             </td>
                                             <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
-                                                {{ $item->stock }}
+                                                <div
+                                                    class="@if ($item->stock <= $item->low_stock_report) text-white bg-red-600 rounded-md text-center @endif">
+                                                    {{ $item->stock }}
+                                                </div>
                                             </td>
                                             <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
                                                 {{ $item->sku }}

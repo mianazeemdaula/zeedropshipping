@@ -18,13 +18,14 @@
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     <div class="flex flex-col gap-2">
-                        <x-label>Bank Name</x-label>
-                        <x-select name="dropshipper">
+                        <x-label>Dropshipper(DS ID)</x-label>
+                        <x-input name="dropshipper" />
+                        {{-- <x-select name="dropshipper">
                             <option value="">Select Dropshipper</option>
                             @foreach ($vendors as $dropshipper)
                                 <option value="{{ $dropshipper->id }}">{{ $dropshipper->name }}</option>
                             @endforeach
-                        </x-select>
+                        </x-select> --}}
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-label>Amount</x-label>

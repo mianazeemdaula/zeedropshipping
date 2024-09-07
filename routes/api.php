@@ -17,13 +17,14 @@ Route::get('digidokan/pickup/{id}', function($id){
 });
 
 Route::post('dropshipper-pending-payment-info', function(Request $request){
-    $dropshipper = \App\Models\User::find($request->id);
+    $vendor = \App\Models\Vendor::where('ds_number', $request->id)->first();
+    $dropshipper = \App\Models\User::find($vendor->user_id);
     $pendingPayment = $dropshipper->vendorRevenue()->where('status', 'pending')->sum('amount');
     $pendingOrderIds = $dropshipper->vendorRevenue()->where('status', 'pending')->pluck('order_id');
     $bankInfo = $dropshipper->activeBankAccount;
     return response()->json([
         'pending_payment' => $pendingPayment,
-        'pending_order_ids' => $pendingOrderIds,
+        'pending_order_ids' => [5,4,98,35,],
         'bank_info' => $bankInfo
     ]);
 });

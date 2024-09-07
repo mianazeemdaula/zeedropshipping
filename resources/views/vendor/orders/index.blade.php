@@ -35,7 +35,7 @@
         <form action="{{ route('vendor.orders.store') }}" method="post" class="mt-4 bg-primary-200 rounded-lg p-4">
             @csrf
             <div class="flex items-center justify-between">
-                <div class="flex space-x-2">
+                <div class="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
                     <div class="flex flex-col">
                         <x-label>Start Date</x-label>
                         <input type="date" name="start_date" id="" class="p-1 rounded-md"
@@ -57,6 +57,11 @@
                             <option value="intransit" @if ($status == 'intransit') selected @endif>Intransit</option>
                             <option value="canceled" @if ($status == 'canceled') selected @endif>Canceled</option>
                         </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <x-label>Search</x-label>
+                        <input type="text" name="search" id="" class="p-1 rounded-md"
+                            value="{{ $search ?? '' }}" placeholder="Order ID or #">
                     </div>
                 </div>
                 <div>
@@ -134,8 +139,9 @@
                                                 <a href="{{ route('vendor.orders.show', $item->id) }}"
                                                     class="text-gray-700 hover:text-blue-500"
                                                     aria-label="View details for Order {{ $item->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                        strokeWidth="2">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
                                                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm7.5 0c-.914 3.407-4.104 6-7.5 6s-6.586-2.593-7.5-6c.914-3.407 4.104-6 7.5-6s6.586 2.593 7.5 6z" />
                                                     </svg>

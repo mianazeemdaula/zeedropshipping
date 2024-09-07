@@ -22,10 +22,10 @@
                                     <tr>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
-                                            Order</th>
+                                            Dropshipper</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
-                                            Description</th>
+                                            Pending Orders</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
                                             Last Payment On</th>
@@ -50,15 +50,15 @@
                                                         class="w-10">
                                                 </div>
                                                 <div>
-                                                    {{ $item->name }}
+                                                    {{ $item->vendor->business_name }}
+                                                </div>
+                                                <div>
+                                                    {{ $item->vendor->ds_number ?? 'N/A' }}
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
                                                 <div class="font-semibold">
-                                                    {{ $item->vendor->business_name }}
-                                                </div>
-                                                <div>
-                                                    {{ $item->vendor->phone }}
+                                                    {{ $item->orders()->where('status', 'cancelled')->count() }}
                                                 </div>
                                             </td>
                                             <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">

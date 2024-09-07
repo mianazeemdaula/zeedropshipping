@@ -68,6 +68,12 @@ class PaymentController extends Controller
             'order_ids' => $request->orderids,
         ]);
 
+        // orders revenue status update
+        \App\Models\VendorRevenue::whereIn('order_id', $request->orderids)->update([
+            'status' => 'paid',
+            'paid_at' => now(),
+        ]);
+
         if($request->hasFile('attachment')){
             $invoiceName = time() . '_'.$bankTrans->id .".". $request->file('attachment')->getClientOriginalExtension();
             $bankTrans->invoice = $request->file('attachment')->storeAs('payments', $invoiceName);

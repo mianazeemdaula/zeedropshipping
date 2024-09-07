@@ -65,4 +65,23 @@ class BankTransactionController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'required',
+        ]);
+        $accountIds = auth()->user()->bankAccounts->pluck('id');
+        $transactions = BankTransaction::whereIn('bank_account_id', $accountIds)
+            ->where('reference', 'like', '%'.$request->search.'%')
+            ->orWhere('note', 'like', '%'.$request->search.'%')
+            ->orWhere('amount', 'like', '%'.$request->search.'%')
+            ->orWhere('status', 'like', '%'.$request->search.'%')
+            ->latest()->paginate();
+        $totalPayments = BankTransaction::whereIn('bank_account_id', $accountIds)
+            ->where('status', 'completed')
+            ->sum('amount');
+        $search = $request->search;
+        return view('vendor.bank-transactions.index', compact('transactions','totalPayments','search'));
+    }
 }

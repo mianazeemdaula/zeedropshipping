@@ -103,6 +103,11 @@ class OrderController extends Controller
                 $order->status = 'packed';
                 $order->packed_date = now();
                 $order->packed_user_id = auth()->user()->id;
+                foreach($order->details as $detail){
+                    $product = $detail->product;
+                    $product->stock = $product->stock - $detail->qty;
+                    $product->save();
+                }
             }else if($request->status === 'shipped'){
                 // Send order to digiDokan
                 $shipper = Shipper::find(1);

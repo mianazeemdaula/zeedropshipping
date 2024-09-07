@@ -3,18 +3,21 @@
 @section('content')
     <section class="mx-auto w-full max-w-7xl px-4 py-4">
         <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
-            <div class="flex items-center justify-between min-w-full">
+            <div class="flex items-center justify-between min-w-full bg-white p-4 rounded-lg">
                 <div>
-                    <h2 class="text-lg font-semibold">Payments</h2>
+                    <h2 class="text-lg font-medium">Payments</h2>
+                    <form action="{{ route('vendor.bank-transactions.search') }}" method="post">
+                        @csrf
+                        <div class="flex space-x-2">
+                            <x-input name="search" placeholder="Search users" />
+                            <button type="submit"
+                                class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">Search</button>
+                        </div>
+                    </form>
                 </div>
-
                 <div class="flex flex-col">
                     <span class="font-normal">Total Payout:</span>
                     <span class="bg-primary-500 text-lg px-2 rounded-full text-white"> RS. {{ $totalPayments }}</span>
-                </div>
-
-                <div>
-                    .
                 </div>
                 {{-- <a href="{{ route('vendor.bank-account.create') }}" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800" >Create</a> --}}
             </div>

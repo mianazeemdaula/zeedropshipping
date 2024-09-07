@@ -52,6 +52,12 @@ class OrderController extends Controller
         if($status !== 'all'){
             $orders = $orders->where('status', $status);
         }
+        if($request->has('search')){
+            $orders = $orders->where('order_number', 'like', '%'.$request->search.'%')
+                ->orWhere('customer_name', 'like', '%'.$request->search.'%')
+                ->orWhere('customer_email', 'like', '%'.$request->search.'%')
+                ->orWhere('customer_phone', 'like', '%'.$request->search.'%');
+        }
         $orders = $orders->latest()->paginate();
         $start_date = $request->start_date;
         $end_date = $request->end_date;
@@ -89,6 +95,31 @@ class OrderController extends Controller
         ]);
 
         $order = Order::where('user_id', auth()->id())->findOrFail($id);
+        if($request->has('sku') && $request->status === 'add_product'){
+            $product = Product::where('sku', $request->sku)->first();
+            if(!$product){
+                return back()->with('error', 'Product not found');
+            }
+            $ifExist = $order->details()->where('product_id', $product->id)->first();
+            if($ifExist){
+                $ifExist->qty += 1;
+                $ifExist->save();
+                // update order total
+                $order->total += $product->sale_price * $ifExist->qty;
+                $order->save();
+                return back()->with('success', 'Product added to order successfully');
+            }
+            $order->details()->create([
+                'product_id' => $product->id,
+                'qty' => 1,
+                'price' => $product->sale_price,
+                'ds_price' => $product->sale_price
+            ]);
+            // update order total
+            $order->total += $product->sale_price;
+            $order->save();
+            return back()->with('success', 'Product added to order successfully');
+        }
         if($request->status === 'cancelled'){
             $order->status = 'cancelled';
             $order->canceled_date = now();
@@ -97,44 +128,7 @@ class OrderController extends Controller
             $order->save();
             return redirect()->route('vendor.orders.index')->with('error', 'Order cancelled successfully');
         }
-        if($request->status === 'shipped'){
-            // Send order to digiDokan
-            $digi = new \App\Services\DigiDokan();
-            $response = $digi->getCities([
-                'shipment_type' => 1,
-                'gateway_id' => 3,
-                'courier_bulk' => 1
-            ]);
-            $cities = collect($response->Overnight);
-            // find city
-            $city = $cities->where('city_name', $order->city)->first();
-            $city_id = $city->city_id ?? 1;
-            $res =  $digi->bookShipment([
-               'seller_number' => Helper::parseDigiPhone(env('DIGIDOKAAN_PHONE')),
-               'buyer_number' => Helper::parseDigiPhone($order->customer_phone),
-               'buyer_name' => $order->customer_name,
-               'buyer_address' => $order->shipping_address ?? 'Lahore',
-               'buyer_city' => $city_id,
-               'piece' => 1,
-               'amount' => intval($order->total),
-               'special_instruction' => $order->extra_note,
-               'product_name' => $order->details()->first()->product->name,
-               'store_url' => $order->user->vendor->store_url,
-               'business_name' => $order->user->vendor->business_name,
-               'origin' => 'Lahore',
-               'gateway_id' => 3,
-               'shipper_address' => $order->user->vendor->address,
-               'shipper_name' => $order->user->vendor->business_name,
-               'shipper_phone' => Helper::parseDigiPhone($order->user->vendor->phone),
-               'shipment_type' => 1,
-               'external_reference_no' => $order->order_number,
-               'weight' => 1,
-               'other_product' => $order->details()->count() > 1,
-               'pickup_id' => 5195
-            ]);
-        }
-        // $order->save();
-        // $order->update($request->all());
+        
         return redirect()->route('vendor.orders.index')->with('success', 'Order updated successfully');
     }
 
@@ -193,9 +187,9 @@ class OrderController extends Controller
                 $orderNumers[] = $order['Name'];
                 // add order details to the order
                 $product = Product::where('sku', $order['Lineitem sku'])->first();
-                if(!$product){
-                    continue;
-                }
+                // if(!$product){
+                //     continue;
+                // }
                 if(isset($order['Financial Status']) && strlen($order['Financial Status']) > 0){
                     $orderModel =  Order::create([
                         'user_id' => auth()->id(),

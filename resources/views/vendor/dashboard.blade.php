@@ -6,13 +6,17 @@
             <x-icon-state-card title="Total Sales" icon="fa-solid fa-dollar" value="{{ $stats['total_sales'] }}"
                 color="blue" />
             <x-icon-state-card title="Open Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['open_orders'] }}"
-                color="red" />
+                color="red" :url="route('vendor.orders.status', 'open')" />
             <x-icon-state-card title="Dispatched Orders" icon="fa-solid fa-cart-shopping"
-                value="{{ $stats['dispatched_orders'] }}" color="red" />
+                value="{{ $stats['dispatched_orders'] }}" color="red" :url="route('vendor.orders.status', 'shipped')" />
             <x-icon-state-card title="Canceled Orders" icon="fa-solid fa-cart-shopping"
-                value="{{ $stats['canceled_orders'] }}" color="red" />
+                value="{{ $stats['canceled_orders'] }}" color="red" :url="route('vendor.orders.status', 'cancelled')" />
             <x-icon-state-card title="Intransit Orders" icon="fa-solid fa-cart-shopping"
-                value="{{ $stats['intransit_orders'] }}" color="red" />
+                value="{{ $stats['intransit_orders'] }}" color="red" :url="route('vendor.orders.status', 'intransit')" />
+            <x-icon-state-card title="Total Revenue" icon="fa-solid fa-dollar" value="{{ $stats['total_revenue'] ?? 0 }}"
+                color="red" :url="route('vendor.revenue.index')" />
+            <x-icon-state-card title="Total Payments" icon="fa-solid fa-money-bill"
+                value="{{ $stats['total_payments'] ?? 0 }}" color="red" :url="route('vendor.bank-transactions.index')" />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4 shadow-sm">
