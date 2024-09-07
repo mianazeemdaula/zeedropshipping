@@ -63,7 +63,7 @@
                         </tr>
                         <tr>
                             <td class="py-1">City:</td>
-                            <td class="text-right">{{ $order->user->vendor->city->name }}</td>
+                            <td class="text-right">{{ $order->user->vendor->city_name }}</td>
                         </tr>
                     </table>
                 </div>

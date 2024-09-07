@@ -17,7 +17,13 @@ Route::get('digidokan/pickup/{id}', function($id){
 });
 
 Route::post('dropshipper-pending-payment-info', function(Request $request){
+    return $request->all();
     $vendor = \App\Models\Vendor::where('ds_number', $request->id)->first();
+    if(!$vendor){
+        return response()->json([
+            'message' => 'Dropshipper not found'
+        ], 404);
+    }
     $dropshipper = \App\Models\User::find($vendor->user_id);
     $pendingPayment = $dropshipper->vendorRevenue()->where('status', 'pending')->sum('amount');
     $pendingOrderIds = $dropshipper->vendorRevenue()->where('status', 'pending')->pluck('order_id');

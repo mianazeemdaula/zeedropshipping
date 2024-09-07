@@ -111,6 +111,7 @@
                 });
             }).catch(error => {
                 console.log(error);
+                alert('Error fetching data');
             });
         });
     </script>
