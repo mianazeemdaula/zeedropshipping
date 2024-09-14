@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title', 'ZeeDropShipping')</title>
+    <title>ZeeDropShipping</title>
     <meta name="description" content="">
-    <meta property="og:title" content="@yield('title', 'Zee DropShipping')" />
+    <meta property="og:title" content="Zeed Dropshipping" />
     <meta property="og:url" content="{{ Request::url() }}" />
     <meta property="og:description"
         content="Best-in-industry guides and information while cultivating a positive community." />
     <meta property="og:image" content="https://www.example.com/sample.jpg" />
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         ! function(f, b, e, v, n, t, s) {
@@ -40,222 +39,185 @@
             src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1" /></noscript>
 </head>
 
-<body class="font-calibrifont">
-    <div class="">
-        <div class="bg-secondary-500 text-white text-center py-2 flex-wrap">
-            <div class="text-sm whitespace-nowrap relative overflow-hidden">
-                <div class="inline-block whitespace-nowrap zeemarquee ">
-                    Attention: Please ensure that every product you list includes its Product SKU. Accurate SKUs are
-                    essential for effective inventory management and seamless order processing. Without a SKU, we cannot
-                    guarantee proper tracking and fulfillment of your products.
+<body>
+    <header class="bg-white relative " x-data="{ isSidebarOpen: false }">
+        <div class="flex justify-between items-center px-7 py-3">
+            <a href="{{ url('/') }}">
+                <img src={{ asset('assets/images/Logo.png') }} alt="Logo" class="w-32 h-auto" />
+            </a>
+            <button class="lg:hidden text-2xl" @click="isSidebarOpen =!isSidebarOpen;">
+                {{-- <button class="lg:hidden text-2xl" @click="alert('ASDSDS');"> --}}
+                ☰
+            </button>
+            <div class="hidden lg:flex items-center justify-between gap-7">
+                <nav>
+                    <ul class="flex items-center gap-10 text-[18px]">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">About</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#">Services</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="flex gap-3.5">
+                    @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="border border-gray-400 px-8 py-3 rounded-lg font-medium text-base hover:bg-primary-500 hover:text-white">Dashbaord</a>
+                    @else
+                        <a href="{{ url('/login') }}"
+                            class="border border-gray-400 px-8 py-3 rounded-lg font-medium text-base hover:bg-primary-500 hover:text-white">
+                            Login
+                        </a>
+                        <a href="{{ url('/signup') }}"
+                            class="border border-gray-400 px-8 py-3 rounded-lg font-medium text-base hover:bg-primary-500 hover:text-white">
+                            Sign Up
+                        </a>
+                    @endauth
                 </div>
             </div>
         </div>
-    </div>
-    <header class='my-8 px-4' x-data="{ sidebar: false }">
-        <div class='flex justify-between items-center'>
-            <div class="flex-1">
-                <div class="size-8 lg:hidden cursor-pointer" x-on:click="sidebar = !sidebar">
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-            </div>
-            <div class="flex-1 flex items-center justify-center">
-                <img src="{{ asset('assets/images/Logo.png') }}" alt="Logo" class='h-20' />
-            </div>
 
-            <div class='hidden lg:flex items-center gap-1 flex-1 justify-end'>
-                {{-- <div class='flex items-center p-3 rounded-lg border justify-center'>
-          <i class='fa-solid fa-search text-blue-950' > </i>
-          <input
-            type="text"
-            id='search'
-            name='search'
-            placeholder='Search'
-            class='outline-none border-none text-black ml-2'/>
-        </div> --}}
-                {{-- <a href="{{ url('/login') }}"> <i class="fa-solid fa-user"></i></a> --}}
-                @if (Auth::check())
-                    <a href="{{ url('/dashboard') }}"
-                        class="bg-secondary-600 text-white px-4 py-2 rounded-lg">{{ auth()->user()->name }}</a>
-                @else
-                    <a href="{{ url('/login') }}" class="bg-secondary-600 text-white px-4 py-2 rounded-lg">Login</a>
-                    {{-- Register now button --}}
-                    <a href="{{ url('/signup') }}" class="bg-secondary-600 text-white px-4 py-2 rounded-lg">Register
-                        Now</a>
-                @endif
-            </div>
-        </div>
-
-        {{-- <div class='mx-4 my-24 flex items-center p-3 rounded-lg border lg:hidden'>
-      <i class='fa-solid fa-search'> </i>
-      <input
-        type="text"
-        id='search'
-        name='search'
-        placeholder='Search'
-        class='outline-none  text-black ml-2 transition'
-      />
-    </div> --}}
-        <aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 bg-white"
-            x-show="sidebar">
-            <div class="flex justify-between items-center p-4">
-                <img src="{{ asset('assets/images/Logo2.png') }}" alt="Logo" class='w-20 h-12 object-fill' />
-                <div class="size-8 cursor-pointer" x-on:click="sidebar = !sidebar">
-                    <i class="fa-solid fa-times"></i>
-                </div>
-            </div>
-            <nav class="p-4">
-                <ul>
+        <div class="fixed top-0 right-0 h-full bg-white shadow-lg transition-transform lg:hidden"
+            :class="isSidebarOpen ? 'translate-x-0' : 'translate-x-full'">
+            <button class="absolute top-4 left-4 text-2xl font-bold" onClick={toggleSidebar}>
+                &times;
+            </button>
+            <nav class="mt-12">
+                <ul class="space-y-6 px-4">
                     <li>
-                        <a href="{{ url('/') }}" class="block py-2">Home</a>
+                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
+                            Home
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ url('/products') }}" class="block py-2">Products</a>
+                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
+                            Home
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ url('/policies') }}" class="block py-2">Policies</a>
+                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
+                            About
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ url('/terms-and-conditions') }}" class="block py-2">Terms & Conditions</a>
+                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
+                            Contact
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ url('/contact') }}" class="block py-2">Contact Us</a>
+                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
+                            Login
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
+                            Signup
+                        </a>
                     </li>
                 </ul>
             </nav>
-        </aside>
-        <nav class="hidden md:block w-full my-8 p-4">
-            <ul class="hidden lg:flex flex-wrap lg:flex-nowrap gap-4 lg:gap-4">
-                <li class="flex-1">
-                    <a
-                        href="{{ url('/') }}"class="block px-8 py-2 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105">
-                        <i class="fa-solid fa-home"></i>
-                        <div class="font-bold">
-                            Home
-                        </div>
-                    </a>
-                </li>
-                <li class="flex-1">
-                    <a href="{{ url('products') }}"
-                        class="block px-8 py-2 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105">
-                        <i class="fa-solid fa-tags"></i>
-                        <div class="font-bold">
-                            Products
-                        </div>
-                    </a>
-                </li>
-                <li class="relative group flex-1">
-                    <a href="{{ url('/policies') }}"
-                        class="block px-8 py-2 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105"><i
-                            class="fa-solid fa-scale-balanced"></i>
-                        <div class="font-bold">
-                            Policies
-                        </div>
-                    </a>
-                </li>
-                <li class="flex-1">
-                    <a href="{{ url('/terms-and-conditions') }}"
-                        class="block px-8 py-2 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105">
-                        <i class="fa-solid fa-file-contract"></i>
-                        <div class="font-bold">
-                            Terms & Conditions
-                        </div>
-                    </a>
-                </li>
-                <li class="flex-1">
-                    <a href="{{ url('/contact') }}"
-                        class="block px-8 py-2 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md transform transition-transform duration-500 hover:scale-105">
-                        <i class="fa-solid fa-address-book "></i>
-                        <div class="font-bold">
-                            Contact Us
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        </div>
     </header>
-    <div class='main md:px-14'>
-        @yield('content')
-    </div>
-
-    <footer class="bg-secondary-500 text-white py-6  md:pt-16 px-12">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-around gap-10 items-start ">
-            <div class="mb-6 md:mb-0">
-                <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Follow Us:</h3>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-white hover:text-secondary-400">
-                        <i class="fa-brands fa-facebook text-2xl"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-secondary-400">
-                        <i class="fa-brands fa-whatsapp text-2xl"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-secondary-400">
-                        <i class="fa-brands fa-instagram text-2xl"></i>
-                    </a>
+    @yield('content')
+    <footer class="bg-secondary-900 px-6 py-10">
+        <div class="flex flex-wrap ">
+            <div class="flex flex-col gap-8 w-full md:w-1/2 lg:w-1/3">
+                <img src={{ asset('assets/images/Logo.png') }} alt="" class="w-full max-w-[300px]" />
+                <p class="text-[16px] text-[#FFFFFF]">
+                    You've reached the end of Collab P, but the journey is just
+                    beginning. Let us be a part of your team and help you develop the
+                    right solution.
+                </p>
+                <div class="flex gap-3 flex-col sm:flex-row">
+                    <button class="px-7 py-3 bg-[#09BAB1] text-white hover:cursor-pointer rounded-lg">
+                        As a Client
+                    </button>
+                    <button class="px-7 py-3 bg-[#09BAB1] text-white hover:cursor-pointer rounded-lg">
+                        As A Service Provider
+                    </button>
                 </div>
             </div>
+            <div class="flex gap-8 w-full md:w-1/2 lg:w-2/3 justify-evenly sm: pt-2">
+                <div class="flex flex-col text-white gap-4">
+                    <h4 class="font-medium text-[20px]">Company</h4>
+                    <ul class="flex flex-col text-[16px] gap-2">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#">Projects</a>
+                        </li>
+                        <li>
+                            <a href="#">Industry</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
 
-            <div class="mb-6 md:mb-0">
-                <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Support</h3>
-                <ul class="space-y-1 text-sm text-start">
-                    <li><a href="{{ url('/policies') }}" class="hover:text-secondary-400">Policies</a></li>
-                    <li><a href="{{ url('/terms-and-conditions') }}" class="hover:text-secondary-400">Terms of
-                            Conditions</a></li>
-                    <li><a href="{{ url('/contact') }}" class="hover:text-secondary-400">Contact Us</a></li>
-                </ul>
-            </div>
+                <div class="flex flex-col text-white gap-4">
+                    <h4 class="font-medium text-[20px]">Community</h4>
+                    <ul class="flex flex-col text-[16px] gap-2">
+                        <li>
+                            <a href="#">Docs</a>
+                        </li>
+                        <li>
+                            <a href="#">Open source</a>
+                        </li>
+                        <li>
+                            <a href="#">Feature</a>
+                        </li>
+                        <li>
+                            <a href="#">Requests</a>
+                        </li>
+                        <li>
+                            <a href="#">Online events</a>
+                        </li>
+                    </ul>
+                </div>
 
-            <div class="mb-6 md:mb-0">
-                <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Powered by</h3>
-                <p class="text-sm text-start">
-                    ZeeDropShipping
-                    <br />
-                    2nd Floor Fazal Trade Center 114-E Gulberg-III
-                    <br />
-                    +92 315-9999547
-                </p>
-            </div>
-        </div>
-
-        <div class="border-t border-blue-800 mt-6 pt-4">
-            <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-xs text-gray-400">&copy; 2024, Zee Dropshipping Powered by
-                    <a href="https://txdevs.com" class="text-white hover:text-secondary-400">TXDevs</a>
-                </p>
-
-                <a href="https://wa.me/923159999547" target="_blank"
-                    class="bg-green-500 flex justify-center fixed bottom-10 right-5 items-center size-12 rounded-full text-white text-sm font-bold py-2 px-4  hover:bg-green-600 mt-4 md:mt-0 z-50 hover:scale-105 hover:animate-pulse">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i>
-                </a>
-
+                <div class="flex flex-col text-white gap-4">
+                    <h4 class="font-medium text-[20px]">Featured Skills</h4>
+                    <ul class="flex flex-col text-[16px] gap-2">
+                        <li>
+                            <a href="#">Software Developers</a>
+                        </li>
+                        <li>
+                            <a href="#">Web Developers</a>
+                        </li>
+                        <li>
+                            <a href="#">Mobile App Developers</a>
+                        </li>
+                        <li>
+                            <a href="#">iOS Developers</a>
+                        </li>
+                        <li>
+                            <a href="#">Node.js Developers</a>
+                        </li>
+                        <li>
+                            <a href="#">PHP Developers</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-[#2BFFF4] border-b border-[#2BFFF4]">
+                                View All
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>
-
-    <script type="module">
-        // function toggleSidebar() {
-        //   const sidebar = document.getElementById('sidebar');
-        //   sidebar.classList.toggle('translate-x-full');
-        //   sidebar.classList.toggle('translate-x-0');
-        // };
-
-        // Function to hide the sidebar
-        function hideSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.add('translate-x-full');
-            sidebar.classList.remove('translate-x-0');
-        };
-
-        // Attach the hideSidebar function to all sidebar links
-        function addLinkClickListeners() {
-            const links = document.querySelectorAll('#sidebar a');
-            links.forEach(link => {
-                link.addEventListener('click', hideSidebar);
-            });
-        };
-        addLinkClickListeners();
-    </script>
-    @yield('scripts')
 </body>
 
 </html>

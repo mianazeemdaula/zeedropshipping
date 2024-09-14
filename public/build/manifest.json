@@ -32,7 +32,7 @@
     "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DLLVxjo7.css",
+    "file": "assets/app-CrI_EreC.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -52,20 +52,8 @@
     "file": "assets/AvenirNextCyr-Regular-DVUnrmNb.woff2",
     "src": "resources/css/fonts/AvenirNextCyr-Regular.woff2"
   },
-  "resources/css/fonts/Calibri-Bold.woff2": {
-    "file": "assets/Calibri-Bold-Bg7EQNSM.woff2",
-    "src": "resources/css/fonts/Calibri-Bold.woff2"
-  },
-  "resources/css/fonts/Calibri-Light.woff2": {
-    "file": "assets/Calibri-Light-D5H3Y-md.woff2",
-    "src": "resources/css/fonts/Calibri-Light.woff2"
-  },
-  "resources/css/fonts/Calibri.woff2": {
-    "file": "assets/Calibri-B-_XUaLm.woff2",
-    "src": "resources/css/fonts/Calibri.woff2"
-  },
   "resources/js/app.js": {
-    "file": "assets/app-BjhzyA5R.js",
+    "file": "assets/app-DNQ5moY4.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

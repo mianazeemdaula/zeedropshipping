@@ -110,4 +110,10 @@ class OrderController extends Controller
         ->orWhere('customer_phone', 'like', '%'.$search.'%')->get();
         return view('admin.orders.index', compact('orders'));
     }
+
+    public function export(Request $request)
+    {
+        $ids = $request->export_ids;
+        return (new \App\Exports\OrderExport(explode(",",$ids)))->download('orders.xlsx');
+    }
 }

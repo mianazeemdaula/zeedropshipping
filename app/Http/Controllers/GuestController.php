@@ -13,7 +13,7 @@ class GuestController extends Controller
             ['image' => 'assets/images/female-avatar.png', 'name' => 'Sara Khan - Karachi', 'comment' => 'I’ve tried other platforms, but Zee Dropshipping stands out with its quality assurance and twice-a-week payments. It’s given me the confidence to scale my business, and I couldn’t be happier with the results!'],
             ['image' => 'assets/images/male-avatar.png', 'name' => 'Bilal Ahmed - Sahiwal', 'comment' => 'The exclusive product requests and automated order processing have been game-changers for me. Zee Dropshipping’s system is efficient and user-friendly, which has significantly improved my business operations.'],
             ['image' => 'assets/images/female-avatar.png', 'name' => 'Fatima Malik - Bahawalpur', 'comment' => 'Nationwide delivery through multiple logistic partners has been a huge advantage for my business. Zee Dropshipping has made it easy to reach customers all over Pakistan with fast and reliable service.'],
-            ['image' => 'assets/images/female-avatar.png', 'name' => 'Fareeha Jabeen - Rawalpindi', 'comment' => 'Zee Dropshipping has been instrumental in scaling my business. Their commitment to quality and timely deliveries is unmatched. The support team is always ready to assist, making the entire process smooth and efficient. Definitely a top choice for dropshipping!'],
+            // ['image' => 'assets/images/female-avatar.png', 'name' => 'Fareeha Jabeen - Rawalpindi', 'comment' => 'Zee Dropshipping has been instrumental in scaling my business. Their commitment to quality and timely deliveries is unmatched. The support team is always ready to assist, making the entire process smooth and efficient. Definitely a top choice for dropshipping!'],
             ['image' => 'assets/images/male-avatar.png', 'name' => 'Omar Khan - Peshawar', 'comment' => 'Working with Zee Dropshipping has been a great experience. Their attention to detail and fast order fulfillment have exceeded my expectations. The ease of integration with Shopify and their reliable service make them a standout partner in the dropshipping world.'],
         ];
 
@@ -32,7 +32,7 @@ class GuestController extends Controller
             ['icon' => 'fa-solid fa-money-check', 'text' => 'Fast & Secure Payment Processing'],
             
         ];
-        return view('guest.index', compact('dropshippersSays', 'whyChoozeZee'));
+        return view('web.index', compact('dropshippersSays', 'whyChoozeZee'));
     }
 
     public function termsAndConditions()

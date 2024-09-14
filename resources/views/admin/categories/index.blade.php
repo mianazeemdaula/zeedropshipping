@@ -3,7 +3,7 @@
 @section('content')
     <section class="mx-auto w-full max-w-7xl px-4 py-4">
         <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
-            <div class="flex items-center justify-between min-w-full bg-white p-2 rounded-lg">
+            <div class="flex items-end justify-between min-w-full bg-white p-2 rounded-lg">
                 <div>
                     <h2 class="text-lg font-medium">Categories</h2>
                     <form action="{{ route('admin.categories.search') }}" method="post">
@@ -15,8 +15,17 @@
                         </div>
                     </form>
                 </div>
-                <a href="{{ route('admin.categories.create') }}"
-                    class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">Create</a>
+
+                <div class="flex gap-2">
+                    <a href="{{ route('admin.categories.create') }}"
+                        class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">Create</a>
+                    <form action="{{ route('admin.categories.export') }}" method="post">
+                        @csrf
+                        <button type="submit" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">
+                            <i class="fa fa-file-excel"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="mt-6 flex flex-col space-y-4">

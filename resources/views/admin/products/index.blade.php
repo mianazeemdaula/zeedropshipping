@@ -29,6 +29,12 @@
                             </div>
                         </form>
                     </x-modal>
+                    <form action="{{ route('admin.products.export') }}" method="post">
+                        @csrf
+                        <button type="submit" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">
+                            <i class="fa fa-file-excel"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

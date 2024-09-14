@@ -149,4 +149,9 @@ class DropShipperController extends Controller
             })->paginate();
         return view('admin.dropshippers.index', compact('users'));
     } 
+
+    public function export()
+    {
+        return (new \App\Exports\DropshipperExport)->download('dropshippers.xlsx');
+    }
 }

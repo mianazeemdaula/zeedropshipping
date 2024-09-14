@@ -12,6 +12,7 @@ use App\Models\PaymentMethod;
 use App\Models\Shipper;
 use Carbon\Carbon;
 use App\Helper\Helper;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -233,5 +234,11 @@ class OrderController extends Controller
             }
         }
         return redirect()->route('vendor.orders.index')->with('success', "Orders ".count($orderNumers)." imported successfully");
+    }
+
+    public function export(Request $request)
+    {
+        $ids = $request->export_ids;
+        return Excel::download(new \App\Exports\OrderExport(explode(",",$ids)), 'orders.xlsx');
     }
 }

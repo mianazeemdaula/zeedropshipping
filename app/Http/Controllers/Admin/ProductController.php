@@ -215,4 +215,8 @@ class ProductController extends Controller
         }
         return redirect()->route('admin.products.index')->with('success', 'Products imported successfully');
     }
+
+    public function export(){
+        return (new \App\Exports\ProductExport)->download('products.xlsx');
+    }
 }

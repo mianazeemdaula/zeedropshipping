@@ -27,8 +27,13 @@
                         </div>
                     </form>
                 </x-modal>
-                {{-- <a href="{{ route('vendor.orders.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Create Order</a> --}}
-                {{-- <a href="{{ url('vendor/orders-import') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Import Shopify</a> --}}
+                <form action="{{ route('vendor.orders.export') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="export_ids">
+                    <button type="submit" class="px-3 py-3 text-white bg-black rounded-lg hover:bg-gray-800">
+                        <i class="fa fa-file-excel"></i>
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -228,7 +233,7 @@
 @endsection
 
 @section('js')
-    <script>
+    <script type="module">
         const modalToggles = document.querySelectorAll('[data-modal-toggle]');
         const modalCloses = document.querySelectorAll('[data-modal-hide]');
         const modal = document.getElementById('default-modal');
@@ -248,4 +253,11 @@
                 document.body.classList.remove('overflow-hidden');
             });
         });
+
+        // on document loaded
+        $(document).ready(function() {
+            var ids = @json($orders->pluck('id'));
+            $('input[name="export_ids"]').val(ids);
+        });
     </script>
+@endsection

@@ -15,6 +15,14 @@
                         </div>
                     </form>
                 </div>
+                <div>
+                    <form action="{{ route('admin.dropshippers.export') }}" method="post">
+                        @csrf
+                        <button type="submit" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">
+                            <i class="fa fa-file-excel"></i>
+                        </button>
+                    </form>
+                </div>
                 {{-- <a href="{{ route('vendor.bank-account.create') }}" class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800" >Create</a> --}}
             </div>
         </div>

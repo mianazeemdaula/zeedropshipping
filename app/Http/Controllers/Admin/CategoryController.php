@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Helper\MediaHelper;
 use Illuminate\Support\Facades\File;
+use App\Exports\CategoryExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -104,5 +106,9 @@ class CategoryController extends Controller
         $search = $request->search;
         $categories = Category::where('name', 'like', '%'.$search.'%')->paginate(10);
         return view('admin.categories.index', compact('categories','search'));
+    }
+
+    public function export(){
+        return Excel::download(new CategoryExport, 'categories.xlsx');
     }
 }

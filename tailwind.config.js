@@ -1,15 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
+  content: {
+    files : [
+      "./resources/**/*.blade.php",
+      "./resources/**/*.js",
+      "./resources/**/*.vue",
+    ],
+    transformrelative: true,
+    transform: (content) => content.replace(/taos:/g, ''),
+  },
   theme: {
     extend: {
       fontFamily: {
         'zeefont': ['zeefont', 'sans-serif'],
         'calibrifont': ['calibrifont', 'sans-serif'],
+        'Caveat': ['Caveat', 'cursive'],
       },
       colors: {
         'primary': {
@@ -40,8 +45,56 @@ export default {
         print: { raw: 'print' },
         screen: { raw: 'screen' },
       },
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateX(-10px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        slideIn: {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: ' translateX(0)', opacity: '1' },
+        },
+        slideOut: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-28px)' },
+        },
+        fadeInUp2: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        textDown: {
+          '0%': { opacity: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        textUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        fadeInUp: 'fadeInUp 1.5s linear forwards',
+        fadeInUp2: 'fadeInUp2 1.5s linear forwards',
+        slideIn: 'slideIn 5s linear  ',
+        textDown: 'textDown 1s ease-out',
+        textUp: 'textUp 1s ease-out forwards',
+        animation: ' slideOut 2s ease-out forwards'
+      },
+      animationDirection: {
+        'alternate': 'alternate',
+        'reverse': 'reverse',
+        'normal': 'normal',
+        'initial': 'initial',
+        'inherit': 'inherit'
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('taos/plugin')
+  ],
+  safelist: [
+    '!duration-[0ms]',
+    '!delay-[0ms]',
+    'html.js :where([class*="taos:"]:not(.taos-init))'
+  ]
 }
 

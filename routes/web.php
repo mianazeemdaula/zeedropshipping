@@ -10,7 +10,7 @@ Route::get('/terms-and-conditions', 'App\Http\Controllers\GuestController@termsA
 Route::get('/policies', 'App\Http\Controllers\GuestController@policies');
 Route::get('/contact', 'App\Http\Controllers\GuestController@contact');
 Route::get('/products', function () {
-    $categoreis = \App\Models\Category::all();
+    $categoreis = \App\Models\Category::whereHas('products')->get();
     return view('guest.products', compact('categoreis'));
 });
 
@@ -34,16 +34,20 @@ Route::middleware(['auth','verified'])->group(function () {
         Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
             Route::resource('categories', 'CategoryController');
             Route::post('categories/search', 'CategoryController@search')->name('categories.search');
+            Route::post('categories/export', 'CategoryController@export')->name('categories.export');
             Route::resource('products', 'ProductController');
             Route::post('products/search', 'ProductController@search')->name('products.search');
             Route::post('products/import', 'ProductController@importProducts')->name('products.import');
+            Route::post('products/export', 'ProductController@export')->name('products.export');
             Route::resource('orders', 'OrderController');
             Route::post('orders/search', 'OrderController@search')->name('orders.search');
+            Route::post('orders/export', 'OrderController@export')->name('orders.export');
             Route::get('/orders-status/{status}', 'OrderController@showStatusOrders')->name('orders.status');
             Route::resource('users', 'UserController');
             Route::post('users/search', 'UserController@search')->name('users.search');
             Route::resource('dropshippers', 'DropShipperController');
             Route::post('dropshippers/search', 'DropShipperController@search')->name('dropshippers.search');
+            Route::post('dropshippers/export', 'DropShipperController@export')->name('dropshippers.export');
             Route::get('/users-status/{status}', 'UserController@showStatusUser')->name('user.status');
             Route::get('/dropshipper-status/{status}', 'DropShipperController@showStatusUser')->name('dropshippers.status');
             Route::resource('shippers', 'ShipperController');
@@ -54,6 +58,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::namespace('App\Http\Controllers\Vendor')->middleware(['validprofile'])->group(function() {
         Route::group(['prefix' => 'vendor','as' => 'vendor.'], function() {
             Route::resource('orders', 'OrderController');
+            Route::post('orders/export', 'OrderController@export')->name('orders.export');
             Route::post('/orders-status/{status}', 'OrderController@showStatusOrder')->name('orders.status');   
             Route::resource('bank-account', 'BankAccountController');
             Route::resource('bank-transactions', 'BankTransactionController');  
