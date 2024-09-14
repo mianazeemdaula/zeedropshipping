@@ -124,7 +124,7 @@
                                 srcset="" class="object-cover rounded-md w-full">
                         </div>
                         <div class="p-2">
-                            <div class="flex items-center justify-between text-xs">
+                            <div class="flex flex-col md:flex-row items-center justify-between  text-xs">
                                 <div class="text-slate-300 uppercase font-semibold">ELECTRONICS</div>
                                 <div>
                                     <i class="fa-solid fa-star text-yellow-400"></i>
