@@ -6,27 +6,12 @@
     @endphp
     <div class="flex-1 delay-[300ms] duration-[1500ms]  taos:translate-x-[{{ $px }}px] taos:opacity-0"
         data-taos-offset="200">
-        <h1 class="text-3xl font-bold font-Caveat text-primary-500">{{ $titel ?? 'About Us' }}</h1>
-        <p class="text-base text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod
-            tempor incididunt
-            ut labore et dolore magna aliqua.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua.
+        <h1 class="text-3xl font-bold font-Caveat text-primary-500">{{ $title ?? 'About Us' }}</h1>
+        <p class="text-base text-justify">
         </p>
+        {{ $slot }}
     </div>
-    <div class="flex-1 hidden md:block lg:block">
+    <div class="w-5/12  hidden md:block lg:block">
         <div class="duration-[800ms] taos:[transform:perspective(2500px)_rotateX(-100deg)] taos:invisible taos:[backface-visibility:hidden] h-40 w-full"
             data-taos-offset="200">
             <img src="https://arkdin-nextjs.vercel.app/_next/image?url=%2Fassets%2Fimg%2Fhero_img_1.png&w=1080&q=75"

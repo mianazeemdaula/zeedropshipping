@@ -9,12 +9,10 @@ class GuestController extends Controller
     public function index()
     {
         $dropshippersSays = [
-            ['image' => 'assets/images/male-avatar.png', 'name' => 'Ali Raza - Lahore', 'comment' => 'Zee Dropshipping has transformed my business. The same-day dispatch and reliable logistics have helped me increase customer satisfaction and boost sales. The support team is always available, making the whole process smooth and stress-free.'],
-            ['image' => 'assets/images/female-avatar.png', 'name' => 'Sara Khan - Karachi', 'comment' => 'I’ve tried other platforms, but Zee Dropshipping stands out with its quality assurance and twice-a-week payments. It’s given me the confidence to scale my business, and I couldn’t be happier with the results!'],
-            ['image' => 'assets/images/male-avatar.png', 'name' => 'Bilal Ahmed - Sahiwal', 'comment' => 'The exclusive product requests and automated order processing have been game-changers for me. Zee Dropshipping’s system is efficient and user-friendly, which has significantly improved my business operations.'],
-            ['image' => 'assets/images/female-avatar.png', 'name' => 'Fatima Malik - Bahawalpur', 'comment' => 'Nationwide delivery through multiple logistic partners has been a huge advantage for my business. Zee Dropshipping has made it easy to reach customers all over Pakistan with fast and reliable service.'],
-            // ['image' => 'assets/images/female-avatar.png', 'name' => 'Fareeha Jabeen - Rawalpindi', 'comment' => 'Zee Dropshipping has been instrumental in scaling my business. Their commitment to quality and timely deliveries is unmatched. The support team is always ready to assist, making the entire process smooth and efficient. Definitely a top choice for dropshipping!'],
-            ['image' => 'assets/images/male-avatar.png', 'name' => 'Omar Khan - Peshawar', 'comment' => 'Working with Zee Dropshipping has been a great experience. Their attention to detail and fast order fulfillment have exceeded my expectations. The ease of integration with Shopify and their reliable service make them a standout partner in the dropshipping world.'],
+            ['image' => 'assets/images/female-avatar.png', 'name' => 'Aisha Khan - Lahore', 'comment' => "Joining Zee Dropshipping has transformed my business. The exclusive products and twice-a-week payments have been game-changers. It's the best decision I've made for scaling my dropshipping!"],
+            ['image' => 'assets/images/male-avatar.png', 'name' => 'Ahmed Shahid - Karachi', 'comment' => "The level of support and quality assurance at Zee Dropshipping is unmatched. The streamlined order process and same-day dispatch have taken my sales to new heights. Highly recommend!"],
+            ['image' => 'assets/images/female-avatar.png', 'name' => 'Fatima Ali - Bahawalpur', 'comment' => "Zee Dropshipping's unique benefits, like the luxury Dubai tour incentive, and their exceptional service have made them my go-to partner. It's been an incredible experience with unmatched growth."],
+            ['image' => 'assets/images/male-avatar.png', 'name' => 'Bilal Rizvi - Peshawar', 'comment' => "The integration with Shopify and the wide range of tested products offered by Zee Dropshipping have made managing my store easier than ever. Their commitment to dropshipper success is evident in everything they do."],
         ];
 
         $whyChoozeZee = [
@@ -37,7 +35,7 @@ class GuestController extends Controller
 
     public function termsAndConditions()
     {
-        return view('guest.terms-and-conditions');
+        return view('web.terms');
     }
 
     public function policies()
@@ -48,5 +46,10 @@ class GuestController extends Controller
     public function contact()
     {
         return view('guest.contact');
+    }
+
+    public function about()
+    {
+        return view('web.about');
     }
 }

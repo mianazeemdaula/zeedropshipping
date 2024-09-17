@@ -39,185 +39,144 @@
             src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1" /></noscript>
 </head>
 
-<body>
-    <header class="bg-white relative " x-data="{ isSidebarOpen: false }">
-        <div class="flex justify-between items-center px-7 py-3">
-            <a href="{{ url('/') }}">
-                <img src={{ asset('assets/images/Logo.png') }} alt="Logo" class="w-32 h-auto" />
-            </a>
-            <button class="lg:hidden text-2xl" @click="isSidebarOpen =!isSidebarOpen;">
-                {{-- <button class="lg:hidden text-2xl" @click="alert('ASDSDS');"> --}}
-                ☰
-            </button>
-            <div class="hidden lg:flex items-center justify-between gap-7">
-                <nav>
-                    <ul class="flex items-center gap-10 text-[18px]">
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li>
-                            <a href="#">About</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact</a>
-                        </li>
-                        <li>
-                            <a href="#">Services</a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="flex gap-3.5">
-                    @auth
-                        <a href="{{ url('/dashboard') }}"
-                            class="border border-gray-400 px-8 py-3 rounded-lg font-medium text-base hover:bg-primary-500 hover:text-white">Dashbaord</a>
-                    @else
-                        <a href="{{ url('/login') }}"
-                            class="border border-gray-400 px-8 py-3 rounded-lg font-medium text-base hover:bg-primary-500 hover:text-white">
-                            Login
-                        </a>
-                        <a href="{{ url('/signup') }}"
-                            class="border border-gray-400 px-8 py-3 rounded-lg font-medium text-base hover:bg-primary-500 hover:text-white">
-                            Sign Up
-                        </a>
-                    @endauth
+<body class="font-zeefont bg-gray-100">
+    <header class="bg-gray-700 md:hidden px-4" x-data={sidebar:false}>
+        <div class='flex justify-between items-center'>
+            <div class="flex-1">
+                <div class="size-8 lg:hidden cursor-pointer" x-on:click="sidebar = !sidebar">
+                    <i class="fa-solid fa-bars text-white"></i>
                 </div>
             </div>
+            <div class="flex-1 flex items-center justify-end p-2">
+                <img src="{{ asset('assets/images/Logo2.png') }}" alt="Logo" class='h-10 object-cover' />
+            </div>
         </div>
-
-        <div class="fixed top-0 right-0 h-full bg-white shadow-lg transition-transform lg:hidden"
-            :class="isSidebarOpen ? 'translate-x-0' : 'translate-x-full'">
-            <button class="absolute top-4 left-4 text-2xl font-bold" onClick={toggleSidebar}>
-                &times;
-            </button>
-            <nav class="mt-12">
-                <ul class="space-y-6 px-4">
-                    <li>
-                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                            About
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                            Contact
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                            Login
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" x-on:click="isSidebarOpen = !isSidebarOpen" class="block text-xl">
-                            Signup
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 animate-textUp bg-white"
+            x-show="sidebar">
+            <div class="p-4">
+                <div class="size-8 cursor-pointer" x-on:click="sidebar = !sidebar">
+                    <i class="fa-solid fa-times"></i>
+                </div>
+                {{-- create the menu here --}}
+                <div class="flex flex-col space-y-4 mt-4">
+                    <a href="{{ url('/') }}"
+                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Home</a>
+                    <a href="{{ url('/products') }}"
+                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Products</a>
+                    <a href="{{ url('/about') }}"
+                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">About</a>
+                    <a href="{{ url('/contact') }}"
+                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Contact
+                        Us</a>
+                    <a href="{{ url('/policies') }}"
+                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Policies</a>
+                    {{-- authenticaion routes here  --}}
+                    @if (Auth::check())
+                        <div class="">
+                            <img src="{{ asset('/users/default.png') }}" alt="" srcset=""
+                                class="size-8 rounded-full">
+                        </div>
+                    @else
+                        <div class="border-b"></div>
+                        <a href="{{ url('/login') }}"
+                            class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Login</a>
+                        <a href="{{ url('/signup') }}"
+                            class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Register</a>
+                    @endif
+                </div>
+        </aside>
+    </header>
+    <header class="bg-gray-700 md:flex items-center justify-between hidden">
+        <div class="px-4">
+            <img src="{{ asset('assets/images/Logo.png') }}" alt="" srcset="" class="h-10 object-cover">
+        </div>
+        <div class="flex-1 p-4 flex items-center justify-center text-white">
+            <a href="{{ url('/') }}"
+                class="px-3 py-2 hover:bg-primary-600 duration-200 hover:animate-pulse rounded-md">Home</a>
+            <a href="{{ url('/products') }}"
+                class="px-3 py-2 hover:bg-primary-600 duration-200 hover:animate-pulse rounded-md">Products</a>
+            <a href="{{ url('/about') }}"
+                class="px-3 py-2 hover:bg-primary-600 duration-200 hover:animate-pulse rounded-md">About</a>
+            <a href="{{ url('/contact') }}"
+                class="px-3 py-2 hover:bg-primary-600 duration-200 hover:animate-pulse rounded-md">Contact
+                Us</a>
+            <a href="{{ url('/policies') }}"
+                class="px-3 py-2 hover:bg-primary-600 duration-200 hover:animate-pulse rounded-md">Policies</a>
+        </div>
+        <div class="flex justify-end bg-primary-600 rounded-l-md">
+            <div class="flex items-center text-white justify-center uppercase">
+                @if (Auth::check())
+                    <div class="">
+                        <img src="{{ asset('/users/default.png') }}" alt="" srcset="" class="size-8 ">
+                    </div>
+                @else
+                    <a href="{{ url('/login') }}"
+                        class="px-3 py-2 w-20 duration-200 hover:animate-pulse h-full">Login</a>
+                    <div class="border-r h-8 border-white"></div>
+                    <a href="{{ url('/signup') }}"
+                        class="px-3 py- duration-200 hover:animate-pulse rounded-md">Register</a>
+                @endif
+            </div>
         </div>
     </header>
     @yield('content')
-    <footer class="bg-secondary-900 px-6 py-10">
-        <div class="flex flex-wrap ">
-            <div class="flex flex-col gap-8 w-full md:w-1/2 lg:w-1/3">
-                <img src={{ asset('assets/images/Logo.png') }} alt="" class="w-full max-w-[300px]" />
-                <p class="text-[16px] text-[#FFFFFF]">
-                    You've reached the end of Collab P, but the journey is just
-                    beginning. Let us be a part of your team and help you develop the
-                    right solution.
-                </p>
-                <div class="flex gap-3 flex-col sm:flex-row">
-                    <button class="px-7 py-3 bg-[#09BAB1] text-white hover:cursor-pointer rounded-lg">
-                        As a Client
-                    </button>
-                    <button class="px-7 py-3 bg-[#09BAB1] text-white hover:cursor-pointer rounded-lg">
-                        As A Service Provider
-                    </button>
+
+    <footer class="bg-white pt-6 md:pt-4 px-12">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-around gap-10 items-start delay-[300ms] duration-[600ms] taos:translate-y-[50px] taos:opacity-0"
+            data-taos-offset="50">
+            <div class="mb-6 md:mb-0">
+                <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Follow Us:</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-primary-400">
+                        <i class="fa-brands fa-facebook text-2xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-primary-400">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    </a>
+                    <a href="#" class=" hover:text-primary-400">
+                        <i class="fa-brands fa-instagram text-2xl"></i>
+                    </a>
                 </div>
             </div>
-            <div class="flex gap-8 w-full md:w-1/2 lg:w-2/3 justify-evenly sm: pt-2">
-                <div class="flex flex-col text-white gap-4">
-                    <h4 class="font-medium text-[20px]">Company</h4>
-                    <ul class="flex flex-col text-[16px] gap-2">
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li>
-                            <a href="#">About Us</a>
-                        </li>
-                        <li>
-                            <a href="#">Projects</a>
-                        </li>
-                        <li>
-                            <a href="#">Industry</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
 
-                <div class="flex flex-col text-white gap-4">
-                    <h4 class="font-medium text-[20px]">Community</h4>
-                    <ul class="flex flex-col text-[16px] gap-2">
-                        <li>
-                            <a href="#">Docs</a>
-                        </li>
-                        <li>
-                            <a href="#">Open source</a>
-                        </li>
-                        <li>
-                            <a href="#">Feature</a>
-                        </li>
-                        <li>
-                            <a href="#">Requests</a>
-                        </li>
-                        <li>
-                            <a href="#">Online events</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="mb-6 md:mb-0">
+                <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Support</h3>
+                <ul class="space-y-1 text-sm text-start">
+                    <li><a href="{{ url('/policies') }}" class="hover:text-primary-400">Policies</a></li>
+                    <li><a href="{{ url('/terms-and-conditions') }}" class="hover:text-primary-400">Terms of
+                            Conditions</a></li>
+                    <li><a href="{{ url('/contact') }}" class="hover:text-primary-400">Contact Us</a></li>
+                </ul>
+            </div>
 
-                <div class="flex flex-col text-white gap-4">
-                    <h4 class="font-medium text-[20px]">Featured Skills</h4>
-                    <ul class="flex flex-col text-[16px] gap-2">
-                        <li>
-                            <a href="#">Software Developers</a>
-                        </li>
-                        <li>
-                            <a href="#">Web Developers</a>
-                        </li>
-                        <li>
-                            <a href="#">Mobile App Developers</a>
-                        </li>
-                        <li>
-                            <a href="#">iOS Developers</a>
-                        </li>
-                        <li>
-                            <a href="#">Node.js Developers</a>
-                        </li>
-                        <li>
-                            <a href="#">PHP Developers</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-[#2BFFF4] border-b border-[#2BFFF4]">
-                                View All
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="mb-6 md:mb-0">
+                <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Powered by</h3>
+                <p class="text-sm text-start">
+                    ZeeDropShipping
+                    <br />
+                    2nd Floor Fazal Trade Center 114-E Gulberg-III
+                    <br />
+                    +92 315-9999547
+                </p>
+            </div>
+        </div>
+
+        <div class="border-t border-primary-800 mt-6 pt-4">
+            <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-xs text-gray-400">&copy; 2024, Zee Dropshipping Powered by
+                    <a href="https://txdevs.com" class="hover:text-primary-400">TXDevs</a>
+                </p>
+
+                <a href="https://wa.me/923159999547" target="_blank"
+                    class="bg-primary-500 flex justify-center fixed bottom-10 right-5 items-center size-12 rounded-full text-white text-sm font-bold py-2 px-4  hover:bg-primary-600 mt-4 md:mt-0 z-50 hover:scale-105 hover:animate-pulse">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                </a>
+
             </div>
         </div>
     </footer>
+    @yield('scripts')
+    <script src="{{ asset('assets/taos.js') }}"></script>
 </body>
 
 </html>

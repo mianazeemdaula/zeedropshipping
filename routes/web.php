@@ -9,6 +9,7 @@ Route::get('/', 'App\Http\Controllers\GuestController@index');
 Route::get('/terms-and-conditions', 'App\Http\Controllers\GuestController@termsAndConditions');
 Route::get('/policies', 'App\Http\Controllers\GuestController@policies');
 Route::get('/contact', 'App\Http\Controllers\GuestController@contact');
+Route::get('/about', 'App\Http\Controllers\GuestController@about');
 Route::get('/products', function () {
     $categoreis = \App\Models\Category::whereHas('products')->get();
     return view('guest.products', compact('categoreis'));

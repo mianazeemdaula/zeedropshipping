@@ -1,79 +1,5 @@
-@extends('layouts.guest')
+@extends('layouts.web')
 @section('content')
-    <header class="bg-white md:hidden px-4" x-data={sidebar:false}>
-        <div class='flex justify-between items-center'>
-            <div class="flex-1">
-                <div class="size-8 lg:hidden cursor-pointer" x-on:click="sidebar = !sidebar">
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-            </div>
-            <div class="flex-1 flex items-center justify-end p-2">
-                <img src="{{ asset('assets/images/Logo2.png') }}" alt="Logo" class='h-10 object-cover' />
-            </div>
-        </div>
-        <aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 animate-textUp bg-white"
-            x-show="sidebar">
-            <div class="p-4">
-                <div class="size-8 cursor-pointer" x-on:click="sidebar = !sidebar">
-                    <i class="fa-solid fa-times"></i>
-                </div>
-                {{-- create the menu here --}}
-                <div class="flex flex-col space-y-4 mt-4">
-                    <a href="#"
-                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Home</a>
-                    <a href="#"
-                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Products</a>
-                    <a href="#"
-                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">About</a>
-                    <a href="#"
-                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Contact
-                        Us</a>
-                    <a href="#"
-                        class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Poclicies</a>
-                    {{-- authenticaion routes here  --}}
-                    @if (Auth::check())
-                        <div class="">
-                            <img src="{{ asset('/users/default.png') }}" alt="" srcset=""
-                                class="size-8 rounded-full">
-                        </div>
-                    @else
-                        <div class="border-b"></div>
-                        <a href="{{ url('/login') }}"
-                            class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Login</a>
-                        <a href="{{ url('/signup') }}"
-                            class="px-3 py-1 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Register</a>
-                    @endif
-                </div>
-        </aside>
-    </header>
-    <header class="bg-white md:flex items-center justify-between hidden">
-        <div class="px-4">
-            <img src="{{ asset('assets/images/Logo.png') }}" alt="" srcset="" class="h-10 object-cover">
-        </div>
-        <div class="flex-1 p-4 flex items-center justify-center">
-            <a href="#" class="px-3 py-2 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Home</a>
-            <a href="#"
-                class="px-3 py-2 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Products</a>
-            <a href="#" class="px-3 py-2 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">About</a>
-            <a href="#" class="px-3 py-2 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Contact
-                Us</a>
-            <a href="#"
-                class="px-3 py-2 hover:bg-primary-100 duration-200 hover:animate-pulse rounded-md">Poclicies</a>
-        </div>
-        <div class="flex justify-end bg-primary-600 rounded-l-md">
-            <div class="flex items-center text-white justify-center uppercase">
-                @if (Auth::check())
-                    <div class="">
-                        <img src="{{ asset('/users/default.png') }}" alt="" srcset="" class="size-8 ">
-                    </div>
-                @else
-                    <a href="{{ url('/login') }}" class="px-3 py-2 w-20 duration-200 hover:animate-pulse h-full">Login</a>
-                    <div class="border-r h-8 border-white"></div>
-                    <a href="{{ url('/signup') }}" class="px-3 py- duration-200 hover:animate-pulse rounded-md">Register</a>
-                @endif
-            </div>
-        </div>
-    </header>
     <div class="swiper h-36 md:h-60 lg:h-96">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
@@ -111,7 +37,19 @@
         </div>
     </div>
 
-    <x-web-content-section :revers="true"></x-web-content-section>
+    <x-web-content-section :revers="true" title="Pakistan’s Top Dropshipping Platform for Instant Business Growth">
+        <p class="text-sm">
+            Elevate your online business with Zee Dropshipping, Pakistan’s most reliable and efficient dropshipping
+            solution. Benefit from same-day dispatch, a wide range of quality products, and exclusive product locking to
+            stay ahead in the market. With our automated order processing and comprehensive support, you can focus on
+            growing your sales while we handle the rest. Join Zee Dropshipping today and transform the way you do
+            e-commerce.
+        </p>
+        <div class="mt-4">
+            <a href="{{ url('/signup') }}" class="bg-primary-500 text-white px-4 py-2 rounded-md hover:bg-primary-600">Get
+                Started</a>
+        </div>
+    </x-web-content-section>
 
     <div class="px-8 py-4">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -146,8 +84,82 @@
         </div>
     </div>
 
-    <x-web-content-section></x-web-content-section>
-    <x-web-content-section :revers="true"></x-web-content-section>
+    <x-web-content-section title="Benefits for Premier Dropshippers">
+        <p class="text-sm my-4">
+            Unlock unparalleled advantages with Zee Dropshipping’s Premier Dropshipper Program. Here's what you get as a
+            premier Dropshipper.
+        </p>
+        <div class="ml-6">
+            <div class="text-primary-500 font-bold">
+                <i class="fa-solid fa-check-square my-4"></i>
+                Exclusive Product Locking:
+            </div>
+            <p class="text-sm my-2">
+                Be the sole seller of top-performing products, reducing competition and increasing your sales potential.
+                This ensures your store stands out with unique offerings that only you can sell.
+            </p>
+            <div class="text-primary-500 font-bold">
+                <i class="fa-solid fa-check-square my-4"></i>
+                Priority Support:
+            </div>
+            <p class="text-sm my-2">
+                Receive rapid assistance from our dedicated team to keep your operations running smoothly. Quick issue
+                resolution helps you avoid disruptions and maintain customer satisfaction.
+            </p>
+            <div class="text-primary-500 font-bold">
+                <i class="fa-solid fa-check-square my-4"></i>
+                Twice-a-Week Payments:
+            </div>
+            <p class="text-sm my-2">
+                Enjoy a steady cash flow with bi-weekly payments, allowing faster reinvestment into your business. This
+                financial flexibility helps in planning and scaling your operations efficiently.
+            </p>
+            <div class="text-primary-500 font-bold">
+                <i class="fa-solid fa-check-square my-4"></i>
+                Early Access to New Product Launches:
+            </div>
+            <p class="text-sm my-2">
+                Get ahead of the competition by offering the latest products to your customers first. Early access means you
+                can
+                attract more customers and boost sales with trendy items.
+            </p>
+        </div>
+    </x-web-content-section>
+    <x-web-content-section :revers="true" title="How It Works
+Step-by-Step Dropshipping Process">
+        <div class="text-primary-500 font-bold mt-4 delay-[300ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="200">
+            <i class="fa-solid fa-check-square my-4"></i>
+            Browse Products:
+        </div>
+        <p class="text-sm my-2 delay-[500ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="200">
+            Discover our extensive catalog of quality-tested products. With just a few clicks, you can find the best
+            products to
+            match your store’s niche.
+        </p>
+        <div class="text-primary-500 font-bold delay-[700ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="200">
+            <i class="fa-solid fa-check-square my-4"></i>
+            Start Selling:
+        </div>
+        <p class="text-sm my-2 delay-[900ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="100">
+            Once you’ve selected your products, list them on your online store. Our seamless Shopify integration makes this
+            process quick and easy, helping you launch in no time.
+        </p>
+
+        <div class="text-primary-500 font-bold delay-[1100ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="100">
+            <i class="fa-solid fa-check-square my-4"></i>We Handle the Rest:
+        </div>
+        <p class="text-sm my-2 delay-[1300ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="100">
+            After a customer places an order, we manage inventory, processing, and shipping. You can relax knowing that we
+            ensure prompt delivery and customer satisfaction.
+        </p>
+
+    </x-web-content-section>
     <div class="px-8 py-10 bg-gray-600">
         <div class="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4">
             <div class="flex items-center space-x-4 p-4 rounded-md justify-start">
@@ -201,14 +213,14 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 px-8 py-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-8 py-4">
         @foreach ($dropshippersSays as $item)
             <div class="delay-[{{ $loop->index + 1 }}00ms] duration-[800ms] taos:translate-y-[200px] taos:opacity-0"
                 data-taos-offset="100">
                 <div
                     class="content relative rounded shadow dark:shadow-gray-700 m-2 p-6 bg-white dark:bg-slate-900 before:content-[''] before:absolute before:start-1/2 before:-bottom-[4px] before:box-border before:border-8 before:rotate-[45deg] before:border-t-transparent before:border-e-white dark:before:border-e-slate-900 before:border-b-white dark:before:border-b-slate-900 before:border-s-transparent before:shadow-testi dark:before:shadow-gray-700 before:origin-top-left">
                     <i class="fa-solid fa-quote-left text-primary-500 text-xl"></i>
-                    <p class="text-slate-400 line-clamp-4">" {{ $item['comment'] }} "</p>
+                    <p class="text-slate-400 line-clamp-5">" {{ $item['comment'] }} "</p>
                     <ul class="list-none mb-0 text-amber-400 mt-3">
                         <li class="inline"><i class="mdi mdi-star"></i></li>
                         <li class="inline"><i class="mdi mdi-star"></i></li>
@@ -225,61 +237,6 @@
             </div>
         @endforeach
     </div>
-
-    <footer class="bg-white pt-6 md:pt-4 px-12">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-around gap-10 items-start delay-[300ms] duration-[600ms] taos:translate-y-[50px] taos:opacity-0"
-            data-taos-offset="100">
-            <div class="mb-6 md:mb-0">
-                <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Follow Us:</h3>
-                <div class="flex space-x-4">
-                    <a href="#" class="hover:text-primary-400">
-                        <i class="fa-brands fa-facebook text-2xl"></i>
-                    </a>
-                    <a href="#" class="hover:text-primary-400">
-                        <i class="fa-brands fa-whatsapp text-2xl"></i>
-                    </a>
-                    <a href="#" class=" hover:text-primary-400">
-                        <i class="fa-brands fa-instagram text-2xl"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="mb-6 md:mb-0">
-                <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Support</h3>
-                <ul class="space-y-1 text-sm text-start">
-                    <li><a href="{{ url('/policies') }}" class="hover:text-primary-400">Policies</a></li>
-                    <li><a href="{{ url('/terms-and-conditions') }}" class="hover:text-primary-400">Terms of
-                            Conditions</a></li>
-                    <li><a href="{{ url('/contact') }}" class="hover:text-primary-400">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <div class="mb-6 md:mb-0">
-                <h3 class="text-primary-600 font-medium mb-2 text-xl text-start">Powered by</h3>
-                <p class="text-sm text-start">
-                    ZeeDropShipping
-                    <br />
-                    2nd Floor Fazal Trade Center 114-E Gulberg-III
-                    <br />
-                    +92 315-9999547
-                </p>
-            </div>
-        </div>
-
-        <div class="border-t border-primary-800 mt-6 pt-4">
-            <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-xs text-gray-400">&copy; 2024, Zee Dropshipping Powered by
-                    <a href="https://txdevs.com" class="hover:text-primary-400">TXDevs</a>
-                </p>
-
-                <a href="https://wa.me/923159999547" target="_blank"
-                    class="bg-primary-500 flex justify-center fixed bottom-10 right-5 items-center size-12 rounded-full text-white text-sm font-bold py-2 px-4  hover:bg-primary-600 mt-4 md:mt-0 z-50 hover:scale-105 hover:animate-pulse">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i>
-                </a>
-
-            </div>
-        </div>
-    </footer>
 @endsection
 
 
