@@ -7,8 +7,6 @@
     <div class="flex-1 delay-[300ms] duration-[1500ms]  taos:translate-x-[{{ $px }}px] taos:opacity-0"
         data-taos-offset="200">
         <h1 class="text-3xl font-bold font-Caveat text-primary-500">{{ $title ?? 'About Us' }}</h1>
-        <p class="text-base text-justify">
-        </p>
         {{ $slot }}
     </div>
     <div class="w-5/12  hidden md:block lg:block">

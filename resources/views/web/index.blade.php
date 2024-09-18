@@ -1,21 +1,13 @@
 @extends('layouts.web')
 @section('content')
-    <div class="swiper h-36 md:h-60 lg:h-96">
+    <div class="swiper h-40 md:h-60 lg:h-96">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            @foreach (range(1, 4) as $item)
+            @foreach (range(1, 6) as $i)
                 <div class="swiper-slide bg-gray-700">
-                    <div class="p-8 md:p-12">
-                        <div>
-                            <div class=" text-white text-xl md:text-4xl font-bold">
-                                Explore the world of Dropshipping
-                            </div>
-                            <div class="text-white text-lg font-Caveat">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptate.
-                            </div>
-                        </div>
-                    </div>
+                    <img src="{{ asset("assets/banners/$i.png") }}" alt="" srcset=""
+                        class="object-cover w-full h-full">
                 </div>
             @endforeach
         </div>
@@ -25,15 +17,17 @@
         <div class="swiper-scrollbar"></div>
     </div>
     <div class="bg-primary-100 my-4">
-        <div class="delay-[100ms] duration-[600ms] taos:[transform:translate3d(0,200px,0)_scale(0.6)] taos:opacity-0 p-4"
-            data-taos-offset="100">
-            <h1 class="text-3xl font-bold text-center font-Caveat text-primary-500">Attention!</h1>
-
-            <p class="text-center text-sm">Please ensure that every product you list includes its Product SKU.
-                Accurate SKUs
-                are essential for effective inventory management and seamless order processing. Without a SKU, we cannot
-                guarantee proper tracking and fulfillment of your products.
-            </p>
+        <div class="relative flex overflow-x-hidden py-4">
+            <div class="animate-marquee whitespace-nowrap">
+                <p class="text-sm px-8">
+                    <i class="font-semibold text-primary-500">Attention</i> Please ensure that every product you list
+                    includes its Product
+                    SKU.
+                    Accurate SKUs are essential for
+                    effective inventory management and seamless order processing. Without a SKU, we cannot
+                    guarantee proper tracking and fulfillment of your products.
+                </p>
+            </div>
         </div>
     </div>
 
