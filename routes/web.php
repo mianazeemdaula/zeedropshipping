@@ -5,7 +5,7 @@ use App\Http\Middleware\EnsureVendorProfileExist;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-Route::get('/', 'App\Http\Controllers\AuthController@signup');
+Route::get('/', 'App\Http\Controllers\GuestController@index');
 Route::get('/terms-and-conditions', 'App\Http\Controllers\GuestController@termsAndConditions');
 Route::get('/policies', 'App\Http\Controllers\GuestController@policies');
 Route::get('/contact', 'App\Http\Controllers\GuestController@contact');

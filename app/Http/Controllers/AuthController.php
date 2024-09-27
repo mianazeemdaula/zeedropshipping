@@ -53,7 +53,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->country_id = 1;
-        $user->status = 'under-review';
+        // $user->status = 'under-review';
         $user->save();
         // logint to the system after signup
         Auth::login($user);
