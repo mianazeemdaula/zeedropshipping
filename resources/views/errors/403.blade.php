@@ -7,7 +7,7 @@
 
 @section('title', __('Forbidden'))
 @section('content')
-    <main class="grid h-screen  place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+    <main class="grid h-screen  place-items-center bg-gray-200 px-6 py-24 sm:py-32 lg:px-8 ">
         <div class="text-center">
             <img src={{ asset('assets/images/Logo.png') }} alt="Zeedropshipping" class="mx-auto mb-8 h-48 w-auto" />
 
