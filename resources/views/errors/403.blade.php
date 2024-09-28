@@ -9,7 +9,7 @@
 @section('content')
     <main class="grid h-screen  place-items-center bg-gray-200 px-6 py-24 sm:py-32 lg:px-8 ">
         <div class="text-center">
-            <img src={{ asset('assets/images/Logo.png') }} alt="Zeedropshipping" class="mx-auto mb-8 h-48 w-auto" />
+            <img src={{ asset('assets/images/Logo.png') }} alt="Zeedropshipping" class="mx-auto mb-8 h-40 w-auto" />
 
             {{-- <p class="mt-2 text-base  tracking-tight text-gray-900 sm:text-2xl">
                 Stop right there!
