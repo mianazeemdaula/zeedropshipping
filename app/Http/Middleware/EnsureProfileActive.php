@@ -22,7 +22,8 @@ class EnsureProfileActive
             }else if($user->status !== 'active') {
                 if($user->status === 'under-review') {
                     auth()->logout();
-                    return abort(403,"You account is under verification pelase wait or check your email for status");
+                    return abort(403,"Thanks for signing up in Zee Dropshipping 
+Your account is under verification please wait or check your email for status");
                 }
                 return abort(403, 'Your account is not active');
             }
