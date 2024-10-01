@@ -12,7 +12,8 @@
             to new heights. Our mission is to provide a hassle-free dropshipping experience, ensuring that you can focus on
             what you do best—selling great products and growing your business.</p>
     </div>
-    <x-web-content-section title="Why Choose Zee Dropshipping?">
+    <x-web-content-section title="Why Choose Zee Dropshipping?" image="{{ asset('assets/images/about.jpg') }}"
+        height="h-[580px]">
         <div class="pt-1 text-sm">
             <i class="font-bold text-primary-500">Wide Range of Quality Products:</i> We offer an extensive selection of
             over

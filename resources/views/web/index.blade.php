@@ -66,28 +66,7 @@
             @foreach ($products as $item)
                 <div class="delay-[{{ $item->index + 1 }}00ms] duration-[800ms] taos:translate-y-[-100px] taos:opacity-0"
                     data-taos-offset="200">
-                    <div class="bg-white rounded-md">
-                        <div class="flex justify-between items-center">
-                            <img src="{{ asset($item->image) }}" alt="" srcset=""
-                                class="object-cover rounded-md w-full min-h-full">
-                        </div>
-                        <div class="p-2">
-                            <div class="flex flex-col md:flex-row items-center justify-between  text-xs">
-                                <div class="text-slate-300 uppercase font-semibold">{{ $item->category->name }}</div>
-                                <div>
-                                    <i class="fa-solid fa-star text-yellow-400"></i>
-                                    <i class="fa-solid fa-star text-yellow-400"></i>
-                                    <i class="fa-solid fa-star text-yellow-400"></i>
-                                    <i class="fa-solid fa-star text-yellow-400"></i>
-                                    <i class="fa-solid fa-star text-yellow-400"></i>
-                                </div>
-                            </div>
-                            <div class="py-2">
-                                <h6 class="text-lg font-semibold line-clamp-2">{{ $item->name }}</h6>
-                                <p class="text-sm text-slate-300 line-clamp-4">{{ $item->description }}</p>
-                            </div>
-                        </div>
-                    </div>
+                    <x-product-card :item="$item"></x-product-card>
                 </div>
             @endforeach
         </div>
@@ -246,6 +225,21 @@ Step-by-Step Dropshipping Process"
                 </div>
             </div>
         @endforeach
+    </div>
+
+    {{-- our logistic companies --}}
+    <div class="px-32 py-4">
+        <div class="flex items-center justify-center my-2 font-Caveat text-4xl text-primary-500 font-medium">
+            Our Logistic Partners
+        </div>
+        <div class="grid grid-col-2 md:grid-cols-3 lg:grid-cols-6 gap-3 items-center">
+            @foreach ([1, 2, 3, 4, 5, 6] as $item)
+                <div class="bg-white flex justify-center items-center p-8 rounded-lg delay-[{{ $loop->index + 1 }}00ms] duration-[800ms] taos:translate-y-[200px] taos:opacity-0"
+                    data-taos-offset="50">
+                    <i class="fa-solid fa-truck"></i>
+                </div>
+            @endforeach
+        </div>
     </div>
 @endsection
 

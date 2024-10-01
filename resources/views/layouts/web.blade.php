@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="flex-1 flex items-center justify-end p-2">
-                <img src="{{ asset('assets/images/Logo2.png') }}" alt="Logo" class='h-10 object-cover' />
+                <img src="{{ asset('assets/images/Logo2.png') }}" alt="Logo" class='h-14 object-cover' />
             </div>
         </div>
         <aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 animate-textUp bg-white"
@@ -88,7 +88,7 @@
     </header>
     <header class="bg-gray-700 md:flex items-center justify-between hidden">
         <div class="px-4">
-            <img src="{{ asset('assets/images/Logo.png') }}" alt="" srcset="" class="h-10 object-cover">
+            <img src="{{ asset('assets/images/Logo.png') }}" alt="" srcset="" class="h-12 object-cover">
         </div>
         <div class="flex-1 p-4 flex items-center justify-center text-white">
             <a href="{{ url('/') }}"

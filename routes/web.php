@@ -12,7 +12,8 @@ Route::get('/contact', 'App\Http\Controllers\GuestController@contact');
 Route::get('/about', 'App\Http\Controllers\GuestController@about');
 Route::get('/products', function () {
     $categoreis = \App\Models\Category::whereHas('products')->get();
-    return view('guest.products', compact('categoreis'));
+    $products = \App\Models\Product::orderBy('id','desc')->take(10)->get();
+    return view('guest.products', compact('categoreis','products'));
 });
 
 // auth routes

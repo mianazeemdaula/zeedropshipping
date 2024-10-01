@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
 
+use App\Models\Bank;
+use App\Models\BankAccount;
+use App\Models\UserKycDoc;
+use Illuminate\Support\Facades\File;
+use App\Models\Vendor;
+
 class AuthController extends Controller
 {
     public function signup()
@@ -20,7 +26,8 @@ class AuthController extends Controller
         if(Auth::check()){
             return redirect()->route('dashboard');
         }
-        return view('auth.signup');
+        $banks = \App\Models\Bank::orderBy('name')->get();
+        return view('auth.signup',compact('banks'));
     }
 
     public function login()
@@ -46,7 +53,18 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'accept_terms' => 'required|in:on'
+            'accept_terms' => 'required|in:on',
+
+            'city_name' => 'required',
+            'phone' => 'required|string|max:255',
+            'business_name' => 'required|string|max:255',
+            'store_url' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'store_logo' => 'nullable|image',
+            'avatar' => 'nullable|image',
+            'account_name' => 'required',
+            'iban' => 'required',
+            
         ]);
         $user = new User();
         $user->name = $request->name;
@@ -58,6 +76,52 @@ class AuthController extends Controller
         // logint to the system after signup
         Auth::login($user);
         $user->assignRole('dropshipper');
+        
+        if($request->hasFile('avatar')) {
+            $avatarName = time() . '_'.$user->id .".". $request->file('avatar')->getClientOriginalExtension();
+            $user->avatar = $request->file('avatar')->storeAs('users', $avatarName);
+            $user->save();
+        }
+        $vendorCount = Vendor::count() + 1;
+        $dsNumber = $vendorCount > 1000 ? $vendorCount : 1000 + $vendorCount;
+        $vendor = $user->vendor()->create([
+            'phone' => $request->phone,
+            'city_id' => 1,
+            'business_name' => $request->business_name,
+            'store_url' => $request->store_url,
+            'address' => $request->address,
+            'ds_number' => 'DS-'.$dsNumber,
+            'city_name' => $request->city_name,
+        ]);
+        if($request->hasFile('store_logo')) {
+            $logoName = time() . '_'.$vendor->id .".". $request->file('store_logo')->getClientOriginalExtension();
+            $vendor->store_logo = $request->file('store_logo')->storeAs('vendors', $logoName);
+            $vendor->save();
+        }
+        if($request->hasFile('cnic')) {
+            $logoName = time() . '_'.$vendor->id .".". $request->file('cnic')->getClientOriginalExtension();
+            $fileName = $request->file('cnic')->storeAs('vendors', $logoName);
+            $kyc = UserKycDoc::where('user_id', $user->id)->where('kyc_doc_id',1)->first();
+            if(!$kyc){
+                $kyc = new UserKycDoc;
+                $kyc->user_id = $user->id;
+                $kyc->kyc_doc_id = 1;
+                $kyc->file = $fileName;
+                $kyc->save();
+            }else{
+                $kyc->file = $fileName;
+                $kyc->status = 'pending';
+                $kyc->save();
+            }
+        }
+        $account = new BankAccount();
+        $account->bank_id = $request->bank_id;
+        $account->user_id = $user->id;
+        $account->account_name = $request->account_name;
+        $account->iban = $request->iban;
+        $account->save();
+        $user->status = 'under-review';
+        $user->save();
         event(new Registered($user));
         return redirect()->route('dashboard');
     }
