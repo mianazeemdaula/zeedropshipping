@@ -12,7 +12,7 @@ class MediaHelper{
         $media->mediable_type = $mediable_type;
         $fileName = time() . '_'.$mediable_id .".". $file->getClientOriginalExtension();
         $media->file_ext = $file->getClientOriginalExtension();
-        $media->file_path = $file->storeAs('media', $fileName);
+        $media->file_path = $file->storeAs('assets/products', $fileName);
         $media->save();
         if(in_array($file->getClientOriginalExtension(),['jpg', 'jpeg', 'png', 'gif'])){
             // make a thumbnail of the image with Intervention Image
