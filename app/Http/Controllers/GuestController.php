@@ -30,7 +30,8 @@ class GuestController extends Controller
             ['icon' => 'fa-solid fa-money-check', 'text' => 'Fast & Secure Payment Processing'],
             
         ];
-        return view('web.index', compact('dropshippersSays', 'whyChoozeZee'));
+        $products = \App\Models\Product::orderBy('id','desc')->take(10)->get();
+        return view('web.index', compact('dropshippersSays', 'whyChoozeZee','products'));
     }
 
     public function termsAndConditions()
