@@ -31,7 +31,23 @@
         </div>
     </div>
 
-    <x-web-content-section :revers="true" title="Pakistan’s Top Dropshipping Platform for Instant Business Growth">
+    <x-web-content-section :revers="true" title="Pakistan’s Top Dropshipping Platform for Instant Business Growth"
+        image="{{ asset('assets/images/home.jpg') }}">
+        <p class="text-sm">
+            Elevate your online business with Zee Dropshipping, Pakistan’s most reliable and efficient dropshipping
+            solution. Benefit from same-day dispatch, a wide range of quality products, and exclusive product locking to
+            stay ahead in the market. With our automated order processing and comprehensive support, you can focus on
+            growing your sales while we handle the rest. Join Zee Dropshipping today and transform the way you do
+            e-commerce.
+        </p><br>
+        <p class="text-sm">
+            Elevate your online business with Zee Dropshipping, Pakistan’s most reliable and efficient dropshipping
+            solution. Benefit from same-day dispatch, a wide range of quality products, and exclusive product locking to
+            stay ahead in the market. With our automated order processing and comprehensive support, you can focus on
+            growing your sales while we handle the rest. Join Zee Dropshipping today and transform the way you do
+            e-commerce.
+        </p>
+        <br>
         <p class="text-sm">
             Elevate your online business with Zee Dropshipping, Pakistan’s most reliable and efficient dropshipping
             solution. Benefit from same-day dispatch, a wide range of quality products, and exclusive product locking to
@@ -78,7 +94,7 @@
         </div>
     </div>
 
-    <x-web-content-section title="Benefits for Premier Dropshippers">
+    <x-web-content-section title="Benefits for Premier Dropshippers" image="{{ asset('assets/images/home2.jpg') }}">
         <p class="text-sm my-4">
             Unlock unparalleled advantages with Zee Dropshipping’s Premier Dropshipper Program. Here's what you get as a
             premier Dropshipper.
@@ -120,7 +136,8 @@
         </div>
     </x-web-content-section>
     <x-web-content-section :revers="true" title="How It Works
-Step-by-Step Dropshipping Process">
+Step-by-Step Dropshipping Process"
+        image="{{ asset('assets/images/home3.jpeg') }}">
         <div class="text-primary-500 font-bold mt-4 delay-[300ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="200">
             <i class="fa-solid fa-check-square my-4"></i>
@@ -214,7 +231,7 @@ Step-by-Step Dropshipping Process">
                 <div
                     class="content relative rounded shadow dark:shadow-gray-700 m-2 p-6 bg-white dark:bg-slate-900 before:content-[''] before:absolute before:start-1/2 before:-bottom-[4px] before:box-border before:border-8 before:rotate-[45deg] before:border-t-transparent before:border-e-white dark:before:border-e-slate-900 before:border-b-white dark:before:border-b-slate-900 before:border-s-transparent before:shadow-testi dark:before:shadow-gray-700 before:origin-top-left">
                     <i class="fa-solid fa-quote-left text-primary-500 text-xl"></i>
-                    <p class="text-slate-400 line-clamp-5">" {{ $item['comment'] }} "</p>
+                    <p class="text-slate-400 text-justify">" {{ $item['comment'] }} "</p>
                     <ul class="list-none mb-0 text-amber-400 mt-3">
                         <li class="inline"><i class="mdi mdi-star"></i></li>
                         <li class="inline"><i class="mdi mdi-star"></i></li>

@@ -103,18 +103,23 @@
             <a href="{{ url('/policies') }}"
                 class="px-3 py-2 hover:bg-primary-600 duration-200 hover:animate-pulse rounded-md">Policies</a>
         </div>
-        <div class="flex justify-end bg-primary-600 rounded-l-md">
-            <div class="flex items-center text-white justify-center uppercase">
+        <div class="flex justify-end rounded-l-md">
+            <div class=" ">
                 @if (Auth::check())
-                    <div class="">
+                    <a class="pr-2 flex space-x-2 items-center justify-center text-white text-sm rounded-l-md bg-primary-600 p-1"
+                        href="{{ route('dashboard') }}">
                         <img src="{{ asset('/users/default.png') }}" alt="" srcset="" class="size-8 ">
-                    </div>
+                        <div>{{ auth()->user()->name }}</div>
+                    </a>
                 @else
-                    <a href="{{ url('/login') }}"
-                        class="px-3 py-2 w-20 duration-200 hover:animate-pulse h-full">Login</a>
-                    <div class="border-r h-8 border-white"></div>
-                    <a href="{{ url('/signup') }}"
-                        class="px-3 py- duration-200 hover:animate-pulse rounded-md">Register</a>
+                    <div
+                        class="flex items-center text-white justify-center rounded-l-md bg-primary-600 uppercase text-sm">
+                        <a href="{{ url('/login') }}"
+                            class="px-3 py-2 w-20 duration-200 hover:animate-pulse h-full">Login</a>
+                        <div class="border-r h-8 border-white"></div>
+                        <a href="{{ url('/signup') }}"
+                            class="px-3 py- duration-200 hover:animate-pulse rounded-md">Register</a>
+                    </div>
                 @endif
             </div>
         </div>

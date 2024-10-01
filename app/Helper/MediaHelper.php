@@ -18,8 +18,8 @@ class MediaHelper{
             // make a thumbnail of the image with Intervention Image
             $image = ImageManager::gd()->read($file);
             $fileName = time() . '_'.$mediable_id ."_thum.". $file->getClientOriginalExtension();
-            $image->scale(150,150)->save(public_path('media/'.$fileName));
-            $media->file_thumbnail = 'media/'.$fileName;
+            $image->scale(150,150)->save(public_path('assets/products/'.$fileName));
+            $media->file_thumbnail = 'assets/products/'.$fileName;
             $media->save();
         }
         return $media;
@@ -40,17 +40,17 @@ class MediaHelper{
         $response = $client->request('GET', $url);
         $ext = explode('.', $url);
         $fileName = time() . '_'.$mediable_id .".". $ext[count($ext)-1];
-        $client->get($url, ['sink' => public_path('media/'.$fileName)]);
+        $client->get($url, ['sink' => public_path('assets/products/'.$fileName)]);
         $media->file_ext = $ext[count($ext)-1];
-        $media->file_path = 'media/'.$fileName;
+        $media->file_path = 'assets/products/'.$fileName;
         $media->save();
         if(in_array($media->file_ext,['jpg', 'jpeg', 'png', 'gif','webp'])){
-            $file = public_path('media/'.$fileName);
+            $file = public_path('assets/products/'.$fileName);
             // make a thumbnail of the image with Intervention Image
             $image = ImageManager::gd()->read($file);
             $fileName = time() . '_'.$mediable_id ."_thum.". $file->getClientOriginalExtension();
-            $image->scale(150,150)->save(public_path('media/'.$fileName));
-            $media->file_thumbnail = 'media/'.$fileName;
+            $image->scale(150,150)->save(public_path('assets/products/'.$fileName));
+            $media->file_thumbnail = 'assets/products/'.$fileName;
             $media->save();
         }
         return $media;

@@ -1,11 +1,8 @@
 @extends('layouts.web')
 @section('content')
     <div class="p-8 my-4 md:p-4 lg:p-4">
-        <p class="text-2xl my-2 text-primary-500">
-            <strong>Courier Charges Policy</strong>
-        </p>
-
-        <x-web-content-section title="Delivery Charges and Packing Costs">
+        <x-web-content-section title="Delivery Charges and Packing Costs" image="{{ asset('assets/images/policies.png') }}"
+            height="h-[520px]">
             <p class="text-sm py-4">
                 Delivery charges are calculated based on the wholesale price of the order
                 and packing costs. Below is the breakdown:
@@ -86,7 +83,8 @@
         <div class="my-2">
             <hr size="2" width="100%" />
         </div>
-        <x-web-content-section title="Profit Payment Policy" revers="true">
+        <x-web-content-section title="Profit Payment Policy" revers="true"
+            image="{{ asset('assets/images/policies1.jpg') }}">
             <p class="text-sm my-2">
                 At Zee Dropshipping, we are committed to providing timely payments to our
                 Dropshippers. Here’s how our payment system works:
@@ -138,7 +136,7 @@
         <div class="my-2">
             <hr size="2" width="100%" />
         </div>
-        <x-web-content-section title="Refund/Complaint Handling Policy">
+        <x-web-content-section title="Refund/Complaint Handling Policy" image="{{ asset('assets/images/policies2.jpg') }}">
             <p class="text-sm py-4">
                 At Zee Dropshipping, we strive to ensure customer satisfaction. If a
                 customer receives an incorrect, broken, or damaged item, we will arrange
