@@ -69,7 +69,7 @@
                     <div class="bg-white rounded-md">
                         <div class="flex justify-between items-center">
                             <img src="{{ asset($item->image) }}" alt="" srcset=""
-                                class="object-cover rounded-md w-full">
+                                class="object-cover rounded-md w-full min-h-full">
                         </div>
                         <div class="p-2">
                             <div class="flex flex-col md:flex-row items-center justify-between  text-xs">
