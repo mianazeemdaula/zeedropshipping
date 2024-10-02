@@ -15,6 +15,7 @@ Route::get('/products', function () {
     $products = \App\Models\Product::orderBy('id','desc')->take(10)->get();
     return view('guest.products', compact('categoreis','products'));
 });
+Route::get('/products/{id}','App\Http\Controllers\GuestController@productDetails');
 
 // auth routes
 Route::get('/signup', 'App\Http\Controllers\AuthController@signup');

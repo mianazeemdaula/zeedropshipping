@@ -53,4 +53,9 @@ class GuestController extends Controller
     {
         return view('web.about');
     }
+
+    public function productDetails($id) {
+        $product = \App\Models\Product::findOrFail($id);
+        return view('guest.product_details',compact('product'));
+    }
 }
