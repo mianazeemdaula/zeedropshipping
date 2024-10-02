@@ -16,8 +16,6 @@
                 </form>
             </div>
             <div class="flex space-x-2">
-                <button data-modal-toggle="default-modal"
-                    class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">Terms of Service</button>
                 <form action="{{ route('admin.orders.export') }}" method="post">
                     @csrf
                     <input type="hidden" name="export_ids">

@@ -2,15 +2,14 @@
 @section('content')
     <div class="p-8 my-4 md:p-4 lg:p-4">
         <x-web-content-section title="Delivery Charges and Packing Costs" image="{{ asset('assets/images/policies.png') }}"
-            height="h-[520px]">
-            <p class="text-sm py-4">
-                Delivery charges are calculated based on the wholesale price of the order
-                and packing costs. Below is the breakdown:
+            height="h-[350px]">
+            <p class="text-sm py-4 font-semibold">
+                Delivery charges and packing costs are structured as follows:
             </p>
             <ol class="">
                 <li>
                     <div class="py-1 text-sm">
-                        <i class="font-bold text-primary-500">1. For Orders Up to Rs.1800/-</i>
+                        <i class="font-bold text-primary-500">1. For Products Up to 1 kg:</i>
                     </div>
                 </li>
                 <ul class="list-disc list-inside indent-4 my-1 text-sm">
@@ -18,49 +17,27 @@
                         <strong>Delivery Charges:</strong> Rs.180/-
                     </li>
                     <li>
-                        <strong>Packing Charges:</strong> Rs.30/-
+                        <strong>Packing Charges:</strong> Rs.40/-
                     </li>
                     <li>
-                        <strong>Total Charges:</strong> Rs.210/-
+                        <strong>Total Charges:</strong> Rs.220/-
                     </li>
                 </ul>
                 <li>
                     <div class="py-1 text-sm">
-                        <i class="font-bold text-primary-500">2. For Orders Exceeding Rs.1800/- and Up to Rs.5000/-</i>
+                        <i class="font-bold text-primary-500">2. For Products Over 1 kg</i>
                     </div>
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-1 text-sm">
                     <li>
-                        <strong>Delivery Charges:</strong> 10% of the total wholesale
-                        amount
+                        <strong>Delivery Charges:</strong> Will vary based on the weight.
                     </li>
                     <li>
-                        <strong>Packing Charges:</strong> Rs.30/-
+                        <strong>Packing Charges:</strong> Rs.40/-
                     </li>
                     <li class="">
-                        <strong>Example:</strong> For an order of Rs.2500/-, delivery
-                        charges will be Rs.250/-, plus packing charges of Rs.30/-,
-                        totaling Rs.280/-
-                    </li>
-                </ul>
-                <li>
-                    <div class="py-1 text-sm">
-                        <i class="font-bold text-primary-500">3. For Orders Over Rs.5000/-</i>
-                    </div>
-
-                </li>
-                <ul class="list-disc list-inside  indent-4 my-1 text-sm">
-                    <li>
-                        <strong>Delivery Charges:</strong> 5% of the total wholesale
-                        amount
-                    </li>
-                    <li>
-                        <strong>Packing Charges:</strong> Rs.30/-
-                    </li>
-                    <li>
-                        <strong>Example:</strong> For an order of Rs.6000/-, delivery
-                        charges will be Rs.300/-, plus packing charges of Rs.30/-,
-                        totaling Rs.330/-
+                        <strong>Example:</strong> For a product weighing 2 kg, specific delivery charges will apply based on
+                        the logistics provider.
                     </li>
                 </ul>
             </ol>
@@ -69,13 +46,11 @@
             </div>
             <ul class="list-disc list-inside  indent-4 my-1 text-sm">
                 <li>
-                    These delivery charges are separate from your selling price or COD
-                    price.
+                    These delivery charges are separate from your selling price or COD price
                 </li>
                 <li>
-                    In case of failed or returned deliveries, a fee of Rs.250/- will
-                    be deducted from your profit. This deduction will be made during
-                    your profit payment process.
+                    In case of product delivery failure, a fee of Rs. 75/- will be deducted from your profit for return
+                    handling, which is separate from the delivery charges.
                 </li>
             </ul>
         </x-web-content-section>
@@ -86,8 +61,8 @@
         <x-web-content-section title="Profit Payment Policy" revers="true"
             image="{{ asset('assets/images/policies1.jpg') }}">
             <p class="text-sm my-2">
-                At Zee Dropshipping, we are committed to providing timely payments to our
-                Dropshippers. Here’s how our payment system works:
+                At Zee Dropshipping, we are committed to providing timely payments to our dropshippers. Here’s how our
+                payment system works:
             </p>
             <ol class="text-sm">
                 <li>
@@ -97,10 +72,11 @@
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-2 text-sm">
                     <li>
-                        Payments are made twice a week.
+                        Payments are processed every Monday.
                     </li>
                     <li>
-                        <strong>Standard Payment:</strong> Processed every Friday.
+                        For accurate distribution of profit, it is essential to provide the correct title of your account,
+                        account number, or IBAN number
                     </li>
                 </ul>
                 <li>
@@ -110,8 +86,11 @@
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-3">
                     <li>
-                        Dropshippers with more than 30 orders delivered daily will receive
-                        an additional payment on Wednesdays.
+                        Dropshippers with more than 100 orders delivered daily will receive payments twice a week, on
+                        Tuesdays and Mondays.
+                    </li>
+                    <li>
+                        Payments are transferred through banking channels for secure transactions.
                     </li>
                 </ul>
                 <p>
@@ -119,18 +98,13 @@
                 </p>
                 <ul class="list-disc list-inside  indent-4 my-3">
                     <li>
-                        Payments are calculated based on the delivered orders and are
-                        processed in accordance with our payment policy.
+                        Payments are calculated based on delivered orders and processed in accordance with our payment
+                        policy
                     </li>
                     <li>
-                        Ensure that all orders are correctly processed and delivered to be
-                        eligible for payments.
+                        Ensure that all orders are correctly processed and delivered to be eligible for payments.
                     </li>
                 </ul>
-                <p>
-                    If you have any questions regarding the payment schedule, please feel free
-                    to contact us at <strong>0315-9999547</strong>.
-                </p>
             </ol>
         </x-web-content-section>
         <div class="my-2">
@@ -138,10 +112,8 @@
         </div>
         <x-web-content-section title="Refund/Complaint Handling Policy" image="{{ asset('assets/images/policies2.jpg') }}">
             <p class="text-sm py-4">
-                At Zee Dropshipping, we strive to ensure customer satisfaction. If a
-                customer receives an incorrect, broken, or damaged item, we will arrange
-                for an exchange delivery. Please follow the steps below to file a
-                complaint:
+                At Zee Dropshipping, we prioritize customer satisfaction. If a customer receives an incorrect, broken, or
+                damaged item, we will arrange for an exchange delivery. Please follow these steps to file a complaint:
             </p>
             <p class="text-lg my-1 text-primary-500">
                 <strong>How to File a Complaint:</strong>
@@ -154,15 +126,13 @@
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-1">
                     <li>
-                        Claims must be filed within 48 hours of delivery.
+                        Claims must be submitted within 48 hours of delivery
                     </li>
                     <li>
-                        To submit a claim, please call our customer support directly at
-                        <strong>0315-9999547</strong>.
+                        To initiate a claim, please call our customer support
                     </li>
                     <li>
-                        Ensure you have video proof demonstrating the issue with the item,
-                        as verbal claims alone will not be accepted.
+                        Ensure you have video proof showcasing the issue, as verbal claims will not be accepted.
                     </li>
                 </ul>
                 <li>
@@ -172,15 +142,13 @@
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-1">
                     <li>
-                        Call our support team at <strong>0315-9999547</strong>.
+                        Call our support team.
                     </li>
                     <li>
-                        Provide detailed information about the issue and share the video
-                        proof.
+                        Provide detailed information about the issue and share the video proof.
                     </li>
                     <li>
-                        Our support team will guide you through the process and arrange
-                        for an exchange delivery if necessary.
+                        Our support team will assist you in the process and arrange for an exchange delivery if needed
                     </li>
                 </ul>
                 <p>
@@ -190,14 +158,12 @@
                 </p>
                 <ul class="list-disc list-inside  indent-4 my-3">
                     <li>
-                        <strong>Video Proof:</strong> Video evidence showing the fault
-                        with the item is mandatory. Verbal complaints or text descriptions
-                        alone will not be sufficient.
+                        <strong>Video Proof:</strong> Video evidence demonstrating the fault is mandatory. Verbal complaints
+                        or written descriptions alone will not suffice.
                     </li>
                     <li>
-                        <strong>Timely Claims:</strong> Claims must be made within 48
-                        hours of receiving the parcel. Claims made outside this timeframe
-                        will not be accepted.
+                        <strong>Timely Claims:</strong> Claims must be made within 48 hours of receiving the parcel. Claims
+                        submitted after this timeframe will not be considered.
                     </li>
                 </ul>
             </ol>

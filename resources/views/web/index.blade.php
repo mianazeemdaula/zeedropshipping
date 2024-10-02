@@ -20,47 +20,46 @@
         <div class="relative flex overflow-x-hidden py-4">
             <div class="animate-marquee whitespace-nowrap">
                 <p class="text-sm px-8">
-                    <i class="font-semibold text-primary-500">Attention</i> Please ensure that every product you list
-                    includes its Product
-                    SKU.
-                    Accurate SKUs are essential for
-                    effective inventory management and seamless order processing. Without a SKU, we cannot
-                    guarantee proper tracking and fulfillment of your products.
+                    <i class="font-semibold text-primary-500">Attention</i> Every listed product must include its SKU for
+                    smooth inventory management and order processing. Missing SKUs may cause tracking and fulfillment
+                    issues.
+                    <i class="font-semibold">Note:</i> Cut-off time for same-day dispatch is 9:00 AM.
                 </p>
             </div>
         </div>
     </div>
 
     <x-web-content-section :revers="true" title="Pakistan’s Top Dropshipping Platform for Instant Business Growth"
-        image="{{ asset('assets/images/home.jpg') }}">
+        image="{{ asset('assets/images/home.jpg') }}" height="h-[320px]">
         <p class="text-sm">
             Elevate your online business with Zee Dropshipping, Pakistan’s most reliable and efficient dropshipping
-            solution. Benefit from same-day dispatch, a wide range of quality products, and exclusive product locking to
-            stay ahead in the market. With our automated order processing and comprehensive support, you can focus on
-            growing your sales while we handle the rest. Join Zee Dropshipping today and transform the way you do
-            e-commerce.
+            solution. Our platform provides same-day dispatch and a wide range of quality products, helping you stay ahead
+            in the competitive market. With exclusive product locking, you can offer unique items that set your store apart
+            from others.
         </p><br>
         <p class="text-sm">
-            Elevate your online business with Zee Dropshipping, Pakistan’s most reliable and efficient dropshipping
-            solution. Benefit from same-day dispatch, a wide range of quality products, and exclusive product locking to
-            stay ahead in the market. With our automated order processing and comprehensive support, you can focus on
-            growing your sales while we handle the rest. Join Zee Dropshipping today and transform the way you do
-            e-commerce.
+            At Zee Dropshipping, we prioritize your growth and success. Our automated order processing simplifies your
+            operations, allowing you to focus on scaling your sales without the stress of logistics. Our dedicated support
+            team is always available to assist you, providing guidance and solutions to any challenges you may face.
         </p>
         <br>
         <p class="text-sm">
-            Elevate your online business with Zee Dropshipping, Pakistan’s most reliable and efficient dropshipping
-            solution. Benefit from same-day dispatch, a wide range of quality products, and exclusive product locking to
-            stay ahead in the market. With our automated order processing and comprehensive support, you can focus on
-            growing your sales while we handle the rest. Join Zee Dropshipping today and transform the way you do
-            e-commerce.
+            Join Zee Dropshipping today and transform your e-commerce experience. With our efficient systems and
+            comprehensive support, you can expand your online presence and increase your profits effortlessly. Whether you
+            are an experienced dropshipper or just starting, our platform equips you with everything you need to thrive in
+            the digital marketplace. Experience instant business growth with us and take your online venture to new heights.
         </p>
         <div class="mt-4">
             <a href="{{ url('/signup') }}" class="bg-primary-500 text-white px-4 py-2 rounded-md hover:bg-primary-600">Get
                 Started</a>
         </div>
     </x-web-content-section>
-
+    <div class="my-2 px-8 flex items-center justify-between">
+        <div class="text-xl text-primary-500 font-semibold">
+            New Listings
+        </div>
+        <a href="{{ url('/products') }}">All Products</a>
+    </div>
     <div class="px-8 py-4">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             @foreach ($products as $item)
@@ -79,7 +78,7 @@
         </p>
         <div class="ml-6">
             <div class="text-primary-500 font-bold">
-                <i class="fa-solid fa-check-square my-4"></i>
+                <i class="fa-solid fa-check-square my-2"></i>
                 Exclusive Product Locking:
             </div>
             <p class="text-sm my-2">
@@ -87,7 +86,7 @@
                 This ensures your store stands out with unique offerings that only you can sell.
             </p>
             <div class="text-primary-500 font-bold">
-                <i class="fa-solid fa-check-square my-4"></i>
+                <i class="fa-solid fa-check-square my-2"></i>
                 Priority Support:
             </div>
             <p class="text-sm my-2">
@@ -95,7 +94,7 @@
                 resolution helps you avoid disruptions and maintain customer satisfaction.
             </p>
             <div class="text-primary-500 font-bold">
-                <i class="fa-solid fa-check-square my-4"></i>
+                <i class="fa-solid fa-check-square my-2"></i>
                 Twice-a-Week Payments:
             </div>
             <p class="text-sm my-2">
@@ -103,7 +102,7 @@
                 financial flexibility helps in planning and scaling your operations efficiently.
             </p>
             <div class="text-primary-500 font-bold">
-                <i class="fa-solid fa-check-square my-4"></i>
+                <i class="fa-solid fa-check-square my-2"></i>
                 Early Access to New Product Launches:
             </div>
             <p class="text-sm my-2">
@@ -113,39 +112,75 @@
             </p>
         </div>
     </x-web-content-section>
-    <x-web-content-section :revers="true" title="How It Works
-Step-by-Step Dropshipping Process"
+    <x-web-content-section :revers="true" title="How to Work with Zee Dropshipping (Step by Step Process)"
         image="{{ asset('assets/images/home3.jpeg') }}">
-        <div class="text-primary-500 font-bold mt-4 delay-[300ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
-            data-taos-offset="200">
-            <i class="fa-solid fa-check-square my-4"></i>
-            Browse Products:
+        <div class="text-primary-500 font-bold mt-4 delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="50">
+            <i class="fa-solid fa-check-square my-2"></i>
+            1. Register Now:
         </div>
-        <p class="text-sm my-2 delay-[500ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
-            data-taos-offset="200">
-            Discover our extensive catalog of quality-tested products. With just a few clicks, you can find the best
-            products to
-            match your store’s niche.
-        </p>
-        <div class="text-primary-500 font-bold delay-[700ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
-            data-taos-offset="200">
-            <i class="fa-solid fa-check-square my-4"></i>
-            Start Selling:
-        </div>
-        <p class="text-sm my-2 delay-[900ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+        <p class="text-sm mb-1 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="100">
-            Once you’ve selected your products, list them on your online store. Our seamless Shopify integration makes this
-            process quick and easy, helping you launch in no time.
+            Sign up on the Zee Dropshipping platform by filling in the required details to create your account.
+        </p>
+        <div class="text-primary-500 font-bold mt-4 delay-[300ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="50">
+            <i class="fa-solid fa-check-square my-2"></i>
+            2. Account Approval:
+        </div>
+        <p class="text-sm mb-1 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="100">
+            After registration, your account will be reviewed. Once approved, you’ll gain access to the portal for order
+            tracking and management.
+        </p>
+        <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="50">
+            <i class="fa-solid fa-check-square my-2"></i>
+            3. Download Shopify App
+        </div>
+        <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="100">
+            Download the Zee Dropshipping app from the Shopify App Store and integrate it with your store for seamless
+            dropshipping.
         </p>
 
-        <div class="text-primary-500 font-bold delay-[1100ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
-            data-taos-offset="100">
-            <i class="fa-solid fa-check-square my-4"></i>We Handle the Rest:
+        <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="50">
+            <i class="fa-solid fa-check-square my-2"></i>
+            4. Copy Product SKU
         </div>
-        <p class="text-sm my-2 delay-[1300ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+        <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="100">
-            After a customer places an order, we manage inventory, processing, and shipping. You can relax knowing that we
-            ensure prompt delivery and customer satisfaction.
+            Browse our product catalog and copy the SKUs of the items you wish to sell for easy order placement.
+        </p>
+        <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="50">
+            <i class="fa-solid fa-check-square my-2"></i>
+            5. Forward Your Orders
+        </div>
+        <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="100">
+            When a customer places an order, go to the Orders section, click the three dots next to the order, and select
+            "Fulfill by Zee Dropshipping" to forward the order details. You can also upload bulk orders through the portal.
+        </p>
+        <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="50">
+            <i class="fa-solid fa-check-square my-2"></i>
+            6. Order Dispatch
+        </div>
+        <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="100">
+            Zee Dropshipping will process and dispatch your orders on the same day. A CN number will be generated for
+            real-time tracking.
+        </p>
+        <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="50">
+            <i class="fa-solid fa-check-square my-2"></i>
+            7. Profit Transfer
+        </div>
+        <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="100">
+            After delivery, your profit will be transferred to your account according to our payment schedule.
         </p>
 
     </x-web-content-section>
@@ -229,14 +264,14 @@ Step-by-Step Dropshipping Process"
 
     {{-- our logistic companies --}}
     <div class="px-32 py-4">
-        <div class="flex items-center justify-center my-2 font-Caveat text-4xl text-primary-500 font-medium">
+        <div class="flex items-center justify-center my-2 text-2xl text-primary-500 font-medium">
             Our Logistic Partners
         </div>
         <div class="grid grid-col-2 md:grid-cols-3 lg:grid-cols-6 gap-3 items-center">
-            @foreach ([1, 2, 3, 4, 5, 6] as $item)
-                <div class="bg-white flex justify-center items-center p-8 rounded-lg delay-[{{ $loop->index + 1 }}00ms] duration-[800ms] taos:translate-y-[200px] taos:opacity-0"
-                    data-taos-offset="50">
-                    <i class="fa-solid fa-truck"></i>
+            @foreach (['tcs.svg', 'trax.svg', 'm_and_p.png', 'leopardscourier-logo.png', 'postex.png', 'daakwala.webp'] as $item)
+                <div class="flex justify-center items-center bg-gray-200 p-8 rounded-lg delay-[{{ $loop->index + 1 }}00ms] duration-[800ms] taos:translate-y-[200px] taos:opacity-0"
+                    data-taos-offset="30">
+                    <img src="{{ asset("assets/logos/$item") }}" alt="" class="h-14 object-contain">
                 </div>
             @endforeach
         </div>

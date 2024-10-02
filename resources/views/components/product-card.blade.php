@@ -20,9 +20,9 @@
                 <div>SKU</div>
                 <div>{{ $item->sku }}</div>
             </div>
-            <div class="flex justify-between items-center text-gray-800 text-sm">
+            <div class="flex justify-between items-center text-gray-800 text-sm font-semibold">
                 <div>Price</div>
-                <div>RS.{{ $item->sale_price }}</div>
+                <div class="">RS.{{ $item->sale_price }}</div>
             </div>
             {{-- <p class="text-xs text-slate-300 line-clamp-4">{{ $item->description }}</p> --}}
         </div>

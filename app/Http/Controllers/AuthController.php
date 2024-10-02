@@ -64,7 +64,6 @@ class AuthController extends Controller
             'avatar' => 'nullable|image',
             'account_name' => 'required',
             'iban' => 'required',
-            
         ]);
         $user = new User();
         $user->name = $request->name;
@@ -92,6 +91,8 @@ class AuthController extends Controller
             'address' => $request->address,
             'ds_number' => 'DS-'.$dsNumber,
             'city_name' => $request->city_name,
+            'sale_level' => $request->sale_level,
+            'last_sales' => $request->last_sales,
         ]);
         if($request->hasFile('store_logo')) {
             $logoName = time() . '_'.$vendor->id .".". $request->file('store_logo')->getClientOriginalExtension();

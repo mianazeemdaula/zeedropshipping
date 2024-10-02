@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="px-8 py-4">
-        <h1 class="font-Caveat text-4xl text-primary-500 font-bold delay-[300ms] duration-[600ms] taos:scale-[0.6] taos:opacity-0"
+        <h1 class="text-2xl text-primary-500 font-bold delay-[300ms] duration-[600ms] taos:scale-[0.6] taos:opacity-0"
             data-taos-offset="50">About</h1>
         <p class="text-sm delay-[300ms] duration-[1000ms] taos:[transform:translate3d(0,200px,0)_scale(0.6)] taos:opacity-0"
             data-taos-offset="50">Welcome to Zee Dropshipping, your trusted partner in the world of e-commerce! At Zee
@@ -15,68 +15,55 @@
     <x-web-content-section title="Why Choose Zee Dropshipping?" image="{{ asset('assets/images/about.jpg') }}"
         height="h-[580px]">
         <div class="pt-1 text-sm">
-            <i class="font-bold text-primary-500">Wide Range of Quality Products:</i> We offer an extensive selection of
-            over
-            200 carefully
-            tested and curated
-            products
-            to help you find the best-performing items for your store. Our focus on quality ensures that you can confidently
-            offer these products to your customers.
+            <div class="font-bold text-primary-500">1. Wide Range of Quality Products:</div> Explore a diverse selection of
+            tested
+            products, with frequent updates to keep your inventory fresh and appealing, helping you attract more customers.
+        </div>
+        <div class="pt-1 text-sm">
+            <div class="font-bold text-primary-500">2. Shopify Integration:</div> Manage your store effortlessly with
+            seamless
+            Shopify integration that automates key processes, allowing you to focus on scaling your business without the
+            hassle.
         </div>
         <div class="py-1 text-sm">
-            <i class="font-bold text-primary-500"> Same-Day Dispatch:</i>
-            We understand that speed is crucial in the e-commerce world. With our same-day dispatch
-            service, your orders are processed and shipped quickly, ensuring faster delivery times and happier customers.
+            <div class="font-bold text-primary-500">3. Same-Day Dispatch:</div>
+            Enjoy fast order processing and same-day dispatch, ensuring that your customers receive their orders quickly,
+            enhancing their shopping experience.
         </div>
         <div class="py-1 text-sm">
-            <i class="font-bold text-primary-500"> Twice-a-Week Payment:</i>
-            We value your hard work and understand the importance of cash flow in running a
-            successful
-            business. For dropshippers with a minimum of 100 delivered orders, we offer the convenience of twice-a-week
-            payments
-            on Tuesdays and Fridays.
+            <div class="font-bold text-primary-500">4. Twice-a-Week Payments:</div>
+            Receive payments twice a week for dropshippers with 100+ delivered orders, ensuring steady cash flow and
+            allowing you to reinvest in your business.
         </div>
         <div class="py-1 text-sm">
-            <i class="font-bold text-primary-500"> Product Quality Assurance:</i>
-            Quality is at the core of everything we do. We work closely with our suppliers to
-            ensure that every product meets our high standards, giving you and your customers peace of mind.
+            <div class="font-bold text-primary-500">5. Product Quality Assurance:</div>
+            We collaborate with trusted suppliers to guarantee high-quality standards for every product, ensuring customer
+            satisfaction and minimizing returns.
         </div>
         <div class="py-1 text-sm">
-            <i class="font-bold text-primary-500"> Dedicated Support:</i>
-            Our dedicated support team is here to assist you every step of the way. Whether you need
-            help
-            with order processing, product selection, or any other aspect of your dropshipping journey, we're just a call or
-            message away.
+            <div class="font-bold text-primary-500">6. Dedicated Support Team:</div>
+            Our support team is available to assist you with any dropshipping inquiries, providing timely help to keep your
+            business running smoothly.
         </div>
         <div class="py-1 text-sm">
-            <i class="font-bold text-primary-500"> Automated Order Processing:</i>
-            We believe in making your life easier. Our automated order processing system
-            streamlines your workflow, reducing the time and effort required to manage your business.
+            <div class="font-bold text-primary-500">7. Automated Order Processing:</div>
+            Simplify your operations with our automated order processing system, reducing manual tasks and allowing you to
+            manage your store efficiently.
         </div>
         <div class="py-1 text-sm">
-            <i class="font-bold text-primary-500"> Exclusive Product Requests:</i>
-            Want to stand out from the competition? We offer an exclusive product request
-            feature,
-            allowing you to lock in unique products that no other dropshipper can sell. This gives you a competitive edge
-            and
-            helps you build a loyal customer base.
+            <div class="font-bold text-primary-500">8. Exclusive Product Requests:</div>
+            Access unique products that only you can sell, providing a competitive advantage and helping you differentiate
+            your store from others.
         </div>
         <div class="py-1 text-sm">
-            <i class="font-bold text-primary-500"> Optional Order Confirmation Facility:</i>
-            We provide the option for order confirmation, adding an extra layer of
-            assurance for you and your customers. This optional service ensures that your customers are ready to receive
-            their
-            orders, reducing the chances of returns.
+            <div class="font-bold text-primary-500">9. Optional Order Confirmation:</div>
+            Use our optional order confirmation service to ensure customer readiness, which can significantly reduce return
+            rates and increase customer satisfaction.
         </div>
         <div class="py-1 text-sm">
-            <i class="font-bold text-primary-500"> Multiple Logistic Partners:</i>
-            We have partnered with multiple logistic companies to ensure nationwide delivery
-            coverage. This allows us to offer you competitive courier rates and reliable shipping services.
-        </div>
-        <div class="py-1 text-sm">
-            <i class="font-bold text-primary-500"> Shopify Integration:</i>
-            To make your dropshipping experience even more seamless, we offer easy integration with
-            Shopify. This allows you to manage your store efficiently and focus on scaling your business.
+            <div class="font-bold text-primary-500">10. Multiple Logistic Partners:</div>
+            Benefit from reliable nationwide delivery and competitive rates through our logistics network, ensuring that
+            your customers receive their orders on time.
         </div>
 
     </x-web-content-section>

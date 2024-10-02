@@ -16,13 +16,13 @@
                     </p>
                     <form action="{{ url('signup') }}" method="POST" class="mt-8">
                         @csrf
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
                             <div>
-                                <x-label>Full Name</x-label>
+                                <x-label>Full Name*</x-label>
                                 <x-input name="name" placeholder="Full Name" value="{{ old('name') }}" />
                             </div>
                             <div>
-                                <x-label>Email</x-label>
+                                <x-label>Email*</x-label>
                                 <x-input name="email" type="email" placeholder="Email" value="{{ old('email') }}" />
                             </div>
                             <div>
@@ -38,7 +38,7 @@
                             </div>
 
                             <div>
-                                <x-label>Store Phone*</x-label>
+                                <x-label>WhatsApp Number*</x-label>
                                 <x-input type="tel" placeholder="923001234567" name="phone"
                                     value="{{ old('phone') }}" />
                             </div>
@@ -54,11 +54,23 @@
                             </div>
 
                             <div>
-                                <x-label>CNIC* </x-label>
+                                <x-label>CNIC* Front Side</x-label>
                                 <x-input type="file" name="cnic" required="true" />
                             </div>
                             <div>
-                                <x-label>Password</x-label>
+                                <x-label>Sales Experience*</x-label>
+                                <x-select name="sale_level">
+                                    <option value="experience">Experience</option>
+                                    <option value="beginner">Beginner</option>
+                                </x-select>
+                            </div>
+                            <div>
+                                <x-label>Last 30 Days Sale*</x-label>
+                                <x-input name="last_sales" type="number" placeholder="500000"
+                                    value="{{ old('last_sales') }}" />
+                            </div>
+                            <div>
+                                <x-label>Password*</x-label>
                                 <x-input name="password" type="password" placeholder="Password" />
                             </div>
                         </div>
@@ -82,7 +94,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-start gap-2">
+                        <div class="flex items-center justify-start gap-2 my-4">
                             <input type="checkbox" name="accept_terms" id="">
                             <p>I accept the <a href="{{ url('/terms-and-conditions') }}" class="text-primary-500">terms
                                     and conditions</a></p>

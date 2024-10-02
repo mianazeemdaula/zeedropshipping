@@ -16,6 +16,10 @@
                             </div>
                         @endif
 
+                        <div class="">
+                            Thanks for signing up in Zee Dropshipping
+                            Your account is under verification please wait or check your email for status
+                        </div>
                         <div class="text-center mt-4">
                             @if (session('status') == 'verification-link-sent')
                                 <div>
