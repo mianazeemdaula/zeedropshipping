@@ -54,6 +54,49 @@ class GuestController extends Controller
         return view('web.about');
     }
 
+    public function products(Request $request)  {
+        $method = $request->method();
+        $categoreis = \App\Models\Category::whereHas('products')->get();
+        if($method == 'POST') {
+            $cats = $request->categories;
+            $sort = $request->sort;
+            $minPrice = $request->from_price;
+            $maxPrice = $request->to_price;
+            $sortColumn = 'id';
+            if($sort){
+                if($sort == 'price_low_to_high'){
+                    $sortColumn = 'price';
+                    $sort = 'asc';
+                } else if($sort == 'price_high_to_low') {
+                    $sortColumn = 'price';
+                    $sort = 'desc';
+                }else if($sort == 'newest') {
+                    $sortColumn = 'id';
+                    $sort = 'desc';
+                }else if($sort == 'oldest') {
+                    $sortColumn = 'id';
+                    $sort = 'asc';
+                }else if($sort == 'best_selling') {
+                    $sortColumn = 'sales_count';
+                    $sort = 'desc';
+                }
+            }
+            $products = \App\Models\Product::when($cats, function($query, $cats) {
+                return $query->whereIn('category_id', $cats);
+            })->when($sort, function($query, $sort) use ($sortColumn) {
+                return $query->orderBy($sortColumn, $sort);
+            })->when($minPrice, function($query, $minPrice) {
+                return $query->where('sale_price','>=',$minPrice);
+            })->when($maxPrice, function($query, $maxPrice) {
+                return $query->where('sale_price','<=',$maxPrice);
+            })->paginate();
+            $filters = $request->all();
+            return view('guest.products', compact('products','categoreis','filters'));
+        }
+        $products = \App\Models\Product::orderBy('id','desc')->paginate();
+        return view('guest.products', compact('categoreis','products'));
+    }
+
     public function productDetails($id) {
         $product = \App\Models\Product::findOrFail($id);
         return view('guest.product_details',compact('product'));

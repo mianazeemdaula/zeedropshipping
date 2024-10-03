@@ -10,11 +10,8 @@ Route::get('/terms-and-conditions', 'App\Http\Controllers\GuestController@termsA
 Route::get('/policies', 'App\Http\Controllers\GuestController@policies');
 Route::get('/contact', 'App\Http\Controllers\GuestController@contact');
 Route::get('/about', 'App\Http\Controllers\GuestController@about');
-Route::get('/products', function () {
-    $categoreis = \App\Models\Category::whereHas('products')->get();
-    $products = \App\Models\Product::orderBy('id','desc')->take(10)->get();
-    return view('guest.products', compact('categoreis','products'));
-});
+Route::get('/products', 'App\Http\Controllers\GuestController@products');
+Route::post('/products', 'App\Http\Controllers\GuestController@products');
 Route::get('/products/{id}','App\Http\Controllers\GuestController@productDetails');
 
 // auth routes

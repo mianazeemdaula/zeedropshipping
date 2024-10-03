@@ -4,13 +4,13 @@
         <div class="flex flex-col lg:flex-row">
             <div class="w-8/12 mx-8">
                 <div>
-                    <img src="{{ $product->image }}" alt="" class="rounded-lg">
+                    <img src="{{ $product->image }}" alt="" class="rounded-lg w-full" id="slider-main">
                 </div>
                 <div class="flex items-center justify-center p-4">
                     <div class="grid grid-cols-4 gap-4 items-center">
                         @foreach ($product->media as $item)
                             <img src="{{ asset($item->file_path) }}" alt="no image" srcset=""
-                                class="size-20 object-contain rounded-md">
+                                class="size-20 object-contain rounded-md cursor-pointer slider-image">
                         @endforeach
                     </div>
                 </div>
@@ -39,10 +39,6 @@
                         <td>Weight</td>
                         <td class="text-end">{{ $product->weight }}g</td>
                     </tr>
-                    <tr>
-                        <td>Minimu Order</td>
-                        <td class="text-end">{{ $product->min_order_qty }}</td>
-                    </tr>
                 </table>
             </div>
         </div>
@@ -57,4 +53,18 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('scripts')
+    <script>
+        // slider-image click event
+        const sliderImages = document.querySelectorAll('.slider-image');
+        sliderImages.forEach((image) => {
+            image.addEventListener('click', (e) => {
+                const src = e.target.src;
+                document.querySelector('#slider-main').src = src;
+            });
+        });
+    </script>
 @endsection

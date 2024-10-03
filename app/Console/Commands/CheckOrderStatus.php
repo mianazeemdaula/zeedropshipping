@@ -64,6 +64,11 @@ class CheckOrderStatus extends Command
                         'paid_at' => now(),
                         'description' => "Order #$order->id revenue",
                     ]);
+                    // increase sales count
+                    $order->details->each(function($detail){
+                        $product = $detail->product;
+                        $product->increment('sales_count', $detail->qty);
+                    });
                 }
                 return $nStatus;
             }
