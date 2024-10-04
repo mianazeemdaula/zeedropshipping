@@ -53,25 +53,17 @@
             </div>
             <div class="bg-gray-50 rounded-lg flex-1 p-4">
                 <div class="text-lg font-semibold">
-                    Some other details
+                    Description
                 </div>
                 <hr class="py-1">
                 <div class="prose ">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae quibusdam ratione, id optio assumenda
-                    culpa dignissimos in exercitationem neque placeat laborum eius inventore eum quasi, magnam numquam sit.
-                    Eveniet, magnam.
+                    {!! $product->description !!}
                 </div>
             </div>
         </div>
         <br>
         <div>
-            <div class="text-lg font-semibold">
-                Description
-            </div>
-            <hr class="py-2">
             <div class="prose min-w-full">
-                {!! $product->description !!}
-
                 <div>
                     @foreach ($product->media as $item)
                         <img src="{{ asset($item->file_path) }}" alt="" srcset="" class="">
