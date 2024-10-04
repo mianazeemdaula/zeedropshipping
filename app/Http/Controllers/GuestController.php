@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class GuestController extends Controller
 {
@@ -63,12 +64,13 @@ class GuestController extends Controller
             $minPrice = $request->from_price;
             $maxPrice = $request->to_price;
             $sortColumn = 'id';
+            $search = $request->search;
             if($sort){
                 if($sort == 'price_low_to_high'){
-                    $sortColumn = 'price';
+                    $sortColumn = 'sale_price';
                     $sort = 'asc';
                 } else if($sort == 'price_high_to_low') {
-                    $sortColumn = 'price';
+                    $sortColumn = 'sale_price';
                     $sort = 'desc';
                 }else if($sort == 'newest') {
                     $sortColumn = 'id';
@@ -89,6 +91,8 @@ class GuestController extends Controller
                 return $query->where('sale_price','>=',$minPrice);
             })->when($maxPrice, function($query, $maxPrice) {
                 return $query->where('sale_price','<=',$maxPrice);
+            })->when($search, function($query, $search) {
+                return $query->where('name','like','%'.$search.'%');
             })->paginate();
             $filters = $request->all();
             return view('guest.products', compact('products','categoreis','filters'));
@@ -100,5 +104,32 @@ class GuestController extends Controller
     public function productDetails($id) {
         $product = \App\Models\Product::findOrFail($id);
         return view('guest.product_details',compact('product'));
+    }
+
+    public function downloadProductImages($id){
+        $product = \App\Models\Product::find($id);
+        $zip = new \ZipArchive();
+        $zipFileName = strtolower(str_replace("-","_",$product->sku)).'_images.zip';
+        if($zip->open(public_path($zipFileName), \ZipArchive::CREATE) === TRUE){
+            
+            foreach($product->media as $media){
+                $fileName = $media->id.'.'.$media->file_ext;
+                if(str_starts_with($media->file_path,"http")){
+                    // download image from url and save to public path
+                    $fileName = time() . '_'.$media->mediable_id .".". $media->file_ext;
+                    $client = new Client();
+                    $response = $client->request('GET', $media->file_path);
+                    $ext = explode('.', $media->file_path);
+                    $client->get($media->file_path, ['sink' => public_path('assets/products/'.$fileName)]);
+                    $zip->addFile(public_path('assets/products/'.$fileName), $fileName);
+                    $media->file_path = 'assets/products/'.$fileName;
+                    $media->save();
+                }else{
+                    $zip->addFile(public_path($media->file_path), $fileName);
+                }
+            }
+            $zip->close();
+        }
+        return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
     }
 }

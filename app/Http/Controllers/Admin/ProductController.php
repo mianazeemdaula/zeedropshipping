@@ -153,12 +153,21 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index')->with('success', 'Product updated successfully');
     }
 
+    public function makeDefaultImage(Request $request){
+        $product = Product::find($request->product_id);
+        $product->image = $request->image;
+        $product->save();
+        return redirect()->back()->with('success', 'Default image set successfully');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully');
     }
 
     public function search(Request $request)

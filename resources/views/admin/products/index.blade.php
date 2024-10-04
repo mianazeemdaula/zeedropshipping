@@ -124,8 +124,7 @@
                                             <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
                                                 {{ $item->low_stock_report }}
                                             </td>
-                                            <td
-                                                class="whitespace-nowrap px-2 py-4 text-sm font-medium text-right sm:px-4 sm:py-4 space-x-1 ">
+                                            <td class="flex items-center justify-center space-x-2 px-2 py-4 text-sm ">
                                                 <a href="{{ route('admin.products.show', $item->id) }}"
                                                     class="text-gray-700 hover:text-blue-500">
                                                     <i class="fa-solid fa-eye"></i>
@@ -133,6 +132,14 @@
                                                 <a href="{{ route('admin.products.edit', $item->id) }}">
                                                     <i class="fa-solid fa-pencil"></i>
                                                 </a>
+                                                <form action="{{ route('admin.products.destroy', $item->id) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="text-red-500 hover:text-red-700">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

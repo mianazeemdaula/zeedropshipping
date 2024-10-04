@@ -32,7 +32,7 @@
     "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-B3yVjM98.css",
+    "file": "assets/app-m2qqeEC8.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -53,7 +53,7 @@
     "src": "resources/css/fonts/AvenirNextCyr-Regular.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app-DNQ5moY4.js",
+    "file": "assets/app-CFX798oF.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

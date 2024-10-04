@@ -2,14 +2,14 @@
 @section('content')
     <div class="p-8 my-4 md:p-4 lg:p-4">
         <x-web-content-section title="Delivery Charges and Packing Costs" image="{{ asset('assets/images/policies.png') }}"
-            height="h-[350px]">
+            height="h-[550px]">
             <p class="text-sm py-4 font-semibold">
                 Delivery charges and packing costs are structured as follows:
             </p>
             <ol class="">
                 <li>
                     <div class="py-1 text-sm">
-                        <i class="font-bold text-primary-500">1. For Products Up to 1 kg:</i>
+                        <div class="font-bold text-primary-500">1. For Products Up to 1 kg:</div>
                     </div>
                 </li>
                 <ul class="list-disc list-inside indent-4 my-1 text-sm">
@@ -17,15 +17,15 @@
                         <strong>Delivery Charges:</strong> Rs.180/-
                     </li>
                     <li>
-                        <strong>Packing Charges:</strong> Rs.40/-
+                        <strong>Packing Charges:</strong> Rs.30/-
                     </li>
                     <li>
-                        <strong>Total Charges:</strong> Rs.220/-
+                        <strong>Total Charges:</strong> Rs.210/-
                     </li>
                 </ul>
                 <li>
                     <div class="py-1 text-sm">
-                        <i class="font-bold text-primary-500">2. For Products Over 1 kg</i>
+                        <div class="font-bold text-primary-500">2. For Products Over 1 kg</div>
                     </div>
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-1 text-sm">
@@ -42,7 +42,7 @@
                 </ul>
             </ol>
             <div class="py-1 text-sm">
-                <i class="font-bold text-primary-500">Additional Information:</i>
+                <div class="font-bold text-primary-500">Additional Information:</div>
             </div>
             <ul class="list-disc list-inside  indent-4 my-1 text-sm">
                 <li>
@@ -67,7 +67,7 @@
             <ol class="text-sm">
                 <li>
                     <div class="py-1 text-sm">
-                        <i class="font-bold text-primary-500">1. Standard Payment Schedule:</i>
+                        <div class="font-bold text-primary-500">1. Standard Payment Schedule:</div>
                     </div>
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-2 text-sm">
@@ -81,7 +81,7 @@
                 </ul>
                 <li>
                     <div class="py-1 text-sm">
-                        <i class="font-bold text-primary-500">2. Enhanced Payment Schedule:</i>
+                        <div class="font-bold text-primary-500">2. Enhanced Payment Schedule:</div>
                     </div>
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-3">
@@ -121,7 +121,7 @@
             <ol class="text-sm">
                 <li>
                     <div class="py-1 text-sm">
-                        <i class="font-bold text-primary-500">1. Claim Submission:</i>
+                        <div class="font-bold text-primary-500">1. Claim Submission:</div>
                     </div>
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-1">
@@ -137,7 +137,7 @@
                 </ul>
                 <li>
                     <div class="py-1 text-sm">
-                        <i class="font-bold text-primary-500">2. Process:</i>
+                        <div class="font-bold text-primary-500">2. Process:</div>
                     </div>
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-1">
@@ -153,7 +153,7 @@
                 </ul>
                 <p>
                 <div class="py-1 text-sm">
-                    <i class="font-bold text-primary-500">Proof and Timeline:</i>
+                    <div class="font-bold text-primary-500">Proof and Timeline:</div>
                 </div>
                 </p>
                 <ul class="list-disc list-inside  indent-4 my-3">

@@ -5,7 +5,6 @@ import Chart from 'chart.js/auto';
 import $ from 'jquery';
 import Swiper from 'swiper/bundle';
 import { CountUp } from 'countup.js';
-
 // import styles bundle
 import 'swiper/css/bundle';
 

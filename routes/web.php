@@ -13,6 +13,7 @@ Route::get('/about', 'App\Http\Controllers\GuestController@about');
 Route::get('/products', 'App\Http\Controllers\GuestController@products');
 Route::post('/products', 'App\Http\Controllers\GuestController@products');
 Route::get('/products/{id}','App\Http\Controllers\GuestController@productDetails');
+Route::get('/download-product-image/{id}','App\Http\Controllers\GuestController@downloadProductImages')->name('download.product.image');
 
 // auth routes
 Route::get('/signup', 'App\Http\Controllers\AuthController@signup');
@@ -39,6 +40,7 @@ Route::middleware(['auth','verified'])->group(function () {
             Route::post('products/search', 'ProductController@search')->name('products.search');
             Route::post('products/import', 'ProductController@importProducts')->name('products.import');
             Route::post('products/export', 'ProductController@export')->name('products.export');
+            Route::post('products/set-default-image', 'ProductController@makeDefaultImage')->name('products.defaultimage');
             Route::resource('orders', 'OrderController');
             Route::post('orders/search', 'OrderController@search')->name('orders.search');
             Route::post('orders/export', 'OrderController@export')->name('orders.export');

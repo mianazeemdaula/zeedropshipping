@@ -6,6 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@tailwindcss/typography": "^0.5.15",
         "autoprefixer": "^10.4.19",
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0",
@@ -19,6 +20,7 @@
         "chart.js": "^4.4.3",
         "countup.js": "^2.8.0",
         "jquery": "^3.7.1",
+        "js-image-zoom": "^0.7.0",
         "swiper": "^11.1.10",
         "taos": "^1.0.5"
     }

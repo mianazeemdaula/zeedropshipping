@@ -268,8 +268,8 @@
             Our Logistic Partners
         </div>
         <div class="grid grid-col-2 md:grid-cols-3 lg:grid-cols-6 gap-3 items-center">
-            @foreach (['tcs.svg', 'trax.svg', 'm_and_p.png', 'leopardscourier-logo.png', 'postex.png', 'daakwala.webp'] as $item)
-                <div class="flex justify-center items-center bg-gray-200 p-8 rounded-lg delay-[{{ $loop->index + 1 }}00ms] duration-[800ms] taos:translate-y-[200px] taos:opacity-0"
+            @foreach (['tcs.svg', 'trax.svg', 'm_and_p.png', 'leopardscourier-logo.png', 'postex.png', 'daaklogo.png'] as $item)
+                <div class="flex justify-center items-center bg-gray-300 p-8 rounded-lg delay-[{{ $loop->index + 1 }}00ms] duration-[800ms] taos:translate-y-[200px] taos:opacity-0"
                     data-taos-offset="30">
                     <img src="{{ asset("assets/logos/$item") }}" alt="" class="h-14 object-contain">
                 </div>

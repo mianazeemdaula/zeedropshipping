@@ -99,7 +99,8 @@ export default {
     },
   },
   plugins: [
-    require('taos/plugin')
+    require('taos/plugin'),
+    require('@tailwindcss/typography'),
   ],
   safelist: [
     '!duration-[0ms]',
