@@ -9,7 +9,7 @@
             understood, and agreed to the following terms and conditions. Please review these carefully as they govern your
             use of Zee Dropshipping</p>
     </div>
-    <x-web-content-section title="Terms & Conditions">
+    <x-web-content-section title="Terms & Conditions" image="{{ asset('assets/images/terms.jpg') }}">
         <div class="py-1 text-sm">
             <div class="font-bold text-primary-500">1. Account and Dispatch</div>
             <ol class="ml-4">
@@ -127,7 +127,7 @@
         </div>
     </x-web-content-section>
 
-    <x-web-content-section title="Refund Policy" revers="true">
+    <x-web-content-section title="Refund Policy" revers="true" image="{{ asset('assets/images/refunds.jpg') }}">
         <div class="text-sm my-4">
             At Zee Dropshipping, we strive to ensure your satisfaction with our services and products. Please review the
             following refund policy details:

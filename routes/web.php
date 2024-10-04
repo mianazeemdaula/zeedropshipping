@@ -79,7 +79,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::namespace('App\Http\Controllers\Dispatcher')->group(function() {
         Route::group(['prefix' => 'dispatcher','as' => 'dispatcher.'], function() {
             Route::resource('orders', 'OrderController');
-            Route::post('/orders-status/{status}', 'OrderController@showStatusOrder')->name('orders.status');
+            Route::get('/orders-status/{status}', 'OrderController@showStatusOrder')->name('orders.status');
             Route::post('/orders-search', 'OrderController@search')->name('orders.search');
             Route::post('/print-orders-label', 'OrderController@printLabel')->name('print.order.label');
             Route::post('/print-orders-stock', 'OrderController@printStcok')->name('print.order.stock');

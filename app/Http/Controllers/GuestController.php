@@ -32,7 +32,10 @@ class GuestController extends Controller
             
         ];
         $products = \App\Models\Product::orderBy('id','desc')->take(10)->get();
-        return view('web.index', compact('dropshippersSays', 'whyChoozeZee','products'));
+        $productsCount = \App\Models\Product::count();
+        $userCount = \App\Models\User::count();
+        $ordersCount = \App\Models\Order::count();
+        return view('web.index', compact('dropshippersSays', 'whyChoozeZee','products','productsCount','userCount','ordersCount'));
     }
 
     public function termsAndConditions()

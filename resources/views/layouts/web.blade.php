@@ -104,8 +104,8 @@
                 class="px-3 py-2 hover:bg-primary-600 duration-200 hover:animate-pulse rounded-md">Policies</a>
         </div>
         <div class="flex justify-end rounded-l-md items-center">
-            <div class=" text-white font-bold mr-3">
-                +92 315-9999547
+            <div class=" text-white font-bold mr-3 flex items-center">
+                <i class="fa-solid fa-phone mr-1"></i>+92-315-9999547
             </div>
             <div class=" ">
                 @if (Auth::check())
