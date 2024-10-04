@@ -55,6 +55,7 @@ Route::middleware(['auth','verified'])->group(function () {
             Route::get('/dropshipper-status/{status}', 'DropShipperController@showStatusUser')->name('dropshippers.status');
             Route::resource('shippers', 'ShipperController');
             Route::resource('payments', 'PaymentController');
+            Route::resource('media', 'MediaController');
         });
     });
 

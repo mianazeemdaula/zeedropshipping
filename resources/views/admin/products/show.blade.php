@@ -78,19 +78,28 @@
                                 class="w-40 h-40 object-cover"></td>
                     </tr>
                 </table>
-                <div class="grid gap-1 grid-cols-4 mt-4" id="media-img">
+                <div class="grid gap-2 grid-cols-4 mt-4" id="media-img">
                     @foreach ($product->media as $item)
-                        <div data-mediaid="{{ $item->id }}">
+                        <div data-mediaid="{{ $item->id }}" class="bg-white">
                             <div class="w-20 h-20">
                                 <img src="{{ asset($item->file_path) }}" alt="" srcset=""
-                                    class="w-full h-full object-cover">
+                                    class="w-full h-full object-contain">
                             </div>
-                            <form action="{{ route('admin.products.defaultimage') }}" method="post" class="text-sm">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <input type="hidden" name="image" value="{{ $item->file_path }}">
-                                <button type="submit">Make Default</button>
-                            </form>
+                            <div class="flex items-center justify-between">
+                                <form action="{{ route('admin.products.defaultimage') }}" method="post" class="text-xs">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="image" value="{{ $item->file_path }}">
+                                    <button type="submit">
+                                        <i class="fa-solid fa-home"></i>
+                                    </button>
+                                </form>
+                                <form action="{{ route('admin.media.destroy', $item->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"><i class="fa-solid fa-trash text-xs"></i></button>
+                                </form>
+                            </div>
                         </div>
                     @endforeach
                 </div>

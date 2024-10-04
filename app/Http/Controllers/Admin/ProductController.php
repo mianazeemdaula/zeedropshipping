@@ -72,12 +72,15 @@ class ProductController extends Controller
         // array of images
         if($request->hasFile('image')){
             $files = $request->file('image');
+            $sortIndex = 1;
             foreach($files as $file){
                 $media = MediaHelper::store($file, $product->id, Product::class);
-                if($file == $files[0]){
+                if($sortIndex == 1){
                     $product->image = $media->file_path;
                     $product->save();
                 }
+                $media->sort = $sortIndex++;
+                $media->save();
             }
         }
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully');
@@ -148,10 +151,6 @@ class ProductController extends Controller
                 $media = MediaHelper::store($file, $product->id, Product::class);
                 $media->sort = $sortIndex++;
                 $media->save();
-                if($file == $files[0]){
-                    $product->image = $media->file_path;
-                    $product->save();
-                }
             }
         }
         return redirect()->route('admin.products.index')->with('success', 'Product updated successfully');
