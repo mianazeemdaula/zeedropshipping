@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Helper\MediaHelper;
 use App\Helper\CSVHelper;
+use App\Models\Media;
 class ProductController extends Controller
 {
     /**
@@ -142,8 +143,11 @@ class ProductController extends Controller
         // array of images
         if($request->hasFile('image')){
             $files = $request->file('image');
+            $sortIndex = 1;
             foreach($files as $file){
                 $media = MediaHelper::store($file, $product->id, Product::class);
+                $media->sort = $sortIndex++;
+                $media->save();
                 if($file == $files[0]){
                     $product->image = $media->file_path;
                     $product->save();
@@ -158,6 +162,17 @@ class ProductController extends Controller
         $product->image = $request->image;
         $product->save();
         return redirect()->back()->with('success', 'Default image set successfully');
+    }
+
+    public function sortmedia(Request $request){
+        $productId = $request->productId;
+        $mediaIds = $request->mediaIds;
+        $pro = Product::find($productId);
+        $sortNo = 1;
+        foreach ($mediaIds as $media) {
+            Media::find($media)->update(['sort' => $sortNo++]);
+        }
+        return response()->json($request->all());
     }
 
     /**

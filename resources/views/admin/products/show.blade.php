@@ -78,9 +78,9 @@
                                 class="w-40 h-40 object-cover"></td>
                     </tr>
                 </table>
-                <div class="grid gap-1 grid-cols-4 mt-4">
+                <div class="grid gap-1 grid-cols-4 mt-4" id="media-img">
                     @foreach ($product->media as $item)
-                        <div>
+                        <div data-mediaid="{{ $item->id }}">
                             <div class="w-20 h-20">
                                 <img src="{{ asset($item->file_path) }}" alt="" srcset=""
                                     class="w-full h-full object-cover">
@@ -96,4 +96,42 @@
                 </div>
             </div>
         </div>
+    @endsection
+
+
+    @section('js')
+        <script type="module">
+            $(document).ready(function() {
+                var mediaImg = document.getElementById('media-img');
+                new Sortable(mediaImg, {
+                    animation: 150,
+                    onEnd: function(e) {
+                        // get list of data-mediaid from the sorted list
+                        var mediaIds = [];
+                        mediaImg.querySelectorAll('div').forEach((item) => {
+                            mediaIds.push(item.getAttribute('data-mediaid'));
+                        });
+                        // remove all null values from the array
+                        mediaIds = mediaIds.filter(function(el) {
+                            return el != null;
+                        });
+                        fetch("{{ route('admin.products.sortmedia') }}", {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            body: JSON.stringify({
+                                mediaIds: mediaIds,
+                                productId: "{{ $product->id }}"
+                            })
+                        }).then(response => response.json()).then(data => {
+                            console.log(data);
+                        }).catch((error) => {
+                            console.error('Error:', error);
+                        });
+                    }
+                })
+            });
+        </script>
     @endsection

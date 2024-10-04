@@ -41,6 +41,7 @@ Route::middleware(['auth','verified'])->group(function () {
             Route::post('products/import', 'ProductController@importProducts')->name('products.import');
             Route::post('products/export', 'ProductController@export')->name('products.export');
             Route::post('products/set-default-image', 'ProductController@makeDefaultImage')->name('products.defaultimage');
+            Route::post('products/sortmedia', 'ProductController@sortmedia')->name('products.sortmedia');
             Route::resource('orders', 'OrderController');
             Route::post('orders/search', 'OrderController@search')->name('orders.search');
             Route::post('orders/export', 'OrderController@export')->name('orders.export');

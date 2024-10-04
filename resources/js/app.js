@@ -5,6 +5,8 @@ import Chart from 'chart.js/auto';
 import $ from 'jquery';
 import Swiper from 'swiper/bundle';
 import { CountUp } from 'countup.js';
+import Sortable from 'sortablejs';
+
 // import styles bundle
 import 'swiper/css/bundle';
 
@@ -15,3 +17,4 @@ window.Alpine = Alpine;
 window.Chart = Chart;
 window.Swiper = Swiper;
 window.CountUp = CountUp;
+window.Sortable = Sortable;

@@ -6,6 +6,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ZeeDropShipping</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('head')
