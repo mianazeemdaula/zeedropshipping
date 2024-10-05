@@ -2,7 +2,7 @@
 @section('content')
     <form action="{{ url('/products') }}" method="post" class="p-8">
         @csrf
-        <div class="flex space-x-0 md:space-x-4">
+        <div class="flex flex-col md:space-x-4 md:flex-row space-y-4 md:space-y-0">
             <div class="bg-white p-4 rounded-lg">
                 <div class="container mx-auto flex gap-8 items-center justify-between">
                     <h1 class="text-sm font-medium">Product Filtring</h1>
@@ -50,19 +50,17 @@
 
                 </aside>
             </div>
-            <main class="container mx-auto flex flex-col lg:flex-row">
-                <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    @foreach ($products as $item)
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach ($products as $item)
+                    <div class="delay-[{{ $item->index + 1 }}00ms] duration-[800ms] taos:translate-y-[-100px] taos:opacity-0"
+                        data-taos-offset="200">
                         <div class="delay-[{{ $item->index + 1 }}00ms] duration-[800ms] taos:translate-y-[-100px] taos:opacity-0"
                             data-taos-offset="200">
-                            <div class="delay-[{{ $item->index + 1 }}00ms] duration-[800ms] taos:translate-y-[-100px] taos:opacity-0"
-                                data-taos-offset="200">
-                                <x-product-card :item="$item" :sku="true"></x-product-card>
-                            </div>
+                            <x-product-card :item="$item" :sku="true"></x-product-card>
                         </div>
-                    @endforeach
-                </div>
-            </main>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </form>
 @endsection
