@@ -33,22 +33,22 @@
 
                     <div class="flex flex-col gap-2">
                         <x-label>Weight (Grams)</x-label>
-                        <x-input name="weight" type="number" value="{{ old('weight') }}" />
+                        <x-input name="weight" type="number" value="{{ old('weight') ?? '10' }}" />
                     </div>
 
                     <div class="flex flex-col gap-2">
                         <x-label>Purchase Price</x-label>
-                        <x-input name="purchase_price" value="{{ old('purchase_price') }}" type="number" />
+                        <x-input name="purchase_price" value="{{ old('purchase_price') ?? '0' }}" type="number" />
                     </div>
 
                     <div class="flex flex-col gap-2">
                         <x-label>Sale Price</x-label>
-                        <x-input name="sale_price" value="{{ old('sale_price') }}" type="number" />
+                        <x-input name="sale_price" value="{{ old('sale_price') ?? '0' }}" type="number" />
                     </div>
 
                     <div class="flex flex-col gap-2 ">
                         <x-label>Discount Price</x-label>
-                        <x-input name="discount_price" value="{{ old('discount_price') }}" type="number" />
+                        <x-input name="discount_price" value="{{ old('discount_price') ?? '0' }}" type="number" />
                     </div>
 
                     <div class="flex flex-col gap-2 ">
@@ -58,28 +58,28 @@
 
                     <div class="flex flex-col gap-2 ">
                         <x-label>Low Stock Qty</x-label>
-                        <x-input name="low_stock_report" value="{{ old('low_stock_report') }}" type="number" />
+                        <x-input name="low_stock_report" value="{{ old('low_stock_report') ?? '10' }}" type="number" />
                     </div>
 
                     <div class="flex flex-col gap-2 ">
                         <x-label>Minimum Order Qty</x-label>
-                        <x-input name="min_order_qty" value="{{ old('min_order_qty') }}" type="number" />
+                        <x-input name="min_order_qty" value="{{ old('min_order_qty') ?? '1' }}" type="number" />
                     </div>
 
                     <div class="flex flex-col gap-2 ">
                         <x-label>Max Order Qty</x-label>
-                        <x-input name="max_order_qty" value="{{ old('max_order_qty') }}" type="number" />
+                        <x-input name="max_order_qty" value="{{ old('max_order_qty') ?? '10' }}" type="number" />
                     </div>
 
 
                     <div class="flex flex-col gap-2 ">
                         <x-label>VAT</x-label>
-                        <x-input name="vat" value="{{ old('vat') }}" type="number" />
+                        <x-input name="vat" value="{{ old('vat') ?? '0' }}" type="number" />
                     </div>
 
                     <div class="flex flex-col gap-2 ">
                         <x-label>Stock</x-label>
-                        <x-input name="stock" value="{{ old('stock') }}" type="number" />
+                        <x-input name="stock" value="{{ old('stock') }}" type="number" value="10" />
                     </div>
                     <div class="flex flex-col gap-2 ">
                         <x-label>Active</x-label>

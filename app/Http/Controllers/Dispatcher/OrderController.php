@@ -145,7 +145,7 @@ class OrderController extends Controller
                     'shipper_phone' => Helper::parseDigiPhone($order->user->vendor->phone),
                     'shipment_type' => 1,
                     'external_reference_no' => $order->order_number,
-                    'weight' => $order->weight ?? 1,
+                    'weight' => $order->weight > 0 ? $order->weight / 1000 : 0.1,
                     'other_product' => $order->details()->count() > 1,
                     'pickup_id' => intval($request->pickup_addresses),
                 ]);

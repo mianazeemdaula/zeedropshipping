@@ -164,7 +164,7 @@
                                         </x-select>
                                     </div>
                                     <div>
-                                        <x-label>Tracking Number</x-label>
+                                        <x-label>Dispatch From</x-label>
                                         <x-select name="pickup_addresses">
                                         </x-select>
                                     </div>

@@ -87,7 +87,7 @@
         </aside>
     </header>
     <header class="bg-gray-700 md:flex items-center justify-between hidden">
-        <div class="px-4">
+        <div class="px-4 flex-1">
             <img src="{{ asset('assets/images/Logo.png') }}" alt="" srcset="" class="h-12 object-cover">
         </div>
         <div class="flex-1 p-4 flex items-center justify-center text-white">
@@ -103,7 +103,7 @@
             <a href="{{ url('/policies') }}"
                 class="px-3 py-2 hover:bg-primary-600 duration-200 hover:animate-pulse rounded-md">Policies</a>
         </div>
-        <div class="flex justify-end rounded-l-md items-center">
+        <div class="flex justify-end rounded-l-md items-center flex-1">
             <div class=" text-white font-bold mr-3 flex items-center">
                 <i class="fa-solid fa-phone mr-1"></i>+92-315-9999547
             </div>

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Helper\MediaHelper;
 use App\Helper\CSVHelper;
 use App\Models\Media;
+use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
     /**
@@ -47,7 +48,7 @@ class ProductController extends Controller
             'max_order_qty' => 'required',
             'weight' => 'required',
             'description' => 'required',
-            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $product = new Product();
@@ -68,6 +69,7 @@ class ProductController extends Controller
         $product->other_details = $request->other_details;
         $product->status = $request->status == 'on' ? 1 : 0;
         $product->save();
+
 
         // array of images
         if($request->hasFile('image')){
@@ -123,7 +125,7 @@ class ProductController extends Controller
             'min_order_qty' => 'required',
             'max_order_qty' => 'required',
             'description' => 'required',
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $product = Product::find($id);
@@ -180,6 +182,9 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::find($id);
+        if(File::exists(public_path($product->image))){
+            File::delete(public_path($product->image));
+        }
         $product->delete();
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully');
     }
