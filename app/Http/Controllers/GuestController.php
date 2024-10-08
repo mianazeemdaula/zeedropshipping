@@ -62,7 +62,7 @@ class GuestController extends Controller
         $method = $request->method();
         $categoreis = \App\Models\Category::whereHas('products')->get();
         if($method == 'POST') {
-            $cats = $request->categories;
+            $cats = $request->cats;
             $sort = $request->sort;
             $minPrice = $request->from_price;
             $maxPrice = $request->to_price;
@@ -87,7 +87,9 @@ class GuestController extends Controller
                 }
             }
             $products = \App\Models\Product::when($cats, function($query, $cats) {
-                return $query->whereIn('category_id', $cats);
+                return $query->whereHas('categories', function($q) use ($cats) {
+                    $q->whereIn('id', array_keys($cats));
+                });
             })->when($sort, function($query, $sort) use ($sortColumn) {
                 return $query->orderBy($sortColumn, $sort);
             })->when($minPrice, function($query, $minPrice) {

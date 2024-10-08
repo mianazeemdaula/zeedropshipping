@@ -20,28 +20,24 @@
                 <div class="text-2xl font-bold">
                     PKR-{{ number_format($product->sale_price, 0, '.', ',') }}
                 </div>
+                <div>
+                    <div class="py-4 font-semibold ">{{ $product->name }}</div>
+                </div>
+                <div class="flex items-center my-2 space-x-1">
+                    @foreach ($product->categories as $item)
+                        <div class="bg-primary-50 text-center px-2 py-1 rounded-md">
+                            {{ $item->name }}
+                        </div>
+                    @endforeach
+                </div>
                 <table class="table-fixed w-full">
-                    <tr>
-                        <td colspan="2" class="py-4 font-semibold ">{{ $product->name }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="py-1 text-sm font-medium flex space-x-2  items-center">
-                            <div>
-                                {{ $product->category->name }}
-                            </div>
-                            <div class="h-4 w-0.5 bg-gray-200"></div>
-                            <div>
-                                {{-- {{ $product->sales_count }} slaes --}}
-                            </div>
-                        </td>
-                    </tr>
                     <tr class="">
                         <td>SKU</td>
-                        <td class="text-end">{{ $product->sku }}</td>
+                        <td class="text-end font-semibold">{{ $product->sku }}</td>
                     </tr>
                     <tr>
                         <td>Weight</td>
-                        <td class="text-end">{{ $product->weight }}g</td>
+                        <td class="text-end font-semibold">{{ $product->weight }}g</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="text-end text-primary-500">

@@ -30,7 +30,8 @@
                     <h2 class="text-base font-medium">Categories</h2>
                     @foreach ($categoreis as $item)
                         <div class="flex items-center">
-                            <input type="checkbox" class="size-3" name="cats[{{ $item->id }}]" />
+                            <input type="checkbox" class="size-3" name="cats[{{ $item->id }}]"
+                                @if (request()->cats && collect(array_keys(request()->cats))->contains($item->id)) checked @endif />
                             <label htmlFor="ksa-only" class="ml-2">
                                 {{ $item->name }}
                             </label>

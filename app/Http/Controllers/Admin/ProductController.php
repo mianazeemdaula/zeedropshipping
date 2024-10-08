@@ -52,7 +52,6 @@ class ProductController extends Controller
         ]);
 
         $product = new Product();
-        $product->category_id = $request->category_id;
         $product->user_id = auth()->id();
         $product->name = $request->name;
         $product->sku = $request->sku;
@@ -68,8 +67,9 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->other_details = $request->other_details;
         $product->status = $request->status == 'on' ? 1 : 0;
+        $product->category_id = $request->categories[0];
         $product->save();
-
+        $product->categories()->sync($request->categories);
 
         // array of images
         if($request->hasFile('image')){
@@ -129,7 +129,6 @@ class ProductController extends Controller
         ]);
 
         $product = Product::find($id);
-        $product->category_id = $request->category_id;
         $product->name = $request->name;
         $product->sku = $request->sku;
         $product->purchase_price = $request->purchase_price;
@@ -145,6 +144,7 @@ class ProductController extends Controller
         $product->other_details = $request->other_details;
         $product->status = $request->status == 'on' ? 1 : 0;
         $product->save();
+        $product->categories()->sync($request->categories);
         // array of images
         if($request->hasFile('image')){
             $files = $request->file('image');

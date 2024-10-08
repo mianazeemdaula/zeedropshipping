@@ -15,9 +15,10 @@ class Category extends Model
         'parent_id',
     ];
 
+    // categories many to many relationship with products
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class, 'category_products');
     }
 
     public function getImageAttribute($value)

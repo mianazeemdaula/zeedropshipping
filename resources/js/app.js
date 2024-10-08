@@ -6,6 +6,7 @@ import $ from 'jquery';
 import Swiper from 'swiper/bundle';
 import { CountUp } from 'countup.js';
 import Sortable from 'sortablejs';
+import select2 from 'select2';
 
 // import styles bundle
 import 'swiper/css/bundle';
@@ -18,3 +19,4 @@ window.Chart = Chart;
 window.Swiper = Swiper;
 window.CountUp = CountUp;
 window.Sortable = Sortable;
+select2();

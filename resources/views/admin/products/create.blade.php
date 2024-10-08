@@ -19,7 +19,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     <div class="flex flex-col gap-2">
                         <x-label>Category</x-label>
-                        <x-select name="category_id">
+                        <x-select name="categories[]" multiple id="categories">
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -113,11 +113,12 @@
 @section('head')
     <script src="https://cdn.tiny.cloud/1/kput55tw7sf7m8nadh5lth5ghsdshrjgwfbj9ju8hcdigf4a/tinymce/7/tinymce.min.js"
         referrerpolicy="origin"></script>
-    <script>
+    <script type="module">
         tinymce.init({
             selector: '#mytextarea',
             toolbar: 'undo redo  | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
             menubar: ''
         });
+        $('#categories').select2();
     </script>
 @endsection

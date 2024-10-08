@@ -111,5 +111,9 @@ Route::post('/reset-password','App\Http\Controllers\AuthController@postResetPass
 
 
 Route::get('/test-api', function(){
-    $image = \App\Helper\MediaHelper::url('https://ae-pic-a1.aliexpress-media.com/kf/Sfb172da41f334e608e5260f23fb7dcecN/Bluetooth-5-3-Earphones-True-Wireless-Headphones-with-Mic-Button-Control-Noise-Reduction-Earhooks-Waterproof-Headset.jpg_.webp', 1, 'App\Models\User');
+    // sync all prodcuts with categories
+    $products = \App\Models\Product::all();
+    foreach($products as $product){
+        $product->categories()->sync([$product->category_id]);
+    }
 });

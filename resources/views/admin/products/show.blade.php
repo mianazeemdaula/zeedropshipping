@@ -50,6 +50,12 @@
                         <td class="py-1 font-bold text-gray-500">User:</td>
                         <td class="text-right">{{ $product->user->name ?? 'N/A' }}</td>
                     </tr>
+                    <tr>
+                        <td class="py-1 font-bold text-gray-500">Categories:</td>
+                        <td class="text-right">
+                            {{ $product->categories()->pluck('name') }}
+                        </td>
+                    </tr>
                 </table>
             </div>
 
