@@ -33,7 +33,7 @@
                     </tr>
                     <tr>
                         <td class="py-1 font-bold text-gray-500">Sale Price:</td>
-                        <td class="text-right">Rs. {{ $product->purchase_price ?? 'N/A' }}</td>
+                        <td class="text-right">Rs. {{ $product->sale_price ?? 'N/A' }}</td>
                     </tr>
                     <tr>
                         <td class="py-1 font-bold text-gray-500">Discount Price:</td>
