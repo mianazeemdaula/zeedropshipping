@@ -117,3 +117,15 @@ Route::get('/test-api', function(){
         $product->categories()->sync([$product->category_id]);
     }
 });
+
+Route::get('/app/customer/data', function(){
+    return response()->json(['message' => 'data fetched successfully']);
+});
+
+Route::get('/app/customer/erasure', function(){
+    return response()->json(['message' => 'Data removed successfully']);
+});
+
+Route::get('/app/shop/erasure', function(){
+    return response()->json(['message' => 'Data removed successfully']);
+});
