@@ -21,7 +21,7 @@ class DigiDokan {
     public function __construct()
     {
         $this->http = new \GuzzleHttp\Client([
-            'base_uri' => 'https://dev.digidokaan.pk/api/v1/digidokaan/',
+            'base_uri' => env('APP_ENV') === 'local' ? 'https://dev.digidokaan.pk/api/v1/digidokaan/': 'https://digidokaan.pk/api/v1/digidokaan/',
             'headers' => ['Accept' => 'application/json']
         ]);
     }

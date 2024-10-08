@@ -144,7 +144,7 @@ class OrderController extends Controller
                     'shipper_address' => $order->user->vendor->address,
                     'shipper_name' => $order->user->vendor->business_name,
                     'shipper_phone' => Helper::parseDigiPhone($order->user->vendor->phone),
-                    'shipment_type' => 1,
+                    'shipment_type' => $request->shipment_type,
                     'external_reference_no' => $order->order_number,
                     'weight' => $order->weight > 0 ? $order->weight / 1000 : 0.1,
                     'other_product' => $order->details()->count() > 1,
