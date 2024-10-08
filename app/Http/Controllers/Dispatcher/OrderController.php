@@ -127,6 +127,7 @@ class OrderController extends Controller
                 $city_id = $city->city_id ?? 1;
                 
                 $res =  $digi->bookShipment([
+                    'source' => 'zee_dropshipping',
                     'seller_number' => Helper::parseDigiPhone(json_decode($shipper->config)->phone),
                     'buyer_number' => Helper::parseDigiPhone($order->customer_phone),
                     'buyer_name' => $order->customer_name,
