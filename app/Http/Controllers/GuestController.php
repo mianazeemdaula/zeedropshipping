@@ -100,7 +100,7 @@ class GuestController extends Controller
             $filters = $request->all();
             return view('guest.products', compact('products','categoreis','filters'));
         }
-        $products = \App\Models\Product::orderBy('id','desc')->paginate();
+        $products = \App\Models\Product::orderBy('id','desc')->paginate(20);
         return view('guest.products', compact('categoreis','products'));
     }
 

@@ -18,7 +18,7 @@
             </div>
             <div class="bg-gray-50 rounded-lg flex-1 p-4">
                 <div class="text-2xl font-bold">
-                    PKR{{ number_format($product->sale_price, 0, '.', ',') }}
+                    PKR-{{ number_format($product->sale_price, 0, '.', ',') }}
                 </div>
                 <table class="table-fixed w-full">
                     <tr>
@@ -31,7 +31,7 @@
                             </div>
                             <div class="h-4 w-0.5 bg-gray-200"></div>
                             <div>
-                                {{ $product->sales_count }} slaes
+                                {{-- {{ $product->sales_count }} slaes --}}
                             </div>
                         </td>
                     </tr>

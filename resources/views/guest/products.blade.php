@@ -50,16 +50,21 @@
 
                 </aside>
             </div>
-            <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                @foreach ($products as $item)
-                    <div class="delay-[{{ $item->index + 1 }}00ms] duration-[800ms] taos:translate-y-[-100px] taos:opacity-0"
-                        data-taos-offset="200">
+            <div>
+                <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    @foreach ($products as $item)
                         <div class="delay-[{{ $item->index + 1 }}00ms] duration-[800ms] taos:translate-y-[-100px] taos:opacity-0"
                             data-taos-offset="200">
-                            <x-product-card :item="$item" :sku="true"></x-product-card>
+                            <div class="delay-[{{ $item->index + 1 }}00ms] duration-[800ms] taos:translate-y-[-100px] taos:opacity-0"
+                                data-taos-offset="200">
+                                <x-product-card :item="$item" :sku="true"></x-product-card>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+                <div class="py-4">
+                    {{ $products->links() }}
+                </div>
             </div>
         </div>
     </form>

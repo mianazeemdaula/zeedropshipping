@@ -15,7 +15,7 @@
                 </div>
                 <div class="flex justify-between items-center text-gray-800 text-sm font-semibold">
                     <div>Price</div>
-                    <div class="">RS.{{ number_format($item->sale_price, 0) }}</div>
+                    <div class="">PKR-{{ number_format($item->sale_price, 0) }}</div>
                 </div>
                 {{-- <p class="text-xs text-slate-300 line-clamp-4">{{ $item->description }}</p> --}}
             </div>
