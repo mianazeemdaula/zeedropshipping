@@ -29,11 +29,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function dashboard(){
+    public function dashboard(Request $request){
+        $user = request()->user();
         return response()->json([
-            'orders' => 100,
-            'delivered' => 90,
-            'pending' => 10,
+            'orders' => $user->orders()->count(),
+            'delivered' => $user->orders()->where('status', 'delivered')->count(),
+            'pending' => $user->orders()->where('status', 'open')->count(),
             'user' => request()->user()->name,
         ]);
     }
