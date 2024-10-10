@@ -56,14 +56,16 @@ class ShopifyOrderController extends Controller
                 $totalWeight = 0;
                 foreach ($order['details'] as $detail) {
                     $product =  Product::where('sku', $detail['sku'])->first();
-                    $orderDetail = new OrderDetail();
-                    $orderDetail->order_id = $orderModel->id;
-                    $orderDetail->product_id = $product->id;
-                    $orderDetail->qty = $detail['quantity'];
-                    $orderDetail->price = $detail['price'];
-                    $orderDetail->ds_price = $product->sale_price;
-                    $orderDetail->save();
-                    $totalWeight += $product->weight * $detail['quantity'];
+                    if($product){
+                        $orderDetail = new OrderDetail();
+                        $orderDetail->order_id = $orderModel->id;
+                        $orderDetail->product_id = $product->id;
+                        $orderDetail->qty = $detail['quantity'];
+                        $orderDetail->price = $detail['price'];
+                        $orderDetail->ds_price = $product->sale_price;
+                        $orderDetail->save();
+                        $totalWeight += $product->weight * $detail['quantity'];
+                    }
                 }
                 $orderModel->weight = $totalWeight;
                 $orderModel->save();

@@ -8,7 +8,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/login', 'App\Http\Controllers\Api\AuthController@login');
-
+Route::get('/dashboard', 'App\Http\Controllers\Api\AuthController@dashboard')->middleware('auth:sanctum');
 Route::post('/shopify/orders', 'App\Http\Controllers\Api\ShopifyOrderController@store');
 
 Route::get('digidokan/pickup/{id}', function($id){

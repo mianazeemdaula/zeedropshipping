@@ -28,4 +28,13 @@ class AuthController extends Controller
             'user' => auth()->user(),
         ]);
     }
+
+    public function dashboard(){
+        return response()->json([
+            'orders' => 100,
+            'delivered' => 90,
+            'pending' => 10,
+            'user' => request()->user()->name,
+        ]);
+    }
 }
