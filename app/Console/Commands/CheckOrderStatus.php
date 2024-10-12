@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Order;
 use App\Services\DigiDokan;
-
+use Illuminate\Support\Facades\Log;
 
 class CheckOrderStatus extends Command
 {
@@ -50,6 +50,7 @@ class CheckOrderStatus extends Command
                 ]);
                 $this->info("Order #$order->id status is $response");
                 $nStatus =  strtolower($response);
+                Log::info("Order #$order->id status is $nStatus DIGIDOKAAN");
                 if($order->status === 'delivered'){
                     $user = $order->user;
                     // $user->notify(new OrderDelivered($order));
