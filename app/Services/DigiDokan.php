@@ -39,14 +39,14 @@ class DigiDokan {
         }
         $response = $this->http->post('auth/login', [
             'form_params' => [
-                'phone' => env('DIGIDOKAAN_PHONE', $config->phone),
-                'password' => env('DIGIDOKAAN_PASSWORD',$config->password)
-            ]
+                'phone' => $config->phone,
+                'password' => $config->password,
+            ],
+            'on_stats' => function (\GuzzleHttp\TransferStats $stats) {
+                Log::info($stats->getEffectiveUri());
+            }
         ]);
         if($response->getStatusCode() == 200) {
-            Log::info('Digidokan login response: '.$config->phone);
-            Log::info('Digidokan login response: '.$config->password);
-            Log::info('Digidokan login response: '.$response->getPath());
             $res =  json_decode($response->getBody()->getContents());
             if($res->code == 200) {
                 if($shipper){
