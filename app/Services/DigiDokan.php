@@ -46,7 +46,7 @@ class DigiDokan {
         if($response->getStatusCode() == 200) {
             Log::info('Digidokan login response: '.$config->phone);
             Log::info('Digidokan login response: '.$config->password);
-            Log::info('Digidokan login response: '.$response);
+            Log::info('Digidokan login response: '.$this->http->getPath());
             $res =  json_decode($response->getBody()->getContents());
             if($res->code == 200) {
                 if($shipper){
