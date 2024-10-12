@@ -2,7 +2,7 @@
 namespace App\Services;
 use App\Models\Shipper;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Support\Facades\Log;
 class DigiDokan {
     private \GuzzleHttp\Client $http;
     public static $logistics = [
@@ -44,6 +44,7 @@ class DigiDokan {
             ]
         ]);
         if($response->getStatusCode() == 200) {
+            Log::info('Digidokan login response: '.$this->http->getConfig('base_uri'));
             $res =  json_decode($response->getBody()->getContents());
             if($res->code == 200) {
                 if($shipper){
