@@ -112,8 +112,7 @@ Route::post('/reset-password','App\Http\Controllers\AuthController@postResetPass
 
 Route::get('/test-api', function(){
     // sync all prodcuts with categories
-    $products = \App\Models\Product::all();
-    foreach($products as $product){
-        $product->categories()->sync([$product->category_id]);
-    }
+    $ordersdata = \App\Models\Order::whereIn('id',[2,3])->whereJsonContains('track_data->gateway_id', 3)
+                ->orderBy('id')->get()->pluck('track_data')->toArray();
+    return $ordersdata;
 });

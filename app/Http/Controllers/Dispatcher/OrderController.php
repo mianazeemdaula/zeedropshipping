@@ -191,31 +191,27 @@ class OrderController extends Controller
 
     public function printLabel(Request $request)
     {
-        try {
-            $digi = new \App\Services\DigiDokan();
-            $shipper = Shipper::find(1);
-            $ordersdata = Order::whereNotNull('track_data')
-            ->whereIn('id',$request->order_ids)->get()->pluck('track_data')->toArray();
-            $gateways = collect($ordersdata)->pluck('gateway_id')->toArray();
-            $links = [];
-            foreach($gateways as $gateway){   
-                // data
-                $ordersdata = Order::whereIn('id',$request->order_ids)->whereJsonContains('track_data->gateway_id', $gateway)
-                ->get()->pluck('track_data')->orderBy('id')->toArray();
-                $trackings = collect($ordersdata)->pluck('tracking_no')->toArray();
-                $orders = collect($ordersdata)->pluck('order_no')->toArray();
-                $response = $digi->downloadLoadSheet([
-                    'orders' => $orders,
-                    'tracking_numbers' => $trackings,
-                    'phone' => \App\Helper\Helper::parseDigiPhone(json_decode($shipper->config)->phone),
-                    'gateway_id' => $gateway,
-                ]);
-                $links[] = $response->pdf_link;
-            }
-            return response()->json(['links' => $links]);
-        } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 500);
+        $digi = new \App\Services\DigiDokan();
+        $shipper = Shipper::find(1);
+        $ordersdata = Order::whereNotNull('track_data')
+        ->whereIn('id',$request->order_ids)->get()->pluck('track_data')->toArray();
+        $gateways = array_unique(collect($ordersdata)->pluck('gateway_id')->toArray());
+        $links = [];
+        foreach($gateways as $gateway){   
+            // data
+            $ordersdata = Order::whereIn('id',$request->order_ids)->whereJsonContains('track_data->gateway_id', $gateway)
+            ->orderBy('id')->get()->pluck('track_data')->toArray();
+            $trackings = collect($ordersdata)->pluck('tracking_no')->toArray();
+            $orders = collect($ordersdata)->pluck('order_no')->toArray();
+            $response = $digi->downloadLoadSheet([
+                'orders' => $orders,
+                'tracking_numbers' => $trackings,
+                'phone' => \App\Helper\Helper::parseDigiPhone(json_decode($shipper->config)->phone),
+                'gateway_id' => $gateway,
+            ]);
+            $links[] = $response->pdf_link;
         }
+        return response()->json(['links' => $links]);
     }
 
     public function printStcok(Request $request){

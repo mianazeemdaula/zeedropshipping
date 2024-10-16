@@ -66,6 +66,8 @@
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Extra Note</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
+                                            Tracking</th>
+                                        <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Action</th>
                                     </tr>
                                 </thead>
@@ -105,6 +107,14 @@
                                                 {{ $item->total }}</td>
                                             <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
                                                 {{ $item->extra_note }}</td>
+                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                                                @if ($item->track_data)
+                                                    <a class="text-blue-500" target="_blank"
+                                                        href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}">
+                                                        {{ $item->track_data['tracking_no'] ?? 'N/A' }}
+                                                    </a>
+                                                @endif
+                                            </td>
                                             <td
                                                 class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 flex items-center space-x-2">
                                                 <a href="{{ route('dispatcher.orders.show', $item->id) }}"
@@ -209,7 +219,6 @@
                     order_ids: orderIds
                 }
             }).then(function(response) {
-                console.log(response);
                 if (response.data && response.data.links.length > 0) {
                     // open the each link in new tab
                     response.data.links.forEach(function(link) {
@@ -219,7 +228,8 @@
                     });
                 }
             }).catch(function(error) {
-                alert(error.message);
+                console.log(error);
+                alert(error.response.data.message);
             });
         });
 
