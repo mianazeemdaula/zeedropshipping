@@ -122,10 +122,12 @@
                                             <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
                                                 {{ $item->extra_note }}</td>
                                             <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                                                <a class="text-blue-500" target="_blank"
-                                                    href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}">
-                                                    {{ $item->track_data['tracking_no'] ?? 'N/A' }}
-                                                </a>
+                                                @if ($item->track_data)
+                                                    <a class="text-blue-500" target="_blank"
+                                                        href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}">
+                                                        {{ $item->track_data['tracking_no'] ?? 'N/A' }}
+                                                    </a>
+                                                @endif
                                             </td>
                                             <td
                                                 class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 flex items-center space-x-2">

@@ -21,6 +21,7 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $status = 'all';
         $orders = Order::where('user_id', auth()->id())->latest()->paginate();
         return view('vendor.orders.index', compact('orders', 'status'));
     }
