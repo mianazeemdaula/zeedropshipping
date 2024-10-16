@@ -131,7 +131,7 @@ class OrderController extends Controller
                     'seller_number' => Helper::parseDigiPhone(json_decode($shipper->config)->phone),
                     'buyer_number' => Helper::parseDigiPhone($order->customer_phone),
                     'buyer_name' => $order->customer_name,
-                    'buyer_address' => empty($order->shipping_address) ? 'Lahore' : $order->billing_address,
+                    'buyer_address' => $order->shipping_address ?? $order->billing_address,
                     'buyer_city' => $city_id,
                     'piece' => $order->details()->count(),
                     'amount' => intval($order->total),
@@ -193,17 +193,23 @@ class OrderController extends Controller
     {
         try {
             $digi = new \App\Services\DigiDokan();
+            $shipper = Shipper::find(1);
             $ordersdata = Order::whereNotNull('track_data')
             ->whereIn('id',$request->order_ids)->get()->pluck('track_data')->toArray();
             $trackings = collect($ordersdata)->pluck('tracking_no')->toArray();
             $orders = collect($ordersdata)->pluck('order_no')->toArray();
-            $response = $digi->downloadLoadSheet([
-                'orders' => $orders,
-                'tracking_numbers' => $trackings,
-                'phone' => \App\Helper\Helper::parseDigiPhone(env('DIGIDOKAAN_PHONE')),
-                'gateway_id' => 3
-            ]);
-            return response()->json($response->pdf_link);
+            $gateways = collect($ordersdata)->pluck('gateway_id')->toArray();
+            $links = [];
+            foreach($gateways as $gateway){    
+                $response = $digi->downloadLoadSheet([
+                    'orders' => $orders,
+                    'tracking_numbers' => $trackings,
+                    'phone' => \App\Helper\Helper::parseDigiPhone(json_decode($shipper->config)->phone),
+                    'gateway_id' => $gateway,
+                ]);
+                $links[] = $response->pdf_link;
+            }
+            return response()->json(['links' => $links]);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 500);
         }

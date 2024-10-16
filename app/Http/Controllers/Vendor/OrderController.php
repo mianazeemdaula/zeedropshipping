@@ -202,7 +202,7 @@ class OrderController extends Controller
                         'order_date' => now()->toDateString(),
                         'status' => 'open',
                         'extra_note' => $order['Notes'],
-                        'shipping_address' => $order['Billing Street'],
+                        'shipping_address' => $order['Shipping Street'] ?? $order['Billing Street'],
                         'billing_address' => $order['Billing Address1'],
                         'zip' => intval(substr($order['Shipping Zip'], 1)),
                         'city' => $order['Shipping City'],

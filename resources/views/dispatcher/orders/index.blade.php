@@ -210,8 +210,11 @@
                 }
             }).then(function(response) {
                 console.log(response);
-                if (response.data) {
-                    window.open(response.data, '_blank');
+                if (response.data && response.data.links.length > 0) {
+                    // open the each link in new tab
+                    response.data.links.forEach(function(link) {
+                        window.open(link, '_blank');
+                    });
                 }
             }).catch(function(error) {
                 alert(error.message);
