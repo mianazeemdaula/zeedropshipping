@@ -13,6 +13,18 @@ class DigiDokan {
         13 => 'BlueEx',
     ];
 
+    public static function trackUrl($id, $trackingNumber){
+        if($id == 3){
+            return 'https://leopards.com.pk/track-shipment/';
+        }else if($id == 9){
+            return 'https://www.swift.com.pk/track-shipment/';
+        }else if($id == 5){
+            return 'https://trax.pk/tracking/?tracking_numbers='.$trackingNumber;
+        }else if($id == 15){
+        }else if($id == 13){
+        }
+    }
+
     public function getLogisticName($id)
     {
         return $this->logistics[$id];

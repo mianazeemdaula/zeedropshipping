@@ -26,8 +26,21 @@
                             <td class="text-right">{{ $order->shipper->name ?? 'N/A' }}</td>
                         </tr>
                         <tr>
-                            <td class="py-1">Track ID:</td>
-                            <td class="text-right">{{ $order->track_data['tracking_no'] ?? 'N/A' }}</td>
+                            <td class="py-1">Tracking ID:</td>
+                            <td class="text-right">
+                                <a class="text-blue-500" target="_blank"
+                                    href="https://digidokaan.pk/real-time-tracking?t_id={{ $order->track_data['tracking_no'] ?? '0' }}">
+                                    {{ $order->track_data['tracking_no'] ?? 'N/A' }}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-1">Logistic Company:</td>
+                            <td class="text-right">
+                                @if ($order->track_data)
+                                    {{ \App\Services\DigiDokan::$logistics[$order->track_data['gateway_id']] ?? 'N/A' }}
+                            </td>
+                            @endif
                         </tr>
                     </table>
                 </div>
