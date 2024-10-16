@@ -122,10 +122,14 @@
                                             <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
                                                 {{ $item->extra_note }}</td>
                                             <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                                                {{ $item->track_data['tracking_no'] ?? '' }}</td>
+                                                <a class="text-blue-500" target="_blank"
+                                                    href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}">
+                                                    {{ $item->track_data['tracking_no'] ?? 'N/A' }}
+                                                </a>
+                                            </td>
                                             <td
                                                 class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 flex items-center space-x-2">
-                                                <a href="{{ route('vendor.orders.show', $item->id) }}"
+                                                <a href="{{ route('admin.orders.show', $item->id) }}"
                                                     class="text-gray-700 hover:text-blue-500"
                                                     aria-label="View details for Order {{ $item->id }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
@@ -134,7 +138,7 @@
                                                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm7.5 0c-.914 3.407-4.104 6-7.5 6s-6.586-2.593-7.5-6c.914-3.407 4.104-6 7.5-6s6.586 2.593 7.5 6z" />
                                                     </svg>
                                                 </a>
-                                                <a href="{{ route('vendor.orders.edit', $item->id) }}"
+                                                <a href="{{ route('admin.orders.edit', $item->id) }}"
                                                     aria-label="Edit Order {{ $item->id }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1"
