@@ -208,14 +208,14 @@
                 data: {
                     order_ids: orderIds
                 }
-            }).then(async function(response) {
+            }).then(function(response) {
                 console.log(response);
                 if (response.data && response.data.links.length > 0) {
                     // open the each link in new tab
                     response.data.links.forEach(function(link) {
                         window.open(link, '_blank');
                         // wait for 1 second before opening next tab
-                        await setTimeout(function() {}, 1000);
+                        setTimeout(function() {}, 1000);
                     });
                 }
             }).catch(function(error) {
