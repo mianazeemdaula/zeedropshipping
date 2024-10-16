@@ -195,13 +195,13 @@ class OrderController extends Controller
             $digi = new \App\Services\DigiDokan();
             $shipper = Shipper::find(1);
             $ordersdata = Order::whereNotNull('track_data')
-            ->whereIn('id',$request->order_ids)->get();
-            $gateways = $ordersdata->pluck('track_data')->pluck('gateway_id')->toArray();
+            ->whereIn('id',$request->order_ids)->get()->pluck('track_data')->toArray();
+            // data
+            $trackings = collect($ordersdata)->pluck('tracking_no')->toArray();
+            $orders = collect($ordersdata)->pluck('order_no')->toArray();
+            $gateways = collect($ordersdata)->pluck('gateway_id')->toArray();
             $links = [];
-            foreach($gateways as $gateway){    
-                // data
-                $trackings = $ordersdata->whereJsonContains("track_data->gateway_id",$gateway)->pluck('tracking_no')->toArray();
-                $orders = $ordersdata->whereJsonContains("track_data->gateway_id",$gateway)->pluck('order_no')->toArray();
+            foreach($gateways as $gateway){
                 $response = $digi->downloadLoadSheet([
                     'orders' => $orders,
                     'tracking_numbers' => $trackings,
