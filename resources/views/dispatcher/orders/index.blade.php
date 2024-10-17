@@ -74,14 +74,14 @@
                                 <tbody class="divide-y divide-gray-200 bg-white">
                                     @if ($orders->count() == 0)
                                         <tr>
-                                            <td colspan="9" class="text-center py-4">No Orders Found</td>
+                                            <td colspan="9" class="text-center py-1">No Orders Found</td>
                                         </tr>
                                     @endif
                                     @foreach ($orders as $item)
                                         <tr>
-                                            <td class="whitespace-nowrap px-4 py-4"><input type="checkbox"
+                                            <td class="whitespace-nowrap px-4 py-1"><input type="checkbox"
                                                     name="checkorderIds" value="{{ $item->id }}" class="order-id"></td>
-                                            <td class="whitespace-nowrap px-4 py-4">
+                                            <td class="whitespace-nowrap px-4 py-1">
                                                 <div class="flex items-center">
                                                     <div class="ml-4">
                                                         <div class="text-sm font-medium text-gray-900">{{ $item->id ?? '' }}
@@ -91,23 +91,23 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-12 py-4">
+                                            <td class="whitespace-nowrap px-12 py-1">
                                                 <div class="text-sm text-gray-900">{{ $item->paymentMethod->name ?? '' }}
                                                 </div>
                                                 <p class="text-sm">{{ $item->details()->count() }} products</p>
                                             </td>
-                                            <td class="whitespace-nowrap px-4 py-4">
+                                            <td class="whitespace-nowrap px-4 py-1">
                                                 <x-status-chip :status="$item->status" />
                                             </td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
                                                 {{ $item->city }} ({{ $item->zip }})</td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
                                                 {{ $item->shipping_cost }}</td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
                                                 {{ $item->total }}</td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
                                                 {{ $item->extra_note }}</td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-700">
                                                 @if ($item->track_data)
                                                     <a class="text-blue-500" target="_blank"
                                                         href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}">
@@ -116,7 +116,7 @@
                                                 @endif
                                             </td>
                                             <td
-                                                class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 flex items-center space-x-2">
+                                                class="whitespace-nowrap px-4 py-1 text-sm text-gray-700 flex items-center space-x-2">
                                                 <a href="{{ route('dispatcher.orders.show', $item->id) }}"
                                                     class="text-gray-700 hover:text-blue-500"
                                                     aria-label="View details for Order {{ $item->id }}">
@@ -132,14 +132,6 @@
                                                         <i class="fa-solid fa-file-pdf"></i>
                                                     </a>
                                                 @endif
-                                                <a href="#" aria-label="Delete Order {{ $item->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1"
-                                                        class="w-5 h-5">
-                                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                                            d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
