@@ -26,11 +26,21 @@
             @if ($user->hasRole('dropshipper') && $user->vendor)
                 <div class="p-4 border rounded-lg">
                     <h1 class="text-base font-bold mb-4">Shop Information</h1>
-                    <div class="w-20 mb-4">
-                        <img src="{{ $user->vendor->store_logo }}" alt="Store Logo" class="w-full rounded">
-                    </div>
                     <table class="w-full table-fixed">
                         <tbody>
+                            <tr>
+                                <td class="text-sm w-1/2">
+                                    <img src="{{ $user->vendor->store_logo }}" alt="Store Logo" class="w-full rounded">
+                                </td>
+                                <td class="text-sm font-semibold w-1/2">
+                                    @if ($user->dropShipperNicKyc)
+                                        <img src="{{ asset($user->dropShipperNicKyc->file) }}" alt=""
+                                            class="w-20">
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+                            </tr>
                             <tr class="">
                                 <td class="text-sm w-1/2">Name</td>
                                 <td class="text-sm w-1/2">Web</td>
