@@ -30,11 +30,15 @@ class CheckOrderStatus extends Command
     {
         $this->info('Checking order status');
         $digidokan = new DigiDokan();
-        Order::whereIn('status', ['dispatched','delivered','shipped'])->get()->each(function($order){
+        $orders = Order::whereNotIn('status', ['open','cancelled'])->get();
+        foreach($orders as $order){
             $status = $this->getOrderStatus($order);
-            // $order->status = $status;
-            // $order->save();
-        });
+            if($status !== $order->status){
+                // Send notification
+            }
+            $order->status = $status;
+            $order->save();
+        }
         $this->info('Order status checked');
     }
 
