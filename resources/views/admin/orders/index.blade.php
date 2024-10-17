@@ -48,7 +48,7 @@
                             <option value="packed" @if ($status == 'packed') selected @endif>Packed</option>
                             <option value="shipped" @if ($status == 'shipped') selected @endif>Shipped</option>
                             <option value="intransit" @if ($status == 'intransit') selected @endif>Intransit</option>
-                            <option value="canceled" @if ($status == 'canceled') selected @endif>Canceled</option>
+                            <option value="cancelled" @if ($status == 'cancelled') selected @endif>Cancelled</option>
                         </select>
                     </div>
                 </div>

@@ -179,10 +179,10 @@ class OrderController extends Controller
 
     public function showStatusOrder($status){
         $orders = Order::query();
-        if(in_array($status,['open','canceled','disptached'])){
+        if(in_array($status,['open','cancelled','disptached'])){
             $orders->whereIn('status', [$status]);
         }else if( $status == 'intransit'){
-            $orders->whereNotIn('status',['open','canceled','disptached','completed']);
+            $orders->whereNotIn('status',['open','cancelled','disptached','completed']);
         }
         $orders = $orders->get();
         return view('dispatcher.orders.index', compact('orders')); 

@@ -90,7 +90,7 @@ class OrderController extends Controller
     {
         $orders = Order::query();
         if($status === 'intransit'){
-            $orders->whereIn('status', ['shipped', 'delivered']);
+            $orders->whereIn('status', ['shipped', 'delivered','in-transit','picked-up']);
         }else {
             $orders->where('status', $status);
         }
