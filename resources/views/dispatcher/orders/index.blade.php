@@ -58,9 +58,7 @@
                                         <th scope="col" class="px-12 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Status</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
-                                            City/Zip</th>
-                                        <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
-                                            Shipping Cost</th>
+                                            City</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Total</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
@@ -92,17 +90,19 @@
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-12 py-1">
-                                                <div class="text-sm text-gray-900">{{ $item->paymentMethod->name ?? '' }}
-                                                </div>
-                                                <p class="text-sm">{{ $item->details()->count() }} products</p>
+                                                @if ($item->details)
+                                                    {{ $item->details()->first()->product->name }}
+                                                    @if ($item->details->count() > 1)
+                                                        <span
+                                                            class="text-sm text-gray-700">+{{ $item->details->count() - 1 }}</span>
+                                                    @endif
+                                                @endif
                                             </td>
                                             <td class="whitespace-nowrap px-4 py-1">
                                                 <x-status-chip :status="$item->status" />
                                             </td>
                                             <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
-                                                {{ $item->city }} ({{ $item->zip }})</td>
-                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
-                                                {{ $item->shipping_cost }}</td>
+                                                {{ $item->city }}</td>
                                             <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
                                                 {{ $item->total }}</td>
                                             <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
@@ -111,7 +111,7 @@
                                                 @if ($item->track_data)
                                                     <a class="text-blue-500" target="_blank"
                                                         href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}">
-                                                        {{ $item->track_data['tracking_no'] ?? 'N/A' }}
+                                                        Track
                                                     </a>
                                                 @endif
                                             </td>
