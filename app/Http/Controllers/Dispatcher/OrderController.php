@@ -118,7 +118,6 @@ class OrderController extends Controller
                     'gateway_id' => $digiGatewayId,
                     'courier_bulk' => 1
                 ]);
-                return $response;
                 $cities = collect($response->Overnight);
                 // find city
                 $city = $cities->where('city_name', $order->city)->first();
