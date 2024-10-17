@@ -36,6 +36,25 @@ class CheckOrderStatus extends Command
             $status = (new DigiDokan())->getStatus($status);
             if($status !== $order->status){
                 // Send notification
+                if($status === 'delivered'){
+                    $user = $order->user;
+                    $tcost = $order->details()->sum(\DB::raw('price * qty'));
+                    $pcost = $order->details()->sum(\DB::raw('ds_price * qty'));
+                    $total = $tcost - $pcost;
+                    $user->vendorRevenue()->create([
+                        'order_id' => $order->id,
+                        'user_id' => $user->id,
+                        'amount' => $total,
+                        'status' => 'earned',
+                        'paid_at' => now(),
+                        'description' => "Order #$order->id revenue",
+                    ]);
+                    // increase sales count
+                    $order->details->each(function($detail){
+                        $product = $detail->product;
+                        $product->increment('sales_count', $detail->qty);
+                    });
+                }
             }
             $order->status = $status;
             $order->save();
@@ -56,26 +75,6 @@ class CheckOrderStatus extends Command
                 $this->info("Order #$order->id status is $response");
                 $nStatus =  strtolower($response);
                 Log::info("Order #$order->id status is $nStatus DIGIDOKAAN");
-                if($order->status === 'delivered'){
-                    $user = $order->user;
-                    // $user->notify(new OrderDelivered($order));
-                    $tcost = $order->details()->sum(\DB::raw('price * qty'));
-                    $pcost = $order->details()->sum(\DB::raw('ds_price * qty'));
-                    $total = $tcost - $order->total - $order->shipping_cost;
-                    $user->vendorRevenue()->create([
-                        'order_id' => $order->id,
-                        'user_id' => $user->id,
-                        'amount' => $total,
-                        'status' => 'paid',
-                        'paid_at' => now(),
-                        'description' => "Order #$order->id revenue",
-                    ]);
-                    // increase sales count
-                    $order->details->each(function($detail){
-                        $product = $detail->product;
-                        $product->increment('sales_count', $detail->qty);
-                    });
-                }
                 return $nStatus;
             }
         } catch (\Throwable $th) {
