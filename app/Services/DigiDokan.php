@@ -11,6 +11,7 @@ class DigiDokan {
         5 => 'Trax',
         15 => 'M&P',
         13 => 'BlueEx',
+        19 => 'Daak',
     ];
 
     public static function trackUrl($id, $trackingNumber){
@@ -23,6 +24,16 @@ class DigiDokan {
         }else if($id == 15){
         }else if($id == 13){
         }
+    }
+
+    public function getStatus($status)
+    {
+        if($status == 'delivery in transit'){
+            return 'in-transit';
+        }else if($status == 'picked up'){
+            return 'picked-up';
+        }
+        return $status;
     }
 
     public function getLogisticName($id)

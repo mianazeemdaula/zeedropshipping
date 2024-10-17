@@ -33,6 +33,7 @@ class CheckOrderStatus extends Command
         $orders = Order::whereNotIn('status', ['open','cancelled'])->get();
         foreach($orders as $order){
             $status = $this->getOrderStatus($order);
+            $status = (new DigiDokan())->getStatus($status);
             if($status !== $order->status){
                 // Send notification
             }
