@@ -40,8 +40,7 @@ class CheckOrderStatus extends Command
                     $user = $order->user;
                     $tcost = $order->details()->sum(\DB::raw('price * qty'));
                     $pcost = $order->details()->sum(\DB::raw('ds_price * qty'));
-                    $weight = $order->weight;
-                    $weightCost = $weight > 1000 ? 40 : 30;
+                    $weightCost = $$order->weight > 1000 ? 40 : 30;
                     $total = ( $tcost - $pcost ) - $weightCost;
                     $user->vendorRevenue()->create([
                         'order_id' => $order->id,
