@@ -60,6 +60,14 @@
                             <td class="py-1">Email:</td>
                             <td class="text-right">{{ $order->customer_email }}</td>
                         </tr>
+                        <tr>
+                            <td class="py-1">Shipping Address:</td>
+                            <td class="text-right">{{ $order->shipping_address }} - {{ $order->city }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-1">Billing Address:</td>
+                            <td class="text-right">{{ $order->billing_address }}</td>
+                        </tr>
                     </table>
                 </div>
 

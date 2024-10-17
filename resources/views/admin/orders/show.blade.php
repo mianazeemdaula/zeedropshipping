@@ -62,6 +62,14 @@
                             <td class="py-1">Email:</td>
                             <td class="text-right">{{ $order->customer_email }}</td>
                         </tr>
+                        <tr>
+                            <td class="py-1">Shipping Address:</td>
+                            <td class="text-right">{{ $order->shipping_address }} - {{ $order->city }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-1">Billing Address:</td>
+                            <td class="text-right">{{ $order->billing_address }}</td>
+                        </tr>
                     </table>
                 </div>
 
@@ -138,44 +146,9 @@
                     </tbody>
                 </table>
                 <div class="mt-4 flex justify-end space-x-2">
-                    <a href="{{ route('vendor.orders.index') }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">
+                    <a onclick="print();" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">
                         <i class="fa-solid fa-print mr-2"></i>Print
                     </a>
-                    <form action="{{ route('vendor.orders.update', $order->id) }}" method="post">
-                        @csrf
-                        @method('PUT')
-                        @php
-                            $btnColor = 'bg-gray-200';
-                            $btnText = 'Close Order';
-                            $btnIcon = 'fa-truck';
-                            $status = 'open';
-                            if ($order->status == 'open') {
-                                $btnColor = 'bg-green-200';
-                                $btnText = 'Packed Order';
-                                $btnIcon = 'fa-box';
-                                $status = 'packed';
-                            } elseif ($order->status == 'packed') {
-                                $btnColor = 'bg-blue-200';
-                                $btnText = 'Shipped Order';
-                                $btnIcon = 'fa-truck';
-                                $status = 'shipped';
-                            } elseif ($order->status == 'shipped') {
-                                $btnColor = 'bg-gray-200';
-                                $btnText = 'Deliver Order';
-                                $btnIcon = 'fa-truck';
-                                $status = 'delivered';
-                            } elseif ($order->status == 'delivered') {
-                                $btnColor = 'bg-gray-200';
-                                $btnText = 'Order Closed';
-                                $btnIcon = 'fa-truck';
-                                $status = 'closed';
-                            }
-                        @endphp
-                        <input type="hidden" name="status" value="{{ $status }}">
-                        <button type="submit" class="{{ $btnColor }} text-gray-700 px-4 py-2 rounded-md">
-                            <i class="fa-solid {{ $btnIcon }}"></i> {{ $btnText }}
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
