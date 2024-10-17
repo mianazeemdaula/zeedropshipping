@@ -87,12 +87,11 @@
                                             Order #</th>
                                         <th scope="col" class="px-12 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Products</th>
-                                        <th scope="col" class="px-12 py-3.5 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col"
+                                            class="px-12 py-3.5 text-start text-sm font-normal text-gray-700">
                                             Status</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
-                                            City/Zip</th>
-                                        <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
-                                            Shipping Cost</th>
+                                            City</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Total</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
@@ -111,7 +110,7 @@
                                     @endif
                                     @foreach ($orders as $item)
                                         <tr>
-                                            <td class="whitespace-nowrap px-4 py-4">
+                                            <td class="whitespace-nowrap px-4 py-1">
                                                 <div class="flex items-center">
                                                     <div class="ml-4">
                                                         <div class="text-sm font-medium text-gray-900">{{ $item->id ?? '' }}
@@ -121,26 +120,36 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-12 py-4">
-                                                <div class="text-sm text-gray-900">{{ $item->paymentMethod->name ?? '' }}
+                                            <td class="whitespace-nowrap px-12 py-1">
+                                                <div class="text-sm text-gray-900">
+                                                    @if ($item->details)
+                                                        {{ $item->details()->first()->product->name }}
+                                                        @if ($item->details->count() > 1)
+                                                            <span
+                                                                class="text-sm text-gray-700">+{{ $item->details->count() - 1 }}</span>
+                                                        @endif
+                                                    @endif
                                                 </div>
-                                                <p class="text-sm">{{ $item->details()->count() }} products</p>
                                             </td>
-                                            <td class="whitespace-nowrap px-4 py-4">
+                                            <td class="whitespace-nowrap px-4 py-1">
                                                 <x-status-chip status="{{ $item->status }}" />
                                             </td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                                                {{ $item->city }} ({{ $item->zip }})</td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                                                {{ $item->shipping_cost }}</td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
+                                                {{ $item->city }}</td>
+                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
                                                 {{ $item->total }}</td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
                                                 {{ $item->extra_note }}</td>
-                                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                                                {{ $item->track_data['tracking_no'] ?? '' }}</td>
+                                            <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-700">
+                                                @if ($item->track_data)
+                                                    <a class="text-blue-500" target="_blank"
+                                                        href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}">
+                                                        {{ $item->track_data['tracking_no'] ?? 'N/A' }}
+                                                    </a>
+                                                @endif
+                                            </td>
                                             <td
-                                                class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 flex items-center space-x-2">
+                                                class="whitespace-nowrap px-4 py-1 text-sm text-gray-700 flex items-center space-x-2">
                                                 <a href="{{ route('vendor.orders.show', $item->id) }}"
                                                     class="text-gray-700 hover:text-blue-500"
                                                     aria-label="View details for Order {{ $item->id }}">
@@ -160,14 +169,6 @@
                                                             d="M11 19h-2a1 1 0 01-1-1v-2a1 1 0 01.293-.707l8.59-8.59a1.5 1.5 0 012.12 0l2.12 2.12a1.5 1.5 0 010 2.12l-8.59 8.59A1 1 0 0111 19z" />
                                                         <path strokeLinecap="round" strokeLinejoin="round"
                                                             d="M13 17l-3-3m0 0l1-1m-1 1l-1-1m1 1h1.5m3-5.5L14 9m-1 1L11.5 7.5" />
-                                                    </svg>
-                                                </a>
-                                                <a href="#" aria-label="Delete Order {{ $item->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1"
-                                                        class="w-5 h-5">
-                                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                                            d="M6 18L18 6M6 6l12 12" />
                                                     </svg>
                                                 </a>
                                             </td>

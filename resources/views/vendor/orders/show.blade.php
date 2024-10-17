@@ -22,10 +22,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="py-1">Shipper:</td>
-                            <td class="text-right">{{ $order->shipper->name ?? 'N/A' }}</td>
-                        </tr>
-                        <tr>
                             <td class="py-1">Tracking ID:</td>
                             <td class="text-right">
                                 <a class="text-blue-500" target="_blank"
@@ -75,12 +71,16 @@
                     <div class="font-bold text-sm">Drop Shipper Details</div>
                     <table class="text-sm w-full ">
                         <tr>
+                            <td class="py-1">DS ID:</td>
+                            <td class="text-right">{{ $order->user->vendor->ds_number }}</td>
+                        </tr>
+                        <tr>
                             <td class="py-1">Name:</td>
                             <td class="text-right">{{ $order->user->name }}</td>
                         </tr>
                         <tr>
                             <td class="py-1">Mobile:</td>
-                            <td class="text-right">{{ $order->user->mobile }}</td>
+                            <td class="text-right">{{ $order->user->mobile ?? $order->user->vendor->phone }}</td>
                         </tr>
                         <tr>
                             <td class="py-1">Email:</td>
@@ -124,22 +124,6 @@
                         <tr>
                             <td colspan="4" class="px-4 py-3.5 text-sm font-bold text-gray-400 text-right">Subtotal</td>
                             <td class="px-4 py-3.5 text-sm font-normal text-gray-700">RS.{{ $order->total }}</td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="4" class="px-4 py-3.5 text-sm font-bold text-gray-400 text-right">Delivery
-                                Charges</td>
-                            <td class="px-4 py-3.5 text-sm font-normal text-gray-700">RS.{{ $order->shipping_cost }}</td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="4" class="px-4 py-3.5 text-sm font-bold text-gray-400 text-right">Tax</td>
-                            <td class="px-4 py-3.5 text-sm font-normal text-gray-700">RS.{{ $order->tax }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="px-4 py-3.5 text-sm text-gray-400 text-right font-bold">Total</td>
-                            <td class="px-4 py-3.5 text-sm font-normal text-gray-700">
-                                RS.{{ $order->tax + $order->shipping_cost + $order->total }}</td>
                         </tr>
                     </tbody>
                 </table>

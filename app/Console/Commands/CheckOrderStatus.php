@@ -38,10 +38,10 @@ class CheckOrderStatus extends Command
                 // Send notification
                 if($status === 'delivered'){
                     $user = $order->user;
-                    $tcost = $order->details()->sum(\DB::raw('price * qty'));
+                    $codcost = $order->details()->sum(\DB::raw('price * qty'));
                     $pcost = $order->details()->sum(\DB::raw('ds_price * qty'));
-                    $weightCost = $$order->weight > 1000 ? 40 : 30;
-                    $total = ( $tcost - $pcost ) - $weightCost;
+                    $packing = $order->weight > 1000 ? 40 : 30;
+                    $total = (( $codcost - $pcost ) - $this->deliveryCharge($order->weight)) - $packing;
                     $user->vendorRevenue()->create([
                         'order_id' => $order->id,
                         'user_id' => $user->id,
@@ -83,5 +83,13 @@ class CheckOrderStatus extends Command
             return $order->status;
         }
         return $order->status;
+    }
+
+    protected function deliveryCharge($weight){
+        if($weight <= 1000){
+            return 180;
+        }
+        $weight = $weight - 1000;
+        return 180 + (100 * (ceil($weight / 1000)));
     }
 }
