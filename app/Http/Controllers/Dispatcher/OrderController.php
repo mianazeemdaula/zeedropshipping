@@ -119,10 +119,11 @@ class OrderController extends Controller
                     'courier_bulk' => 1
                 ]);
                 $cities = collect($response->Overnight);
+                return $cities;
                 // find city
                 $city = $cities->where('city_name', $order->city)->first();
                 if(!$city){
-                    return redirect()->back()->with('error', 'Order city not found');
+                    return redirect()->back()->with('error', 'Order city not found for this shipment type');
                 }
                 $city_id = $city->city_id ?? 1;
                 
