@@ -16,7 +16,7 @@ class DropShipperController extends Controller
      */
     public function index()
     {
-        $users = User::role('dropshipper')->paginate();
+        $users = User::role('dropshipper')->orderBy('id','desc')->paginate();
         return view('admin.dropshippers.index', compact('users'));
     }
 
