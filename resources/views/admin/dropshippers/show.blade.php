@@ -59,11 +59,17 @@
                                     <x-status-chip status="{{ $user->status }}" />
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="text-sm  w-1/2 pt-2">Sale Level</td>
+                                <td class="text-sm w-1/2 pt-2">Last Sales</td>
+                            </tr>
+                            <tr>
+                                <td class="text-sm font-semibold w-1/2 pt-2">{{ $user->vendor->sale_level }}</td>
+                                <td class="text-sm font-semibold w-1/2 pt-2">{{ $user->vendor->last_sales }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-
-
                 <div class="p-4 border rounded-lg">
                     <h1 class="text-base font-bold mb-4">Address Information</h1>
                     <table class="w-full table-fixed">
@@ -83,15 +89,6 @@
                             <tr>
                                 <td class="text-sm font-semibold w-1/2 pt-2">{{ $user->vendor->phone }}</td>
                                 <td class="text-sm font-semibold w-1/2 pt-2">{{ $user->vendor->address }}</td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-sm  w-1/2 pt-2">Sale Level</td>
-                                <td class="text-sm w-1/2 pt-2">Last Sales</td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-semibold w-1/2 pt-2">{{ $user->vendor->sale_level }}</td>
-                                <td class="text-sm font-semibold w-1/2 pt-2">{{ $user->vendor->last_sales }}</td>
                             </tr>
                         </tbody>
                     </table>

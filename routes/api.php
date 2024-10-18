@@ -17,7 +17,6 @@ Route::get('digidokan/pickup/{id}', function($id){
 });
 
 Route::post('dropshipper-pending-payment-info', function(Request $request){
-    return $request->all();
     $vendor = \App\Models\Vendor::where('ds_number', $request->id)->first();
     if(!$vendor){
         return response()->json([
@@ -30,7 +29,7 @@ Route::post('dropshipper-pending-payment-info', function(Request $request){
     $bankInfo = $dropshipper->activeBankAccount;
     return response()->json([
         'pending_payment' => $pendingPayment,
-        'pending_order_ids' => [5,4,98,35,],
+        'pending_order_ids' => $pendingOrderIds,
         'bank_info' => $bankInfo
     ]);
 });
