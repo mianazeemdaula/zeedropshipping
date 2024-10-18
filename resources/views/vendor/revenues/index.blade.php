@@ -31,10 +31,10 @@
                                             Description</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
-                                            Credited On</th>
+                                            Status</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
-                                            Status</th>
+                                            Credited On</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
                                             Amount</th>
