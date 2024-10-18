@@ -14,7 +14,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('id','desc')->paginate();
+        $orders = Order::orderBy('id','desc');
+        if(request()->has('status') && request()->status != 'all'){
+            $orders = $orders->where('status', request()->status);
+        }
+        $orders = $orders->paginate();
         return view('admin.orders.index', compact('orders'));
     }
 
@@ -84,18 +88,6 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function showStatusOrders(string $status)
-    {
-        $orders = Order::query();
-        if($status === 'intransit'){
-            $orders->whereIn('status', ['shipped', 'delivered','in-transit','picked-up']);
-        }else {
-            $orders->where('status', $status);
-        }
-        $orders = $orders->orderBy('id','desc')->paginate();
-        return view('admin.orders.index', compact('orders'));
     }
 
     public function search(Request $request)

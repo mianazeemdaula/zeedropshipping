@@ -1,9 +1,10 @@
-<div>
+<div class="flex items-center justify-center">
     @php
         $color = 'gray';
         switch ($status) {
             case 'active':
             case 'completed':
+            case 'delivered':
                 $color = 'green';
                 break;
             case 'inactive':
@@ -11,9 +12,9 @@
                 $color = 'red';
                 break;
             case 'pending':
+            case 'open':
                 $color = 'yellow';
                 break;
-
             default:
                 break;
         }

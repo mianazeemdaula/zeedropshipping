@@ -45,6 +45,17 @@ class Order extends Model
         'delivered_date' => 'datetime',
         'track_data' => 'array',
     ];
+
+    public static $statuses = [
+        'all',
+        'open',
+        'packed',
+        'shipped',
+        'picked-up',
+        'in-transit',
+        'delivered',
+        'canceled',
+    ];
     
 
     public function user()

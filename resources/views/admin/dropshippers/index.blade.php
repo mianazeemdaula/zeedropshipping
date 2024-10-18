@@ -37,7 +37,8 @@
                                     <tr>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
-                                            DS#</th>
+                                            DS #
+                                        </th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
                                             User</th>
@@ -49,7 +50,10 @@
                                             Ratio</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-center text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
-                                            Status</th>
+                                            <a href="{{ App\Helper\Helper::genSortUrl('status') }}">
+                                                Status
+                                            </a>
+                                        </th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
                                             City</th>

@@ -25,13 +25,13 @@
                                             Dropshipper</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
-                                            Pending Orders</th>
+                                            Orders without payment</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
-                                            Last Payment On</th>
+                                            Last payment on</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
-                                            Due Amount</th>
+                                            Due amount</th>
                                         {{-- <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Action</th> --}}
                                     </tr>
                                 </thead>
@@ -45,10 +45,6 @@
                                     @foreach ($vendors as $item)
                                         <tr>
                                             <td class="whitespace-nowrap px-2 py-2 text-sm sm:px-4 sm:py-2">
-                                                <div class="font-medium">
-                                                    <img src="{{ $item->avatar }}" alt="" srcset=""
-                                                        class="w-10">
-                                                </div>
                                                 <div>
                                                     {{ $item->vendor->business_name }}
                                                 </div>
@@ -58,7 +54,7 @@
                                             </td>
                                             <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
                                                 <div class="font-semibold">
-                                                    {{ $item->orders()->where('status', 'cancelled')->count() }}
+                                                    {{ $item->vendorRevenue()->where('status', 'earned')->count() }}
                                                 </div>
                                             </td>
                                             <td class="whitespace nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">

@@ -8,7 +8,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
-
+use App\Helper\Helper;
 class DropShipperController extends Controller
 {
     /**
@@ -16,7 +16,12 @@ class DropShipperController extends Controller
      */
     public function index()
     {
-        $users = User::role('dropshipper')->orderBy('id','desc')->paginate();
+        $users = User::role('dropshipper');
+        if(request()->has('sort')){
+            $param = Helper::sortParam(request()->sort);
+            $users = $users->orderBy($param[0], $param[1]);
+        }
+        $users = $users->paginate();
         return view('admin.dropshippers.index', compact('users'));
     }
 

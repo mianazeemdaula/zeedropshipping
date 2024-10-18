@@ -88,12 +88,8 @@
     <script type="module">
         const dropshipper = document.querySelector('#dropshipper');
         $('#dropshipper').on('change', function() {
-            const selected = $(this).find('option:selected');
-            const id = selected.val();
-            const name = selected.text();
-            console.log(id, name);
             axios.post('/api/dropshipper-pending-payment-info', {
-                id: id,
+                id: dropshipper.value,
             }).then(response => {
                 console.log(response.data);
                 $('#amount').val(response.data.pending_payment);
