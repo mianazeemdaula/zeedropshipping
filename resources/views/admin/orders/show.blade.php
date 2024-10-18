@@ -82,7 +82,7 @@
                         </tr>
                         <tr>
                             <td class="py-1">Mobile:</td>
-                            <td class="text-right">{{ $order->user->mobile }}</td>
+                            <td class="text-right">{{ $order->user->mobile ?? $order->user->vendor->phone }}</td>
                         </tr>
                         <tr>
                             <td class="py-1">Email:</td>

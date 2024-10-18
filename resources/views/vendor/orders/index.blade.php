@@ -120,7 +120,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-12 py-1">
+                                            <td class="whitespace-normal px-4 py-1 line-clamp-2">
                                                 <div class="text-sm text-gray-900">
                                                     @if ($item->details)
                                                         {{ $item->details()->first()->product->name }}

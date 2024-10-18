@@ -12,7 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
-
+use Carbon\Carbon;
 use App\Models\Bank;
 use App\Models\BankAccount;
 use App\Models\UserKycDoc;
@@ -135,8 +135,25 @@ class AuthController extends Controller
 
     public function dashboard()  {
         $user = Auth::user();
+        $dates = [];
+        for ($i = 0; $i < 7; $i++) {
+            $dates[] = Carbon::now()->subDays($i)->format('Y-m-d');
+        }
+        $dates = array_reverse($dates);
         if($user->hasRole('admin')){
+            $chartOrders = [];
+            $chartSales = [];
+            $chartUsers = [];
+            foreach($dates as $date){
+                $key = Carbon::parse($date)->format('d');
+                $chartOrders[$key] = Order::whereDate('created_at', $date)->count();
+                $chartSales[$key] = Order::whereIn('status',['delivered'])->whereDate('created_at', $date)->sum('total');
+                $chartUsers[$key] = User::whereDate('created_at', $date)->count();
+            }
             $stats = [
+                'chartOrders' => $chartOrders,
+                'chartSales' => $chartSales,
+                'chartUsers' => $chartUsers,
                 'total_users' => User::count(),
                 'total_team' => User::role('dispatcher')->count(),
                 'total_vendors' => User::role('dropshipper')->count(),
@@ -155,7 +172,19 @@ class AuthController extends Controller
             ];
             return view('admin.dashboard', compact('stats'));
         }else if($user->hasRole('dropshipper')){
+            $chartOrders = [];
+            $chartSales = [];
+            $chartPayments = [];
+            foreach($dates as $date){
+                $key = Carbon::parse($date)->format('d');
+                $chartOrders[$key] = Order::where('user_id',auth()->id())->whereDate('created_at', $date)->count();
+                $chartSales[$key] = Order::where('user_id',auth()->id())->whereIn('status',['delivered'])->whereDate('created_at', $date)->sum('total');
+                $chartPayments[$key] = \App\Models\VendorRevenue::whereStatus('paid')->whereDate('created_at', $date)->count();
+            }
             $stats = [
+                'chartOrders' => $chartOrders,
+                'chartSales' => $chartSales,
+                'chartPayments' => $chartPayments,
                 'open_orders' => Order::where('status', 'open')->count(),
                 'intransit_orders' => Order::whereNotIn('status', ['open','cancelled'])->count(),
                 'canceled_orders' => Order::where('status', 'cancelled')->count(),

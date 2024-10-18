@@ -45,10 +45,10 @@
             type: 'line',
             responsive: true,
             data: {
-                labels: ['16', '17', '18', '19', '20', '21'],
+                labels: @json(array_keys($stats['chartOrders'])),
                 datasets: [{
                     label: 'Sales',
-                    data: [12, 19, 3, 5, 15, 3],
+                    data: @json(array_values($stats['chartOrders'])),
                     tension: 0.4,
                     borderColor: 'rgb(234, 50, 57)',
                 }]
@@ -65,10 +65,10 @@
             type: 'bar',
             responsive: true,
             data: {
-                labels: ['16', '17', '18', '19', '20', '21'],
+                labels: @json(array_keys($stats['chartSales'])),
                 datasets: [{
                     label: 'Sales',
-                    data: [12, 19, 3, 5, 15, 3],
+                    data: @json(array_values($stats['chartSales'])),
                     barThickness: 20,
                     backgroundColor: 'rgb(234, 50, 57)',
                 }]
@@ -85,10 +85,10 @@
             type: 'line',
             responsive: true,
             data: {
-                labels: ['25/08/2024', '29/08/2024', '02/09/2024', '05/09/2024', ],
+                labels: @json(array_keys($stats['chartPayments'])),
                 datasets: [{
                     label: '',
-                    data: [25, 15, 18, 6],
+                    data: @json(array_values($stats['chartPayments'])),
                     backgroundColor: 'rgb(234, 50, 0)',
                     borderColor: 'rgb(234, 50, 57)',
                     tension: 0.4,

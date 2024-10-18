@@ -7,6 +7,10 @@
             case 'delivered':
                 $color = 'green';
                 break;
+            case 'booked':
+            case 'in-transit':
+                $color = 'blue';
+                break;
             case 'inactive':
             case 'cancelled':
                 $color = 'red';
