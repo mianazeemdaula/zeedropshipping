@@ -93,7 +93,7 @@
     </div>
 @endsection
 
-@section('js')
+{{-- @section('js')
     <script type="module">
         const dropshipper = document.querySelector('#dropshipper');
         $('#dropshipper').on('change', function() {
@@ -120,4 +120,4 @@
             });
         });
     </script>
-@endsection
+@endsection --}}
