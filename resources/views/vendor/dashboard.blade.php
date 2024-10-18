@@ -13,6 +13,8 @@
                 value="{{ $stats['canceled_orders'] }}" color="red" :url="route('vendor.orders.status', 'cancelled')" />
             <x-icon-state-card title="Intransit Orders" icon="fa-solid fa-cart-shopping"
                 value="{{ $stats['intransit_orders'] }}" color="red" :url="route('vendor.orders.status', 'intransit')" />
+            <x-icon-state-card title="Delivered Orders" icon="fa-solid fa-cart-shopping"
+                value="{{ $stats['delivered_orders'] }}" color="red" :url="route('vendor.orders.status', 'delivered')" />
             <x-icon-state-card title="Total Revenue" icon="fa-solid fa-dollar" value="{{ $stats['total_revenue'] ?? 0 }}"
                 color="red" :url="route('vendor.revenue.index')" />
             <x-icon-state-card title="Total Payments" icon="fa-solid fa-money-bill"
