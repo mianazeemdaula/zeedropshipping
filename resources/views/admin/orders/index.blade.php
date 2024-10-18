@@ -62,23 +62,25 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50 text-xs">
                                     <tr>
-                                        <th scope="col" class="px-4 py-1 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col" class="px-4 py-1 text-left text-gray-700">
+                                            Dropshipper</th>
+                                        <th scope="col" class="px-4 py-1 text-left text-gray-700">
                                             Order #</th>
-                                        <th scope="col" class="px-12 py-1 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col" class="px-12 py-1 text-left text-gray-700">
                                             Products</th>
-                                        <th scope="col" class="px-12 py-1 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col" class="px-12 py-1 text-left text-gray-700">
                                             Status</th>
-                                        <th scope="col" class="px-4 py-1 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col" class="px-4 py-1 text-left  text-gray-700">
                                             City</th>
-                                        <th scope="col" class="px-4 py-1 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col" class="px-4 py-1 text-left  text-gray-700">
                                             Shipping Cost</th>
-                                        <th scope="col" class="px-4 py-1 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col" class="px-4 py-1 text-left text-gray-700">
                                             Total</th>
-                                        <th scope="col" class="px-4 py-1 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col" class="px-4 py-1 text-left  text-gray-700">
                                             Extra Note</th>
-                                        <th scope="col" class="px-4 py-1 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col" class="px-4 py-1 text-left text-gray-700">
                                             Track ID</th>
-                                        <th scope="col" class="px-4 py-1 text-left text-sm font-normal text-gray-700">
+                                        <th scope="col" class="px-4 py-1 text-left text-gray-700">
                                             Action</th>
                                     </tr>
                                 </thead>
@@ -90,6 +92,18 @@
                                     @endif
                                     @foreach ($orders as $item)
                                         <tr>
+                                            <td class="whitespace-nowrap px-4 py-1">
+                                                <div class="flex items-center">
+                                                    <div class="">
+                                                        <div class=" text-gray-900">
+                                                            {{ $item->user->vendor->ds_number ?? '' }}
+                                                        </div>
+                                                        <div class=" text-gray-700">
+                                                            {{ $item->user->vendor->business_name ?? '' }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td class="whitespace-nowrap px-4 py-1">
                                                 <div class="flex items-center">
                                                     <div class="">

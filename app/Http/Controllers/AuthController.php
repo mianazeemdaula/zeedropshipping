@@ -190,7 +190,7 @@ class AuthController extends Controller
                 'canceled_orders' => Order::where('status', 'cancelled')->count(),
                 'dispatched_orders' => Order::where('status', 'dispatched')->count(),
                 'total_orders' => Order::where('user_id', auth()->id())->count(),
-                'total_sales' => Order::whereNotIn('status',['cancelled','open','packed'])->where('user_id', auth()->id())->sum('total'),
+                'total_sales' => Order::whereNotIn('status',['cancelled','open','packed','booked'])->where('user_id', auth()->id())->sum('total'),
                 'total_revenue' => \App\Models\VendorRevenue::where('user_id', auth()->id())->sum('amount'),
                 'total_payments' => \App\Models\VendorRevenue::where('user_id', auth()->id())->where('status', 'paid')->sum('amount'),
             ];

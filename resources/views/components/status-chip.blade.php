@@ -15,10 +15,6 @@
             case 'cancelled':
                 $color = 'red';
                 break;
-            case 'pending':
-            case 'open':
-                $color = 'yellow';
-                break;
             default:
                 break;
         }
