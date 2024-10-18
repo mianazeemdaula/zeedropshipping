@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\VendorRevenue;
 use App\Models\User;
 use App\Models\BankTransaction;
+use App\Models\Vendor;  
 
 class PaymentController extends Controller
 {
