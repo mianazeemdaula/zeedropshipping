@@ -5,8 +5,10 @@
         <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
             <div class="flex items-center justify-between min-w-full">
                 <h2 class="text-lg font-semibold">Profile</h2>
-                <a href="{{ route('vendor.profile.edit', $user->id) }}"
-                    class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">Edit</a>
+                @if ($user->status == 'active')
+                    <a href="{{ route('vendor.profile.edit', $user->id) }}"
+                        class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">Edit</a>
+                @endif
             </div>
         </div>
         <div class="mt-6 flex flex-col space-y-4 bg-white p-6 rounded-lg">

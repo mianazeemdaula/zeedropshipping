@@ -62,6 +62,7 @@ class PaymentController extends Controller
         ]);
         $d = Vendor::where('ds_number',$request->dropshipper)->first();
         $dropshipper = User::find($d->id);
+        return $dropshipper;
         // create payment
         $bankTrans = BankTransaction::create([
             'bank_account_id' => $dropshipper->activeBankAccount->id,
