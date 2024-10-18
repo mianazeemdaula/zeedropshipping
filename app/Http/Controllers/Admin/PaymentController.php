@@ -9,6 +9,8 @@ use App\Models\VendorRevenue;
 use App\Models\User;
 use App\Models\BankTransaction;
 use App\Models\Vendor;  
+use App\Models\BankAccount;
+
 
 class PaymentController extends Controller
 {
@@ -20,6 +22,9 @@ class PaymentController extends Controller
         // distinct vendors 
         $revenueUserIds = VendorRevenue::distinct()->pluck('user_id');
         $vendors = User::whereIn('id', $revenueUserIds)->withSum('vendorRevenue', 'amount')
+        ->whereHas('vendorRevenue',function($q){
+            $q->where('status', 'earned');
+        })
         ->with('activeBankAccount.lastBankTransaction')->paginate();
         return view('admin.payments.index', compact('vendors'));
     }
@@ -29,13 +34,17 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $revenueUserIds = VendorRevenue::distinct()->pluck('user_id');
-        $vendors = User::whereIn('id', $revenueUserIds)->withSum('vendorRevenue', 'amount')
-        ->whereHas('vendorRevenue',function($q){
-            $q->where('status', 'pending');
-        })->get();
-        $vendors = User::role('dropshipper')->get();
-        return view('admin.payments.create', compact('vendors'));
+        // $revenueUserIds = VendorRevenue::distinct()->pluck('user_id');
+        // $vendors = User::whereIn('id', $revenueUserIds)->withSum('vendorRevenue', 'amount')
+        // ->whereHas('vendorRevenue',function($q){
+        //     $q->where('status', 'pending');
+        // })->get();
+        // $vendors = User::role('dropshipper')->get();
+        $user = Vendor::where('ds_number',request()->ds)->first()->user;
+        $amount = VendorRevenue::where('user_id', $user->id)->where('status', 'earned')->sum('amount');
+        $bank = $user->activeBankAccount;
+        $ordersIds = VendorRevenue::where('user_id', $user->id)->where('status', 'earned')->pluck('order_id');
+        return view('admin.payments.create', compact('user', 'amount','bank','ordersIds'));
     }
 
     /**

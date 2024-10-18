@@ -19,17 +19,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     <div class="flex flex-col gap-2">
                         <x-label>Dropshipper(DS ID)</x-label>
-                        <x-input name="dropshipper" />
-                        {{-- <x-select name="dropshipper">
-                            <option value="">Select Dropshipper</option>
-                            @foreach ($vendors as $dropshipper)
-                                <option value="{{ $dropshipper->id }}">{{ $dropshipper->name }}</option>
-                            @endforeach
-                        </x-select> --}}
+                        <x-input name="dropshipper" value="{{ $user->vendor->ds_number }}" readonly />
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-label>Amount</x-label>
-                        <x-input name="amount" value="{{ old('amount') }}" type="number" />
+                        <x-input name="amount" value="{{ $amount }}" type="number" />
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-label>Deduction</x-label>
@@ -61,15 +55,22 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-label>Bank Account Title</x-label>
-                        <x-input name="bank_title" value="{{ old('bank_title') }}" readonly />
+                        <x-input name="bank_title" value="{{ $bank->account_name }}" readonly />
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-label>Bank Account</x-label>
-                        <x-input name="bank_iban" value="{{ old('bank_iban') }}" readonly />
+                        <x-input name="bank_iban" value="{{ $bank->iban }}" readonly />
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-label>Pending Orders</x-label>
-                        <div id="pending_orders" class="flex items-center justify-start gap-2">
+                        {{-- <div id="pending_orders" class="flex items-center justify-start gap-2">
+                        </div> --}}
+                        <div class="flex items-center gap-2">
+                            @foreach ($ordersIds as $item)
+                                <input type="checkbox" name="orderids[]" checked value="{{ $item }}"
+                                    class="form-checkbox h-5 w-5 text-green-600">
+                                <span>{{ $item }}</span>
+                            @endforeach
                         </div>
                     </div>
                 </div>
