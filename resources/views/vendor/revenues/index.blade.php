@@ -34,6 +34,9 @@
                                             Credited On</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Status</th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
                                             Amount</th>
                                         {{-- <th scope="col" class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">Action</th> --}}
                                     </tr>
@@ -57,6 +60,9 @@
                                             </td>
                                             <td class="whitespace-nowrap px-2 py-1  sm:px-4 sm:py-1">
                                                 {{ $item->description }}
+                                            </td>
+                                            <td class="whitespace nowrap px-2 py-1 sm:px-4 sm:py-1">
+                                                <x-status-chip :status="$item->status" />
                                             </td>
                                             <td class="whitespace nowrap px-2 py-1 sm:px-4 sm:py-1">
                                                 {{ $item->created_at }}
