@@ -24,8 +24,8 @@ Route::post('dropshipper-pending-payment-info', function(Request $request){
         ], 404);
     }
     $dropshipper = \App\Models\User::find($vendor->user_id);
-    $pendingPayment = $dropshipper->vendorRevenue()->where('status', 'pending')->sum('amount');
-    $pendingOrderIds = $dropshipper->vendorRevenue()->where('status', 'pending')->pluck('order_id');
+    $pendingPayment = $dropshipper->vendorRevenue()->where('status', 'earned')->sum('amount');
+    $pendingOrderIds = $dropshipper->vendorRevenue()->where('status', 'earned')->pluck('order_id');
     $bankInfo = $dropshipper->activeBankAccount;
     return response()->json([
         'pending_payment' => $pendingPayment,
