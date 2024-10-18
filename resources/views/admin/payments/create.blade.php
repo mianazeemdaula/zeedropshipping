@@ -18,7 +18,11 @@
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     <div class="flex flex-col gap-2">
-                        <x-label>Dropshipper(DS ID)</x-label>
+                        <x-label>Dropshipper</x-label>
+                        <x-input name="name" value="{{ $user->vendor->business_name }}" readonly />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <x-label>DS ID</x-label>
                         <x-input name="dropshipper" value="{{ $user->vendor->ds_number }}" readonly />
                     </div>
                     <div class="flex flex-col gap-2">
@@ -54,11 +58,15 @@
                         <x-input name="note" value="{{ old('note') }}" />
                     </div>
                     <div class="flex flex-col gap-2">
+                        <x-label>Bank</x-label>
+                        <x-input name="bank" value="{{ $bank->bank->name }}" readonly />
+                    </div>
+                    <div class="flex flex-col gap-2">
                         <x-label>Bank Account Title</x-label>
                         <x-input name="bank_title" value="{{ $bank->account_name }}" readonly />
                     </div>
                     <div class="flex flex-col gap-2">
-                        <x-label>Bank Account</x-label>
+                        <x-label>Account #</x-label>
                         <x-input name="bank_iban" value="{{ $bank->iban }}" readonly />
                     </div>
                     <div class="flex flex-col gap-2">
