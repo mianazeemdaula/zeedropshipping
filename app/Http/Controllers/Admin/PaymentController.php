@@ -43,7 +43,6 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'dropshipper' => 'required|exists:users,id',
             'amount' => 'required|numeric',
             'payment_method' => 'required',
             'payment_date' => 'required|date',
@@ -51,8 +50,8 @@ class PaymentController extends Controller
             'deduction' => 'required|numeric',
             'orderids' => 'required|array',
         ]);
-
-        $dropshipper = User::find($request->dropshipper);
+        $d = Vendor::where('ds_number',$request->dropshipper)->first();
+        $dropshipper = User::find($d->id);
         // create payment
         $bankTrans = BankTransaction::create([
             'bank_account_id' => $dropshipper->activeBankAccount->id,
