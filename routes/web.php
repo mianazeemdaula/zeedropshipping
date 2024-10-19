@@ -9,6 +9,7 @@ Route::get('/', 'App\Http\Controllers\GuestController@index');
 Route::get('/terms-and-conditions', 'App\Http\Controllers\GuestController@termsAndConditions');
 Route::get('/policies', 'App\Http\Controllers\GuestController@policies');
 Route::get('/contact', 'App\Http\Controllers\GuestController@contact');
+Route::post('/contact', 'App\Http\Controllers\GuestController@postContact');
 Route::get('/about', 'App\Http\Controllers\GuestController@about');
 Route::get('/products', 'App\Http\Controllers\GuestController@products');
 Route::post('/products', 'App\Http\Controllers\GuestController@products');

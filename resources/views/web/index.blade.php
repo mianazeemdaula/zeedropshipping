@@ -69,6 +69,9 @@
                 </div>
             @endforeach
         </div>
+        <div class="my-2 flex items-center justify-center">
+            <a href="{{ url('/products') }}" class="">View All</a>
+        </div>
     </div>
 
     <x-web-content-section title="Benefits for Premier Dropshippers" image="{{ asset('assets/images/home2.jpg') }}">
@@ -255,7 +258,7 @@
                 </div>
                 <div class="text-center mt-5"><img src="{{ asset($item['image']) }}"
                         class="size-14 rounded-full shadow-md dark:shadow-gray-700 mx-auto" alt="">
-                    <h6 class="mt-2 font-semibold font-Caveat text-xl">{{ explode('-', $item['name'])[0] }}</h6><span
+                    <h6 class="mt-2 text-lg">{{ explode('-', $item['name'])[0] }}</h6><span
                         class="text-slate-400 text-sm">{{ explode('-', $item['name'])[1] }}</span>
                 </div>
             </div>

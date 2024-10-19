@@ -166,9 +166,10 @@ class AuthController extends Controller
                 'total_orders' => Order::count(),
                 'total_products' => Product::count(),
                 'open_orders' => Order::where('status', 'open')->count(),
-                'intransit_orders' => Order::whereNotIn('status', ['open','cancelled'])->count(),
+                'intransit_orders' => Order::whereNotIn('status', ['open','cancelled','delivered'])->count(),
                 'canceled_orders' => Order::where('status', 'cancelled')->count(),
                 'dispatched_orders' => Order::where('status', 'dispatched')->count(),
+                'total_revenue' => Order::whereIn('status',['delivered'])->sum('total'),
             ];
             return view('admin.dashboard', compact('stats'));
         }else if($user->hasRole('dropshipper')){

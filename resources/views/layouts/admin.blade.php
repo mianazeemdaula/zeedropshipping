@@ -73,9 +73,6 @@
                         <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-truck mr-2"></i>
                             Orders</a>
                     </li>
-                    {{-- <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('vendor.bank-account.*')) bg-primary @endif">
-          <a href="{{ route('vendor.bank-account.index') }}" class="block"><i class="fa-solid fa-bank mr-2"></i> Bank Account</a>
-        </li> --}}
                     <li
                         class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('vendor.bank-transactions.*')) bg-primary @endif">
                         <a href="{{ route('vendor.bank-transactions.index') }}" class="block"><i
@@ -101,25 +98,15 @@
                                 class="fa-solid fa-home mr-2"></i> Orders</a>
                     </li>
                 @endrole
-                {{-- <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('vendor.orders.*')) bg-primary @endif">
-          <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-users mr-2"></i> Users</a>
-        </li>
-        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('vendor.orders.*')) bg-primary @endif">
-          <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Levels</a>
-        </li>
-        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('vendor.orders.*')) bg-primary @endif">
-          <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> News</a>
-        </li>
-        <li class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('vendor.orders.*')) bg-primary @endif">
-          <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Suggestions</a>
-        </li>
-        <li class="p-2 hover:bg-primary-700  hover:animate-pulse @if (request()->routeIs('vendor.orders.*')) bg-primary @endif">
-          <a href="{{ route('vendor.orders.index') }}" class="block"><i class="fa-solid fa-home mr-2"></i> Posts</a>
-        </li> --}}
                 <li
                     class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('change.password')) bg-primary @endif">
                     <a href="{{ route('change.password') }}" class="block"><i class="fa-solid fa-lock mr-2"></i>
                         Change Password</a>
+                </li>
+                <li
+                    class="p-2 hover:bg-primary-700 hover:animate-pulse @if (request()->routeIs('change.password')) bg-primary @endif">
+                    <a href="{{ url('/contact') }}" class="block"><i class="fa-solid fa-headset mr-2"></i>
+                        Support</a>
                 </li>
                 <li class="p-2 hover:bg-primary-700  hover:animate-pulse">
                     <form action="{{ url('logout') }}" method="post">

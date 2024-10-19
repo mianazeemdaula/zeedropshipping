@@ -15,19 +15,23 @@
             <x-icon-state-card title="Inactive Dropshippers" icon="fa-solid fa-handshake"
                 value="{{ $stats['inactive_dropshippers'] }}" color="blue"
                 url="{{ route('admin.dropshippers.status', 'no-orders-inactive') }}" />
+            <x-icon-state-card title="Total Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['total_orders'] }}"
+                color="green" url="{{ route('admin.orders.index', ['status' => 'all']) }}" />
             <x-icon-state-card title="Open Orders" icon="fa-solid fa-cart-shopping" value="{{ $stats['open_orders'] }}"
-                color="red" url="{{ route('admin.orders.status', 'open') }}" />
+                color="red" url="{{ route('admin.orders.index', ['status' => 'open']) }}" />
             <x-icon-state-card title="Dispatched Orders" icon="fa-solid fa-cart-shopping"
                 value="{{ $stats['dispatched_orders'] }}" color="red"
-                url="{{ route('admin.orders.status', 'shipped') }}" />
+                url="{{ route('admin.orders.index', ['status' => 'shipped']) }}" />
             <x-icon-state-card title="Canceled Orders" icon="fa-solid fa-cart-shopping"
                 value="{{ $stats['canceled_orders'] }}" color="red"
-                url="{{ route('admin.orders.status', 'canceled') }}" />
+                url="{{ route('admin.orders.index', ['status' => 'cancelled']) }}" />
             <x-icon-state-card title="Intransit Orders" icon="fa-solid fa-cart-shopping"
                 value="{{ $stats['intransit_orders'] }}" color="red"
-                url="{{ route('admin.orders.status', 'intransit') }}" />
+                url="{{ route('admin.orders.index', ['status' => 'in-transit']) }}" />
             <x-icon-state-card title="Total Products" icon="fa-solid fa-tags" value="{{ $stats['total_products'] }}"
                 color="primary" url="{{ route('admin.products.index') }}" />
+            <x-icon-state-card title="Total Revenue" icon="fa-solid fa-bank" value="{{ $stats['total_revenue'] }}"
+                color="primary" />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4 shadow-sm">

@@ -7,9 +7,9 @@
 
 @section('title', __('Forbidden'))
 @section('content')
-    <main class="grid h-screen  place-items-center bg-gray-200 px-6 py-24 sm:py-32 lg:px-8 ">
+    <main class="grid h-screen  place-items-center bg-gray-200 px-6 lg:px-8 ">
         <div class="text-center">
-            <img src={{ asset('assets/images/Logo.png') }} alt="Zeedropshipping" class="mx-auto mb-8 h-40 w-auto" />
+            <img src={{ asset('assets/images/Logo.png') }} alt="Zeedropshipping" class="mx-auto mb-8 h-28 w-auto" />
 
             {{-- <p class="mt-2 text-base  tracking-tight text-gray-900 sm:text-2xl">
                 Stop right there!
@@ -24,20 +24,21 @@
             </div>
         </div>
 
-        <div class="flex items-center space-x-4 my-3">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                class="text-blue-600 hover:text-blue-800">
-                <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                class="text-pink-600 hover:text-pink-800">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                class="text-blue-400 hover:text-blue-600">
-                <i class="fa-brands fa-twitter"></i>
-            </a>
-
+        <div class="flex flex-col md:flex-row items-center space-x-2 my-3">
+            <div class="flex items-center space-x-4">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                    class="text-blue-600 hover:text-blue-800">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                    class="text-pink-600 hover:text-pink-800">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                    class="text-blue-400 hover:text-blue-600">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+            </div>
             <div class="w-full flex justify-center">
                 <form action="" method="POST"
                     class="flex items-center w-full max-w-md bg-white border rounded-lg shadow-md">

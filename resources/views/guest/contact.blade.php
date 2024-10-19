@@ -24,7 +24,15 @@
             </div>
 
             <div class=" bg-gray-100 p-4 rounded-lg">
-                <form action="" method="post">
+                @if (session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-2"
+                        role="alert">
+                        <strong class="font-bold">Success!</strong>
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>
+                @endif
+                <form action="{{ url('contact') }}" method="post">
+                    @csrf
                     <div class="space-y-2">
                         <div class="font-bold uppercase text-2xl">Send Us a Message</div>
                         <div class="grid gap-4">

@@ -31,7 +31,7 @@ class GuestController extends Controller
             ['icon' => 'fa-solid fa-money-check', 'text' => 'Fast & Secure Payment Processing'],
             
         ];
-        $products = \App\Models\Product::orderBy('id','desc')->take(10)->get();
+        $products = \App\Models\Product::orderBy('id','desc')->take(20)->get();
         $productsCount = \App\Models\Product::count();
         $userCount = \App\Models\User::count();
         $ordersCount = \App\Models\Order::count();
@@ -98,11 +98,11 @@ class GuestController extends Controller
                 return $query->where('sale_price','<=',$maxPrice);
             })->when($search, function($query, $search) {
                 return $query->where('name','like','%'.$search.'%');
-            })->paginate();
+            })->paginate(50);
             $filters = $request->all();
             return view('guest.products', compact('products','categoreis','filters'));
         }
-        $products = \App\Models\Product::orderBy('id','desc')->paginate(20);
+        $products = \App\Models\Product::orderBy('id','desc')->paginate(50);
         return view('guest.products', compact('categoreis','products'));
     }
 
@@ -136,5 +136,17 @@ class GuestController extends Controller
             $zip->close();
         }
         return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
+    }
+
+    public function postContact(Request $request) {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+        $data = $request->all();
+        \Mail::to('support@zeedropshipping.com')->send(new \App\Mail\ContactMail($data));
+        return back()->with('success','Your message has been sent successfully.');
     }
 }

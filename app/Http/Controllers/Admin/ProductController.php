@@ -17,7 +17,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::query();
+        if(request()->has('status') && request()->status != ''){
+            if(request()->status == 'all'){
+            }else if(request()->status == 'in-transit'){
+                $products = $products->whereNotIn('status', ['delivered', 'cancelled','open']);
+            } else{
+                $products = $products->where('status', request()->status);
+            }
+        }
+        $products = $products->paginate();
         return view('admin.products.index', compact('products'));
     }
 

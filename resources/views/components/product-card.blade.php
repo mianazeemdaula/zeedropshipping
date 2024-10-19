@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center">
             <img src="{{ asset($item->image) }}" alt="" srcset="" class="object-cover rounded-md w-full h-64">
         </div>
-        <div class="p-2">
+        <div class="p-2 h-32 justify-end">
             <div class="flex flex-col md:flex-row items-center justify-between  text-xs">
                 <div class="text-slate-300 uppercase font-normal">{{ $item->category->name }}</div>
             </div>
