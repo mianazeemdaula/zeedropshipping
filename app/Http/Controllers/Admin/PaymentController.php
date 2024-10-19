@@ -21,7 +21,9 @@ class PaymentController extends Controller
     {
         // distinct vendors 
         $revenueUserIds = VendorRevenue::distinct()->pluck('user_id');
-        $vendors = User::whereIn('id', $revenueUserIds)->withSum('vendorRevenue', 'amount')
+        $vendors = User::whereIn('id', $revenueUserIds)->withSum(['vendorRevenue' => function($q){
+            return $q->where('status', 'earned');
+        }], 'amount')
         ->whereHas('vendorRevenue',function($q){
             $q->where('status', 'earned');
         })
