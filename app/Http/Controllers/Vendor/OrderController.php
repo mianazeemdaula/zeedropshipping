@@ -21,9 +21,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $status = 'all';
-        $orders = Order::where('user_id', auth()->id())->latest()->paginate();
-        return view('vendor.orders.index', compact('orders', 'status'));
+        $orders = Order::orderBy('id','desc');
+        if(request()->has('status') && request()->status != 'all'){
+            $orders = $orders->where('status', request()->status);
+        }
+        $orders = $orders->where('user_id', auth()->id())->latest()->paginate();
+        return view('vendor.orders.index', compact('orders'));
     }
 
     /**
@@ -42,7 +45,6 @@ class OrderController extends Controller
 ;        $request->validate([
             'start_date' => 'required',
             'end_date' => 'required',
-            'status' => 'required',
         ]);
 
         $startDate = Carbon::parse($request->start_date)->format('Y-m-d').' 00:00:00';
@@ -50,9 +52,6 @@ class OrderController extends Controller
         $status = $request->status;
         $orders = Order::where('user_id', auth()->id())
             ->whereBetween('created_at', [$startDate, $endDate]);
-        if($status !== 'all'){
-            $orders = $orders->where('status', $status);
-        }
         if($request->has('search')){
             $orders = $orders->where('order_number', 'like', '%'.$request->search.'%')
                 ->orWhere('customer_name', 'like', '%'.$request->search.'%')
@@ -142,13 +141,6 @@ class OrderController extends Controller
     }
     
 
-    public function showStatusOrder(string $status)
-    {
-        $orders = Order::where('user_id', auth()->id())->where('status', $status)->latest()->paginate();
-        return view('vendor.orders.index', compact('orders', 'status'));
-    }
-
-
     public function import()
     {
         return view('vendor.orders.import');
@@ -234,6 +226,45 @@ class OrderController extends Controller
             }
         }
         return redirect()->route('vendor.orders.index')->with('success', "Orders ".count($orderNumers)." imported successfully");
+    }
+
+    public function csvImport(Request $request){
+        $request->validate([
+            'file' => 'required|mimes:csv,txt',
+            'provider' =>  'required'
+        ]);
+        $rows =  CSVHelper::readCSV($request->file);
+        $orders =  CSVHelper::namedKeys($rows);
+        foreach($orders as $key => $order){
+            $product = Product::where('sku', $order['sku'])->first();
+            $orderModel =  Order::create([
+                'user_id' => auth()->id(),
+                'order_number' => $order['order_no'],
+                'customer_name' => $order['customer_name'],
+                'customer_email' => $order['customer_email'],
+                'customer_phone' => Helper::parseDigiPhone($order['customer_mobile']),
+                'total' => $order['price'] * $order['qty'],
+                'order_date' => Carbon::parse($order['date'])->toDateString(),
+                'status' => 'open',
+                'extra_note' => $order['note'],
+                'shipping_address' => $order['delivery_address'] ?? $order['city'],
+                'billing_address' => $order['delivery_address'] ?? $order['city'],
+                'zip' => intval($order['zipcode'] ?? '51000'),
+                'city' => $order['city'],
+                'payment_method_id' => 1,
+                'shipping_cost' => 0,
+                'tax' => 0,
+            ]);
+            if($product){
+                $orderModel->details()->create([
+                    'product_id' => $product->id,
+                    'qty' => $order['qty'],
+                    'price' => $order['price'],
+                    'ds_price' => $product->sale_price
+                ]);
+            }
+        }
+        return redirect()->route('vendor.orders.index')->with('success', "Orders imported successfully");
     }
 
     public function export(Request $request)

@@ -1,0 +1,3 @@
+order_no,date,customer_name,customer_mobile,customer_email,delivery_address,city,zipcode,sku,price,qty,note
+1,10/20/2024,Mr Abcd,3001234567,abc@gmail.com,"Shadman road II, S23, Lahore",Lahore,54180,SKU-240811-208,2600,1,
+2,10/20/2024,Mr Xyz,3341234567,xyz@gmail.com,DHA II Awami Villaz III,Multan,52112,SKU-240811-209,1200,1,

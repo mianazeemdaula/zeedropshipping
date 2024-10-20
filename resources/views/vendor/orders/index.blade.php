@@ -4,7 +4,15 @@
     <section class="mx-auto w-full px-4 py-4 ">
         <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
             <div>
-                <h2 class="text-lg font-semibold">Orders</h2>
+                <h2 class="text-base">Orders</h2>
+                <div class="flex items-center">
+                    @foreach (App\Models\Order::$statuses as $item)
+                        <div class="px-1 @if (!$loop->last) border-r @endif">
+                            <a @if (request()->status !== $item) href="{{ route('vendor.orders.index', ['status' => $item]) }}" @endif
+                                class="text-xs {{ request()->status !== $item ? 'text-primary-500' : 'text-gray-800' }} hover:text-gray-900">{{ ucfirst($item) }}</a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
             <div class="flex space-x-2">
                 <x-modal title="Import Orders from Shopify" subTitle="Its help you to import direct orders from shopify">
@@ -27,17 +35,43 @@
                         </div>
                     </form>
                 </x-modal>
-                <form action="{{ route('vendor.orders.export') }}" method="post">
+
+                <x-modal btnText="Import Non-Shopify" title="Import non-Shopify" btnColor="bg-green-500"
+                    subTitle="Its help you to import orders from non shopify platform" icon="fa-solid fa-arrow-up">
+                    <form class="mt-5" enctype="multipart/form-data" method="POST"
+                        action="{{ route('vendor.orders.import') }}">
+                        @csrf
+                        <div>
+                            <label for="user name" class="block text-sm text-gray-700 capitalize dark:text-gray-200">Orders
+                                CSV</label>
+                            <input type="hidden" name="provider" value="local">
+                            <input placeholder="Zeedropshipping CSV" name="file" type="file"
+                                class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                        </div>
+
+                        <div class="flex justify-between mt-6">
+                            <a href="{{ asset('assets/sample-order-sheet.csv') }}"
+                                class="px-3 py-2 text-sm tracking-wide capitalize transition-colors duration-200 transform text-primary-500  focus:ring-opacity-50">
+                                Sample Sheet
+                            </a>
+                            <button type="submit"
+                                class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                Import non-Shopify
+                            </button>
+                        </div>
+                    </form>
+                </x-modal>
+                {{-- <form action="{{ route('vendor.orders.export') }}" method="post">
                     @csrf
                     <input type="hidden" name="export_ids">
                     <button type="submit" class="px-3 py-3 text-white bg-black rounded-lg hover:bg-gray-800">
                         <i class="fa fa-file-excel"></i>
                     </button>
-                </form>
+                </form> --}}
             </div>
         </div>
 
-        <form action="{{ route('vendor.orders.store') }}" method="post" class="mt-4 bg-primary-200 rounded-lg p-4">
+        <form action="{{ route('vendor.orders.store') }}" method="post" class="">
             @csrf
             <div class="flex items-center justify-between">
                 <div class="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
@@ -52,25 +86,13 @@
                             value="{{ $end_date ?? date('Y-m-d') }}">
                     </div>
                     <div class="flex flex-col">
-                        @php $status = $status ?? 'all'; @endphp
-                        <x-label>Order Status</x-label>
-                        <select name="status" id="" class="p-1 rounded-md">
-                            <option value="all" @if ($status == 'all') selected @endif>All</option>
-                            <option value="open" @if ($status == 'open') selected @endif>Open</option>
-                            <option value="packed" @if ($status == 'packed') selected @endif>Packed</option>
-                            <option value="shipped" @if ($status == 'shipped') selected @endif>Shipped</option>
-                            <option value="intransit" @if ($status == 'intransit') selected @endif>Intransit</option>
-                            <option value="cancelled" @if ($status == 'cancelled') selected @endif>Cancelled</option>
-                        </select>
-                    </div>
-                    <div class="flex flex-col">
                         <x-label>Search</x-label>
                         <input type="text" name="search" id="" class="p-1 rounded-md"
                             value="{{ $search ?? '' }}" placeholder="Order ID or #">
                     </div>
                 </div>
                 <div>
-                    <button class="bg-blue-500 text-white px-4 py-1 rounded-md">Filter</button>
+                    <button class="bg-green-500 text-white px-4 py-1 rounded-md">Filter</button>
                 </div>
             </div>
         </form>
@@ -85,6 +107,8 @@
                                     <tr>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Order #</th>
+                                        <th scope="col" class="px-12 py-3.5 text-left text-sm font-normal text-gray-700">
+                                            Customer</th>
                                         <th scope="col" class="px-12 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Products</th>
                                         <th scope="col"
@@ -113,10 +137,20 @@
                                             <td class="whitespace-nowrap px-4 py-1">
                                                 <div class="flex items-center">
                                                     <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900">{{ $item->id ?? '' }}
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            {{ $item->id ?? '' }}
                                                         </div>
                                                         <div class="text-sm text-gray-700">{{ $item->order_number ?? '' }}
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="whitespace-nowrap px-4 py-1">
+                                                <div class="ml-4">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ $item->customer_name ?? '' }}
+                                                    </div>
+                                                    <div class="text-xs text-gray-700">{{ $item->customer_phone ?? '' }}
                                                     </div>
                                                 </div>
                                             </td>

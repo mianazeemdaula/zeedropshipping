@@ -5,12 +5,30 @@
         <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
             <div class="flex items-center justify-between min-w-full">
                 <h2 class="text-lg font-semibold">Profile</h2>
-                @if ($user->status == 'active')
+                @if ($user->status !== 'active')
                     <a href="{{ route('vendor.profile.edit', $user->id) }}"
                         class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">Edit</a>
                 @endif
             </div>
         </div>
+        @if ($user->status == 'active')
+            <div class="my-2 bg-white rounded-lg p-4 flex flex-col md:flex-row md:space-x-3">
+                <div class="text-green-500 text-[50px]">
+                    <i class="fa-solid fa-info-circle"></i>
+                </div>
+                <div>
+                    <div class="font-medium">
+                        Need Assistance or Changes?
+                    </div>
+                    <div class="text-sm">
+                        If you require any changes or have any questions, feel free to reach out to us via email at
+                        <a class="text-primary-500 hover:text-primary-700"
+                            href="{{ url('contact') }}">support@zeedropshipping.com</a>.
+                    </div>
+                    <div class="text-sm">We're here to help!</div>
+                </div>
+            </div>
+        @endif
         <div class="mt-6 flex flex-col space-y-4 bg-white p-6 rounded-lg">
             <div class="p-4 border rounded-lg flex items-center space-x-2">
                 <div class="w-20 h-20">

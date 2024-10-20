@@ -73,6 +73,7 @@ Route::middleware(['auth','verified'])->group(function () {
             Route::get('/orders-import', 'App\Http\Controllers\Vendor\OrderController@import');
             Route::get('/orders-status/{status}', 'App\Http\Controllers\Vendor\OrderController@showStatusOrder');
             Route::post('/orders-import', 'App\Http\Controllers\Vendor\OrderController@importStore');
+            Route::post('/orders/csv-import', 'App\Http\Controllers\Vendor\OrderController@csvImport')->name('orders.import');
             Route::resource('profile', 'ProfileController')->withoutMiddleware('validprofile');
         });
     });

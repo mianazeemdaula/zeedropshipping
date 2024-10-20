@@ -9,8 +9,8 @@
                 <div class="flex items-center">
                     @foreach (App\Models\Order::$statuses as $item)
                         <div class="px-1 @if (!$loop->last) border-r @endif">
-                            <a href="{{ route('admin.orders.index', ['status' => $item]) }}"
-                                class="text-xs text-primary-500 hover:text-gray-900">{{ ucfirst($item) }}</a>
+                            <a @if (request()->status !== $item) href="{{ route('admin.orders.index', ['status' => $item]) }}" @endif
+                                class="text-xs {{ request()->status !== $item ? 'text-primary-500' : 'text-gray-800' }} hover:text-gray-900">{{ ucfirst($item) }}</a>
                         </div>
                     @endforeach
                 </div>
