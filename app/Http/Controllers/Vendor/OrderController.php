@@ -22,7 +22,9 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::orderBy('id','desc');
-        if(request()->has('status') && request()->status != 'all'){
+        if (request()->has('status') && request()->status == 'in-transit'){
+            $orders = $orders->whereIn('status',['in-transit','booked','shipped']);
+        }else if(request()->has('status') && request()->status != 'all'){
             $orders = $orders->where('status', request()->status);
         }
         $orders = $orders->where('user_id', auth()->id())->latest()->paginate();

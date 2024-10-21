@@ -54,7 +54,7 @@ class Order extends Model
         'picked-up',
         'in-transit',
         'delivered',
-        'canceled',
+        'cancelled',
     ];
     
 
