@@ -115,7 +115,7 @@
                                                 </div>
                                             </td>
                                             <td class="whitespace-normal px-4 py-1 line-clamp-2">
-                                                @if ($item->details)
+                                                @if ($item->details && $item->details->count() > 0)
                                                     {{ $item->details()->first()->product->name }}
                                                     @if ($item->details->count() > 1)
                                                         <span
