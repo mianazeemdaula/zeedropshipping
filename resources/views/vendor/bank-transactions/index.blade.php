@@ -9,7 +9,7 @@
                     <form action="{{ route('vendor.bank-transactions.search') }}" method="post">
                         @csrf
                         <div class="flex space-x-2">
-                            <x-input name="search" placeholder="Search users" />
+                            <x-input name="search" placeholder="Search transactions" />
                             <button type="submit"
                                 class="px-5 text-white bg-black py-2 rounded-lg hover:bg-gray-800">Search</button>
                         </div>
