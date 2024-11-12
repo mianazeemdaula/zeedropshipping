@@ -98,11 +98,11 @@ class GuestController extends Controller
                 return $query->where('sale_price','<=',$maxPrice);
             })->when($search, function($query, $search) {
                 return $query->where('name','like','%'.$search.'%');
-            })->paginate(50);
+            })->paginate(52);
             $filters = $request->all();
             return view('guest.products', compact('products','categoreis','filters'));
         }
-        $products = \App\Models\Product::orderBy('id','desc')->paginate(50);
+        $products = \App\Models\Product::orderBy('id','desc')->paginate(52);
         return view('guest.products', compact('categoreis','products'));
     }
 

@@ -21,7 +21,7 @@ class DropShipperController extends Controller
             $param = Helper::sortParam(request()->sort);
             $users = $users->orderBy($param[0], $param[1]);
         }
-        $users = $users->paginate();
+        $users = $users->latest()->paginate();
         return view('admin.dropshippers.index', compact('users'));
     }
 

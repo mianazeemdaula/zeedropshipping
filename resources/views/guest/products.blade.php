@@ -3,7 +3,7 @@
     <form action="{{ url('/products') }}" method="post" class="p-8">
         @csrf
         <div class="flex flex-col md:space-x-4 md:flex-row space-y-4 md:space-y-0">
-            <div class="bg-white p-4 rounded-lg">
+            <div class="bg-white p-4 rounded-lg max-h-[700px]">
                 <div class="container mx-auto flex gap-8 items-center justify-between">
                     <h1 class="text-sm font-medium">Product Filtring</h1>
                 </div>

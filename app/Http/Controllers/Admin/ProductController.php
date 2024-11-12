@@ -26,7 +26,7 @@ class ProductController extends Controller
                 $products = $products->where('status', request()->status);
             }
         }
-        $products = $products->paginate();
+        $products = $products->latest()->paginate();
         return view('admin.products.index', compact('products'));
     }
 

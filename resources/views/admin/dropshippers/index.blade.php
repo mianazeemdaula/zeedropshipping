@@ -62,6 +62,12 @@
                                             Note</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            <a href="{{ App\Helper\Helper::genSortUrl('created_at') }}">
+                                                Created on
+                                            </a>
+                                        </th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
                                             Action</th>
                                     </tr>
                                 </thead>
@@ -74,37 +80,41 @@
                                     @endif
                                     @foreach ($users as $item)
                                         <tr>
-                                            <td class="whitespace-nowrap px-2 py-2 text-sm sm:px-2 sm:py-2">
+                                            <td class="whitespace-nowrap px-2 py-2 text-xs sm:px-2 sm:py-2">
                                                 {{ $item->vendor->ds_number ?? 'N/A' }}
                                             </td>
-                                            <td class="whitespace-nowrap px-2 py-2 text-sm sm:px-2 sm:py-2">
+                                            <td class="whitespace-nowrap px-2 py-2 text-xs sm:px-2 sm:py-2">
                                                 <div>
                                                     <div>{{ $item->name }}</div>
                                                     <div>{{ $item->email }}</div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-2 py-2 text-sm sm:px-2 sm:py-2">
+                                            <td class="whitespace-nowrap px-2 py-2 text-xs sm:px-2 sm:py-2">
                                                 <div>
                                                     <div>{{ $item->vendor->business_name ?? 'N/A' }}</div>
                                                     <div>{{ $item->vendor->phone ?? 'N/A' }}</div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace nowrap px-2 py-2 text-sm sm:px-2 sm:py-2">
+                                            <td class="whitespace nowrap px-2 py-2 text-xs sm:px-2 sm:py-2">
                                                 {{ $item->order_ratio }} %
                                             </td>
-                                            <td class="whitespace nowrap px-2 py-2 text-sm sm:px-2 sm:py-2 text-center">
+                                            <td class="whitespace nowrap px-2 py-2 text-xs sm:px-2 sm:py-2 text-center">
                                                 <x-status-chip :status="$item->status" />
                                             </td>
-                                            <td class="whitespace nowrap px-2 py-2 text-sm sm:px-2 sm:py-2">
+                                            <td class="whitespace nowrap px-2 py-2 text-xs sm:px-2 sm:py-2">
                                                 {{ $item->vendor->city_name ?? 'N/A' }}
                                             </td>
 
-                                            <td class="whitespace nowrap px-2 py-2 text-sm sm:px-2 sm:py-2">
+                                            <td class="whitespace nowrap px-2 py-2 text-xs sm:px-2 sm:py-2">
                                                 {{ $item->comment }}
                                             </td>
 
+                                            <td class="whitespace nowrap px-2 py-2 text-xs sm:px-2 sm:py-2">
+                                                {{ $item->created_at }}
+                                            </td>
+
                                             <td
-                                                class="whitespace-nowrap px-2 py-2 text-sm font-medium text-right sm:px-2 sm:py-2 flex">
+                                                class="whitespace-nowrap px-2 py-2 text-xs font-medium text-right sm:px-2 sm:py-2 flex">
                                                 <a href="{{ route('admin.dropshippers.show', $item->id) }}"
                                                     class="text-gray-700 hover:text-blue-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"

@@ -73,6 +73,9 @@
                                             Low Qty</th>
                                         <th scope="col"
                                             class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
+                                            Created on</th>
+                                        <th scope="col"
+                                            class="px-2 py-2 text-left text-xs font-normal text-gray-700 sm:px-4 sm:py-3.5">
                                             Action</th>
                                     </tr>
                                 </thead>
@@ -90,56 +93,62 @@
                                                     <img class="h-10 w-10 rounded-full object-cover"
                                                         src="{{ asset($item->image) }}" alt="Product Image" />
                                                     <div>
-                                                        <div class="text-sm font-medium text-gray-900 text-wrap">
+                                                        <div class="text-xs font-medium text-gray-900 text-wrap">
                                                             {{ $item->name }}
                                                         </div>
-                                                        <div class="text-sm text-gray-700">
+                                                        <div class="text-xs text-gray-700">
                                                             {{ $item->category->name ?? '' }}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                            <td class="whitespace-nowrap px-2 py-4 text-xs sm:px-4 sm:py-4">
                                                 RS.{{ $item->purchase_price }}
                                             </td>
 
-                                            <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                            <td class="whitespace-nowrap px-2 py-4 text-xs sm:px-4 sm:py-4">
                                                 RS.{{ $item->sale_price }}
                                             </td>
-                                            <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                            <td class="whitespace-nowrap px-2 py-4 text-xs sm:px-4 sm:py-4">
                                                 <x-status-chip :status="$item->status == 1 ? 'active' : 'inactive'" />
                                             </td>
-                                            <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                            <td class="whitespace-nowrap px-2 py-4 text-xs sm:px-4 sm:py-4">
                                                 <div
                                                     class="@if ($item->stock <= $item->low_stock_report) text-white bg-red-600 rounded-md text-center @endif">
                                                     {{ $item->stock }}
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                            <td class="whitespace-nowrap px-2 py-4 text-xs sm:px-4 sm:py-4">
                                                 {{ $item->sku }}
                                             </td>
-                                            <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                            <td class="whitespace-nowrap px-2 py-4 text-xs sm:px-4 sm:py-4">
                                                 {{ $item->vat }}
                                             </td>
-                                            <td class="whitespace-nowrap px-2 py-4 text-sm sm:px-4 sm:py-4">
+                                            <td class="whitespace-nowrap px-2 py-4 text-xs sm:px-4 sm:py-4">
                                                 {{ $item->low_stock_report }}
                                             </td>
-                                            <td class="flex items-center justify-center space-x-2 px-2 py-4 text-sm ">
-                                                <a href="{{ route('admin.products.show', $item->id) }}"
-                                                    class="text-gray-700 hover:text-blue-500">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </a>
-                                                <a href="{{ route('admin.products.edit', $item->id) }}">
-                                                    <i class="fa-solid fa-pencil"></i>
-                                                </a>
-                                                <form action="{{ route('admin.products.destroy', $item->id) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="text-red-500 hover:text-red-700">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                    </button>
-                                                </form>
+                                            <td class="whitespace-nowrap px-2 py-4 text-xs sm:px-4 sm:py-4">
+                                                {{ $item->created_at }}
+                                            </td>
+                                            <td>
+                                                <div class="flex items-center justify-center space-x-2 px-2 py-4 text-xs ">
+
+                                                    <a href="{{ route('admin.products.show', $item->id) }}"
+                                                        class="text-gray-700 hover:text-blue-500">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{ route('admin.products.edit', $item->id) }}">
+                                                        <i class="fa-solid fa-pencil"></i>
+                                                    </a>
+                                                    <form action="{{ route('admin.products.destroy', $item->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="text-red-500 hover:text-red-700">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

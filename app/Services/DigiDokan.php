@@ -170,6 +170,26 @@ class DigiDokan {
         }
     }
 
+    public function getTrackingRecord($params){
+        $token = $this->login();
+        $response = $this->http->post('get-order-tracking', [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token,
+            ],
+            'form_params' => $params,
+        ]);
+        if($response->getStatusCode() == 200) {
+            $res =  json_decode($response->getBody()->getContents());
+            if($res->code == 200) {
+                return $res;
+            }else if($res->code == 401) {
+                $token = $this->refreshToken();
+                return $this->getShipmentTracking($params);
+            }
+            throw new \Exception($res->error);
+        }
+    }
+
     public function downloadLoadSheet($params){
         $token = $this->login();
         $response = $this->http->post('download-load-sheet', [

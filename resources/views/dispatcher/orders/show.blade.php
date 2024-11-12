@@ -28,10 +28,9 @@
                         <tr>
                             <td class="py-1">Tracking ID:</td>
                             <td class="text-right">
-                                <a class="text-blue-500" target="_blank"
-                                    href="https://digidokaan.pk/real-time-tracking?t_id={{ $order->track_data['tracking_no'] ?? '0' }}">
-                                    {{ $order->track_data['tracking_no'] ?? 'N/A' }}
-                                </a>
+                                <a class="text-blue-500" target="_blank" {{-- href="https://digidokaan.pk/real-time-tracking?t_id={{ $order->track_data['tracking_no'] ?? '0' }}"> --}}
+                                    href="{{ route('track.order', $order->id) }}">
+                                    {{ $order->track_data['tracking_no'] ?? 'N/A' }} </a>
                             </td>
                         </tr>
                         <tr>

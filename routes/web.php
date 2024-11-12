@@ -32,6 +32,10 @@ Route::middleware(['auth','verified'])->group(function () {
     // change password route
     Route::get('change-password', 'App\Http\Controllers\AuthController@changePassword');
     Route::post('change-password', 'App\Http\Controllers\AuthController@postChangePassword')->name('change.password');
+
+    // track order
+    Route::get('/track-order/{id}', 'App\Http\Controllers\TrackOrderController@index')->name('track.order');
+
     Route::namespace('App\Http\Controllers\Admin')->group(function () {
         Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
             Route::resource('categories', 'CategoryController');

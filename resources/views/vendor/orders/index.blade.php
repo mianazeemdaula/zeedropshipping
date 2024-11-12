@@ -176,8 +176,8 @@
                                                 {{ $item->extra_note }}</td>
                                             <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-700">
                                                 @if ($item->track_data)
-                                                    <a class="text-blue-500" target="_blank"
-                                                        href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}">
+                                                    <a class="text-blue-500" target="_blank" {{-- href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}"> --}}
+                                                        href="{{ route('track.order', $item->id) }}">
                                                         {{ $item->track_data['tracking_no'] ?? 'N/A' }}
                                                     </a>
                                                 @endif

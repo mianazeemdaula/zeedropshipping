@@ -66,6 +66,8 @@
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Tracking</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
+                                            Updated On</th>
+                                        <th scope="col" class="px-4 py-3.5 text-left text-sm font-normal text-gray-700">
                                             Action</th>
                                     </tr>
                                 </thead>
@@ -82,9 +84,9 @@
                                             <td class="whitespace-nowrap px-4 py-1">
                                                 <div class="flex items-center">
                                                     <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900">{{ $item->id ?? '' }}
+                                                        <div class="text-xs font-medium text-gray-900">{{ $item->id ?? '' }}
                                                         </div>
-                                                        <div class="text-sm text-gray-700">{{ $item->order_number ?? '' }}
+                                                        <div class="text-xs text-gray-700">{{ $item->order_number ?? '' }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,27 +96,29 @@
                                                     {{ $item->details()->first()->product->name }}
                                                     @if ($item->details->count() > 1)
                                                         <span
-                                                            class="text-sm text-gray-700">+{{ $item->details->count() - 1 }}</span>
+                                                            class="text-xs text-gray-700">+{{ $item->details->count() - 1 }}</span>
                                                     @endif
                                                 @endif
                                             </td>
-                                            <td class="whitespace-nowrap px-4 py-1">
+                                            <td class="whitespace-nowrap px-4 py-1 text-xs">
                                                 <x-status-chip :status="$item->status" />
                                             </td>
-                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-700">
                                                 {{ $item->city }}</td>
-                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-700">
                                                 {{ $item->total }}</td>
-                                            <td class="whitespace-nowrap px-4 py-1 text-sm text-gray-700">
+                                            <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-700">
                                                 {{ $item->extra_note }}</td>
                                             <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-700">
                                                 @if ($item->track_data)
                                                     <a class="text-blue-500" target="_blank"
-                                                        href="https://digidokaan.pk/real-time-tracking?t_id={{ $item->track_data['tracking_no'] ?? '0' }}">
+                                                        href="{{ route('track.order', $item->id) }}">
                                                         Track
                                                     </a>
                                                 @endif
                                             </td>
+                                            <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-700">
+                                                {{ $item->updated_at }}</td>
                                             <td
                                                 class="whitespace-nowrap px-4 py-1 text-sm text-gray-700 flex items-center space-x-2">
                                                 <a href="{{ route('dispatcher.orders.show', $item->id) }}"
