@@ -4,7 +4,7 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            @foreach (range(1, 6) as $i)
+            @foreach (range(2, 6) as $i)
                 <div class="swiper-slide bg-gray-700">
                     <img src="{{ asset("assets/banners/$i.png") }}" alt="" srcset=""
                         class="object-cover w-full h-full">
