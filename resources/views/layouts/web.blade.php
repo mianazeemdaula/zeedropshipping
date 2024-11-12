@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ZeeDropShipping</title>
+    <title>@yield('title', 'Zeedropshipping')</title>
     <meta name="description" content="">
     <meta property="og:title" content="Zeed Dropshipping" />
     <meta property="og:url" content="{{ Request::url() }}" />
     <meta property="og:description"
         content="Best-in-industry guides and information while cultivating a positive community." />
-    <meta property="og:image" content="https://www.example.com/sample.jpg" />
+    <meta property="og:image" content="https://zeedropshipping.com/assets/banners/4.png" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         ! function(f, b, e, v, n, t, s) {

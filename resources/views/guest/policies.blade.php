@@ -1,4 +1,5 @@
 @extends('layouts.web')
+@section('title', 'Policies | Zeedropshipping')
 @section('content')
     <div class="p-8 my-4 md:p-4 lg:p-4">
         <x-web-content-section title="Delivery Charges and Packing Costs" image="{{ asset('assets/images/policies.png') }}"

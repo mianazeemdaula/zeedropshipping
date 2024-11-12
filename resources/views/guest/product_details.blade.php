@@ -1,4 +1,5 @@
 @extends('layouts.web')
+@section('title', "{$product->name} | Zeedropshipping")
 @section('content')
     <div class="p-8 bg-white">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">

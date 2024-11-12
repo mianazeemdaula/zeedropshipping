@@ -1,5 +1,5 @@
 @extends('layouts.web')
-
+@section('title', 'About | Zeedropshipping')
 @section('content')
     <div class="px-8 py-4">
         <h1 class="text-2xl text-primary-500 font-bold delay-[300ms] duration-[600ms] taos:scale-[0.6] taos:opacity-0"

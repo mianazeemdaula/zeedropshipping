@@ -1,4 +1,5 @@
 @extends('layouts.web')
+@section('title', 'Home')
 @section('content')
     <div class="swiper h-40 md:h-60 lg:h-96">
         <!-- Additional required wrapper -->

@@ -1,4 +1,5 @@
 @extends('layouts.web')
+@section('title', 'Products | Zeedropshipping')
 @section('content')
     <form action="{{ url('/products') }}" method="post" class="p-8">
         @csrf
