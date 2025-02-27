@@ -35,8 +35,10 @@
         fbq('init', '1482469525706513');
         fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1" /></noscript>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1482469525706513&ev=PageView&noscript=1" />
+    </noscript>
 </head>
 
 <body class="font-zeefont bg-gray-100">
@@ -171,7 +173,7 @@
 
         <div class="border-t border-primary-800 mt-6 pt-4">
             <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-xs text-gray-400">&copy; 2024, Zee Dropshipping Powered by
+                <p class="text-xs text-gray-400">&copy; 2025, Zee Dropshipping Powered by
                     <a href="https://txdevs.com" class="hover:text-primary-400">TXDevs</a>
                 </p>
 

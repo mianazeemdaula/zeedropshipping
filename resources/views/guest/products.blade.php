@@ -12,12 +12,12 @@
                     <div class="py-4">
                         <h2 class="text-base font-medium">Search</h2>
                         <input type="text" name="search" value="{{ request()->search }}"
-                            class="w-64 border text-gray-700  p-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
+                            class="w-64 border text-gray-700  p-2 rounded-lg outline-hidden focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
                             placeholder="Search" />
 
                         <h2 class="text-base font-medium mt-4">Sorting</h2>
                         <select name="sort" id="sort"
-                            class="w-64 border text-gray-700  p-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
+                            class="w-64 border text-gray-700  p-2 rounded-lg outline-hidden focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                             <option value="price_low_to_high" @if (request()->sort == 'price_low_to_high') selected @endif>Price, low
                                 to high</option>
                             <option value="price_high_to_low" @if (request()->sort == 'price_high_to_low') selected @endif>Price, high

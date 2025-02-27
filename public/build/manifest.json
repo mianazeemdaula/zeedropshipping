@@ -1,64 +1,11 @@
 {
-  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf": {
-    "file": "assets/fa-brands-400-Dur5g48u.ttf",
-    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf"
-  },
-  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2": {
-    "file": "assets/fa-brands-400-O7nZalfM.woff2",
-    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2"
-  },
-  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf": {
-    "file": "assets/fa-regular-400-Bf3rG5Nx.ttf",
-    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf"
-  },
-  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2": {
-    "file": "assets/fa-regular-400-DgEfZSYE.woff2",
-    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2"
-  },
-  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf": {
-    "file": "assets/fa-solid-900-BV3CbEM2.ttf",
-    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf"
-  },
-  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2": {
-    "file": "assets/fa-solid-900-DOQJEhcS.woff2",
-    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2"
-  },
-  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.ttf": {
-    "file": "assets/fa-v4compatibility-B9MWI-E6.ttf",
-    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.ttf"
-  },
-  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2": {
-    "file": "assets/fa-v4compatibility-BX8XWJtE.woff2",
-    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2"
-  },
-  "resources/css/app.css": {
-    "file": "assets/app-pdz5nJa9.css",
-    "src": "resources/css/app.css",
-    "isEntry": true
-  },
-  "resources/css/fonts/AvenirNextCyr-Bold.woff2": {
-    "file": "assets/AvenirNextCyr-Bold-BN3WPJNn.woff2",
-    "src": "resources/css/fonts/AvenirNextCyr-Bold.woff2"
-  },
-  "resources/css/fonts/AvenirNextCyr-Light.woff2": {
-    "file": "assets/AvenirNextCyr-Light-nKHxlDzT.woff2",
-    "src": "resources/css/fonts/AvenirNextCyr-Light.woff2"
-  },
-  "resources/css/fonts/AvenirNextCyr-Medium.woff2": {
-    "file": "assets/AvenirNextCyr-Medium-CBQpy7Y1.woff2",
-    "src": "resources/css/fonts/AvenirNextCyr-Medium.woff2"
-  },
-  "resources/css/fonts/AvenirNextCyr-Regular.woff2": {
-    "file": "assets/AvenirNextCyr-Regular-DVUnrmNb.woff2",
-    "src": "resources/css/fonts/AvenirNextCyr-Regular.woff2"
-  },
   "resources/js/app.js": {
-    "file": "assets/app-CPMqWY3e.js",
+    "file": "assets/app-C3Ph7UHJ.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-v2Sj8WLY.css"
+      "assets/app-C8H0mNe_.css"
     ]
   }
 }

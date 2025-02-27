@@ -16,7 +16,7 @@
         </div>
 
         <div class="w-60 h-30 mt-4">
-            <div class="bg-white p-4 rounded-xl flex flex-col items-start shadow-sm">
+            <div class="bg-white p-4 rounded-xl flex flex-col items-start shadow-xs">
                 <h1 class="text-base font-bold">Orders Distribution</h1>
                 <canvas id="chart-1" class=""></canvas>
             </div>

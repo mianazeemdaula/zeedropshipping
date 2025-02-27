@@ -27,7 +27,7 @@
                 <div class="p-4 border rounded-lg">
                     <h1 class="text-base font-bold mb-4">Shop Information</h1>
                     <div class="w-20 mb-4">
-                        <img src="{{ $user->vendor->store_logo }}" alt="Store Logo" class="w-full rounded">
+                        <img src="{{ $user->vendor->store_logo }}" alt="Store Logo" class="w-full rounded-sm">
                     </div>
                     <table class="w-full table-fixed">
                         <tbody>

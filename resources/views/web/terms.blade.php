@@ -226,7 +226,7 @@
                     of any changes.</li>
             </ol>
         </div>
-        <div class="py-1 text-sm">
+        {{-- <div class="py-1 text-sm">
             <div class="font-bold text-primary-500">11. Privacy</div>
             <ol class="ml-4">
                 <li>9.1. Dropshippers with a minimum of 100 delivered orders will receive payments twice a week, on
@@ -241,7 +241,7 @@
                     increase.
                 </li>
             </ol>
-        </div>
+        </div> --}}
         <div class="text-primary-500 font-semibold text-sm">
             For further assistance, please contact us at support@zeedropshipping.com or +92-315-9999547
         </div>

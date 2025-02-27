@@ -25,7 +25,7 @@
                 <div class="flex items-center justify-between space-x-4">
                     <h1 class="text-xl font-medium text-gray-800 ">{{ $title ?? '' }}</h1>
 
-                    <button x-on:click="modelOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
+                    <button x-on:click="modelOpen = false" class="text-gray-600 focus:outline-hidden hover:text-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

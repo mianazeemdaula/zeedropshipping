@@ -130,52 +130,66 @@
         <div class="text-primary-500 font-bold mt-4 delay-[300ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="50">
             <i class="fa-solid fa-check-square my-2"></i>
-            2. Account Approval:
+            2. Account Approval & Dashboard Access:
         </div>
         <p class="text-sm mb-1 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="100">
-            After registration, your account will be reviewed. Once approved, you’ll gain access to the portal for order
-            tracking and management.
+            Once your account is approved, log in to your dashboard, where you can manage orders, track shipments, and
+            upload order files.
+        </p>
+        <div class="text-primary-500 font-bold mt-4 delay-[300ms] duration-[1500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="50">
+            <i class="fa-solid fa-check-square my-2"></i>
+            3. Select Products & Copy SKUs:
+        </div>
+        <p class="text-sm mb-1 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
+            data-taos-offset="100">
+            Browse the product catalog, choose the items you want to sell, and copy their SKUs for easy order placement.
         </p>
         <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="50">
             <i class="fa-solid fa-check-square my-2"></i>
-            3. Download Shopify App
+            4. Upload Your Orders
         </div>
         <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="100">
-            Download the Zee Dropshipping app from the Shopify App Store and integrate it with your store for seamless
-            dropshipping.
+        <ul class="list-disc list-inside">
+            <li>
+                <strong>For Shopify Users:</strong> Export your orders in a CSV file and upload them directly in the
+                <strong>Orders</strong>
+                section of your
+                Zee
+                Dropshipping dashboard.
+            </li>
+            <li>
+                <strong>For Non-Shopify Users:</strong> Download the <strong>sample order </strong> file, fill in the
+                required details, and
+                upload it to the
+                dashboard.
+            </li>
+        </ul>
         </p>
 
         <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="50">
             <i class="fa-solid fa-check-square my-2"></i>
-            4. Copy Product SKU
+            5. Order Processing & Dispatch
         </div>
         <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="100">
-            Browse our product catalog and copy the SKUs of the items you wish to sell for easy order placement.
+            Zee Dropshipping will process and dispatch your orders on the <strong>same day.</strong> A <strong>CN
+                number</strong> will be
+            generated for each
+            order, allowing real-time tracking.
         </p>
         <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="50">
             <i class="fa-solid fa-check-square my-2"></i>
-            5. Forward Your Orders
+            6. Track Your Orders
         </div>
         <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="100">
-            When a customer places an order, go to the Orders section, click the three dots next to the order, and select
-            "Fulfill by Zee Dropshipping" to forward the order details. You can also upload bulk orders through the portal.
-        </p>
-        <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
-            data-taos-offset="50">
-            <i class="fa-solid fa-check-square my-2"></i>
-            6. Order Dispatch
-        </div>
-        <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
-            data-taos-offset="100">
-            Zee Dropshipping will process and dispatch your orders on the same day. A CN number will be generated for
-            real-time tracking.
+            Monitor order status and track shipments directly from your<strong> Zee Dropshipping dashboard.</strong>
         </p>
         <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="50">
@@ -246,7 +260,7 @@
             <div class="delay-[{{ $loop->index + 1 }}00ms] duration-[800ms] taos:translate-y-[200px] taos:opacity-0"
                 data-taos-offset="100">
                 <div
-                    class="content relative rounded shadow dark:shadow-gray-700 m-2 p-6 bg-white dark:bg-slate-900 before:content-[''] before:absolute before:start-1/2 before:-bottom-[4px] before:box-border before:border-8 before:rotate-[45deg] before:border-t-transparent before:border-e-white dark:before:border-e-slate-900 before:border-b-white dark:before:border-b-slate-900 before:border-s-transparent before:shadow-testi dark:before:shadow-gray-700 before:origin-top-left">
+                    class="content relative rounded-sm shadow-sm dark:shadow-gray-700 m-2 p-6 bg-white dark:bg-slate-900 before:content-[''] before:absolute before:start-1/2 before:-bottom-[4px] before:box-border before:border-8 before:rotate-[45deg] before:border-t-transparent before:border-e-white dark:before:border-e-slate-900 before:border-b-white dark:before:border-b-slate-900 before:border-s-transparent before:shadow-testi dark:before:shadow-gray-700 before:origin-top-left">
                     <i class="fa-solid fa-quote-left text-primary-500 text-xl"></i>
                     <p class="text-slate-400 text-justify">" {{ $item['comment'] }} "</p>
                     <ul class="list-none mb-0 text-amber-400 mt-3">

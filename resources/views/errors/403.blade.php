@@ -43,7 +43,7 @@
                 <form action="" method="POST"
                     class="flex items-center w-full max-w-md bg-white border rounded-lg shadow-md">
                     <input type="email" placeholder="Enter your email"
-                        class="flex-grow px-4 py-2 text-sm placeholder:text-gray-600 border-r border-gray-300 outline-none rounded-l-lg" />
+                        class="grow px-4 py-2 text-sm placeholder:text-gray-600 border-r border-gray-300 outline-hidden rounded-l-lg" />
                     <button type="submit"
                         class="bg-black text-white px-4 py-2 rounded-r-lg font-medium text-sm hover:bg-gray-800">
                         Send

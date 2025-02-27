@@ -134,14 +134,14 @@
 
             <main class="flex-1 p-6 bg-gray-100 ">
                 @if (session('success'))
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-2"
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-sm relative mb-2"
                         role="alert">
                         <strong class="font-bold">Success!</strong>
                         <span class="block sm:inline">{{ session('success') }}</span>
                     </div>
                 @endif
                 @if (session('error'))
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-2"
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-sm relative mb-2"
                         role="alert">
                         <strong class="font-bold">Error!</strong>
                         <span class="block sm:inline">{{ session('error') }}</span>

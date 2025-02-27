@@ -6,7 +6,7 @@
             <h5 class="text-lg font-semibold">Create User</h5>
             <p class="mb-4">This is a form to create a new user.</p>
             @if ($errors->any())
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-sm relative" role="alert">
                     <strong class="font-bold">Holy smokes!</strong>
                     <span class="block sm:inline">Something seriously bad happened.</span>
                     <ul class="mt-3 list-disc list-inside text-sm text-red-600">

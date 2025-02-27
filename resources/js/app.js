@@ -1,5 +1,7 @@
 import './bootstrap';
 // import jquery
+import "/node_modules/select2/dist/css/select2.css";
+
 import Alpine from 'alpinejs'
 import Chart from 'chart.js/auto';
 import $ from 'jquery';

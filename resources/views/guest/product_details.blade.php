@@ -48,7 +48,7 @@
                     </tr>
                 </table>
                 <div class="text-sm mt-4">
-                    <a href="https://wa.me/923159999547" class="text-white bg-primary-500 px-4 py-2 rounded-sm"
+                    <a href="https://wa.me/923159999547" class="text-white bg-primary-500 px-4 py-2 rounded-xs"
                         target="_blank" rel="noopener noreferrer">Confirm Stock</a>
                     <div class="mt-2"> Before running a paid campaign, please confirm the stock availability</div>
                 </div>

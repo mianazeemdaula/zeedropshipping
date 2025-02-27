@@ -30,7 +30,7 @@
                         <tbody>
                             <tr>
                                 <td class="text-sm w-1/2">
-                                    <img src="{{ $user->vendor->store_logo }}" alt="Store Logo" class="w-full rounded">
+                                    <img src="{{ $user->vendor->store_logo }}" alt="Store Logo" class="w-full rounded-sm">
                                 </td>
                                 <td class="text-sm font-semibold w-1/2">
                                     @if ($user->dropShipperNicKyc)

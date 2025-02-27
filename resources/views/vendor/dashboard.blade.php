@@ -21,16 +21,16 @@
                 value="{{ $stats['total_payments'] ?? 0 }}" color="red" :url="route('vendor.bank-transactions.index')" />
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4 shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4 shadow-xs">
             <div class="bg-white p-4 rounded-xl flex flex-col items-start">
                 <h1 class="text-base font-bold">Orders</h1>
                 <canvas id="chart-1" class=""></canvas>
             </div>
-            <div class="bg-white p-4 rounded-xl flex flex-col items-start shadow-sm">
+            <div class="bg-white p-4 rounded-xl flex flex-col items-start shadow-xs">
                 <h1 class="text-base font-bold">Sales</h1>
                 <canvas id="chart-2" class=""></canvas>
             </div>
-            <div class=" bg-white p-4 rounded-xl flex flex-col items-start shadow-sm">
+            <div class=" bg-white p-4 rounded-xl flex flex-col items-start shadow-xs">
                 <h1 class="text-base font-bold">Payments</h1>
                 <canvas id="chart-3" class=""></canvas>
             </div>

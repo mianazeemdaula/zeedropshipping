@@ -74,7 +74,7 @@
             id='search'
             name='search'
             placeholder='Search'
-            class='outline-none border-none text-black ml-2'/>
+            class='outline-hidden border-none text-black ml-2'/>
         </div> --}}
                 {{-- <a href="{{ url('/login') }}"> <i class="fa-solid fa-user"></i></a> --}}
                 @if (Auth::check())
@@ -96,7 +96,7 @@
         id='search'
         name='search'
         placeholder='Search'
-        class='outline-none  text-black ml-2 transition'
+        class='outline-hidden  text-black ml-2 transition'
       />
     </div> --}}
         <aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 bg-white"

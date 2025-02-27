@@ -31,14 +31,34 @@
                 </li>
                 <ul class="list-disc list-inside  indent-4 my-1 text-sm">
                     <li>
-                        <strong>Delivery Charges:</strong> Will vary based on the weight.
+                        <strong>Delivery Charges:</strong> Varies based on weight.
                     </li>
                     <li>
-                        <strong>Packing Charges:</strong> Rs.40/-
+                        <strong>Packing Charges:</strong> 40 PKR
                     </li>
-                    <li class="">
+                    {{-- <li class="">
                         <strong>Example:</strong> For a product weighing 2 kg, specific delivery charges will apply based on
                         the logistics provider.
+                    </li> --}}
+                </ul>
+                <li>
+                    <div class="py-1 text-sm">
+                        <div class="font-bold text-primary-500">3. Exclusive Rates for Premier Dropshippers</div>
+                    </div>
+                </li>
+                <ul class="list-disc list-inside  indent-4 my-1 text-sm">
+                    <li>
+                        <strong>50+ Delivered Orders Per Day</strong>
+                        <ul class="list-item list-disc list-inside">
+                            <li>Reduced Delivery Charges: 150 PKR</li>
+                            <li>No Return Handling Fees</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Below 50 Delivered Orders Per Day</strong>
+                        <ul class="list-item list-disc list-inside">
+                            <li>A return handling fee of 75 PKR per failed delivery will apply</li>
+                        </ul>
                     </li>
                 </ul>
             </ol>
