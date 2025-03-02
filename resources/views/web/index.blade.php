@@ -154,15 +154,17 @@
         <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="100">
         <ul class="list-disc list-inside">
-            <li>
-                <strong>For Shopify Users:</strong> Export your orders in a CSV file and upload them directly in the
-                <strong>Orders</strong>
+            <li class="text-sm">
+                <span class="font-semibold">For Shopify Users:</span> Export your orders in a CSV file and upload them
+                directly in the
+                <span class="font-semibold">Orders</span>
                 section of your
                 Zee
                 Dropshipping dashboard.
             </li>
-            <li>
-                <strong>For Non-Shopify Users:</strong> Download the <strong>sample order </strong> file, fill in the
+            <li class="text-sm">
+                <span class="font-semibold">For Non-Shopify Users:</span> Download the <span class="font-semibold">sample
+                    order </span> file, fill in the
                 required details, and
                 upload it to the
                 dashboard.
@@ -177,8 +179,9 @@
         </div>
         <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="100">
-            Zee Dropshipping will process and dispatch your orders on the <strong>same day.</strong> A <strong>CN
-                number</strong> will be
+            Zee Dropshipping will process and dispatch your orders on the <span class="font-semibold">same day.</span> A
+            <span class="font-semibold">CN
+                number</span> will be
             generated for each
             order, allowing real-time tracking.
         </p>
@@ -189,7 +192,8 @@
         </div>
         <p class="text-sm my-2 delay-[500ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="100">
-            Monitor order status and track shipments directly from your<strong> Zee Dropshipping dashboard.</strong>
+            Monitor order status and track shipments directly from your<span class="font-semibold"> Zee Dropshipping
+                dashboard.</span>
         </p>
         <div class="text-primary-500 font-bold delay-[300ms] duration-[500ms]  taos:translate-y-[150px] taos:opacity-0"
             data-taos-offset="50">

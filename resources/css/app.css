@@ -1,9 +1,7 @@
-@import '@fortawesome/fontawesome-free/css/all.css' layer(base);
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap')
-layer(base);
-@import url('./jquery.exzoom.css') layer(base);
-/* @import '~select2/dist/css/select2.min.css' layer(base); */
 @import 'tailwindcss';
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+@import url('./jquery.exzoom.css');
 @source "../views";
 
 @config '../../tailwind.config.js';

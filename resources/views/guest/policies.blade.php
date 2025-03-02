@@ -49,14 +49,14 @@
                 <ul class="list-disc list-inside  indent-4 my-1 text-sm">
                     <li>
                         <strong>50+ Delivered Orders Per Day</strong>
-                        <ul class="list-item list-disc list-inside">
+                        <ul class="list-disc list-inside indent-8">
                             <li>Reduced Delivery Charges: 150 PKR</li>
                             <li>No Return Handling Fees</li>
                         </ul>
                     </li>
                     <li>
                         <strong>Below 50 Delivered Orders Per Day</strong>
-                        <ul class="list-item list-disc list-inside">
+                        <ul class="list-disc list-inside indent-8">
                             <li>A return handling fee of 75 PKR per failed delivery will apply</li>
                         </ul>
                     </li>
